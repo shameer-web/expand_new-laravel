@@ -71,7 +71,13 @@
 							<label>Subcode:</label>
 							<div class="input-group">
 								<div class="input-group-prepend"><span class="input-group-text"></div>
-								<input type="text" class="form-control" name="subcode" placeholder=""/>
+								<select class="form-control " id="kt_select2_1" name="subcode">
+									<option selected="selected">Select Subcode</option>
+									@foreach($subcode as $row)
+									<option value="{{$row->id}}">{{$row->subcode}}</option>
+									@endforeach
+									
+								</select>
 							</div>
 							<span class="form-text text-muted">Please enter your Subcode</span>
 						</div>
@@ -80,7 +86,13 @@
 						<div class="col-lg-3">
 							<label>Area:</label>
 							<div class="input-group">
-								<input type="text" name="area" class="form-control" placeholder="Enter your area"/>
+								<select class="form-control " id="kt_select2_1" name="area">
+									<option selected="selected">Select Area</option>
+									@foreach($area as $row)
+									<option value="{{$row->id}}">{{$row->area_name}}</option>
+									@endforeach
+									
+								</select>
 								<div class="input-group-append"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
 							</div>
 							<span class="form-text text-muted">Please enter your area</span>
@@ -210,6 +222,29 @@
 							</div>
 							<span class="form-text text-muted">Please enter Remarks</span>
 						</div>
+
+
+
+						 
+
+
+						
+
+
+			            <div class="col-lg-4">
+							<label>Date :</label>
+							<div class="input-group" >
+								<input type="text" name="date" id="datetimepicker1" class="form-control" placeholder="date"/>
+								<div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
+							</div>
+							{{-- <span class="form-text text-muted">Please enter your address</span> --}}
+						</div>
+
+
+					
+
+                         
+						
 						
 					</div>
 
@@ -236,11 +271,53 @@
 
 <link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 
+
+
+
+{{-- datetimepicker --}}
+
+<link rel="stylesheet" href="{{asset('css/bootstrap-datetimepicker.min.css')}}">
+
+{{-- end datetimepicker --}}
+
+
+
+
+
+
+
+
+
+
+
 @endsection
 
 @section('script')
 
 <!--begin::Page Vendors(used by this page)-->
+
+
+
+{{-- datetimepicker --}}
+<script src="{{asset('js/bootstrap-datetimepicker.min.js')}}"></script>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+{{--  end datetimepicker --}}
+
+
+
+
+
+
+
+
+
+
+
+
 <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 <!--end::Page Vendors-->
 <!--begin::Page Scripts(used by this page)-->

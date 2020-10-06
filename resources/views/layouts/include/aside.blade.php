@@ -407,6 +407,24 @@
 													<span class="menu-text">Mangage Device Loc</span>
 												</a>
 											</li>
+
+											<li class="menu-item" aria-haspopup="true">
+												<a href="{{ route('area.index') }}" class="menu-link">
+													<i class="menu-bullet menu-bullet-dot">
+														<span></span>
+													</i>
+													<span class="menu-text">Mangage Area</span>
+												</a>
+											</li>
+
+											<li class="menu-item" aria-haspopup="true">
+												<a href="{{ route('subcode.index') }}" class="menu-link">
+													<i class="menu-bullet menu-bullet-dot">
+														<span></span>
+													</i>
+													<span class="menu-text">Mangage Subcode</span>
+												</a>
+											</li>
 										</ul>
 									</div>
 									

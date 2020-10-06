@@ -12,6 +12,8 @@ use App\Customer;
 use App\Company;
 use App\Device;
 use App\Package;
+use App\Area;
+use App\Subcode;
 use App\CustomerPackage;
 use DB;
 class CustomerController extends Controller
@@ -55,10 +57,14 @@ class CustomerController extends Controller
     public function create()
     {
         $district= District::where('district_status', 1)->get();
-        return view('admin.customer.create',compact('district', $district));
+        $area= Area::where('area_status', 1)->get();
+        $subcode= Subcode::where('subcode_status', 1)->get();
+
+        return view('admin.customer.create')->with('district', $district)->with('area',$area)->with('subcode',$subcode);
     }
     public function store(Request $request)
-    {
+    {   
+       // dd($request->all());
         $customer_prefix="CST-N";
         $customer = Customer::select('id', 'cust_id')->orderBy('id', 'desc')->first();
         
@@ -93,6 +99,7 @@ class CustomerController extends Controller
         $customer->phone = $request->phone;
         $customer->mobile_number = $request->mobile;
         $customer->remark = $request->remark;
+        $customer->date = $request->date;
         $customer->customer_status = '1';
         $customer->save();
         

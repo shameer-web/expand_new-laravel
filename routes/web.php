@@ -64,6 +64,10 @@ Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'adm
     Route::resource('company','CompanyController');
     Route::resource('loc','LocController');
     Route::resource('district','DistrictController');
+    Route::resource('area','AreaController');
+    Route::resource('subcode','SubcodeController');
+
+
 
     Route::resource('gst','GstController');
 

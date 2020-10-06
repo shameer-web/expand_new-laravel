@@ -162,7 +162,7 @@
 					<td><span class="label label-primery label-inline mr-2">Pospaid</span></td>
 					@endif
 					<td>{{$row->kseb_post_no}}</td>
-					<td>{{$row->area}}</td>
+					<td>{{$row->Area->area_name}}</td>
 					<td>{{$row->installation_address}}</td>
 					
 					<td>

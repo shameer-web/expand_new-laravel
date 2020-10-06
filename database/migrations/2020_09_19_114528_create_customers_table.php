@@ -35,6 +35,7 @@ class CreateCustomersTable extends Migration
             $table->string('email')->unique();
             $table->string('join_date');
             $table->string('remark');
+            $table->string('date');
 
             $table->integer('customer_status')->default(1);
             $table->timestamps();

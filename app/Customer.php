@@ -3,11 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Area;
 
 class Customer extends Model
 {
     //
-
+    
+     protected $table ='customers';
     protected $fillable = [
 
     	
@@ -28,8 +30,15 @@ class Customer extends Model
         'mobile_number',	
         'email',		
         'remark',
+        'date',
         'customer_status',
         'enqid'		
 
     ];
+
+    //belong to relationship
+   public function Area(){
+    return $this->belongsTo(Area::class,'area','id');
+   }
+
 }
