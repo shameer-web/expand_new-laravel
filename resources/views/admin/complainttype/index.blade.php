@@ -4,21 +4,15 @@
 @section('content')
 
 
-{{-- <?php
-if(isset($value)){
- $value =$page_data['value'] 
-}
- ?> --}}
- 
 
 
-
-                    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+                    <div class="content d-flex flex-column flex-column-fluid col-md-10 mx-auto" id="kt_content">
                        <div class="card card-custom gutter-b">
 							<div class="card-header flex-wrap py-3">
 								<div class="card-title">
 									<h3 class="card-label">
-										View All Complaints
+										View All Complainttype's
+
 										<!-- <span class="d-block text-muted pt-2 font-size-sm">sorting & pagination remote datasource</span> -->
 									</h3>
 								</div>
@@ -80,7 +74,7 @@ if(isset($value)){
 <!--end::Dropdown-->
 
 <!--begin::Button-->
-									<a href="{{ route('complaint.create') }}" class="btn btn-primary font-weight-bolder">
+									<a href="{{ route('complainttype.create') }}" class="btn btn-primary font-weight-bolder">
 										<span class="svg-icon svg-icon-md"><!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 									    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 									        <rect x="0" y="0" width="24" height="24"/>
@@ -98,58 +92,33 @@ if(isset($value)){
 												                    <thead>
 									                              <tr>
                                              
-											  <th>ID</th>
-                                              <th>Complaint ID</th>
-                                              <th>Complaint</th>
-                                              <th>Customer Name</th>
-                                              <th>Mobile</th>
-                                              <th>Date</th>
-                                              <th>Status</th>
+                                              <th> ID</th>
+                                              <th>Complaint Type </th>
+                                              
+                                              
                                               <th>Actions</th>
-											
 					                                  </tr>
 					                    </thead>
-					                 @if(isset($page_data['value']))
-                                      @foreach($page_data['value'] as $row)
-									
+                                      @foreach($complainttype as $row)
 				                        <tbody>
 				                           
                           				 <tr>
-											<td >{{ $row->id }}</td>
-											<td>{{ $row->complaint_id}}</td>
-											<td>
-												 
-					                              @foreach($row->complaint as $data)
-					                              <span class="btn"> {{ $data['complainttype'].';' }} </span>
-					                               @endforeach
-											</td>
-											<td>{{ $row->customer->name }}</td>
-											<td>{{ $row->phone_no }}</td>
-											<td>{{ $row->created_at }}</td>
-
-											
-
-											@if($row->status ==0) 
-									   <td><button class="badge btn btn-danger">pendind</button></td>
-										  @else
-										  <td> <button class=" badge btn btn-success">Closed</button></td>
-										  @endif
-
-
-											
-											
+                                              <td>{{ $row->id }}</td>
+                                              <td>{{ $row->complainttype }}</td>
+                                             
+                                               
+                                             
                                             <td>
-												<a href="{{ route('complaint.edit',$row->id) }}" class="btn btn-outline-primary font-weight-bold mr-2"><i class="fa fa-edit"></i></a>
+												<a href="{{ route('complainttype.edit',$row->id) }}" class="btn btn-outline-primary font-weight-bold mr-2"><i class="fa fa-edit"></i></a>
 
 
 												<button type="button" id="deletebtn"
-                                                              data-action="{{ route('complaint.update',$row->id) }}" data-toggle="modal"
+                                                              data-action="{{ route('complainttype.update',$row->id) }}" data-toggle="modal"
                                                               data-target="#delete_modal" class="btn btn-outline-danger"><i
                                                               class="fa fa-trash" aria-hidden="true"></i>
                                                              </button>
-															
+												
 											</td>
-											
                                              
                                              
                                   		</tr>
@@ -159,7 +128,6 @@ if(isset($value)){
                            
 						                     </tbody>
 						                @endforeach
-						                @endif
 
 						        		</table>
 
@@ -186,15 +154,13 @@ if(isset($value)){
                                     <button type="button" class="btn btn-primary modal-dismiss"
                                         data-dismiss="modal">Cancel</button>
                                 </p>
-                                <input type="hidden" name="complaint_status" value="0">
+                                <input type="hidden" name="complainttype_status" value="0">
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
 
-
-		
 
 
     
@@ -203,9 +169,9 @@ if(isset($value)){
 
 
 
-		</div>
+						</div>
 
-	</div>
+					</div>
 
 
 
@@ -255,23 +221,9 @@ $('body').on('click', '#deletebtn', function() {
     $('#delete_form').attr('action', action);
 
 })
-
-$('body').on('click', '#btnassign', function() {
-    var no = $(this).closest('tr').children('td');
-
-    $('#btnassign').data('action');
-    var action = $(this).data('action');
-    $('#assign_form').attr('action', action);
-
-})
-setTimeout(function() {
-    $('#successMessage').fadeOut('fast');
-}, 30000); // <-- time in milliseconds
 </script>
 
 		<script src="{{asset('assets/js/pages/crud/forms/widgets/select2.js')}}"></script>
-
-		
 
 		
 

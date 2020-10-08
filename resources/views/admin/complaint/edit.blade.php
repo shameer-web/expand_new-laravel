@@ -4,16 +4,32 @@
 @section('content')
 
 
-<?php
+ <?php
  $complaint =$page_data['complaint'] 
+ ?>
+
+ <?php
+ $user =$page_data['user'] 
+ ?>
+
+ <?php
+ $customer =$page_data['customer'] 
+ ?>
+
+ <?php
+ $complainttype =$page_data['complainttype'] 
  ?>
 
 
 
 
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 
-	<!--begin::Subheader-->
+
+
+
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+         <!--begin::Subheader-->
 						<div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
 							<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
 
@@ -40,8 +56,8 @@
 							</div>
 						</div>
 
-						<!--end::Subheader-->					
-
+						<!--end::Subheader-->
+					
 						<div class="card card-custom gutter-b example example-compact">
 							<div class="card-header">
 								<h3 class="card-title">
@@ -55,31 +71,72 @@
 								@method('put')
 								<div class="card-body">
 									<div class="form-group row">
-										<label class="col-lg-2 col-form-label text-right">Complaint Id:</label>
-										<div class="col-lg-3">
-											<input type="text" name="complaint_id" value="{{ $complaint->complaint_id }}"  class="form-control" placeholder="Enter Complaint Id"/>
-											<span class="form-text text-muted">Please enter Complaint Id</span>
-										</div>
-										<label class="col-lg-2 col-form-label text-right">Complaint Details:</label>
-										<div class="col-lg-3">
-											{{-- <input type="text" name="complaint" class="form-control" placeholder="Enter contact number"/> --}}
-											<textarea name="complaint" value="" class="form-control" placeholder="Enter your Complaint ">{{ $complaint->complaint }}</textarea>
-											<span class="form-text text-muted">Please enter your Complaint Details</span>
-										</div>
-									</div>
-									<div class="form-group row">
-										<label class="col-lg-2 col-form-label text-right">Customer Name:</label>
+										
+
+                                         <label class="col-lg-2 col-form-label text-right">Customer Name:</label>
 										<div class="col-lg-3">
 											<div class="input-group">
 												
 
 
 
-												<select class="form-control  "  name="customer_name">
-                                                    <option selected="selected">Select User</option>
-                                                    <option value="Rahul">Rahul</option>
-                                                    <option value="Ram">Ram</option>
-                                                    <option value="Prem">Prem</option>
+												<select class="form-control  "  name="customer_name" value="{{ $complaint->customer_name }}">
+                                                            @foreach($customer as $row)
+															<option value="{{ $row->id }}"
+                                                                     @if($row->id == $complaint->customer_name )
+                                                                     selected
+                                                                     @endif
+
+																>
+																{{ $row->name }}</option>
+															 @endforeach
+                                                    
+                                                    
+                                                   
+                                                </select>
+												
+											</div>
+											<span class="form-text text-muted">Please select your customer</span>
+										</div>
+
+										<label class="col-lg-2 col-form-label text-right">Phone No:</label>
+										<div class="col-lg-3">
+											<input type="text" name="phone_no" value="{{ $complaint->phone_no }}"  class="form-control" placeholder="Enter Phone No"/>
+											<span class="form-text text-muted">Please enter Phone number</span>
+										</div>
+
+
+
+										
+									</div>
+									<div class="form-group row">
+
+
+										<label class="col-lg-2 col-form-label text-right">Email Id:</label>
+										<div class="col-lg-3">
+											<input type="text" name="email" value="{{ $complaint->email }}"  class="form-control" placeholder="Enter Email Id"/>
+											<span class="form-text text-muted">Please enter Email Id</span>
+										</div>
+
+
+
+										<label class="col-lg-2 col-form-label text-right">Staff:</label>
+										<div class="col-lg-3">
+											<div class="input-group">
+												
+
+
+
+												<select class="form-control  "  name="staff" value="{{ $complaint->staff }}">
+                                                            @foreach($user as $row)
+															<option value="{{ $row->id }}"
+                                                                     @if($row->id == $complaint->staff )
+                                                                     selected
+                                                                     @endif
+
+																>
+																{{ $row->name }}</option>
+															 @endforeach
                                                     
                                                     
                                                    
@@ -89,6 +146,61 @@
 											<span class="form-text text-muted">Please enter your address</span>
 										</div>
 										
+									</div>
+
+									<div class="form-group row">
+
+										<label class="col-lg-2 col-form-label text-right">Complaint's:</label>
+										<div class="col-lg-3">
+											<div class="input-group">
+												
+
+
+
+												{{-- <select class="form-control  "  name="complaint">
+                                                    <option selected="selected">Select User</option>
+                                                    <option value="Rahul">Rahul</option>
+                                                    <option value="Ram">Ram</option>
+                                                    <option value="prem">Prem</option>
+                                                    
+                                                    
+                                                   
+                                                </select> --}}
+
+                                                	@php
+                                                            	$val = $complaint->complaint;
+                                                            	
+                                                            @endphp
+                                                 <select name="complaint[]"  class="form-control selectpicker select2" id="kt_select2_3" placeholder=""  multiple="multiple" style="width: 100%" >
+
+															 
+															@foreach($complainttype as $row)
+															<option value="{{ $row->id }}"
+                                                                    <?php if(in_array($row->id, $val)){
+                                                                    echo 'selected'; } else{}?>                                                             
+                                                 
+																>
+																{{ $row->complainttype }}</option>
+															 @endforeach
+
+
+
+															
+															
+												 </select>
+
+												
+											</div>
+											<span class="form-text text-muted">Please select your complaint's</span>
+										</div>
+
+										<label class="col-lg-2 col-form-label text-right">Other complaint:</label>
+										<div class="col-lg-3">
+											<input type="text" name="other_complaint" value="{{ $complaint->other_complaint }}"  class="form-control" placeholder="Enter Email Id"/>
+											<span class="form-text text-muted">Please enter other complaint</span>
+										</div>
+										
+
 									</div>
 									
 

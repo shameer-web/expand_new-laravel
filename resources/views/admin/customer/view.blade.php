@@ -157,9 +157,9 @@
 					<td>{{$row->name}}</td>
 					<td>{{$row->mobile_number}}</td>
 					@if($row->customer_type==1)
-					<td><span class="label label-success label-inline mr-2">Prepaid</span></td>
+					<td><span class="label label-success label-inline mr-2">Regular</span></td>
 					@else
-					<td><span class="label label-primery label-inline mr-2">Pospaid</span></td>
+					<td><span class="label label-primery label-inline mr-2">Rent</span></td>
 					@endif
 					<td>{{$row->kseb_post_no}}</td>
 					<td>{{$row->Area->area_name}}</td>

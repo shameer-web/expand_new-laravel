@@ -162,12 +162,12 @@
 								<label class="radio radio-solid">
 									<input type="radio" name="ctype" checked="checked" value="1"/>
 									<span></span>
-									Prepaid
+									Regular
 								</label>
 								<label class="radio radio-solid">
 									<input type="radio" name="ctype" value="2"/>
 									<span></span>
-									Pospaid
+									Rent
 								</label>
 							</div>
 							<span class="form-text text-muted">Please select user Type</span>

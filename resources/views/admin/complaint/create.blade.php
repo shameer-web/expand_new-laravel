@@ -51,20 +51,9 @@
 								@csrf
 								<div class="card-body">
 									<div class="form-group row">
-										<label class="col-lg-2 col-form-label text-right">Complaint Id:</label>
-										<div class="col-lg-3">
-											<input type="text" name="complaint_id"  class="form-control" placeholder="Enter Complaint Id"/>
-											<span class="form-text text-muted">Please enter Complaint Id</span>
-										</div>
-										<label class="col-lg-2 col-form-label text-right">Complaint Details:</label>
-										<div class="col-lg-3">
-											{{-- <input type="text" name="complaint" class="form-control" placeholder="Enter contact number"/> --}}
-											<textarea name="complaint" class="form-control" placeholder="Enter your Complaint "></textarea>
-											<span class="form-text text-muted">Please enter your Complaint Details</span>
-										</div>
-									</div>
-									<div class="form-group row">
-										<label class="col-lg-2 col-form-label text-right">Customer Name:</label>
+										
+
+                                         <label class="col-lg-2 col-form-label text-right">Customer Name:</label>
 										<div class="col-lg-3">
 											<div class="input-group">
 												
@@ -72,10 +61,52 @@
 
 
 												<select class="form-control  "  name="customer_name">
-                                                    <option selected="selected">Select User</option>
-                                                    <option value="Rahul">Rahul</option>
-                                                    <option value="Ram">Ram</option>
-                                                    <option value="prem">Prem</option>
+                                                            @foreach($customer as $row)
+															<option value="{{ $row->id }}">{{ $row->name }}</option>
+															
+															 @endforeach
+                                                    
+                                                    
+                                                   
+                                                </select>
+												
+											</div>
+											<span class="form-text text-muted">Please select your customer</span>
+										</div>
+
+										<label class="col-lg-2 col-form-label text-right">Phone No:</label>
+										<div class="col-lg-3">
+											<input type="number" name="phone_no"  class="form-control" placeholder="Enter Phone No"/>
+											<span class="form-text text-muted">Please enter Phone number</span>
+										</div>
+
+
+
+										
+									</div>
+									<div class="form-group row">
+
+
+										<label class="col-lg-2 col-form-label text-right">Email Id:</label>
+										<div class="col-lg-3">
+											<input type="email" name="email"  class="form-control" placeholder="Enter Email Id"/>
+											<span class="form-text text-muted">Please enter Email Id</span>
+										</div>
+
+
+
+										<label class="col-lg-2 col-form-label text-right">Staff:</label>
+										<div class="col-lg-3">
+											<div class="input-group">
+												
+
+
+
+												<select class="form-control  "  name="staff">
+                                                            @foreach($user as $row)
+															<option value="{{ $row->id }}">{{ $row->name }}</option>
+															
+															 @endforeach
                                                     
                                                     
                                                    
@@ -85,6 +116,50 @@
 											<span class="form-text text-muted">Please enter your address</span>
 										</div>
 										
+									</div>
+
+									<div class="form-group row">
+
+										<label class="col-lg-2 col-form-label text-right">Complaint's:</label>
+										<div class="col-lg-3">
+											<div class="input-group">
+												
+
+
+
+												{{-- <select class="form-control  "  name="complaint">
+                                                    <option selected="selected">Select User</option>
+                                                    <option value="Rahul">Rahul</option>
+                                                    <option value="Ram">Ram</option>
+                                                    <option value="prem">Prem</option>
+                                                    
+                                                    
+                                                   
+                                                </select> --}}
+
+
+                                                 <select name="complaint[]" class="form-control selectpicker select2" id="kt_select2_3" placeholder=""  multiple="multiple" style="width: 100%" >
+
+															 
+															 @foreach($complainttype as $row)
+															<option value="{{ $row->id }}" >{{ $row->complainttype }}</option>
+															 @endforeach
+															
+															
+												 </select>
+
+												
+											</div>
+											<span class="form-text text-muted">Please select your complaint's</span>
+										</div>
+
+										<label class="col-lg-2 col-form-label text-right">Other complaint:</label>
+										<div class="col-lg-3">
+											<input type="text" name="other_complaint"  class="form-control" placeholder="Enter other_complaint"/>
+											<span class="form-text text-muted">Please enter other complaint</span>
+										</div>
+										
+
 									</div>
 									
 

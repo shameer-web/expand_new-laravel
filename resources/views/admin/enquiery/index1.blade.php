@@ -4,21 +4,13 @@
 @section('content')
 
 
-{{-- <?php
-if(isset($value)){
- $value =$page_data['value'] 
-}
- ?> --}}
- 
-
-
 
                     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                        <div class="card card-custom gutter-b">
 							<div class="card-header flex-wrap py-3">
 								<div class="card-title">
 									<h3 class="card-label">
-										View All Complaints
+										View All Enquieries
 										<!-- <span class="d-block text-muted pt-2 font-size-sm">sorting & pagination remote datasource</span> -->
 									</h3>
 								</div>
@@ -80,7 +72,7 @@ if(isset($value)){
 <!--end::Dropdown-->
 
 <!--begin::Button-->
-									<a href="{{ route('complaint.create') }}" class="btn btn-primary font-weight-bolder">
+									<a href="{{ route('enquiry.create') }}" class="btn btn-primary font-weight-bolder">
 										<span class="svg-icon svg-icon-md"><!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 									    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 									        <rect x="0" y="0" width="24" height="24"/>
@@ -98,56 +90,52 @@ if(isset($value)){
 												                    <thead>
 									                              <tr>
                                              
-											  <th>ID</th>
-                                              <th>Complaint ID</th>
-                                              <th>Complaint</th>
-                                              <th>Customer Name</th>
-                                              <th>Mobile</th>
-                                              <th>Date</th>
-                                              <th>Status</th>
-                                              <th>Actions</th>
+											<th style="display:none">Order ID</th>
+											<th>Enquiry No</th>
+											<th>Name</th>
+											<th>Address</th>
+											<th>Phone</th>
+											<th>Phost No</th>
+											<th>Assigned By</th>
+											<th>Date</th>
+                                            <th>Actions</th>
 											
 					                                  </tr>
 					                    </thead>
-					                 @if(isset($page_data['value']))
-                                      @foreach($page_data['value'] as $row)
+                                      @foreach($data as $row)
 									
 				                        <tbody>
 				                           
                           				 <tr>
-											<td >{{ $row->id }}</td>
-											<td>{{ $row->complaint_id}}</td>
-											<td>
-												 
-					                              @foreach($row->complaint as $data)
-					                              <span class="btn"> {{ $data['complainttype'].';' }} </span>
-					                               @endforeach
-											</td>
-											<td>{{ $row->customer->name }}</td>
-											<td>{{ $row->phone_no }}</td>
-											<td>{{ $row->created_at }}</td>
+											<td style="display:none">{{ $row->id }}</td>
+											<td>{{ $row->enqid }}</td>
+											<td>{{ $row->full_name }}</td>
+											<td>{{ $row->address }}</td>
+											<td>{{ $row->contact_number }}</td>
+											<td>{{ $row->postcode }}</td>
 
-											
-
-											@if($row->status ==0) 
-									   <td><button class="badge btn btn-danger">pendind</button></td>
+											@if($row->assign_to ==1) 
+									   <td><span class="label label-danger label-inline mr-2">Not Assigned</span></td>
 										  @else
-										  <td> <button class=" badge btn btn-success">Closed</button></td>
+										  <td> <span class="label label-success label-inline mr-2"> {{$row->name }}</span></td>
 										  @endif
 
 
 											
-											
+											<td>{{ $row->created_at }}</td>
                                             <td>
-												<a href="{{ route('complaint.edit',$row->id) }}" class="btn btn-outline-primary font-weight-bold mr-2"><i class="fa fa-edit"></i></a>
+												<a href="{{ route('enquiry.edit',$row->id) }}" class="btn btn-outline-primary font-weight-bold mr-2"><i class="fa fa-edit"></i></a>
 
 
 												<button type="button" id="deletebtn"
-                                                              data-action="{{ route('complaint.update',$row->id) }}" data-toggle="modal"
+                                                              data-action="{{ route('enquiry.update',$row->id) }}" data-toggle="modal"
                                                               data-target="#delete_modal" class="btn btn-outline-danger"><i
                                                               class="fa fa-trash" aria-hidden="true"></i>
                                                              </button>
-															
+															 <button type="button" id="btnassign" data-action="{{ route('enquiry.update',$row->id) }}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+													Assign
+												</button>	
+												
 											</td>
 											
                                              
@@ -159,7 +147,6 @@ if(isset($value)){
                            
 						                     </tbody>
 						                @endforeach
-						                @endif
 
 						        		</table>
 
@@ -186,7 +173,7 @@ if(isset($value)){
                                     <button type="button" class="btn btn-primary modal-dismiss"
                                         data-dismiss="modal">Cancel</button>
                                 </p>
-                                <input type="hidden" name="complaint_status" value="0">
+                                <input type="hidden" name="enquiery_status" value="0">
                             </div>
                         </div>
                     </form>
@@ -194,7 +181,43 @@ if(isset($value)){
             </div>
 
 
-		
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+				<form id="assign_form" action="" method="post" class="form-horizontal">
+                        @csrf
+                        @method('put')
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<i aria-hidden="true" class="ki ki-close"></i>
+							</button>
+						</div>
+						<div class="modal-body">
+						<div class="form-group row">
+							<label class="col-lg-3 col-form-label text-right">Assign To:</label>
+								<div class=" col-lg-6">
+									<select class="form-control " id="kt_select2_1" name="assign_to">
+										
+
+										@foreach($user as $row)
+													<option value="{{ $row->id }}" >{{ $row->name }}</option>
+										@endforeach
+										
+										
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary font-weight-bold">Save changes</button>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
+
 
 
     

@@ -11,8 +11,12 @@ class Complaint extends Model
     protected $fillable =[
 
        'complaint_id',
-       'complaint',
        'customer_name',
+       'phone_no',
+       'email',
+       'staff',
+       'complaint',
+       'other_complaint',
        'assigned',
 
        'status',
@@ -20,4 +24,17 @@ class Complaint extends Model
 
 
     ];
+
+    protected $casts = [
+      'complaint' => 'array'
+    ];
+
+
+    public function customer(){
+    return $this->belongsTo(Customer::class,'customer_name','id');
+   }
+
+    public function staff(){
+    return $this->belongsTo(User::class,'staff','id');
+   }
 }
