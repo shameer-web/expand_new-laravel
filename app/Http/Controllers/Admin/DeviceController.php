@@ -32,6 +32,8 @@ class DeviceController extends Controller
              ->select('devices.*', 'districts.district_name','companies.company_name','modes.model_name','locs.loc_name','types.type_name')
              ->where('device_status', 1)
              ->get();
+
+       // $data= Device::where('device_status', 1)->get();
         return view('admin.device.index')->with('data',$data);
        
     }

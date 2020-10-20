@@ -120,6 +120,13 @@
 
 									<div class="form-group row">
 
+
+										<label class="col-lg-2 col-form-label text-right">KSEB Post No:</label>
+										<div class="col-lg-3">
+											<input type="text" name="post_no"  class="form-control" placeholder="Enter KSEB Post No"/>
+											<span class="form-text text-muted">Please enter KSEB Post No</span>
+										</div>
+
 										<label class="col-lg-2 col-form-label text-right">Complaint's:</label>
 										<div class="col-lg-3">
 											<div class="input-group">
@@ -153,12 +160,18 @@
 											<span class="form-text text-muted">Please select your complaint's</span>
 										</div>
 
+										
+										
+
+									</div>
+
+									<div class="form-group row">
+
 										<label class="col-lg-2 col-form-label text-right">Other complaint:</label>
 										<div class="col-lg-3">
 											<input type="text" name="other_complaint"  class="form-control" placeholder="Enter other_complaint"/>
 											<span class="form-text text-muted">Please enter other complaint</span>
 										</div>
-										
 
 									</div>
 									

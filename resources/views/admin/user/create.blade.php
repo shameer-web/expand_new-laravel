@@ -190,8 +190,10 @@
 															 
 															
 															<option value="1" >Admin</option>
-															<option value="2" >Staff</option>
-															<option value="3" >Customer</option>
+															<option value="2" >Office Staff</option>
+															<option value="3" >Technician-staff</option>
+															<option value="4" >Collection Agent</option>
+															<option value="5" >Customer</option>
 															
 															
 															

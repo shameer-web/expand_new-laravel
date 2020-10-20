@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Package;
+use App\Gst;
 
 class PackageController extends Controller
 {
@@ -30,7 +31,8 @@ class PackageController extends Controller
     public function create()
     {
         //
-         return view('admin.package.create');
+        $gst = Gst::where('gst_status',1)->first();
+         return view('admin.package.create')->with('gst',$gst);
     }
 
     /**
@@ -41,16 +43,23 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
        // dd($request->all());
+       //  if($request->gst){
+       // $abc =($request->gst[0]+$request->gst[1]+$request->gst[2]);
+       //  }
+       //  dd($abc);
+
+
 
 
         $package =new Package();
         $package->package_name = $request->package_name;
 
         $package->package_type = $request->package_type;
+        $package->package_duration = $request->package_duration;
         $package->package_price = $request->package_price;
-        $package->gst = $request->gst;
+        $package->gst = $request->tax;
         $package->package_amount = $request->package_amount;
         $package->total_amount = $request->total_amount;
 

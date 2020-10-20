@@ -4,11 +4,11 @@
 @section('content')
 
 
-{{-- <?php
-if(isset($value)){
- $value =$page_data['value'] 
-}
- ?> --}}
+<?php
+
+ $user =$page_data['user'] 
+
+ ?>
  
 
 
@@ -123,7 +123,7 @@ if(isset($value)){
 					                              <span class="btn"> {{ $data['complainttype'].';' }} </span>
 					                               @endforeach
 											</td>
-											<td>{{ $row->customer->name }}</td>
+											<td>{{ $row->customer['name'] }}</td>
 											<td>{{ $row->phone_no }}</td>
 											<td>{{ $row->created_at }}</td>
 
@@ -132,7 +132,7 @@ if(isset($value)){
 											@if($row->status ==0) 
 									   <td><button class="badge btn btn-danger">pendind</button></td>
 										  @else
-										  <td> <button class=" badge btn btn-success">Closed</button></td>
+										  <td> <button class=" badge btn btn-success">Completed</button></td>
 										  @endif
 
 
@@ -147,6 +147,11 @@ if(isset($value)){
                                                               data-target="#delete_modal" class="btn btn-outline-danger"><i
                                                               class="fa fa-trash" aria-hidden="true"></i>
                                                              </button>
+
+
+                                                             <button type="button" id="btnassign" data-action="{{ route('complaint.update',$row->id) }}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+													Assign
+												</button>	
 															
 											</td>
 											
@@ -192,6 +197,52 @@ if(isset($value)){
                     </form>
                 </div>
             </div>
+
+
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+				<form id="assign_form" action="" method="post" class="form-horizontal">
+                        @csrf
+                        @method('put')
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel"> Please Confirm Your Action</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<i aria-hidden="true" class="ki ki-close"></i>
+							</button>
+						</div>
+						<div class="modal-body">
+						<div class="form-group row">
+							<label class="col-lg-3 col-form-label text-right">Assign To:</label>
+								<div class=" col-lg-9 ">
+									<select class="form-control" id="kt_select2_1" style="width: 100%" name="assigned">
+										
+
+										@foreach($user as $row)
+													<option value="{{ $row->id }}" >{{ $row->name }}</option>
+										@endforeach
+										
+										
+									</select>
+								</div>
+						</div>
+						<div class="form-group row">
+								<label class="col-lg-3 col-form-label text-right">Remarks:</label>
+								<div class=" col-lg-9">
+									<input type="text" name="remarks" class="form-control">
+									<input type="hidden" name="status" value="1" class="form-control">
+								</div>
+						</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary font-weight-bold">Save changes</button>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
 
 
 		

@@ -20,10 +20,11 @@ class CreateComplaintsTable extends Migration
              $table->string('phone_no');
              $table->string('email');
              $table->string('staff');
-
+             $table->string('post_no');
             $table->mediumText('complaint');
             $table->string('other_complaint');
-              $table->string('assigned')->nullable();
+            $table->string('assigned')->nullable();
+            $table->string('remarks')->nullable();
 
               $table->integer('status')->default(0);
              $table->integer('complaint_status')->default(1);

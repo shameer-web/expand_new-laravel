@@ -36,15 +36,15 @@ class LoginController extends Controller
             return $this->redirectTo;
                 break;
             case 4:
-                    $this->redirectTo = '/team';
+                    $this->redirectTo = '/collection-agent';
                 return $this->redirectTo;
                 break;
             case 3:
-                $this->redirectTo = '/player';
+                $this->redirectTo = '/technician-staff';
                 return $this->redirectTo;
                 break;
             case 5:
-                    $this->redirectTo = '/academy';
+                    $this->redirectTo = '/customer';
                 return $this->redirectTo;
                 break;
             case 6:
@@ -52,7 +52,7 @@ class LoginController extends Controller
                 return $this->redirectTo;
                 break;
             case 2:
-                $this->redirectTo = '/staff';
+                $this->redirectTo = '/office-staff';
                 return $this->redirectTo;
                 break;
             default:

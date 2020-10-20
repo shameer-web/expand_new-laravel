@@ -28,12 +28,25 @@ class Admin
         }
 
         if (Auth::user()->role == 3) {
-            return redirect()->route('customer');
+           // return redirect()->route('customer');
+             return $next($request);
         }
 
        
         if (Auth::user()->role == 1) {
             return $next($request);
+        }
+
+
+         if (Auth::user()->role == 4) {
+           // return redirect()->route('');
+             return $next($request);
+        }
+
+
+         if (Auth::user()->role == 5) {
+           // return redirect()->route('');
+             return $next($request);
         }
 
        

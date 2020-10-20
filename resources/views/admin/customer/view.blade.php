@@ -70,7 +70,7 @@
 <!--end::Dropdown-->
 
 <!--begin::Button-->
-<a href="#" class="btn btn-primary font-weight-bolder">
+<a href="{{ route('customer.create') }}" class="btn btn-primary font-weight-bolder">
 	<span class="svg-icon svg-icon-md"><!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <rect x="0" y="0" width="24" height="24"/>
@@ -167,14 +167,42 @@
 					
 					<td>
 					<a href="{{ route('customer.profile',$row->id) }}" class="btn btn-outline-warning font-weight-bold mr-2"><i class="fa fa-eye"></i></a>
-					<a href="" class="btn btn-outline-primary font-weight-bold mr-2"><i class="fa fa-edit"></i></a>
-					<button type="button" id="deletebtn" data-action="" data-toggle="modal" data-target="#delete_modal" class="btn btn-outline-danger"><i
+					<a href="{{ route('customer.edit',$row->id) }}" class="btn btn-outline-primary font-weight-bold mr-2"><i class="fa fa-edit"></i></a>
+					<button type="button" id="deletebtn" data-action="{{ route('customer.update',$row->id) }}" data-toggle="modal" data-target="#delete_modal" class="btn btn-outline-danger"><i
 					class="fa fa-trash" aria-hidden="true"></i></button></td>
 					</tr>
 				@endforeach
 			</tbody>
 		</table>
 		<!--end: Datatable-->
+
+         <div class="modal fade" tabindex="-1" id="delete_modal" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog " role="document">
+                    <form id="delete_form" action="" method="post" class="form-horizontal">
+                        @csrf
+                        @method('put')
+                        <div class="modal-content">
+                            <div class="alert alert-danger" role="alert" style="margin-bottom: 0px">
+                                <button type="button" class="close" data-dismiss="modal"></button>
+                                <br />
+                                <h4 class="alert-heading">Warning! Please Confirm Your Action</h4>
+                                <br />
+                                <p> Are You Sure to Delete this Data ?. All the Associated Data will Lost. </p>
+                                <p>
+                                    <button class="btn btn-danger " type="submit" name="submit">Confirm &
+                                        Delete</button>
+                                    <button type="button" class="btn btn-primary modal-dismiss"
+                                        data-dismiss="modal">Cancel</button>
+                                </p>
+                                <input type="hidden" name="customer_status" value="0">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
 	</div>
 </div>
 <!--end::Card-->	
@@ -196,6 +224,18 @@
 @section('script')
 
 <script src="{{asset('assets/js/pages/crud/ktdatatable/base/html-table.js')}}"></script>
+
+
+<script>
+$('body').on('click', '#deletebtn', function() {
+    var no = $(this).closest('tr').children('td');
+
+    $('#deletebtn').data('action');
+    var action = $(this).data('action');
+    $('#delete_form').attr('action', action);
+
+})
+</script>
 
 
 @endsection

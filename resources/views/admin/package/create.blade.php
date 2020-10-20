@@ -65,7 +65,8 @@
 						                                Postaid
 						                            </label>
 						                            <label class="radio radio-lg">
-						                                <input type="radio" name="package_type" value="Prepaid" />
+						                                <input type="radio" name="package_type" id="prepade"
+						                                onclick="myFunction()" value="Prepaid" />
 						                                <span></span>
 						                               	Prepaid
 						                            </label>
@@ -81,17 +82,29 @@
 											</div>
 											
 										</div>
-										<label class="col-lg-2 col-form-label text-right">Package GST %:</label>
-										<div class="col-lg-3">
-											<div class="input-group">
-												 <input type="text" name="gst" class="form-control" id="gst" placeholder="0">
-												
-											</div>
-											
-										</div>
+
+										<label class="col-lg-2 col-form-label text-right">Chose tax:</label>
+										<div class="checkbox-inline" id="tax1">
+									        <label class="checkbox">
+									            <input type="checkbox" class="gst" id="cgst" value="{{$gst->cgst}}" name="gst[]"/>
+									            <span></span>
+									           CGST {{$gst->cgst}} %
+									        </label>
+									        <label class="checkbox">
+									            <input type="checkbox" class="gst" id="sgst" value="{{$gst->sgst}}" name="gst[]"/>
+									            <span></span>
+									            SGST {{$gst->sgst}} %
+									        </label>
+									        <label class="checkbox">
+									            <input type="checkbox" class="gst" id="cess" value="{{$gst->cess}}" name="gst[]"/>
+									            <span></span>
+									            CESS {{$gst->cess}} %
+									        </label>
+									    </div>
+										
 									</div>
 									<div class="form-group row">
-										<label class="col-lg-2 col-form-label text-right">Package Amount:</label>
+										<label class="col-lg-2 col-form-label text-right">Gst Amount:</label>
 										<div class=" col-lg-3">
 											<div class="input-group">
 												<input type="text" name='package_amount' id="gst_amount" placeholder='0.00' class="form-control" />
@@ -99,14 +112,31 @@
 											</div>
 										</div>
 
-
-										<label class="col-lg-2 col-form-label text-right">Total Amount:</label>
+                                        
+										<label class="col-lg-2 col-form-label text-right">Total Amount incl all taxes:</label>
 										<div class=" col-lg-3">
 											<div class="input-group">
 												 <input type="text" readonly name='total_amount' id="total_amount1" placeholder='0.00' class="form-control" />
 												
 											</div>
 										</div>
+                                       
+                                       <div class="col-lg-3" id="durations" style="display:none">
+                                       
+										<label class=" col-form-label text-right">Package Durations:</label>
+										<div  >
+											<input type="number" name="package_duration"  class="form-control" placeholder="Enter Package Durations:"/>
+
+											
+										</div>
+									   </div>
+
+
+
+										
+
+
+										<input type="hidden" name="tax" id="tax">
 									</div>
 
 									<!-- begin: Example Code-->
@@ -117,7 +147,7 @@
 									<div class="row">
 										<div class="col-lg-2"></div>
 										<div class="col-lg-10">
-											<button type="submit" class="btn btn-success mr-2">Submit</button>
+											<button type="submit" id="submit" class="btn btn-success mr-2">Submit</button>
 											<button type="reset" class="btn btn-secondary">Cancel</button>
 										</div>
 									</div>
@@ -163,6 +193,9 @@
 
 
      <!--begin::Page Vendors(used by this page)-->
+
+        
+
 		<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 		<!--end::Page Vendors-->
 		<!--begin::Page Scripts(used by this page)-->
@@ -173,10 +206,36 @@
 
 		
 <script>
+  
+        
+
+        function myFunction() {
+       var checkBox = document.getElementById("prepade");
+       var text = document.getElementById("durations");
+       if (checkBox.checked == true){
+           text.style.display = "block";
+          } else {
+             text.style.display = "none";
+           }
+        }
+    
+
+
+
 	$(document).ready(function(){
     
-	$('#gst').on('keyup change',function(){
+	$('#cgst').on("click",function(){
 		calc_total();
+		
+	});
+	$('#sgst').on("click",function(){
+		calc_total1();
+		
+	});
+	$('#cess').on("click",function(){
+		calc_total2();
+		
+		
 	});
 	
 
@@ -188,11 +247,122 @@ function calc_total()
 {
 	var package_price = $('#package_price').val();
 	//alert(package_price)
-	tax_sum=package_price/100*$('#gst').val();
+	var cgst = parseInt($("#cgst").val());
+	$('#tax').val(cgst);
+
+	tax_sum=package_price/100*$('#cgst').val();
 	$('#gst_amount').val(tax_sum);
 	var result = parseInt(tax_sum) + parseInt(package_price);
-	$("#total_amount1").val(result);
+	$("#total_amount1").val(result.toFixed(2));
 }
+function calc_total1()
+{
+	var package_price = $('#package_price').val();
+
+
+	var cgst = parseInt($("#cgst").val());
+	var sgst = parseInt($("#sgst").val());
+	var cgstsgst = cgst+sgst;
+	$('#tax').val(cgstsgst);
+	
+	tax_sum=package_price/100*cgstsgst;
+	$('#gst_amount').val(tax_sum);
+	var result = parseInt(tax_sum) + parseInt(package_price);
+	$("#total_amount1").val(result.toFixed(2));
+}
+function calc_total2()
+{
+	var package_price = $('#package_price').val();
+	var cgst = parseInt($("#cgst").val());
+	var sgst = parseInt($("#sgst").val());
+	var cess = parseInt($("#cess").val());
+	var cgstsgstcess = cgst+sgst+cess;
+	$('#tax').val(cgstsgstcess);
+	
+	tax_sum=package_price/100*cgstsgstcess;
+	$('#gst_amount').val(tax_sum);
+	var result = parseInt(tax_sum) + parseInt(package_price);
+	$("#total_amount1").val(result.toFixed(2));
+}
+
+
+// $(document).ready(function() {
+//   $('#submit').click(function() {
+
+//   	  if ($('#cgst,#sgst,#cess').is(":checked")) {
+
+//      	//   alert($('#sgst').val());
+//       // alert($('#cgst').val());
+//       // alert($('#cess').val());
+
+//       var cgst = parseInt($("#cgst").val());
+// 	var sgst = parseInt($("#sgst").val());
+// 	var cess = parseInt($("#cess").val());
+// 	var cgstsgstcess = cgst+sgst+cess;
+
+
+     
+//       $('#tax').val(cgstsgstcess);
+
+//     }
+
+   
+//     if ($('#cgst').is(":checked")) {
+//       var cgst = $('#cgst').val();
+//       $('#tax').val(cgst);
+//       // alert($('#sgst').val());
+//       // alert($('#cess').val());
+
+//     }
+//     else if ($('#sgst').is(":checked")) {
+//       var sgst = $('#sgst').val();
+//       $('#tax').val(sgst);
+
+//     }
+
+//      else if ($('#cess').is(":checked")) {
+//       var cess = $('#cess').val();
+//       $('#tax').val(cess);
+
+//     }
+
+//       else if($('#cgst,#sgst').is(":checked")) {
+
+//      	//   alert($('#sgst').val());
+//       // alert($('#cess').val());
+
+//       var cgst = parseInt($("#cgst").val());
+// 	var sgst = parseInt($("#sgst").val());
+// 	var cgstsgst = cgst+sgst;
+
+
+     
+//       $('#tax').val(cgstsgst);
+
+//     }
+
+
+//     else if ($('#cgst #sgst #cess').is(":checked")) {
+
+//      	//   alert($('#sgst').val());
+//       // alert($('#cgst').val());
+//       // alert($('#cess').val());
+
+//       var cgst = parseInt($("#cgst").val());
+// 	var sgst = parseInt($("#sgst").val());
+// 	var cess = parseInt($("#cess").val());
+// 	var cgstsgstcess = cgst+sgst+cess;
+
+
+     
+//       $('#tax').val(cgstsgstcess);
+
+//     }
+
+
+
+//   })
+// });
 
 
 

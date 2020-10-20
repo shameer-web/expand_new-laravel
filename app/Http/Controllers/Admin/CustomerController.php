@@ -30,7 +30,7 @@ class CustomerController extends Controller
         ->join('districts','districts.id', '=', 'devices.district')
         ->join('locs','locs.id', '=', 'devices.lco_id')
         ->where('device_status', 1)
-        ->where('status', $id)->first();                   
+        ->where('devices.id', $id)->first();                   
         $customer = Customer::where('customer_status', 1)->
                             where('id',$id)->first();
 
@@ -56,6 +56,8 @@ class CustomerController extends Controller
     }
     public function create()
     {
+
+
         $district= District::where('district_status', 1)->get();
         $area= Area::where('area_status', 1)->get();
         $subcode= Subcode::where('subcode_status', 1)->get();
@@ -64,19 +66,60 @@ class CustomerController extends Controller
     }
     public function store(Request $request)
     {   
-       // dd($request->all());
-        $customer_prefix="CST-N";
+        
+          // $subcode =new Subcode();
+
+
+
+        // dd($request->all());
+        // $customer_prefix="CST-N";
+        // $customer = Customer::select('id', 'cust_id')->orderBy('id', 'desc')->first();
+        
+        // if($customer){
+        //     $previous_no = $customer->cust_id;
+        //     $cust_id = substr($previous_no, 5);
+        //     $new_no = (int)$cust_id+1;
+        // }else{
+        //     $new_no = 0001; // Starting No When No Data is Present
+        // }
+        
+        // $test= $customer_prefix.str_pad($new_no, 4, '0', STR_PAD_LEFT);
+
+
+
+
+           $exist_subcode = Subcode::where('id', '=', $request->subcode)
+                         ->first();
+
+           $exist_area = Area::where('id', '=', $request->area)
+                         ->first();
+
+         //dd( $exist_area->area_name);
+        $customer_prefix= $exist_subcode->subcode.''.$exist_area->area_name.'-';
+        //dd($customer_prefix);
         $customer = Customer::select('id', 'cust_id')->orderBy('id', 'desc')->first();
+       // dd($customer->id);
         
         if($customer){
-            $previous_no = $customer->cust_id;
-            $cust_id = substr($previous_no, 5);
-            $new_no = (int)$cust_id+1;
+            // $previous_no = $customer->id;
+            $cust_id = $customer->id;
+             $new_no = (int)$cust_id+1;
         }else{
-            $new_no = 0001; // Starting No When No Data is Present
+            $new_no = 1; // Starting No When No Data is Present
         }
         
-        $test= $customer_prefix.str_pad($new_no, 4, '0', STR_PAD_LEFT);
+        $test= $customer_prefix.str_pad($new_no, STR_PAD_LEFT);
+      // dd($test);
+
+
+         $request->validate([
+
+       
+        'email'=>'required|unique:customers|email|max:255',
+      
+
+        
+        ]);
         
         
         
@@ -84,23 +127,41 @@ class CustomerController extends Controller
         $customer->cust_id = $test;
         $customer->enqid = $request->enqid;
         $customer->name = $request->name;
-        $customer->email = $request->email;
         $customer->sub_code = $request->subcode;
         $customer->area = $request->area;
         $customer->crf_no = $request->crfno;
-        $customer->installation_address = $request->address;
         $customer->kseb_post_no = $request->ksebno;
+        $customer->installation_address = $request->address;
         $customer->district = $request->district;
         $customer->pin_code = $request->pincode;
         $customer->communication_address = $request->caddress;
+        $customer->district1 = $request->district1;
+        $customer->pin_code1 = $request->pincode1;
+
         $customer->customer_type = $request->ctype;
         $customer->id_proof_type = $request->prooftype;
-        // $customer->proof = $request->proof;
+        $customer->id_proof_number = $request->id_proof_number;
+
         $customer->phone = $request->phone;
         $customer->mobile_number = $request->mobile;
+
+        $customer->email = $request->email;
+         $customer->date = $request->date;
         $customer->remark = $request->remark;
-        $customer->date = $request->date;
-        $customer->customer_status = '1';
+       
+       
+
+       
+        
+       
+       
+       
+       
+        // $customer->proof = $request->proof;
+        
+       
+       
+        // $customer->customer_status = '1';
         $customer->save();
         
         return redirect()->route('customer.create')->with('message','succesfully created your field');
@@ -126,4 +187,48 @@ class CustomerController extends Controller
         $package->save();
         return redirect()->route('customer.profile',$id)->with('message','succesfully created your field');
     }
+
+
+
+     public function edit($id){
+
+
+        
+         $customer =Customer::find($id);
+         $district= District::where('district_status', 1)->get();
+         $area= Area::where('area_status', 1)->get();
+         $subcode= Subcode::where('subcode_status', 1)->get();
+
+        return view('admin.customer.edit')->with('customer',$customer)->with('district', $district)->with('area',$area)->with('subcode',$subcode);
+    }
+    public function update(Request $request , $id){
+
+
+         $customer=Customer::find($id);
+        // dd($request->all());
+          $customer_update = $customer->update($request->toArray());
+        if ($customer_update) {
+
+            if (isset($request->customer_status) and $request->customer_status == '0') {
+                Session::flash('toasttype', 'success');
+                Session::flash('toasttitle', 'Deleted');
+                Session::flash('toastcontent', 'customer  Details Deleted  Successfully');
+            } else {
+
+                Session::flash('toasttype', 'success');
+                Session::flash('toasttitle', 'Success');
+                Session::flash('toastcontent', 'customer  Details updated Successfully');
+            }
+        } else {
+            Session::flash('toasttype', 'error');
+            Session::flash('toasttitle', 'Error');
+            Session::flash('toastcontent', 'customer  Details Not Updated');
+        }
+
+       
+        
+       
+        return redirect()->route('customer.index');
+    }
+
 }

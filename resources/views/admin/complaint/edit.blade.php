@@ -150,6 +150,16 @@
 
 									<div class="form-group row">
 
+
+										<label class="col-lg-2 col-form-label text-right">KSEB Post No:</label>
+										<div class="col-lg-3">
+											<input type="text" name="post_no" value="{{ $complaint->post_no }}"  class="form-control" placeholder=""/>
+											<span class="form-text text-muted">Please enter KSEB Post No</span>
+										</div>
+
+
+
+
 										<label class="col-lg-2 col-form-label text-right">Complaint's:</label>
 										<div class="col-lg-3">
 											<div class="input-group">
@@ -157,15 +167,7 @@
 
 
 
-												{{-- <select class="form-control  "  name="complaint">
-                                                    <option selected="selected">Select User</option>
-                                                    <option value="Rahul">Rahul</option>
-                                                    <option value="Ram">Ram</option>
-                                                    <option value="prem">Prem</option>
-                                                    
-                                                    
-                                                   
-                                                </select> --}}
+												
 
                                                 	@php
                                                             	$val = $complaint->complaint;
@@ -194,14 +196,58 @@
 											<span class="form-text text-muted">Please select your complaint's</span>
 										</div>
 
+										
+										
+
+									</div>
+
+									<div class="form-group row">
+
 										<label class="col-lg-2 col-form-label text-right">Other complaint:</label>
 										<div class="col-lg-3">
 											<input type="text" name="other_complaint" value="{{ $complaint->other_complaint }}"  class="form-control" placeholder="Enter Email Id"/>
 											<span class="form-text text-muted">Please enter other complaint</span>
 										</div>
-										
+                                        
+
+                                        <label class="col-lg-2 col-form-label text-right">Remarks:</label>
+										<div class="col-lg-3">
+											<input type="text" name="remarks" value="{{ $complaint->remarks }}"  class="form-control" placeholder="Enter Email Id"/>
+											<span class="form-text text-muted">Please enter Remarks</span>
+										</div>
 
 									</div>
+
+									{{-- <div class="form-group row">
+
+
+										<label class="col-lg-2 col-form-label text-right">Assign To:</label>
+										<div class="col-lg-3">
+											<div class="input-group">
+												
+
+
+
+												<select class="form-control  "  name="staff" value="{{ $complaint->staff }}">
+                                                            @foreach($user as $row)
+															<option value="{{ $row->id }}"
+                                                                     @if($row->id == $complaint->assigned )
+                                                                     selected
+                                                                     @endif
+
+																>
+																{{ $row->name }}</option>
+															 @endforeach
+                                                    
+                                                    
+                                                   
+                                                </select>
+												
+											</div>
+											<span class="form-text text-muted">Please enter your Assign Name</span>
+										</div>
+
+								    </div> --}}
 									
 
 									<!-- begin: Example Code-->

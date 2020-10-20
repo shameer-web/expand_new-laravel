@@ -96,7 +96,13 @@
 														<td>admin</td>
 													    
 													    @elseif($row->role == 2)
-                                                        <td>Staff</td>
+                                                        <td>Office Staff</td>
+
+                                                         @elseif($row->role == 3)
+                                                        <td>Technician-staff</td>
+
+                                                         @elseif($row->role == 4)
+                                                        <td>Collection Agent</td>
 
                                                         @else
                                                         <td>Customers</td>

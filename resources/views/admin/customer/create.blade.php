@@ -51,23 +51,19 @@
 				<div class="card-body">
 				    	
 					<div class="form-group row">
-						<div class="col-lg-3">
+						<div class="col-lg-4">
 							<label>Enq No:</label>
 							<input type="text" class="form-control enqid-quirey"  style="text-transform:uppercase" name="enqid" value="" id="enqid" placeholder="Eg : ENQ-N0001" required/>
 							<span class="form-text text-muted" id="alert-box">Please enter your Enqiry Number</span>
 							
 						</div>
-						<div class="col-lg-3">
+						<div class="col-lg-4">
 							<label>Full Name:</label>
 							<input type="text" class="form-control " name="name" id="name" placeholder="Enter full name" required/>
 							<span class="form-text text-muted">Please enter your full name</span>
 						</div>
-						<div class="col-lg-3">
-							<label>Email:</label>
-							<input type="email" class="form-control" name="email" placeholder="Enter email" required/>
-							<span class="form-text text-muted">Please enter your email</span>
-						</div>
-						<div class="col-lg-3">
+						
+						<div class="col-lg-4">
 							<label>Subcode:</label>
 							<div class="input-group">
 								<div class="input-group-prepend"><span class="input-group-text"></div>
@@ -81,9 +77,15 @@
 							</div>
 							<span class="form-text text-muted">Please enter your Subcode</span>
 						</div>
+
+
+						
 					</div>
 					<div class="form-group row">
-						<div class="col-lg-3">
+
+
+
+						<div class="col-lg-4">
 							<label>Area:</label>
 							<div class="input-group">
 								<select class="form-control " id="kt_select2_1" name="area">
@@ -97,12 +99,15 @@
 							</div>
 							<span class="form-text text-muted">Please enter your area</span>
 						</div>
-						<div class="col-lg-3">
+
+						
+						
+						<div class="col-lg-4">
 							<label>CRF No:</label>
 							<input type="text" name="crfno" class="form-control" placeholder=""/>
 							<span class="form-text text-muted">Please enter your crf no</span>
 						</div>
-						<div class="col-lg-3">
+						<div class="col-lg-4">
 							<label>KSEB Post No:</label>
 							<div class="input-group">
 								<div class="input-group-prepend"><span class="input-group-text"><i class="la la-info-circle"></i></span></div>
@@ -110,7 +115,11 @@
 							</div>
 							<span class="form-text text-muted">Please enter Kseb Post Number</span>
 						</div>
-						<div class="col-lg-3">
+						
+					</div>
+					<div class="form-group row">
+
+                        <div class="col-lg-4">
 							<label>Installation Address:</label>
 							<div class="input-group">
 								<input type="text" name="address" id="iaddress" class="form-control" placeholder="Enter your address"/>
@@ -118,8 +127,7 @@
 							</div>
 							<span class="form-text text-muted">Please enter your address</span>
 						</div>
-					</div>
-					<div class="form-group row">
+
 						<div class="col-lg-4">
 							<label>District:</label>
 							<div class="input-group">
@@ -145,6 +153,20 @@
 							</div>
 							<span class="form-text text-muted">Please enter your Pincode</span>
 						</div>
+
+
+						
+						
+						
+					</div>
+
+
+					<input type="checkbox" id="same" name="same" onchange= "addressFunction()"/>	
+					<label for = "same" style="color: red"> <b> same address</b> </label>
+
+					<div class="form-group row">
+
+
 						<div class="col-lg-4">
 							<label>Communication Address:</label>
 							<div class="input-group">
@@ -153,8 +175,42 @@
 							</div>
 							<span class="form-text text-muted">Please enter your address</span>
 						</div>
+
+
+						<div class="col-lg-4">
+							<label>District:</label>
+							<div class="input-group">
+								<div class="input-group-append"></div>
+								<select class="form-control " id="kt_select2_1" name="district1">
+									<option selected="selected">Select District</option>
+									@foreach($district as $row)
+									<option value="{{$row->id}}">{{$row->district_name}}</option>
+									@endforeach
+									
+								</select>
+							</div>
+							<span class="form-text text-muted">Please enter your District</span>
+						</div>
 						
-					</div>
+
+
+						<div class="col-lg-4">
+							<label>Pincode:</label>
+							<div class="input-group">
+								<div class="input-group-append"></div>
+								<input type="text" name="pincode1"  id="pincode" class="form-control" placeholder="Enter your pincode"/>
+							</div>
+							<span class="form-text text-muted">Please enter your Pincode</span>
+						</div>
+
+
+
+
+				    </div>		
+                     
+
+
+
 					<div class="form-group row">
 						<div class="col-lg-4">
 							<label>Customer Type:</label>
@@ -189,12 +245,13 @@
 							<span class="form-text text-muted">Please select your id typeDistrict</span>
 						</div>
 						
+                        <div class="col-lg-4">
+							<label>ID Proof Number:</label>
+							<input type="text" class="form-control" name="id_proof_number" placeholder="Enter ID Proof Number " required/>
+							<span class="form-text text-muted">Please enter ID Proof Number</span>
+						</div>
 
-
-						<div class="col-lg-4">
-                            <input type="file" name="proof">
-							<span class="form-text text-muted">Max file size is 1MB and max number of files is 5.</span>
-						</div>	
+						
 					</div>
 					<div class="form-group row">
 						
@@ -214,6 +271,27 @@
 							</div>
 							<span class="form-text text-muted">Please enter your Mobile Number</span>
 						</div>
+
+
+						<div class="col-lg-4">
+							<label>Email:</label>
+							<input type="email" class="form-control" name="email" placeholder="Enter email" required/>
+							<span class="form-text text-muted">Please enter your email</span>
+						</div>
+
+                       
+
+                        <div class="col-lg-4">
+							<label>Join Date :</label>
+							<div class="input-group" >
+								<input type="text" name="date" id="datetimepicker1" class="form-control" placeholder="date"/>
+								<div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
+							</div>
+							<span class="form-text text-muted">Please enter Join Date</span>
+						</div>
+
+
+
 						<div class="col-lg-4">
 							<label>Remarks:</label>
 							<div class="input-group">
@@ -224,6 +302,13 @@
 						</div>
 
 
+						<div class="col-lg-4">
+							<label>Proof:</label>
+                            <input type="file" class="form-control" name="proof">
+							<span class="form-text text-muted">Max file size is 1MB and max number of files is 5.</span>
+						</div>
+
+
 
 						 
 
@@ -231,15 +316,7 @@
 						
 
 
-			            <div class="col-lg-4">
-							<label>Date :</label>
-							<div class="input-group" >
-								<input type="text" name="date" id="datetimepicker1" class="form-control" placeholder="date"/>
-								<div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
-							</div>
-							{{-- <span class="form-text text-muted">Please enter your address</span> --}}
-						</div>
-
+			            
 
 					
 
@@ -344,8 +421,8 @@ $(document).on('keyup', '.enqid-quirey', function() {
                 $('#name').val(response.full_name);
                 $('#mobile').val(response.contact_number);
                 $('#ksebno').val(response.postcode);
-                $('#iaddress').val(response.address);
-                $('#caddress').val(response.address);
+                // $('#iaddress').val(response.address);
+                // $('#caddress').val(response.address);
                  $('#alert-box').text('');
             }
         else{
@@ -364,6 +441,25 @@ $(document).on('keyup', '.enqid-quirey', function() {
     }
 }
 );
+
+
+ 
+function addressFunction() 
+{ 
+if (document.getElementById('same').checked) 
+{ 
+	document.getElementById('caddress').value=document. 
+			getElementById('iaddress').value; 
+	
+} 
+	
+else
+{ 
+	document.getElementById('caddress').value=""; 
+	 
+} 
+} 
+
 </script>
 
 @endsection

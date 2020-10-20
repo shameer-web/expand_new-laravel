@@ -372,7 +372,7 @@
 													<i class="menu-bullet menu-bullet-dot">
 														<span></span>
 													</i>
-													<span class="menu-text">Mangage District</span>
+													<span class="menu-text">Manage District</span>
 												</a>
 											</li>
 											<li class="menu-item" aria-haspopup="true">
@@ -380,7 +380,7 @@
 													<i class="menu-bullet menu-bullet-dot">
 														<span></span>
 													</i>
-													<span class="menu-text">Mangage Company</span>
+													<span class="menu-text">Manage Company</span>
 												</a>
 											</li>
 											<li class="menu-item" aria-haspopup="true">
@@ -388,7 +388,7 @@
 													<i class="menu-bullet menu-bullet-dot">
 														<span></span>
 													</i>
-													<span class="menu-text">Mangage Device Type</span>
+													<span class="menu-text">Manage Device Type</span>
 												</a>
 											</li>
 											<li class="menu-item" aria-haspopup="true">
@@ -396,7 +396,7 @@
 													<i class="menu-bullet menu-bullet-dot">
 														<span></span>
 													</i>
-													<span class="menu-text">Mangage Device Model</span>
+													<span class="menu-text">Manage Device Model</span>
 												</a>
 											</li>
 											<li class="menu-item" aria-haspopup="true">
@@ -404,7 +404,7 @@
 													<i class="menu-bullet menu-bullet-dot">
 														<span></span>
 													</i>
-													<span class="menu-text">Mangage Device Loc</span>
+													<span class="menu-text">Manage Device Loc</span>
 												</a>
 											</li>
 
@@ -413,7 +413,7 @@
 													<i class="menu-bullet menu-bullet-dot">
 														<span></span>
 													</i>
-													<span class="menu-text">Mangage Area</span>
+													<span class="menu-text">Manage Area</span>
 												</a>
 											</li>
 
@@ -422,7 +422,26 @@
 													<i class="menu-bullet menu-bullet-dot">
 														<span></span>
 													</i>
-													<span class="menu-text">Mangage Subcode</span>
+													<span class="menu-text">Manage Subcode</span>
+												</a>
+											</li>
+
+											<li class="menu-item" aria-haspopup="true">
+												<a href="{{ route('gst.index') }}" class="menu-link">
+													<i class="menu-bullet menu-bullet-dot">
+														<span></span>
+													</i>
+													<span class="menu-text">Manage Gst</span>
+												</a>
+											</li>
+
+
+											<li class="menu-item" aria-haspopup="true">
+												<a href="{{ route('technician_status.index') }}" class="menu-link">
+													<i class="menu-bullet menu-bullet-dot">
+														<span></span>
+													</i>
+													<span class="menu-text">Technician Status</span>
 												</a>
 											</li>
 										</ul>

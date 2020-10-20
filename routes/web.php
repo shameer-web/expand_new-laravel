@@ -52,6 +52,11 @@ Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'adm
     Route::get('/customer-enquiry/{enq_id}', 'CustomerController@enquiry')->name('customer.enquiry');  /// get enquiry data 
     Route::get('/customer/create', 'CustomerController@create')->name('customer.create');
     Route::post('/customer/store','CustomerController@store')->name('customer.store');
+
+    Route::get('/customer/{id}/edit','CustomerController@edit')->name('customer.edit');
+    Route::put('/customer/{id}/update','CustomerController@update')->name('customer.update');
+
+
     Route::get('/customer/profile/{id}', 'CustomerController@profile')->name('customer.profile');
     Route::post('/customer/device','CustomerController@device')->name('customer.device');
     Route::post('/customer/package','CustomerController@package')->name('customer.package');
@@ -68,10 +73,8 @@ Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'adm
     Route::resource('subcode','SubcodeController');
     Route::resource('complainttype','ComplainttypeController');
 
-
-
-
     Route::resource('gst','GstController');
+    Route::resource('technician_status','TechnicianstatusController');
 
 
 // data manage route end here
@@ -90,13 +93,55 @@ Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'adm
  
 
 
-Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'staff','namespace'=>'Staff'), function()
+Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'office-staff','namespace'=>'OfficeStaff'), function()
 {  
 
 
    
 
     Route::get('/', 'StaffController@index');
+
+     Route::resource('packages','PackageController');
+     Route::resource('devices','DeviceController');
+
+
+
+    //enquiry 
+    Route::get('/enquiry','EnquiryController@index')->name('enquiries.index');
+    Route::get('/enquiry/create','EnquiryController@create')->name('enquiries.create');
+    Route::post('/enquiry/create','EnquiryController@store')->name('enquiries.store');
+    Route::get('/enquiry/{id}/edit','EnquiryController@edit')->name('enquiries.edit');
+    Route::put('/enquiry/{id}/update','EnquiryController@update')->name('enquiries.update');
+   //end enquiry 
+
+
+
+    //customer route start here
+    Route::get('/customer', 'CustomerController@index')->name('cus.index');
+    Route::get('/customer-enquiry/{enq_id}', 'CustomerController@enquiry')->name('cus.enquiry');  /// get enquiry data 
+    Route::get('/customer/create', 'CustomerController@create')->name('cus.create');
+    Route::post('/customer/store','CustomerController@store')->name('cus.store');
+
+    Route::get('/customer/{id}/edit','CustomerController@edit')->name('cus.edit');
+    Route::put('/customer/{id}/update','CustomerController@update')->name('cus.update');
+
+
+    Route::get('/customer/profile/{id}', 'CustomerController@profile')->name('cus.profile');
+    Route::post('/customer/device','CustomerController@device')->name('cus.device');
+    Route::post('/customer/package','CustomerController@package')->name('cus.package');
+//customer route end here
+
+
+
+    //complaints 
+ Route::get('/complaint','ComplaintController@index')->name('complaints.index');
+ Route::get('/complainty/create','ComplaintController@create')->name('complaints.create');
+ Route::post('/complaint/create','ComplaintController@store')->name('complaints.store');
+ Route::get('/complaint/{id}/edit','ComplaintController@edit')->name('complaints.edit');
+ Route::put('/complaint/{id}/update','ComplaintController@update')->name('complaints.update');
+//end complaints
+
+
 
     
 
@@ -107,6 +152,55 @@ Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'sta
      
      
 });
+
+
+
+Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'technician-staff','namespace'=>'TechnicianStaff'), function()
+{  
+
+
+   
+
+    Route::get('/', 'StaffController@index');
+
+
+
+
+    //customer route start here
+    Route::get('/customer', 'CustomerController@index')->name('customers.index');
+
+     Route::get('/customer/profile/{id}', 'CustomerController@profile')->name('customers.profile');
+
+    Route::post('/customer/device','CustomerController@device')->name('customers.device');
+    Route::post('/customer/package','CustomerController@package')->name('customers.package');
+
+
+    //customer route end here
+
+
+
+    //complaints 
+ Route::get('/complaint','ComplaintController@index')->name('comp.index');
+ Route::get('/complainty/create','ComplaintController@create')->name('comp.create');
+ Route::post('/complaint/create','ComplaintController@store')->name('comp.store');
+ Route::get('/complaint/{id}/edit','ComplaintController@edit')->name('comp.edit');
+ Route::put('/complaint/{id}/update','ComplaintController@update')->name('comp.update');
+  Route::get('/complaint/{id}/check','ComplaintController@check')->name('comp.check');
+//end complaints
+
+});   
+
+
+
+Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'collection-agent','namespace'=>'CollectionAgent'), function()
+{  
+
+
+   
+
+    Route::get('/', 'StaffController@index');
+
+});    
 
 
 

@@ -33,6 +33,9 @@ class ComplaintController extends Controller
       $page_data['value'] = $value;
      }
 
+      $user= User::where('user_delete_status', 1)->get();
+       $page_data['user'] = $user;
+
     return view('admin.complaint.index',compact('page_data'));
 
 
@@ -68,9 +71,11 @@ class ComplaintController extends Controller
        
     	
     	$complaint->customer_name =$request->customer_name;
-        $complaint->phone_no =$request->phone_no;
-        $complaint->email =$request->email;
-        $complaint->staff =$request->staff;
+      $complaint->phone_no =$request->phone_no;
+      $complaint->email =$request->email;
+      $complaint->staff =$request->staff;
+      $complaint->post_no =$request->post_no;
+
 
         $complaint->complaint =$request->complaint;
         // $complaint->complaint = json_encode($request->complaint);
@@ -114,7 +119,7 @@ class ComplaintController extends Controller
        
       
        
-        ;
+      
        // $data=User::all();
 
         return view('admin.complaint.edit',compact('page_data'));
@@ -129,7 +134,7 @@ class ComplaintController extends Controller
 
     public function update(Request $request ,$id){
 
-
+      //dd($request->all());
     	 $complaint=Complaint::find($id);
         // dd($request->all());
           $complaint_update = $complaint->update($request->toArray());

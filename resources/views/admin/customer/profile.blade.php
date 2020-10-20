@@ -93,7 +93,7 @@
             </div>
             <div class="d-flex align-items-center justify-content-between">
                 <span class="font-weight-bold mr-2">Location:</span>
-                <span class="text-muted">{{ $customer->area}}</span>
+                <span class="text-muted">{{ $customer->Area['area_name']}}</span>
             </div>
         </div>
         <!--end::Contact-->
@@ -719,7 +719,11 @@
                         <th>Package Name</th>
                         <th>Amount </th>
                         <th >Type</th>
+                        <th >Status</th>
+                        <th >Payment Status</th>
+                        <th >Payment</th>
                         <th >Date</th>
+
                         
                     </tr>
                 </thead>
@@ -740,6 +744,24 @@
                                 
                             <span class="label label-lg label-light-success label-inline">{{$pk->ptype}}</span>
                             </td>
+
+                                @if($pk->package_status == 0) 
+                                    <td><button class="badge btn btn-danger" type="submit">in-active</button></td>
+                                @else
+                                     <td><button class="badge btn btn-success" type="submit">active</button></td>
+                                @endif
+
+
+                                @if($pk->payment_status == 0) 
+                                   <td><button class="badge btn btn-danger" type="submit">pending</button></td>
+                                @else
+                                   <td><button class="badge btn btn-success" type="submit">success</button></td>
+                                @endif
+                                <td>
+                                    <button class="badge btn btn-primary" type="submit">Pay</button>
+                                </td>
+
+
                             
                             <td>
                             {{$pk->date}}
