@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.collection_agent')
 
 
 @section('content')
@@ -14,7 +14,7 @@
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
 
                     <!--begin::Page Title-->
-                    <h5 class="text-dark font-weight-bold my-1 mr-5">Customers | Create New Customer</h5>
+                    <h5 class="text-dark font-weight-bold my-1 mr-5">Customers | Edit Customer Details</h5>
 
                     <!--end::Page Title-->
                 </div>
@@ -36,7 +36,7 @@
     <div class="card card-custom gutter-b example example-compact">
         <div class="card-header">
             <h3 class="card-title">
-               New Customer
+               Edit Customer
             </h3>
             <div class="card-toolbar">
                 <div class="example-tools justify-content-center">
@@ -46,58 +46,50 @@
             </div>
         </div>
 			<!--begin::Form-->
-
-			<form class="form" action="{{ route('customer.store') }}" method="POST" enctype="multipart/form-data" >
+			<form class="form" action="{{ route('customer.notification',$customer->id) }}" method="POST" enctype="multipart/form-data" >
 			@csrf
+			{{-- @method('put') --}}
 				<div class="card-body">
-
-					<div class="form-group row">
-                        <div class="col-lg-4">
-							<label>Cust id:</label>
-							<input type="text" class="form-control enqid-quirey"  style="text-transform:uppercase" name="cust_id" value="{{ $test }}" readonly />
-							<span class="form-text text-muted" id="alert-box"></span>
-							
-						</div>
-
-					</div>
-
-
 				    	
 					<div class="form-group row">
-						<div class="col-lg-4">
+						{{-- <div class="col-lg-4">
 							<label>Enq No:</label>
-							<input type="text" class="form-control enqid-quirey"  style="text-transform:uppercase" name="enqid" value="" id="enqid" placeholder="Eg : ENQ-N0001" />
-							<span class="form-text text-muted" >Please enter your Enqiry Number</span>
-
-							@error('enqid')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
+							<input type="text" class="form-control enqid-quirey"  style="text-transform:uppercase" name="enqid" value="" id="enqid" placeholder="Eg : ENQ-N0001" required/>
+							<span class="form-text text-muted" id="alert-box">Please enter your Enqiry Number</span>
 							
-						</div>
-						<div class="col-lg-4">
+						</div> --}}
+						<div class="col-lg-6">
 							<label>Full Name:</label>
-							<input type="text" class="form-control " name="name" id="name" placeholder="Enter full name" />
+							<input type="text" class="form-control "
+							value="{{ $customer->name }}" name="name" id="name" placeholder="Enter full name" required/>
 							<span class="form-text text-muted">Please enter your full name</span>
-
-							@error('name')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 						
-						<div class="col-lg-4">
+						<div class="col-lg-6">
 							<label>Subcode:</label>
 							<div class="input-group">
 								<div class="input-group-prepend"><span class="input-group-text"></div>
-								<select class="form-control " id="kt_select2_1" name="subcode">
-									<option selected="selected">Select Subcode</option>
-									@foreach($subcode as $row)
-									<option value="{{$row->id}}">{{$row->subcode}}</option>
+								<select class="form-control "  name="subcode">
+									
+									
+
+
+
+									 @foreach($subcode as $row)
+															<option value="{{ $row->id }}"
+                                                                     @if($row->id == $customer->sub_code )
+                                                                     selected
+                                                                     @endif
+
+																>
+																{{ $row->subcode }}</option>
 									@endforeach
+
+
+
+									 
 									
 								</select>
-								@error('subcode')
-								<p class="text-danger">{{ $message }}</p>
-							    @enderror
 							</div>
 							<span class="form-text text-muted">Please enter your Subcode</span>
 						</div>
@@ -113,17 +105,21 @@
 							<label>Area:</label>
 							<div class="input-group">
 								<select class="form-control " id="kt_select2_1" name="area">
-									<option selected="selected">Select Area</option>
+									
+									
+
 									@foreach($area as $row)
-									<option value="{{$row->id}}">{{$row->area_name}}</option>
+															<option value="{{ $row->id }}"
+                                                                     @if($row->id == $customer->area )
+                                                                     selected
+                                                                     @endif
+
+																>
+																{{ $row->area_name }}</option>
 									@endforeach
 									
 								</select>
 								<div class="input-group-append"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
-
-								@error('area')
-								<p class="text-danger">{{ $message }}</p>
-							    @enderror
 							</div>
 							<span class="form-text text-muted">Please enter your area</span>
 						</div>
@@ -132,22 +128,16 @@
 						
 						<div class="col-lg-4">
 							<label>CRF No:</label>
-							<input type="text" name="crfno" class="form-control" placeholder=""/>
+							<input type="text" name="crfno" value="{{ $customer->crf_no }}" class="form-control" placeholder=""/>
 							<span class="form-text text-muted">Please enter your crf no</span>
-							@error('crfno')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 						<div class="col-lg-4">
 							<label>KSEB Post No:</label>
 							<div class="input-group">
 								<div class="input-group-prepend"><span class="input-group-text"><i class="la la-info-circle"></i></span></div>
-								<input type="text" name="ksebno" id="ksebno" class="form-control" placeholder="Post Number"/>
+								<input type="text" name="ksebno" value="{{ $customer->kseb_post_no }}" id="ksebno" class="form-control" placeholder="Post Number"/>
 							</div>
 							<span class="form-text text-muted">Please enter Kseb Post Number</span>
-							@error('ksebno')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 						
 					</div>
@@ -156,14 +146,10 @@
                         <div class="col-lg-4">
 							<label>Installation Address:</label>
 							<div class="input-group">
-								<input type="text" name="address" id="iaddress" class="form-control" placeholder="Enter your address"/>
+								<input type="text" name="address" value="{{ $customer->installation_address }}" id="iaddress" class="form-control" placeholder="Enter your address"/>
 								<div class="input-group-append"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
 							</div>
 							<span class="form-text text-muted">Please enter your address</span>
-
-							@error('address')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
 						<div class="col-lg-4">
@@ -171,18 +157,26 @@
 							<div class="input-group">
 								<div class="input-group-append"></div>
 								<select class="form-control " id="kt_select2_1" name="district">
-									<option selected="selected">Select District</option>
+									{{-- <option selected="selected">Select District</option>
 									@foreach($district as $row)
 									<option value="{{$row->id}}">{{$row->district_name}}</option>
+									@endforeach --}}
+
+
+
+									@foreach($district as $row)
+															<option value="{{ $row->id }}"
+                                                                     @if($row->id == $customer->district )
+                                                                     selected
+                                                                     @endif
+
+																>
+																{{ $row->district_name }}</option>
 									@endforeach
 									
 								</select>
 							</div>
 							<span class="form-text text-muted">Please enter your District</span>
-
-							@error('district')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 						
 
@@ -191,13 +185,9 @@
 							<label>Pincode:</label>
 							<div class="input-group">
 								<div class="input-group-append"></div>
-								<input type="text" name="pincode"  id="pincode" class="form-control" placeholder="Enter your pincode"/>
+								<input type="text" name="pincode" value="{{ $customer->pin_code }}"  id="pincode" class="form-control" placeholder="Enter your pincode"/>
 							</div>
 							<span class="form-text text-muted">Please enter your Pincode</span>
-
-							@error('pincode')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
 
@@ -216,14 +206,10 @@
 						<div class="col-lg-4">
 							<label>Communication Address:</label>
 							<div class="input-group">
-								<input type="text" name="caddress" id="caddress" class="form-control" placeholder="Enter your address"/>
+								<input type="text" name="caddress" value="{{ $customer->communication_address }}" id="caddress" class="form-control" placeholder="Enter your address"/>
 								<div class="input-group-append"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
 							</div>
 							<span class="form-text text-muted">Please enter your address</span>
-
-							@error('caddress')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
 
@@ -232,18 +218,22 @@
 							<div class="input-group">
 								<div class="input-group-append"></div>
 								<select class="form-control " id="kt_select2_1" name="district1">
-									<option selected="selected">Select District</option>
+								
+
+
 									@foreach($district as $row)
-									<option value="{{$row->id}}">{{$row->district_name}}</option>
+															<option value="{{ $row->id }}"
+                                                                     @if($row->id == $customer->district1 )
+                                                                     selected
+                                                                     @endif
+
+																>
+																{{ $row->district_name }}</option>
 									@endforeach
 									
 								</select>
 							</div>
 							<span class="form-text text-muted">Please enter your District</span>
-
-							@error('district1')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 						
 
@@ -252,13 +242,9 @@
 							<label>Pincode:</label>
 							<div class="input-group">
 								<div class="input-group-append"></div>
-								<input type="text" name="pincode1"  id="pincode" class="form-control" placeholder="Enter your pincode"/>
+								<input type="text" name="pincode1" value="{{ $customer->pin_code1 }}"  id="pincode" class="form-control" placeholder="Enter your pincode"/>
 							</div>
 							<span class="form-text text-muted">Please enter your Pincode</span>
-
-							@error('pincode1')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
 
@@ -273,29 +259,28 @@
 						<div class="col-lg-4">
 							<label>Customer Type:</label>
 							<div class="radio-inline">
+                              
+                               
+
 								<label class="radio radio-solid">
-									<input type="radio" name="ctype" checked="checked" value="1"/>
+									<input type="radio" name="ctype" {{ $customer->customer_type == '1' ? 'checked' : '' }} value="1"/>
 									<span></span>
 									Regular
 								</label>
 								<label class="radio radio-solid">
-									<input type="radio" name="ctype" value="2"/>
+									<input type="radio" name="ctype" {{ $customer->customer_type == '2' ? 'checked' : '' }} value="2"/>
 									<span></span>
 									Rent
 								</label>
 							</div>
 							<span class="form-text text-muted">Please select user Type</span>
-
-							@error('ctype')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 						<div class="col-lg-4">
 							<label>ID Proof Type:</label>
 							<div class="input-group">
 								<div class="input-group-append"></div>
 								<select class="form-control " id="kt_select2_1" name="prooftype">
-									<option selected="selected">Select Id</option>
+									<option selected="selected" value="{{ $customer->id_proof_type }}">Select Id</option>
 									<option value="1">Adhar</option>
 									<option value="2">Voter ID</option>
 									<option value="3">Pan</option>
@@ -304,21 +289,13 @@
 									
 								</select>
 							</div>
-							<span class="form-text text-muted">Please select your ID Proof Type </span>
-
-							@error('prooftype')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
+							<span class="form-text text-muted">Please select your id typeDistrict</span>
 						</div>
 						
                         <div class="col-lg-4">
 							<label>ID Proof Number:</label>
-							<input type="text" class="form-control" name="id_proof_number" placeholder="Enter ID Proof Number " />
+							<input type="text" class="form-control" name="id_proof_number" value="{{ $customer->id_proof_number }}" placeholder="Enter ID Proof Number " required/>
 							<span class="form-text text-muted">Please enter ID Proof Number</span>
-
-							@error('id_proof_number')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
 						
@@ -329,36 +306,24 @@
 							<label>Phone:</label>
 							<div class="input-group">
 								<div class="input-group-append"></div>
-								<input type="text" class="form-control" name="phone" id="phone" placeholder="Enter your Phone"/>
+								<input type="text" class="form-control" name="phone" value="{{ $customer->phone }}" id="phone" placeholder="Enter your Phone"/>
 							</div>
 							<span class="form-text text-muted">Please enter your Phone Number</span>
-
-							@error('phone')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 						<div class="col-lg-4">
 							<label>Mobile:</label>
 							<div class="input-group">
 								<div class="input-group-append"></div>
-								<input type="text" class="form-control" name="mobile_number" id="mobile" placeholder="Enter your Mobile"/>
+								<input type="text" class="form-control" name="mobile" value="{{ $customer->mobile_number }}" id="mobile" placeholder="Enter your Mobile"/>
 							</div>
 							<span class="form-text text-muted">Please enter your Mobile Number</span>
-
-							@error('mobile_number')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
 
 						<div class="col-lg-4">
 							<label>Email:</label>
-							<input type="email" class="form-control" name="email" placeholder="Enter email"/>
+							<input type="email" class="form-control" name="email" value="{{ $customer->email }}" placeholder="Enter email" required/>
 							<span class="form-text text-muted">Please enter your email</span>
-
-							@error('email')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
                        
@@ -366,14 +331,10 @@
                         <div class="col-lg-4">
 							<label>Join Date :</label>
 							<div class="input-group" >
-								<input type="text" name="date" id="datetimepicker1" class="form-control" placeholder="date"/>
+								<input type="text" name="date" value="{{ $customer->date }}" id="datetimepicker1" class="form-control" placeholder="date"/>
 								<div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
 							</div>
 							<span class="form-text text-muted">Please enter Join Date</span>
-
-							@error('date')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
 
@@ -382,13 +343,9 @@
 							<label>Remarks:</label>
 							<div class="input-group">
 								<div class="input-group-append"></div>
-								<input type="text" class="form-control" name="remark" placeholder="Enter your Remarks"/>
+								<input type="text" class="form-control" name="remark" value="{{ $customer->remark }}" placeholder="Enter your Remarks"/>
 							</div>
 							<span class="form-text text-muted">Please enter Remarks</span>
-
-							@error('remark')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
 
@@ -396,10 +353,6 @@
 							<label>Proof:</label>
                             <input type="file" class="form-control" name="proof">
 							<span class="form-text text-muted">Max file size is 1MB and max number of files is 5.</span>
-
-							@error('proof')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
 

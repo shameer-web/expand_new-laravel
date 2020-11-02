@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Area;
+use Carbon\Carbon;
 
 class AreaController extends Controller
 {
@@ -17,6 +18,15 @@ class AreaController extends Controller
     public function index()
     {
         //
+            // $mytime =Carbon::now();
+            // $abc =$mytime->toDateTimeString();
+            // dd($abc);
+
+         // $startTime = Carbon::parse('2020-02-11 04:04:26');
+         //    $endTime = Carbon::parse('2020-02-12 04:36:56');
+
+         //  $totalDuration = $endTime->diffForHumans($startTime);
+         //  dd($totalDuration);
 
         $area= Area::where('area_status', 1)->get();
         return view('admin.area.index')->with('area',$area);

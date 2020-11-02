@@ -149,8 +149,13 @@
                                                              </button>
 
 
-                                                             <button type="button" id="btnassign" data-action="{{ route('complaint.update',$row->id) }}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-													Assign
+                                                             	<form action="{{ route('complaint.complaint_reg') }}" method="post">
+                                                             		@csrf
+                                                             		<input type="hidden" name="search" value="{{ $row->customer_name }}">
+                                                             		<button  type="submit" class="btn btn-primary">View</button>
+                                                             		
+                                                             	</form>
+													
 												</button>	
 															
 											</td>
@@ -200,7 +205,7 @@
 
 
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+           {{--  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 				<form id="assign_form" action="" method="post" class="form-horizontal">
                         @csrf
@@ -242,7 +247,7 @@
 					</div>
 					</form>
 				</div>
-			</div>
+			</div> --}}
 
 
 		

@@ -10,6 +10,10 @@ class CustomerPackage extends Model
 
 
      protected $fillable = [
-       'package_name','cus_id','customer_package_status'
+       'package_name','package_amount','cus_id','package_status','payment_status','payment_date','customer_package_status'
     ];
+
+    public function package(){
+    return $this->belongsTo(Package::class,'package_name','id');
+   }
 }

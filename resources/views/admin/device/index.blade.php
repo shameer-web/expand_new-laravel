@@ -101,9 +101,9 @@
                                               <th>Model</th>
                                               <th>District</th>
                                               <th>LCO ID</th>
-                                              <th>Status</th>
+                                              <th>Assigned Customer</th>
 											  <th>Actions</th>
-											  <th></th>
+											  
 					                                  </tr>
 					                    </thead>
                                       @foreach($data as $row)
@@ -113,21 +113,23 @@
                           				 <tr>
 											  <td>{{ $row->id }}</td>
 											  <td>{{ $row->deviceid }}</td>
-                                              <td>{{ $row->company_name }}</td>
-                                              <td>{{ $row->type_name }}</td>
+                                              <td>{{ $row->Company['company_name'] }}</td>
+                                              <td>{{ $row->Type['type_name'] }}</td>
                                               <td>{{ $row->device_id}}</td>
                                               <td>{{ $row->serial_number }}</td>
-                                              <td>{{ $row->model_name}}</td>
-                                              <td>{{ $row->district_name }}</td>
-                                              <td>{{ $row->loc_name }}</td>
-											  @if($row->status ==1) 
-									   <td><span class="label label-success label-inline mr-2">Stock</span></td>
-										  @elseif($row->status ==2) 
-										  <td> <span class="label label-dange label-inline mr-2">Damage</span></td>
-										  @elseif($row->status ==3) 
-										  <td> <span class="label label-warning label-inline mr-2">Service</span></td>
+                                              <td>{{ $row->Mode['model_name']}}</td>
+                                              <td>{{ $row->District['district_name'] }}</td>
+                                              <td>{{ $row->Loc['loc_name'] }}</td>
+											  @if($row->status ==0) 
+									   <td>{{-- <span class="label label-warning label-inline mr-2">Not Assigned</span> --}}
+                                       <button class="btn btn-warning badge">Not Assigned</button>
+									   </td>
 										  @else 
-										  <td> <span class="label label-success label-inline mr-2">Customer</span></td>
+										  <td> {{-- <span class="label label-primary label-inline mr-2">{{ $row->Customer['name'] }}</span> --}}
+                                           <button class="btn btn-primary badge">{{ $row->Customer['name'] }}</button>
+
+										  </td>
+										 
 										  @endif
                                              
                                             <td>

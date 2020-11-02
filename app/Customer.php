@@ -12,6 +12,7 @@ class Customer extends Model
     protected $fillable = [
 
     	'cust_id',
+        'area_subcode_id',
     	'enqid',
     	'name',			
         'sub_code',		
@@ -45,5 +46,17 @@ class Customer extends Model
       //belong to relationship
    public function Area(){
     return $this->belongsTo(Area::class,'area','id');
+   }
+
+    public function Subcode(){
+    return $this->belongsTo(Subcode::class,'sub_code','id');
+   }
+
+    public function District(){
+    return $this->belongsTo(District::class,'district','id');
+   }
+
+    public function District1(){
+    return $this->belongsTo(District::class,'district1','id');
    }
 }

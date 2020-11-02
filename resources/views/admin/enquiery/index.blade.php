@@ -87,8 +87,8 @@
 										<div class="card-body">
 											<!--begin: Datatable-->
 											<table class="table table-bordered table-checkable" id="kt_datatable">
-												                    <thead>
-									                              <tr>
+											<thead>
+									        <tr>
                                              
 											<th style="display:none">Order ID</th>
 											<th>Enquiry No</th>
@@ -100,7 +100,7 @@
 											<th>Date</th>
                                             <th>Actions</th>
 											
-					                                  </tr>
+					                        </tr>
 					                    </thead>
                                       @foreach($data as $row)
 									

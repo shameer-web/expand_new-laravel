@@ -11,7 +11,31 @@
                         
                         <!--end::Subheader-->
                         <!--begin::Entry-->
-                        <div class="d-flex flex-column-fluid">
+                      
+                            <form class="form" action="{{ route('complaint.complaint_reg') }}" method="post"  id="form-complaint">
+                                @csrf
+                            <div class="row">
+                            <label class="col-lg-3 col-form-label text-right">Cus Id:</label>
+                                        <div class="col-lg-6">
+                                            <input type="number" name="search" id="search"  class="form-control" placeholder="Enter Customer Id"/>
+                                            <span class="form-text text-muted">Please enter Customer Id</span>
+
+
+                                             @error('search')
+                                                <p class="text-danger">{{ $message }}</p>
+                                             @enderror
+                                        </div>
+
+                                        <div class="col-lg-3">
+                                            <button type="submit" class="btn btn-success mr-2">Go</button>
+                                            
+                                        </div>
+                            </div>
+                            </form>
+                            
+                         
+
+                        <div class="d-flex flex-column-fluid pt-5">
                             <!--begin::Container-->
                             <div class="container">
                                 <!--begin::Dashboard-->

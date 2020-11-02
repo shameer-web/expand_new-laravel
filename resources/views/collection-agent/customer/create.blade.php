@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.collection_agent')
 
 
 @section('content')
@@ -46,42 +46,21 @@
             </div>
         </div>
 			<!--begin::Form-->
-
-			<form class="form" action="{{ route('customer.store') }}" method="POST" enctype="multipart/form-data" >
+			<form class="form" action="{{ route('cust.store') }}" method="POST" enctype="multipart/form-data" >
 			@csrf
 				<div class="card-body">
-
-					<div class="form-group row">
-                        <div class="col-lg-4">
-							<label>Cust id:</label>
-							<input type="text" class="form-control enqid-quirey"  style="text-transform:uppercase" name="cust_id" value="{{ $test }}" readonly />
-							<span class="form-text text-muted" id="alert-box"></span>
-							
-						</div>
-
-					</div>
-
-
 				    	
 					<div class="form-group row">
 						<div class="col-lg-4">
 							<label>Enq No:</label>
-							<input type="text" class="form-control enqid-quirey"  style="text-transform:uppercase" name="enqid" value="" id="enqid" placeholder="Eg : ENQ-N0001" />
-							<span class="form-text text-muted" >Please enter your Enqiry Number</span>
-
-							@error('enqid')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
+							<input type="text" class="form-control enqid-quirey"  style="text-transform:uppercase" name="enqid" value="" id="enqid" placeholder="Eg : ENQ-N0001" required/>
+							<span class="form-text text-muted" id="alert-box">Please enter your Enqiry Number</span>
 							
 						</div>
 						<div class="col-lg-4">
 							<label>Full Name:</label>
-							<input type="text" class="form-control " name="name" id="name" placeholder="Enter full name" />
+							<input type="text" class="form-control " name="name" id="name" placeholder="Enter full name" required/>
 							<span class="form-text text-muted">Please enter your full name</span>
-
-							@error('name')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 						
 						<div class="col-lg-4">
@@ -95,9 +74,6 @@
 									@endforeach
 									
 								</select>
-								@error('subcode')
-								<p class="text-danger">{{ $message }}</p>
-							    @enderror
 							</div>
 							<span class="form-text text-muted">Please enter your Subcode</span>
 						</div>
@@ -120,10 +96,6 @@
 									
 								</select>
 								<div class="input-group-append"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
-
-								@error('area')
-								<p class="text-danger">{{ $message }}</p>
-							    @enderror
 							</div>
 							<span class="form-text text-muted">Please enter your area</span>
 						</div>
@@ -134,9 +106,6 @@
 							<label>CRF No:</label>
 							<input type="text" name="crfno" class="form-control" placeholder=""/>
 							<span class="form-text text-muted">Please enter your crf no</span>
-							@error('crfno')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 						<div class="col-lg-4">
 							<label>KSEB Post No:</label>
@@ -145,9 +114,6 @@
 								<input type="text" name="ksebno" id="ksebno" class="form-control" placeholder="Post Number"/>
 							</div>
 							<span class="form-text text-muted">Please enter Kseb Post Number</span>
-							@error('ksebno')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 						
 					</div>
@@ -160,10 +126,6 @@
 								<div class="input-group-append"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
 							</div>
 							<span class="form-text text-muted">Please enter your address</span>
-
-							@error('address')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
 						<div class="col-lg-4">
@@ -179,10 +141,6 @@
 								</select>
 							</div>
 							<span class="form-text text-muted">Please enter your District</span>
-
-							@error('district')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 						
 
@@ -194,10 +152,6 @@
 								<input type="text" name="pincode"  id="pincode" class="form-control" placeholder="Enter your pincode"/>
 							</div>
 							<span class="form-text text-muted">Please enter your Pincode</span>
-
-							@error('pincode')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
 
@@ -220,10 +174,6 @@
 								<div class="input-group-append"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
 							</div>
 							<span class="form-text text-muted">Please enter your address</span>
-
-							@error('caddress')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
 
@@ -240,10 +190,6 @@
 								</select>
 							</div>
 							<span class="form-text text-muted">Please enter your District</span>
-
-							@error('district1')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 						
 
@@ -255,10 +201,6 @@
 								<input type="text" name="pincode1"  id="pincode" class="form-control" placeholder="Enter your pincode"/>
 							</div>
 							<span class="form-text text-muted">Please enter your Pincode</span>
-
-							@error('pincode1')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
 
@@ -285,10 +227,6 @@
 								</label>
 							</div>
 							<span class="form-text text-muted">Please select user Type</span>
-
-							@error('ctype')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 						<div class="col-lg-4">
 							<label>ID Proof Type:</label>
@@ -304,21 +242,13 @@
 									
 								</select>
 							</div>
-							<span class="form-text text-muted">Please select your ID Proof Type </span>
-
-							@error('prooftype')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
+							<span class="form-text text-muted">Please select your id typeDistrict</span>
 						</div>
 						
                         <div class="col-lg-4">
 							<label>ID Proof Number:</label>
-							<input type="text" class="form-control" name="id_proof_number" placeholder="Enter ID Proof Number " />
+							<input type="text" class="form-control" name="id_proof_number" placeholder="Enter ID Proof Number " required/>
 							<span class="form-text text-muted">Please enter ID Proof Number</span>
-
-							@error('id_proof_number')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
 						
@@ -332,33 +262,21 @@
 								<input type="text" class="form-control" name="phone" id="phone" placeholder="Enter your Phone"/>
 							</div>
 							<span class="form-text text-muted">Please enter your Phone Number</span>
-
-							@error('phone')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 						<div class="col-lg-4">
 							<label>Mobile:</label>
 							<div class="input-group">
 								<div class="input-group-append"></div>
-								<input type="text" class="form-control" name="mobile_number" id="mobile" placeholder="Enter your Mobile"/>
+								<input type="text" class="form-control" name="mobile" id="mobile" placeholder="Enter your Mobile"/>
 							</div>
 							<span class="form-text text-muted">Please enter your Mobile Number</span>
-
-							@error('mobile_number')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
 
 						<div class="col-lg-4">
 							<label>Email:</label>
-							<input type="email" class="form-control" name="email" placeholder="Enter email"/>
+							<input type="email" class="form-control" name="email" placeholder="Enter email" required/>
 							<span class="form-text text-muted">Please enter your email</span>
-
-							@error('email')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
                        
@@ -370,10 +288,6 @@
 								<div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
 							</div>
 							<span class="form-text text-muted">Please enter Join Date</span>
-
-							@error('date')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
 
@@ -385,10 +299,6 @@
 								<input type="text" class="form-control" name="remark" placeholder="Enter your Remarks"/>
 							</div>
 							<span class="form-text text-muted">Please enter Remarks</span>
-
-							@error('remark')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
 
@@ -396,10 +306,6 @@
 							<label>Proof:</label>
                             <input type="file" class="form-control" name="proof">
 							<span class="form-text text-muted">Max file size is 1MB and max number of files is 5.</span>
-
-							@error('proof')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
 
@@ -507,7 +413,7 @@ $(document).on('keyup', '.enqid-quirey', function() {
     var enq = $(this).val();
     if(enq != null){
     $.ajax({
-        url: '{{url('admin')}}/customer-enquiry/' + enq,
+        url: '{{url('admin')}}/cust-enquiry/' + enq,
         type: 'get',
         dataType: 'json',
         success: function(response){

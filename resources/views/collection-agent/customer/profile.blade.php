@@ -1,9 +1,7 @@
-@extends('layouts.admin')
+@extends('layouts.collection_agent')
 
 
 @section('content')
-
-
 
 <div class="subheader py-2 py-lg-6  subheader-solid " id="kt_subheader">
     <div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -149,13 +147,6 @@
 
     <!--begin::Body-->
                 <div class="card-body pt-2">
-                    @if($cust_package == null)
-                    <div class="d-flex flex-wrap align-items-center mb-10">
-                         <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
-                                <P class="text-danger">Package Not Taken</P>
-                            </a>
-                    </div>
-                    @else
                     <!--begin::Item-->
                     <div class="d-flex flex-wrap align-items-center mb-10">
                         <!--begin::Symbol-->
@@ -167,13 +158,13 @@
                         <!--begin::Title-->
                         <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
                             <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
-                                {{ $cust_package->package['package_name'] }}
+                                Cup & Green
                             </a>
-                            <span class=" font-weight-bold  my-1">
-                               Package Amount
+                            <span class="text-muted font-weight-bold font-size-sm my-1">
+                                Local, clean & environmental
                             </span>
                             <span class="text-muted font-weight-bold font-size-sm">
-                                Created Date: <span class="text-primary font-weight-bold">{{ $cust_package->created_at }}</span>
+                                Created by: <span class="text-primary font-weight-bold">CoreAd</span>
                             </span>
                         </div>
                         <!--end::Title-->
@@ -182,16 +173,15 @@
                         <div class="d-flex align-items-center py-lg-0 py-2">
                             <div class="d-flex flex-column text-right">
                                 <span class="text-dark-75 font-weight-bolder font-size-h4">
-                                    {{  $cust_package->package['package_price'] }}
+                                    24,900
                                 </span>
                                 <span class="text-muted font-size-sm font-weight-bolder">
-                                    
+                                    votes
                                 </span>
                             </div>
                         </div>
                         <!--end::Info-->
                     </div>
-                    @endif
             </div>
     <!--end::Body-->
 </div>
@@ -224,61 +214,20 @@
                     <div class="d-flex flex-column align-items-cente py-2 w-75">
                         <!--begin::Title-->
                         <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">
-                            Package & Payment Due
+                            Data analytics research showcase
                         </a>
                         <!--end::Title-->
 
                         <!--begin::Data-->
-                        @if($cust_package == null)
                         <span class="text-muted font-weight-bold">
-                            <p class="text-primary">No Due</p>
+                            Due in 2 Days
                         </span>
-                        @else
-                        <span class="text-muted font-weight-bold">
-                              @if($cust_package->payment_date =='')
-                                 <td>
-                                    <button class="badge btn btn-primary">pls pay</button>
-                                   
-                                </td>
-                                
-                                @elseif(\Carbon\Carbon::parse($cust_package->payment_date)->diffForHumans() == '1 month ago')
-                                <td>
-                                    <button class="btn btn-danger badge">due</button>
-                                   
-                                </td>
-
-                                 @elseif(\Carbon\Carbon::parse($cust_package->payment_date)->diffForHumans() == '2 month ago')
-                                <td>
-                                    <button class="btn btn-danger badge">due</button>
-                                   
-                                </td>
-                                 @elseif(\Carbon\Carbon::parse($cust_package->payment_date)->diffForHumans() >= '3 month ago')
-                                <td>
-                                    <button class="btn btn-danger badge">due</button>
-                                   
-                                </td>
-                                 @elseif(\Carbon\Carbon::parse($cust_package->payment_date)->diffForHumans() >= '4 month ago')
-                                <td>
-                                    <button class="btn btn-danger badge">due</button>
-                                   
-                                </td>
-                                 @elseif(\Carbon\Carbon::parse($cust_package->payment_date)->diffForHumans() >= '5 month ago')
-                                <td>
-                                    <button class="btn btn-danger badge">due</button>
-                                   
-                                </td>
-                                 @else
-                                   <td><button class="badge btn btn-primary" type="submit">{{ \Carbon\Carbon::parse($cust_package->payment_date)->diffForHumans() }}</button></td>
-                                @endif
-
-                        </span>
-                        @endif
                         <!--end::Data-->
                     </div>
                     <!--end::Info-->
 
                     <!--begin::Label-->
-                  {{--   <span class="label label-lg label-light-warning label-inline font-weight-bold py-4">In Progress</span> --}}
+                    <span class="label label-lg label-light-warning label-inline font-weight-bold py-4">In Progress</span>
                     <!--end::Label-->
                 </div>
                 <!--end::Section-->
@@ -303,7 +252,19 @@
             <span class="card-label font-weight-bolder text-dark">Complaints</span>
           
         </h3>
-        
+        <!-- <div class="card-toolbar">
+            <ul class="nav nav-pills nav-pills-sm nav-dark-75">
+                <li class="nav-item">
+                    <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_1">Month</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_2">Week</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_1_3">Day</a>
+                </li>
+            </ul>
+        </div> -->
     </div>
     <!--end::Header-->
 
@@ -311,50 +272,45 @@
     <div class="card-body py-2">
         <!--begin::Table-->
         <div class="table-responsive">
-            <table class="table table-bordered table-checkable mt-5" id="">
-                                            <thead>
-                                             <tr>
-                                             
-                                              <th>ID</th>
-                                              <th>Complaint ID</th>
-                                              <th>Complaint</th>
-                                              <th>Customer Id</th>
-                                              <th>Mobile</th>
-                                              <th>Date</th>
-                                              <th>Status</th>
-                                              {{-- <th>Actions</th> --}}
-                                            
-                                             </tr>
-                                            </thead>
-                                            <tbody>
-                                               @if($complaint == null)
-                                               <div class="card-body">
-                                                   
-                                               </div>
-                                               @else
-
-                                              <tr>
-                                                <td>{{ $complaint->id }}</td>
-                                                <td>{{ $complaint->complaint_id }}</td>
-                                                <td>
-                                                    @foreach($single_com as$com )
-                                                      {{ $com->complainttype }},<br>
-                                                    @endforeach
-                                                </td>
-                                                <td>{{ $complaint->customer_name }}</td>
-                                                <td>{{ $complaint->phone_no }}</td>
-                                                <td>{{ $complaint->created_at }}</td>
-                                                @if($complaint->status ==0) 
-                                                   <td><button class="badge btn btn-danger">pendind</button></td>
-                                                @else
-                                                <td> <button class=" badge btn btn-success">Completed</button></td>
-                                                @endif
-                                                {{-- <td>{{ $complaint-> }}</td> --}}
-                                              </tr>
-                                              @endif
-                                            </tbody>
-                                  
-                                        </table>
+            <table class="table  table-vertical-center" >
+                <thead>
+                    <tr>
+                        <th >ID</th>
+                        <th >Customer</th>
+                        <th >Complaint</th>
+                        <th  >Status</th>
+                        <th  >Payment</th>
+                        <th >Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td >
+                            1
+                        </td>
+                        <td >
+                            nane
+                        </td>
+                        <td >
+                            Network Error
+                        </td>
+                        <td >
+                            <span class="label label-lg label-light-primary label-inline">Approved</span>
+                        </td>
+                        <td >
+                        <span class="text-muted font-weight-bold">
+                                Paid
+                            </span>
+                            
+                        </td>
+                        <td>
+                            01-10-20
+                        </td>
+                    </tr>
+                    
+                    
+                </tbody>
+            </table>
         </div>
         <!--end::Table-->
     </div>
@@ -418,25 +374,6 @@
 							
 						</div>
 					</div>
-
-                    <div class="form-group row">
-                        <label class="col-xl-3 col-lg-3 col-form-label">Area Subcode Id </label>
-                        <div class="col-lg-9 col-xl-6">
-                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->area_subcode_id}}"/>
-                            
-                        </div>
-                    </div>
-
-
-                    <div class="form-group row">
-                        <label class="col-xl-3 col-lg-3 col-form-label">Enquiry Id </label>
-                        <div class="col-lg-9 col-xl-6">
-                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->enqid}}"/>
-                            
-                        </div>
-                    </div>
-
-
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label"> Name</label>
 						<div class="col-lg-9 col-xl-6">
@@ -446,13 +383,13 @@
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">Sub Code</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->Subcode['subcode']}}"/>
+							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->sub_code}}"/>
 						</div>
 					</div>
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">Area ID</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->Area['area_name']}}"/>
+							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->area}}"/>
 							
 						</div>
 					</div>
@@ -482,7 +419,7 @@
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">District</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->District['district_name']}}"/>
+							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->district}}"/>
 							
 						</div>
 					</div>
@@ -501,22 +438,6 @@
 							
 						</div>
                     </div>
-
-
-                    <div class="form-group row">
-                        <label class="col-xl-3 col-lg-3 col-form-label">District</label>
-                        <div class="col-lg-9 col-xl-6">
-                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->District1['district_name']}}"/>
-                            
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-xl-3 col-lg-3 col-form-label">Pin Code</label>
-                        <div class="col-lg-9 col-xl-6">
-                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->pin_code1}}"/>
-                            
-                        </div>
-                    </div>
                     
                     <div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">Customer Type</label>
@@ -533,30 +454,10 @@
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">ID Type</label>
 						<div class="col-lg-9 col-xl-6">
-
-                            @if($customer->id_proof_type == 1)
-							<input class="form-control form-control-lg form-control-solid" type="text" value="Adhar"/>
-                            @elseif($customer->id_proof_type == 2 )
-                            <input class="form-control form-control-lg form-control-solid" type="text" value="Voter ID"/>
-                            @elseif($customer->id_proof_type == 3 )
-
-                            <input class="form-control form-control-lg form-control-solid" type="text" value="Pan Card"/>
-                            @else
-                            <input class="form-control form-control-lg form-control-solid" type="text" value="Driwing Licence"/>
-                            @endif
-
+							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->proof}}"/>
 							
 						</div>
 					</div>
-
-
-                    <div class="form-group row">
-                        <label class="col-xl-3 col-lg-3 col-form-label">Id Proof Number</label>
-                        <div class="col-lg-9 col-xl-6">
-                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->id_proof_number}}"/>
-                            
-                        </div>
-                    </div>
 
 
 					
@@ -625,31 +526,6 @@
 			<!--begin::Form-->
 			<form class="form">
 				<!--begin::Body-->
-
-                @if($cdevice == null)
-                {{-- <div class="card-body">
-                    <div class="row">
-
-                    </div>
-                </div> --}}
-                
-                <div class="card-body">
-                    <div class="row">
-                        <label class="col-xl-3"></label>
-                        <div class="col-lg-9 col-xl-6">
-                            <h5 class="font-weight-bold mb-6">Device Info</h5>
-                        </div>
-                        
-                        <button type="button" class="btn btn-outline-danger"> <i class="fa fa-plus" data-toggle="modal" data-target="#adddevice">Add Device</i></button>
-                    
-
-
-                    </div>
-                </div>
-
-
-                @else
-
 				<div class="card-body">
 					<div class="row">
 						<label class="col-xl-3"></label>
@@ -720,9 +596,15 @@
 						</div>
 					</div>
 
+
+					
+
+
+					
+					
+					
 					
 				</div>
-                @endif
 				<!--end::Body-->
 			</form>
 			<!--end::Form-->
@@ -739,7 +621,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('customer.device') }}" method="post">
+                    <form action="{{ route('cust.device') }}" method="post">
                     @csrf
 								
                         <div class="form-group">
@@ -803,7 +685,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('customer.package')}}" method="POST">
+                    <form action="{{ route('cust.package')}}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label  class="form-control-label">Package Name:</label>
@@ -839,8 +721,6 @@
                         <th >Type</th>
                         <th >Status</th>
                         <th >Payment Status</th>
-                        <th >Payment date</th>
-                        <th>pay duration</th>
                         <th >Payment</th>
                         <th >Date</th>
 
@@ -878,60 +758,8 @@
                                    <td><button class="badge btn btn-success" type="submit">success</button></td>
                                 @endif
                                 <td>
-                                    {{$pk->payment_date}}
+                                    <button class="badge btn btn-primary" type="submit">Pay</button>
                                 </td>
-                                  @if($pk->payment_date =='')
-                                <td>
-                                   
-                                   
-                                </td>
-                                
-                                @elseif(\Carbon\Carbon::parse($pk->payment_date)->diffForHumans() == '1 month ago')
-                                <td>
-                                    <button class="btn btn-danger badge">due</button>
-                                   
-                                </td>
-
-                                 @elseif(\Carbon\Carbon::parse($pk->payment_date)->diffForHumans() == '2 month ago')
-                                <td>
-                                    <button class="btn btn-danger badge">due</button>
-                                   
-                                </td>
-                                 @elseif(\Carbon\Carbon::parse($pk->payment_date)->diffForHumans() >= '3 month ago')
-                                <td>
-                                    <button class="btn btn-danger badge">due</button>
-                                   
-                                </td>
-                                 @elseif(\Carbon\Carbon::parse($pk->payment_date)->diffForHumans() >= '4 month ago')
-                                <td>
-                                    <button class="btn btn-danger badge">due</button>
-                                   
-                                </td>
-                                 @elseif(\Carbon\Carbon::parse($pk->payment_date)->diffForHumans() >= '5 month ago')
-                                <td>
-                                    <button class="btn btn-danger badge">due</button>
-                                   
-                                </td>
-                                 @else
-                                   <td><button class="badge btn btn-primary" type="submit">{{ \Carbon\Carbon::parse($pk->payment_date)->diffForHumans() }}</button></td>
-                                @endif
-
-                                <td>
-                                
-                                    {{-- <a href="{{ route('customer.update_package',$pk->id) }}" class="badge btn btn-info">Pay</a> --}}
-
-                                    <form action="{{ route('customer.update_package',$pk->id) }}">
-                                        @csrf
-                                        <input type="hidden" name="payment_amount" value="{{$pk->price}}">
-                                         <input type="hidden" name="cus_id" value="{{ $customer->id}}">
-                                           <input type="hidden" name="package_amount" value="{{$pk->price}}">
-                                        <button type="submit" class="btn btn-info badge">pay</button>
-                                        
-                                    </form>
-                                </td>
-
-                                
-
 
 
                             
@@ -1136,7 +964,6 @@
 
 <script src="{{asset('assets/js/pages/crud/ktdatatable/base/html-table.js')}}"></script>
 <script>
-    
     $("#first_div").show();
     $("#overview_menu").addClass('active');
     $("#second1_div").hide();
@@ -1148,10 +975,7 @@
     $("#overview_menu").click(function(){
         $("#first_div").show();
         $("#second1_div").hide();
-        $("#device_div").hide();
-        $("#package_div").hide();
-        $("#service_div").hide();
-    
+        $("#second1_div").hide();
         $("#overview_menu").addClass('active');
         $("#personal_menu").removeClass('active');
         $("#device_menu").removeClass('active');     
@@ -1160,10 +984,8 @@
     })
     $("#personal_menu").click(function(){
         $("#first_div").hide();
-        $("#device_div").hide();
+        $("device_div").hide();
         $("#second1_div").show();
-        $("#package_div").hide();
-        $("#service_div").hide();
         $("#overview_menu").removeClass('active');
         $("#personal_menu").addClass('active');
         $("#device_menu").removeClass('active');   
@@ -1174,8 +996,6 @@
         $("#first_div").hide();
         $("#second1_div").hide();
         $("#device_div").show();
-        $("#package_div").hide();
-        $("#service_div").hide();
         $("#overview_menu").removeClass('active');
         $("#personal_menu").removeClass('active');
         $("#device_menu").addClass('active');  
@@ -1187,8 +1007,6 @@
         $("#second1_div").hide();
         $("#device_div").hide();
         $("#package_div").show();
-        $("#service_div").hide();
-
         $("#overview_menu").removeClass('active');
         $("#personal_menu").removeClass('active');
         $("#device_menu").removeClass('active'); 
@@ -1207,7 +1025,8 @@
         $("#device_menu").removeClass('active'); 
         $("#package_menu").removeClass('active');
         $("#service_menu").addClass('active');
-    })  
+    })
+   
 
 </script>
 

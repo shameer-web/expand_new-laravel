@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.collection_agent')
 
 
 @section('content')
@@ -46,45 +46,28 @@
             </div>
         </div>
 			<!--begin::Form-->
-
-			<form class="form" action="{{ route('customer.store') }}" method="POST" enctype="multipart/form-data" >
+			<form class="form" action="{{ route('cust.store') }}" method="POST" enctype="multipart/form-data" >
 			@csrf
 				<div class="card-body">
-
-					<div class="form-group row">
-                        <div class="col-lg-4">
-							<label>Cust id:</label>
-							<input type="text" class="form-control enqid-quirey"  style="text-transform:uppercase" name="cust_id" value="{{ $test }}" readonly />
-							<span class="form-text text-muted" id="alert-box"></span>
-							
-						</div>
-
-					</div>
-
-
 				    	
 					<div class="form-group row">
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<label>Enq No:</label>
-							<input type="text" class="form-control enqid-quirey"  style="text-transform:uppercase" name="enqid" value="" id="enqid" placeholder="Eg : ENQ-N0001" />
-							<span class="form-text text-muted" >Please enter your Enqiry Number</span>
-
-							@error('enqid')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
+							<input type="text" class="form-control enqid-quirey"  style="text-transform:uppercase" name="enqid" value="" id="enqid" placeholder="Eg : ENQ-N0001" required/>
+							<span class="form-text text-muted" id="alert-box">Please enter your Enqiry Number</span>
 							
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<label>Full Name:</label>
-							<input type="text" class="form-control " name="name" id="name" placeholder="Enter full name" />
+							<input type="text" class="form-control " name="name" id="name" placeholder="Enter full name" required/>
 							<span class="form-text text-muted">Please enter your full name</span>
-
-							@error('name')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
-						
-						<div class="col-lg-4">
+						<div class="col-lg-3">
+							<label>Email:</label>
+							<input type="email" class="form-control" name="email" placeholder="Enter email" required/>
+							<span class="form-text text-muted">Please enter your email</span>
+						</div>
+						<div class="col-lg-3">
 							<label>Subcode:</label>
 							<div class="input-group">
 								<div class="input-group-prepend"><span class="input-group-text"></div>
@@ -95,21 +78,12 @@
 									@endforeach
 									
 								</select>
-								@error('subcode')
-								<p class="text-danger">{{ $message }}</p>
-							    @enderror
 							</div>
 							<span class="form-text text-muted">Please enter your Subcode</span>
 						</div>
-
-
-						
 					</div>
 					<div class="form-group row">
-
-
-
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<label>Area:</label>
 							<div class="input-group">
 								<select class="form-control " id="kt_select2_1" name="area">
@@ -120,52 +94,32 @@
 									
 								</select>
 								<div class="input-group-append"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
-
-								@error('area')
-								<p class="text-danger">{{ $message }}</p>
-							    @enderror
 							</div>
 							<span class="form-text text-muted">Please enter your area</span>
 						</div>
-
-						
-						
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<label>CRF No:</label>
 							<input type="text" name="crfno" class="form-control" placeholder=""/>
 							<span class="form-text text-muted">Please enter your crf no</span>
-							@error('crfno')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<label>KSEB Post No:</label>
 							<div class="input-group">
 								<div class="input-group-prepend"><span class="input-group-text"><i class="la la-info-circle"></i></span></div>
 								<input type="text" name="ksebno" id="ksebno" class="form-control" placeholder="Post Number"/>
 							</div>
 							<span class="form-text text-muted">Please enter Kseb Post Number</span>
-							@error('ksebno')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
-						
-					</div>
-					<div class="form-group row">
-
-                        <div class="col-lg-4">
+						<div class="col-lg-3">
 							<label>Installation Address:</label>
 							<div class="input-group">
 								<input type="text" name="address" id="iaddress" class="form-control" placeholder="Enter your address"/>
 								<div class="input-group-append"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
 							</div>
 							<span class="form-text text-muted">Please enter your address</span>
-
-							@error('address')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
-
+					</div>
+					<div class="form-group row">
 						<div class="col-lg-4">
 							<label>District:</label>
 							<div class="input-group">
@@ -179,10 +133,6 @@
 								</select>
 							</div>
 							<span class="form-text text-muted">Please enter your District</span>
-
-							@error('district')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 						
 
@@ -194,25 +144,7 @@
 								<input type="text" name="pincode"  id="pincode" class="form-control" placeholder="Enter your pincode"/>
 							</div>
 							<span class="form-text text-muted">Please enter your Pincode</span>
-
-							@error('pincode')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
-
-
-						
-						
-						
-					</div>
-
-
-					<input type="checkbox" id="same" name="same" onchange= "addressFunction()"/>	
-					<label for = "same" style="color: red"> <b> same address</b> </label>
-
-					<div class="form-group row">
-
-
 						<div class="col-lg-4">
 							<label>Communication Address:</label>
 							<div class="input-group">
@@ -220,55 +152,9 @@
 								<div class="input-group-append"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
 							</div>
 							<span class="form-text text-muted">Please enter your address</span>
-
-							@error('caddress')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
-						</div>
-
-
-						<div class="col-lg-4">
-							<label>District:</label>
-							<div class="input-group">
-								<div class="input-group-append"></div>
-								<select class="form-control " id="kt_select2_1" name="district1">
-									<option selected="selected">Select District</option>
-									@foreach($district as $row)
-									<option value="{{$row->id}}">{{$row->district_name}}</option>
-									@endforeach
-									
-								</select>
-							</div>
-							<span class="form-text text-muted">Please enter your District</span>
-
-							@error('district1')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 						
-
-
-						<div class="col-lg-4">
-							<label>Pincode:</label>
-							<div class="input-group">
-								<div class="input-group-append"></div>
-								<input type="text" name="pincode1"  id="pincode" class="form-control" placeholder="Enter your pincode"/>
-							</div>
-							<span class="form-text text-muted">Please enter your Pincode</span>
-
-							@error('pincode1')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
-						</div>
-
-
-
-
-				    </div>		
-                     
-
-
-
+					</div>
 					<div class="form-group row">
 						<div class="col-lg-4">
 							<label>Customer Type:</label>
@@ -285,10 +171,6 @@
 								</label>
 							</div>
 							<span class="form-text text-muted">Please select user Type</span>
-
-							@error('ctype')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 						<div class="col-lg-4">
 							<label>ID Proof Type:</label>
@@ -304,24 +186,15 @@
 									
 								</select>
 							</div>
-							<span class="form-text text-muted">Please select your ID Proof Type </span>
-
-							@error('prooftype')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
+							<span class="form-text text-muted">Please select your id typeDistrict</span>
 						</div>
 						
-                        <div class="col-lg-4">
-							<label>ID Proof Number:</label>
-							<input type="text" class="form-control" name="id_proof_number" placeholder="Enter ID Proof Number " />
-							<span class="form-text text-muted">Please enter ID Proof Number</span>
 
-							@error('id_proof_number')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
-						</div>
 
-						
+						<div class="col-lg-4">
+                            <input type="file" name="proof">
+							<span class="form-text text-muted">Max file size is 1MB and max number of files is 5.</span>
+						</div>	
 					</div>
 					<div class="form-group row">
 						
@@ -332,52 +205,15 @@
 								<input type="text" class="form-control" name="phone" id="phone" placeholder="Enter your Phone"/>
 							</div>
 							<span class="form-text text-muted">Please enter your Phone Number</span>
-
-							@error('phone')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 						<div class="col-lg-4">
 							<label>Mobile:</label>
 							<div class="input-group">
 								<div class="input-group-append"></div>
-								<input type="text" class="form-control" name="mobile_number" id="mobile" placeholder="Enter your Mobile"/>
+								<input type="text" class="form-control" name="mobile" id="mobile" placeholder="Enter your Mobile"/>
 							</div>
 							<span class="form-text text-muted">Please enter your Mobile Number</span>
-
-							@error('mobile_number')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
-
-
-						<div class="col-lg-4">
-							<label>Email:</label>
-							<input type="email" class="form-control" name="email" placeholder="Enter email"/>
-							<span class="form-text text-muted">Please enter your email</span>
-
-							@error('email')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
-						</div>
-
-                       
-
-                        <div class="col-lg-4">
-							<label>Join Date :</label>
-							<div class="input-group" >
-								<input type="text" name="date" id="datetimepicker1" class="form-control" placeholder="date"/>
-								<div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
-							</div>
-							<span class="form-text text-muted">Please enter Join Date</span>
-
-							@error('date')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
-						</div>
-
-
-
 						<div class="col-lg-4">
 							<label>Remarks:</label>
 							<div class="input-group">
@@ -385,21 +221,6 @@
 								<input type="text" class="form-control" name="remark" placeholder="Enter your Remarks"/>
 							</div>
 							<span class="form-text text-muted">Please enter Remarks</span>
-
-							@error('remark')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
-						</div>
-
-
-						<div class="col-lg-4">
-							<label>Proof:</label>
-                            <input type="file" class="form-control" name="proof">
-							<span class="form-text text-muted">Max file size is 1MB and max number of files is 5.</span>
-
-							@error('proof')
-								<p class="text-danger">{{ $message }}</p>
-							@enderror
 						</div>
 
 
@@ -410,7 +231,15 @@
 						
 
 
-			            
+			            <div class="col-lg-4">
+							<label>Date :</label>
+							<div class="input-group" >
+								<input type="text" name="date" id="datetimepicker1" class="form-control" placeholder="date"/>
+								<div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
+							</div>
+							{{-- <span class="form-text text-muted">Please enter your address</span> --}}
+						</div>
+
 
 					
 
@@ -507,7 +336,7 @@ $(document).on('keyup', '.enqid-quirey', function() {
     var enq = $(this).val();
     if(enq != null){
     $.ajax({
-        url: '{{url('admin')}}/customer-enquiry/' + enq,
+        url: '{{url('admin')}}/cust-enquiry/' + enq,
         type: 'get',
         dataType: 'json',
         success: function(response){
@@ -515,8 +344,8 @@ $(document).on('keyup', '.enqid-quirey', function() {
                 $('#name').val(response.full_name);
                 $('#mobile').val(response.contact_number);
                 $('#ksebno').val(response.postcode);
-                // $('#iaddress').val(response.address);
-                // $('#caddress').val(response.address);
+                $('#iaddress').val(response.address);
+                $('#caddress').val(response.address);
                  $('#alert-box').text('');
             }
         else{
@@ -535,25 +364,6 @@ $(document).on('keyup', '.enqid-quirey', function() {
     }
 }
 );
-
-
- 
-function addressFunction() 
-{ 
-if (document.getElementById('same').checked) 
-{ 
-	document.getElementById('caddress').value=document. 
-			getElementById('iaddress').value; 
-	
-} 
-	
-else
-{ 
-	document.getElementById('caddress').value=""; 
-	 
-} 
-} 
-
 </script>
 
 @endsection

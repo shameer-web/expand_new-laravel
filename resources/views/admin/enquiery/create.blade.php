@@ -57,24 +57,15 @@
 											<span class="form-text text-muted">Please enter your kseb post number</span>
 										</div>
 									</div>
-									<!-- <div class="form-group row">
-										<label class="col-lg-2 col-form-label text-right">Assign To:</label>
+									<div class="form-group row">
+										<label class="col-lg-2 col-form-label text-right">State:</label>
 										<div class=" col-lg-3">
-											<select class="form-control " id="kt_select2_1" name="assign_to">
-												{{-- <option value="AK">Nihal</option>
-												<option value="HI">Rajeesh</option>
-												<option value="CA">Subeesh</option>
-												<option value="NV">Akhil</option>
-												<option value="OR">Oregon</option> --}}
-
-												@foreach($data as $row)
-															<option value="{{ $row->id }}" >{{ $row->name }}</option>
-												@endforeach
-												
+											<select class="form-control " id="kt_select2_1" name="state">
+												<option value="Kerala">Kerala</option>
 												
 											</select>
 										</div>
-									</div> -->
+									</div>
 
 									<!-- begin: Example Code-->
 									

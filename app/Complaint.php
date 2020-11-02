@@ -18,6 +18,8 @@ class Complaint extends Model
        'post_no',
        'complaint',
        'other_complaint',
+       'active_deactive',
+       'active_deactive_date',
        'assigned',
        'remarks',
 
@@ -35,9 +37,7 @@ class Complaint extends Model
     ];
 
 
-  public function customer(){
-    return $this->belongsTo(Customer::class,'customer_name','id');
-   }
+  
 
     public function assingned(){
     return $this->belongsTo(User::class,'assigned','id');
@@ -49,5 +49,8 @@ class Complaint extends Model
 
     public function tech_status(){
     return $this->belongsTo(Technicianstatus::class,'technician_status','id');
+   }
+   public function cus(){
+    return $this->belongsTo(Customer::class,'customer_name','id');
    }
 }

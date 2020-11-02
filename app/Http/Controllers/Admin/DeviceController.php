@@ -22,18 +22,19 @@ class DeviceController extends Controller
     public function index()
     {
 
-       
-        $data = DB::table('devices')
-             ->join('districts', 'districts.id', '=', 'devices.district')
-             ->join('companies', 'companies.id','=','devices.device')
-             ->join('modes', 'modes.id','=','devices.model')
-             ->join('locs', 'locs.id','=','devices.lco_id')
-             ->join('types', 'types.id','=','devices.type')
-             ->select('devices.*', 'districts.district_name','companies.company_name','modes.model_name','locs.loc_name','types.type_name')
-             ->where('device_status', 1)
-             ->get();
+        
 
-       // $data= Device::where('device_status', 1)->get();
+        // $data = DB::table('devices')
+        //      ->join('districts', 'districts.id', '=', 'devices.district')
+        //      ->join('companies', 'companies.id','=','devices.device')
+        //      ->join('modes', 'modes.id','=','devices.model')
+        //      ->join('locs', 'locs.id','=','devices.lco_id')
+        //      ->join('types', 'types.id','=','devices.type')
+        //      ->select('devices.*', 'districts.district_name','companies.company_name','modes.model_name','locs.loc_name','types.type_name')
+        //      ->where('device_status', 1)
+        //      ->get();
+
+         $data= Device::where('device_status', 1)->get();
         return view('admin.device.index')->with('data',$data);
        
     }
@@ -103,7 +104,7 @@ class DeviceController extends Controller
         $device->model = $request->model;
         $device->district = $request->district;
         $device->lco_id = $request->lco_id;
-        $device->status = '1';
+        $device->status = '0';
 
         $device->save();
 

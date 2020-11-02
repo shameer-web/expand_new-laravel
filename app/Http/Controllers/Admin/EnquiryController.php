@@ -41,9 +41,11 @@ class EnquiryController extends Controller
 
 
      public function store(Request $request)
-    {
+    {   
+        //dd($request->all());
         $invoice_prefix="ENQ-N";
-        $invoice = Enquiery::select('id', 'enqid')->orderBy('id', 'desc')->first();
+        // $invoice = Enquiery::select('id', 'enqid')->orderBy('id', 'desc')->first();
+        $invoice = Enquiery::orderBy('id', 'desc')->first();
         
         if($invoice){
             $previous_invoice_no = $invoice->enqid;
@@ -61,6 +63,7 @@ class EnquiryController extends Controller
         $enquiery->contact_number = $request->contact_number;
         $enquiery->address = $request->address;
         $enquiery->postcode = $request->postcode;
+        $enquiery->state = $request->state;
         $enquiery->assign_to = '1';
         // dd($enquiery);
         $enquiery->save();
