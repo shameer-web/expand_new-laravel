@@ -14,7 +14,7 @@ class EnquiryController extends Controller
     {
         //
 
-            $user =User::where('user_delete_status', 1)->get();
+            $user =User::where('user_delete_status', 1)->where('role', '!=' , 1)->get();
             $data = DB::table('enquieries')
              ->join('users', 'enquieries.assign_to', '=', 'users.id')
              ->select('enquieries.*', 'users.name')

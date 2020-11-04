@@ -52,7 +52,7 @@
 									<div class="form-group row">
 										<label class="col-lg-2 col-form-label text-right">Package Name:</label>
 										<div class="col-lg-3">
-											<input type="text" name="package_name"  class="form-control" placeholder="Enter Package Name"/>
+											<input type="text" name="package_name"  class="form-control" placeholder="Enter Package Name" required/>
 
 											
 										</div>
@@ -60,13 +60,13 @@
 										<div class="col-lg-3 radio-inline">
 											 
 						                            <label class="radio radio-lg">
-						                                <input type="radio" value="Postaid"  name="package_type"/>
+						                                <input type="radio" value="Postaid"  name="package_type" required/>
 						                                <span></span>
 						                                Postaid
 						                            </label>
 						                            <label class="radio radio-lg">
 						                                <input type="radio" name="package_type" id="prepade"
-						                                onclick="myFunction()" value="Prepaid" />
+						                                onclick="myFunction()" value="Prepaid"  />
 						                                <span></span>
 						                               	Prepaid
 						                            </label>
@@ -78,7 +78,7 @@
 										<label class="col-lg-2 col-form-label text-right">Package Price:</label>
 										<div class="col-lg-3">
 											<div class="input-group">
-												  <input type="text" name='package_price' placeholder='0.00' class="form-control" id="package_price" />
+												  <input type="text" name='package_price' placeholder='0.00' class="form-control" id="package_price" required />
 											</div>
 											
 										</div>
@@ -107,7 +107,7 @@
 										<label class="col-lg-2 col-form-label text-right">Gst Amount:</label>
 										<div class=" col-lg-3">
 											<div class="input-group">
-												<input type="text" name='package_amount' id="gst_amount" placeholder='0.00' class="form-control" />
+												<input type="text" name='package_amount' id="gst_amount" placeholder='0.00' class="form-control" required/>
 												
 											</div>
 										</div>

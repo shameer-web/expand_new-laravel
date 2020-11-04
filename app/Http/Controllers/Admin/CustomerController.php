@@ -69,6 +69,7 @@ class CustomerController extends Controller
         ->join('modes','modes.id', '=', 'devices.model')
         ->join('districts','districts.id', '=', 'devices.district')
         ->join('locs','locs.id', '=', 'devices.lco_id')
+        ->select('devices.*','companies.company_name','types.type_name','modes.model_name','districts.district_name','locs.loc_name')
         ->where('device_status', 1)
         ->where('devices.status', $id)->first();                   
         $customer = Customer::where('customer_status', 1)->
@@ -225,7 +226,7 @@ class CustomerController extends Controller
 
             $enq =Enquiery::find($enquiery->id);
             //dd($enq->enquiery_status);
-            $enq->enquiery_status = 0;
+            $enq->status = 1;
             
 
             $enq->update();
@@ -487,6 +488,18 @@ class CustomerController extends Controller
 
 
         
+
+    }
+
+    public function device_status(Request $request , $id){
+     // dd($id);
+     // dd($request->all());
+      $device = Device::find($id);
+      //dd($device);
+      $device->device_check = $request->device_check;
+      $device->update();
+
+      return redirect()->back();
 
     }
 

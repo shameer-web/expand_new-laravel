@@ -57,6 +57,8 @@ Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'adm
     Route::put('/customer/{id}/update','CustomerController@update')->name('customer.update');
      Route::get('/customer/profile/{id}', 'CustomerController@profile')->name('customer.profile');
     Route::post('/customer/device','CustomerController@device')->name('customer.device');
+    Route::put('/customer/{id}/device-status','CustomerController@device_status')->name('customer.device_status');
+
     Route::post('/customer/package','CustomerController@package')->name('customer.package');
     Route::get('/customer/update_package/{id}','CustomerController@update_package')->name('customer.update_package');
 

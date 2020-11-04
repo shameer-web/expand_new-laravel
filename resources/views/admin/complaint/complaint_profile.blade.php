@@ -379,7 +379,7 @@
         <div class="card card-custom gutter-b example example-compact">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                     Create Form
+                                     Create Complaint
                                 </h3>
                                 
                             </div>
@@ -392,32 +392,7 @@
                                     <div class="form-group row">
                                         
 
-                                         {{-- <label class="col-lg-2 col-form-label text-right">Customer Name:</label>
-                                        <div class="col-lg-3">
-                                            <div class="input-group">
-                                                
-
-
-
-                                                <select class="form-control  "  name="customer_name">
-                                                            @foreach($customer as $row)
-                                                            <option value="{{ $row->id }}">{{ $row->name }}</option>
-                                                            
-                                                             @endforeach
-                                                    
-                                                    
-                                                   
-                                                </select>
-                                                
-                                            </div>
-                                            <span class="form-text text-muted">Please select your customer</span>
-                                        </div> --}}
-
-                                        {{-- <label class="col-lg-2 col-form-label text-right">Phone No:</label>
-                                        <div class="col-lg-3">
-                                            <input type="number" name="phone_no"  class="form-control" placeholder="Enter Phone No"/>
-                                            <span class="form-text text-muted">Please enter Phone number</span>
-                                        </div> --}}
+                                       
 
 
 
@@ -426,16 +401,12 @@
                                     <div class="form-group row">
 
 
-                                       {{--  <label class="col-lg-2 col-form-label text-right">Email Id:</label>
-                                        <div class="col-lg-3">
-                                            <input type="email" name="email"  class="form-control" placeholder="Enter Email Id"/>
-                                            <span class="form-text text-muted">Please enter Email Id</span>
-                                        </div> --}}
+                                     
 
 
 
                                         <label class="col-lg-2 col-form-label text-right">Staff:</label>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-10">
                                             <div class="input-group">
                                                 
 
@@ -457,13 +428,50 @@
 
 
 
-                                        <label class="col-lg-2 col-form-label text-right">KSEB Post No:</label>
-                                        <div class="col-lg-4">
-                                            <input type="text" name="post_no"  class="form-control" placeholder="Enter KSEB Post No"/>
-                                            <span class="form-text text-muted">Please enter KSEB Post No</span>
-                                        </div>
+                                       
                                         
                                     </div>
+
+
+
+                                    <div class="form-group row">
+                                        
+                                       <label class="col-lg-2 col-form-label text-right">KSEB Post No:</label>
+                                        <div class="col-lg-4">
+                                            <input type="text" name="post_no"  class="form-control" placeholder="Enter KSEB Post No" required/>
+                                            <span class="form-text text-muted">Please enter KSEB Post No</span>
+                                        </div>
+
+
+                                         <label class="col-lg-1 col-form-label text-right">Type :</label>
+                                        <div class="col-lg-5">
+                                            <div class="input-group">
+                                                
+
+
+
+                                                <select class="form-control  "  name="type">
+
+                                                    <option value="">--Select--</option>
+                                                    <option value="Activation">Activation</option>
+                                                    <option value="Deactivation">Deactivation</option>
+                                                    <option value="Complaints">Complaints</option>
+                                                    <option value="Activation/Deactivation">Activation/Deactivation</option>    
+                                                    
+                                                    
+                                                   
+                                                </select>
+                                                
+                                            </div>
+                                            <span class="form-text text-muted">Please enter Staff name</span>
+                                        </div>
+                                       
+
+
+
+                                        
+                                    </div>
+
 
                                     <div class="form-group row">
 
@@ -479,7 +487,7 @@
                                                 
 
 
-                                                 <select name="complaint[]" class="form-control selectpicker select2" id="kt_select2_3" placeholder=""  multiple="multiple" style="width: 100%" >
+                                                 <select name="complaint[]" class="form-control selectpicker select2" id="kt_select2_3" placeholder=""  multiple="multiple" style="width: 100%" required>
 
                                                              
                                                              @foreach($complainttype as $row)
@@ -509,7 +517,7 @@
                                         <div class="col-lg-10">
                                            {{--  <input type="text" name="other_complaint"  class="form-control" placeholder="Enter other_complaint"/>
                                             <span class="form-text text-muted">Please enter other complaint</span> --}}
-                                            <textarea name="other_complaint" class="form-control" placeholder="Enter other_complaint" rows="3"></textarea>
+                                            <textarea name="other_complaint" class="form-control" placeholder="Enter other_complaint" rows="3" required></textarea>
                                         </div>
 
                                         
@@ -521,12 +529,12 @@
                                     <label class="col-lg-2 col-form-label text-right">Active Or De-active:</label>
                                         <div class="radio-inline col-lg-5 ">
                                             <label class="radio radio-solid">
-                                             <input type="radio" name="active_deactive" checked="checked" id="active" value="1"/>
+                                             <input type="radio" name="active_deactive" checked="checked" id="active" value="1" required/>
                                               <span></span>
                                                 Active
                                             </label>
                                             <label class="radio radio-solid">
-                                              <input type="radio" name="active_deactive" id="inactive"  value="2" onclick="myFunction()"/>
+                                              <input type="radio" name="active_deactive" id="inactive"  value="2" onclick="myFunction()" required/>
                                              <span></span>
                                              De-active
                                             </label>
@@ -536,7 +544,7 @@
                                    <div class="col-lg-5">
                             <label>Active Or De-active  :</label>
                             <div class="input-group" >
-                                <input type="text" name="active_deactive_date" id="datetimepicker1" class="form-control" placeholder="date"/>
+                                <input type="text" name="active_deactive_date" id="datetimepicker1" class="form-control" placeholder="date"/ required>
                                 <div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
                             </div>
                             <span class="form-text text-muted">Please enter Active Or De-active</span>

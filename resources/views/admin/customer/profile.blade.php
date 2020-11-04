@@ -656,8 +656,12 @@
 						<div class="col-lg-9 col-xl-6">
 							<h5 class="font-weight-bold mb-6">Device Info</h5>
 						</div>
+
+                         <button type="button" id="btnstatus" data-action="{{ route('customer.device_status',$cdevice->id) }}" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal">
+                                                    Status
+                                                </button>
                         
-                        <button type="button" class="btn btn-outline-danger"> <i class="fa fa-plus" data-toggle="modal" data-target="#adddevice">Add Device</i></button>
+                        {{-- <button type="button" class="btn btn-outline-danger"> <i class="fa fa-plus" data-toggle="modal" data-target="#adddevice">Add Device</i></button> --}}
                     
 
 
@@ -720,6 +724,32 @@
 						</div>
 					</div>
 
+
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Status</label>
+                        <div class="col-lg-9 col-xl-6">
+                           
+                                    @if($cdevice->device_check ==1) 
+                                      
+                                       <button class="btn btn-primary badge">In Stock</button>
+                                      
+
+                                       @elseif($cdevice->device_check ==2)
+
+                                        
+                                       <button class="btn btn-danger badge">Damaged</button>
+                                       
+
+                                       @else
+                                        
+                                       <button class="btn btn-warning badge">Service Center</button>
+                                       
+                                       @endif
+
+                            
+                        </div>
+                    </div>
+
 					
 				</div>
                 @endif
@@ -763,6 +793,44 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <form id="status_form" action="" method="post" class="form-horizontal">
+                        @csrf
+                        @method('put')
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <i aria-hidden="true" class="ki ki-close"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-right">Assign To:</label>
+                                <div class=" col-lg-6">
+                                    <select class="form-control " id="kt_select2_1" name="device_check">
+                                        
+
+                                        
+                                                    <option value="2" >Damage</option>
+                                                    <option value="3" >Service</option>
+                                        
+                                        
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary font-weight-bold">Save changes</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
 
     <!-- /**************************** third section end  here ************************************************/ -->
 
@@ -866,7 +934,7 @@
                             </td>
 
                                 @if($pk->package_status == 0) 
-                                    <td><button class="badge btn btn-danger" type="submit">in-active</button></td>
+                                    <td><button class="badge btn btn-danger" type="submit">pending</button></td>
                                 @else
                                      <td><button class="badge btn btn-success" type="submit">active</button></td>
                                 @endif
@@ -1208,6 +1276,15 @@
         $("#package_menu").removeClass('active');
         $("#service_menu").addClass('active');
     })  
+
+    $('body').on('click', '#btnstatus', function() {
+    var no = $(this).closest('tr').children('td');
+
+    $('#btnstatus').data('action');
+    var action = $(this).data('action');
+    $('#status_form').attr('action', action);
+
+})
 
 </script>
 

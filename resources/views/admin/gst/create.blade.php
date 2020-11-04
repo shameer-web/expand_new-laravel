@@ -53,7 +53,7 @@
 									<div class="form-group row">
 										<label class="col-lg-2 col-form-label text-right">GST:</label>
 										<div class="col-lg-3">
-											<input type="number" name="gst"  class="form-control" placeholder="GST"/>
+											<input type="number" name="gst"  class="form-control" placeholder="GST" required/>
 											<span class="form-text text-muted">Please enter  Gst</span>
 										</div>
 										<label class="col-lg-2 col-form-label text-right">CGST:</label>

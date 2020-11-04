@@ -54,7 +54,7 @@
 									<div class="form-group row">
 										<label class="col-lg-3 col-form-label text-right">Subcode:</label>
 										<div class="col-lg-9">
-											<input type="text" name="subcode"  class="form-control" placeholder="Subcode"/>
+											<input type="text" name="subcode"  class="form-control" placeholder="Subcode" required/>
 											<span class="form-text text-muted">Please enter your Subcode</span>
 										</div>
 										

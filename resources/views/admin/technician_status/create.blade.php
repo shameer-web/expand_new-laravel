@@ -54,7 +54,7 @@
 									<div class="form-group row">
 										<label class="col-lg-3 col-form-label text-right">Technician Status:</label>
 										<div class="col-lg-9">
-											<input type="text" name="technician_status"  class="form-control" placeholder="Technician Status"/>
+											<input type="text" name="technician_status"  class="form-control" placeholder="Technician Status" required/>
 											<span class="form-text text-muted">Please enter Technician status</span>
 										</div>
 										

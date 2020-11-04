@@ -54,7 +54,7 @@
 									<div class="form-group row">
 										<label class="col-lg-3 col-form-label text-right">Name:</label>
 										<div class="col-lg-9">
-											<input type="text" name="model_name"  class="form-control" placeholder="Type"/>
+											<input type="text" name="model_name"  class="form-control" placeholder="Type" required/>
 											<span class="form-text text-muted">Please enter your Model name</span>
 										</div>
 										

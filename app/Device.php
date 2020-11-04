@@ -19,6 +19,7 @@ class Device extends Model
        'assign_to',
        'device_status',
        'status',
+       'device_check',
        'cus_device_status',
        'device_id'
     ];

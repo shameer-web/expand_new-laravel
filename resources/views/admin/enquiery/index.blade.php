@@ -95,9 +95,10 @@
 											<th>Name</th>
 											<th>Address</th>
 											<th>Phone</th>
-											<th>Phost No</th>
+											{{-- <th>Phost No</th> --}}
 											<th>Assigned By</th>
 											<th>Date</th>
+											<th>Status</th>
                                             <th>Actions</th>
 											
 					                        </tr>
@@ -112,7 +113,7 @@
 											<td>{{ $row->full_name }}</td>
 											<td>{{ $row->address }}</td>
 											<td>{{ $row->contact_number }}</td>
-											<td>{{ $row->postcode }}</td>
+											{{-- <td>{{ $row->postcode }}</td> --}}
 
 											@if($row->assign_to ==1) 
 									   <td><span class="label label-danger label-inline mr-2">Not Assigned</span></td>
@@ -123,6 +124,15 @@
 
 											
 											<td>{{ $row->created_at }}</td>
+
+                                              @if($row->status ==0) 
+									   <td><span class="label label-pending label-inline mr-2">pending</span></td>
+										@else
+										<td> <span class="label label-success label-inline mr-2"> completed</span></td>
+										@endif
+
+
+
                                             <td>
 												<a href="{{ route('enquiry.edit',$row->id) }}" class="btn btn-outline-primary font-weight-bold mr-2"><i class="fa fa-edit"></i></a>
 

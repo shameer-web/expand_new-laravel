@@ -78,6 +78,7 @@ class ComplaintController extends Controller
       $complaint->email =$request->email;
       $complaint->staff =$request->staff;
       $complaint->post_no =$request->post_no;
+      $complaint->type =$request->type;
 
 
         $complaint->complaint =$request->complaint;
@@ -143,7 +144,8 @@ class ComplaintController extends Controller
        
 
         //dd($cust_device);
-        $user =User::where('user_delete_status', 1)->get();
+        //$user =User::where('user_delete_status', 1)->get();
+         $user =User::where('user_delete_status', 1)->where('role', '!=' , 1)->get();
         $customer =Customer::where('customer_status', 1)->get();
         $complainttype =Complainttype::where('complainttype_status', 1)->get();
 
@@ -198,7 +200,8 @@ class ComplaintController extends Controller
          $complaint =Complaint::find($id);
 
 
-          $user =User::where('user_delete_status', 1)->get();
+          //$user =User::where('user_delete_status', 1)->get();
+          $user =User::where('user_delete_status', 1)->where('role', '!=' , 1)->get();
           $customer =Customer::where('customer_status', 1)->get();
           $complainttype =Complainttype::where('complainttype_status', 1)->get();
 

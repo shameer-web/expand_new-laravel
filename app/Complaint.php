@@ -16,6 +16,7 @@ class Complaint extends Model
        'email',
        'staff',
        'post_no',
+       'type',
        'complaint',
        'other_complaint',
        'active_deactive',

@@ -54,7 +54,7 @@
 									<div class="form-group row">
 										<label class="col-lg-3 col-form-label text-right">District:</label>
 										<div class="col-lg-9">
-											<input type="text" name="district_name"  class="form-control" placeholder="District"/>
+											<input type="text" name="district_name"  class="form-control" placeholder="District" required/>
 											<span class="form-text text-muted">Please enter your District name</span>
 										</div>
 										

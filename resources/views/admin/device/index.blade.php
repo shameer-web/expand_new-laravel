@@ -92,16 +92,18 @@
 												                    <thead>
 									                              <tr>
                                              
-											  <th>Order ID</th>
+											  {{-- <th>Order ID</th> --}}
 											  <th>Device</th>
                                               <th>Comapany</th>
                                               <th>Type</th>
                                               <th>Device ID</th>
-                                              <th>Serial Number</th>
+                                              {{-- <th>Serial Number</th> --}}
                                               <th>Model</th>
                                               <th>District</th>
-                                              <th>LCO ID</th>
+                                             {{--  <th>LCO ID</th> --}}
                                               <th>Assigned Customer</th>
+                                              <th>Status</th>
+
 											  <th>Actions</th>
 											  
 					                                  </tr>
@@ -111,26 +113,48 @@
 				                        <tbody>
 				                           
                           				 <tr>
-											  <td>{{ $row->id }}</td>
+											  {{-- <td>{{ $row->id }}</td> --}}
 											  <td>{{ $row->deviceid }}</td>
                                               <td>{{ $row->Company['company_name'] }}</td>
                                               <td>{{ $row->Type['type_name'] }}</td>
                                               <td>{{ $row->device_id}}</td>
-                                              <td>{{ $row->serial_number }}</td>
+                                             {{--  <td>{{ $row->serial_number }}</td> --}}
                                               <td>{{ $row->Mode['model_name']}}</td>
                                               <td>{{ $row->District['district_name'] }}</td>
-                                              <td>{{ $row->Loc['loc_name'] }}</td>
+                                             {{--  <td>{{ $row->Loc['loc_name'] }}</td> --}}
 											  @if($row->status ==0) 
 									   <td>{{-- <span class="label label-warning label-inline mr-2">Not Assigned</span> --}}
-                                       <button class="btn btn-warning badge">Not Assigned</button>
+                                       <button class="btn btn-info badge">Not Assigned</button>
 									   </td>
+
+
 										  @else 
 										  <td> {{-- <span class="label label-primary label-inline mr-2">{{ $row->Customer['name'] }}</span> --}}
-                                           <button class="btn btn-primary badge">{{ $row->Customer['name'] }}</button>
+                                           <button class="btn btn-success badge">{{ $row->Customer['name'] }}</button>
 
 										  </td>
 										 
 										  @endif
+
+										    @if($row->device_check ==1) 
+									   <td>{{-- <span class="label label-warning label-inline mr-2">Not Assigned</span> --}}
+                                       <button class="btn btn-primary badge">In Stock</button>
+									   </td>
+
+									   @elseif($row->device_check ==2)
+
+									    <td>
+                                       <button class="btn btn-danger badge">Damaged</button>
+									   </td>
+
+									   @else
+									    <td>
+                                       <button class="btn btn-warning badge">Service Center</button>
+									   </td>
+									   @endif
+
+
+
                                              
                                             <td>
 												<a href="{{ route('device.edit',$row->id) }}" class="btn btn-outline-primary font-weight-bold mr-2"><i class="fa fa-edit"></i></a>
@@ -141,6 +165,11 @@
                                                               data-target="#delete_modal" class="btn btn-outline-danger"><i
                                                               class="fa fa-trash" aria-hidden="true"></i>
                                                              </button>
+
+
+                                                 <button type="button" id="btnstatus" data-action="{{ route('device.update',$row->id) }}" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal">
+													Status
+												</button>	             
 												
 											</td>
 											
@@ -185,6 +214,46 @@
                     </form>
                 </div>
             </div>
+
+
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+				<form id="status_form" action="" method="post" class="form-horizontal">
+                        @csrf
+                        @method('put')
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<i aria-hidden="true" class="ki ki-close"></i>
+							</button>
+						</div>
+						<div class="modal-body">
+						<div class="form-group row">
+							<label class="col-lg-3 col-form-label text-right">Assign To:</label>
+								<div class=" col-lg-6">
+									<select class="form-control " id="kt_select2_1" name="device_check">
+										
+
+										
+													<option value="2" >Damage</option>
+													<option value="3" >Service</option>
+										
+										
+										
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary font-weight-bold">Save changes</button>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
 
 
 
@@ -244,6 +313,16 @@ $('body').on('click', '#deletebtn', function() {
     $('#deletebtn').data('action');
     var action = $(this).data('action');
     $('#delete_form').attr('action', action);
+
+})
+
+
+$('body').on('click', '#btnstatus', function() {
+    var no = $(this).closest('tr').children('td');
+
+    $('#btnstatus').data('action');
+    var action = $(this).data('action');
+    $('#status_form').attr('action', action);
 
 })
 </script>

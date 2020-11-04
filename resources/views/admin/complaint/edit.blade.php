@@ -159,8 +159,50 @@
 
 
 
+										<label class="col-lg-2 col-form-label text-right">Staff:</label>
+										<div class="col-lg-3">
+											<div class="input-group">
+												
 
-										<label class="col-lg-2 col-form-label text-right">Complaint's:</label>
+
+
+												<select class="form-control  "  name="type" value="{{ $complaint->type }}">
+                                                           
+															<option value="{{ $complaint->type}}"
+                                                                    
+                                                                     selected
+                                                                     
+
+																>
+																{{ $complaint->type}}</option>
+
+																 <option value="Activation">Activation</option>
+                                                    <option value="Deactivation">Deactivation</option>
+                                                    <option value="Complaints">Complaints</option>
+                                                    <option value="Activation/Deactivation">Activation/Deactivation</option>
+															
+                                                    
+                                                    
+                                                   
+                                                </select>
+												
+											</div>
+											<span class="form-text text-muted">Please enter your address</span>
+										</div>
+
+
+
+
+										
+										
+										
+
+									</div>
+
+									<div class="form-group row">
+
+
+                                       <label class="col-lg-2 col-form-label text-right">Complaint's:</label>
 										<div class="col-lg-3">
 											<div class="input-group">
 												
@@ -196,12 +238,7 @@
 											<span class="form-text text-muted">Please select your complaint's</span>
 										</div>
 
-										
-										
 
-									</div>
-
-									<div class="form-group row">
 
 										<label class="col-lg-2 col-form-label text-right">Other complaint:</label>
 										<div class="col-lg-3">
@@ -210,11 +247,7 @@
 										</div>
                                         
 
-                                        <label class="col-lg-2 col-form-label text-right">Remarks:</label>
-										<div class="col-lg-3">
-											<input type="text" name="remarks" value="{{ $complaint->remarks }}"  class="form-control" placeholder="Enter Email Id"/>
-											<span class="form-text text-muted">Please enter Remarks</span>
-										</div>
+                                        
 
 									</div>
 

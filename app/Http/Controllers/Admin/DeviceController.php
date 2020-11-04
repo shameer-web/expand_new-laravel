@@ -157,7 +157,7 @@ class DeviceController extends Controller
     {
         //
 
-
+        //dd($request->all());
 
 
              $device_update = $device->update($request->toArray());
