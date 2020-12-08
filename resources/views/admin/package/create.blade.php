@@ -66,7 +66,7 @@
 						                            </label>
 						                            <label class="radio radio-lg">
 						                                <input type="radio" name="package_type" id="prepade"
-						                                onclick="myFunction()" value="Prepaid"  />
+						                                {{-- onclick="myFunction()" --}} value="Prepaid"  />
 						                                <span></span>
 						                               	Prepaid
 						                            </label>
@@ -137,6 +137,9 @@
 
 
 										<input type="hidden" name="tax" id="tax">
+										<input type="hidden" name="tax5" id="tax5">
+										<input type="hidden" name="tax6" id="tax6">
+										<input type="hidden" name="tax7" id="tax7">
 									</div>
 
 									<!-- begin: Example Code-->
@@ -249,11 +252,17 @@ function calc_total()
 	//alert(package_price)
 	var cgst = parseInt($("#cgst").val());
 	$('#tax').val(cgst);
+	// $('#tax5').val(cgst);
+
+
 
 	tax_sum=package_price/100*$('#cgst').val();
-	$('#gst_amount').val(tax_sum);
+	$('#tax5').val(tax_sum);
+	$('#gst_amount').val(tax_sum.toFixed(2));
+
 	var result = parseInt(tax_sum) + parseInt(package_price);
 	$("#total_amount1").val(result.toFixed(2));
+	// $('#tax5').val(result.toFixed(2));
 }
 function calc_total1()
 {
@@ -262,11 +271,20 @@ function calc_total1()
 
 	var cgst = parseInt($("#cgst").val());
 	var sgst = parseInt($("#sgst").val());
+    
+
+    tax_sum=package_price/100*$('#sgst').val();
+    $('#tax6').val(tax_sum);
+	
+
+
+
+
 	var cgstsgst = cgst+sgst;
 	$('#tax').val(cgstsgst);
-	
+	// $('#tax6').val(sgst);
 	tax_sum=package_price/100*cgstsgst;
-	$('#gst_amount').val(tax_sum);
+	$('#gst_amount').val(tax_sum.toFixed(2));
 	var result = parseInt(tax_sum) + parseInt(package_price);
 	$("#total_amount1").val(result.toFixed(2));
 }
@@ -276,11 +294,20 @@ function calc_total2()
 	var cgst = parseInt($("#cgst").val());
 	var sgst = parseInt($("#sgst").val());
 	var cess = parseInt($("#cess").val());
+
+
+
+    tax_sum=package_price/100*$('#cess').val();
+    $('#tax7').val(tax_sum);
+
+    
+	
 	var cgstsgstcess = cgst+sgst+cess;
 	$('#tax').val(cgstsgstcess);
+	// $('#tax7').val(cess);
 	
 	tax_sum=package_price/100*cgstsgstcess;
-	$('#gst_amount').val(tax_sum);
+	$('#gst_amount').val(tax_sum.toFixed(2));
 	var result = parseInt(tax_sum) + parseInt(package_price);
 	$("#total_amount1").val(result.toFixed(2));
 }

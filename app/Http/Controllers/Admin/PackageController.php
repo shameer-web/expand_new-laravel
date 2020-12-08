@@ -44,24 +44,31 @@ class PackageController extends Controller
     public function store(Request $request)
     {
 
-       // dd($request->all());
+       //dd($request->all());
        //  if($request->gst){
        // $abc =($request->gst[0]+$request->gst[1]+$request->gst[2]);
        //  }
        //  dd($abc);
 
 
-
-
+        $total_tax =$request->tax5 + $request->tax6 + $request->tax7;
+       // dd($total_tax);
+        //dd($request->package_price + $total_tax);
+         
         $package =new Package();
         $package->package_name = $request->package_name;
 
         $package->package_type = $request->package_type;
         $package->package_duration = $request->package_duration;
         $package->package_price = $request->package_price;
+        $package->cgst = $request->tax5;
+        $package->sgst = $request->tax6;
+        $package->cess = $request->tax7;
+        $package->total_tax =$total_tax;
+
         $package->gst = $request->tax;
         $package->package_amount = $request->package_amount;
-        $package->total_amount = $request->total_amount;
+        $package->total_amount = $request->package_price + $total_tax;
 
         $package->save();
 

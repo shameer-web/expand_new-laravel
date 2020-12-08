@@ -1,4 +1,4 @@
-@extends('layouts.staff')
+@extends('layouts.office_staff')
 
 
 @section('content')
@@ -30,12 +30,12 @@
 									<div class="form-group row">
 										<label class="col-lg-2 col-form-label text-right">Full Name:</label>
 										<div class="col-lg-3">
-											<input type="text" name="full_name"  class="form-control" placeholder="Enter full name"/>
+											<input type="text" name="full_name"  class="form-control" placeholder="Enter full name" required />
 											<span class="form-text text-muted">Please enter your full name</span>
 										</div>
 										<label class="col-lg-2 col-form-label text-right">Contact Number:</label>
 										<div class="col-lg-3">
-											<input type="text" name="contact_number" class="form-control" placeholder="Enter contact number"/>
+											<input type="text" name="contact_number" class="form-control" placeholder="Enter contact number" required />
 											<span class="form-text text-muted">Please enter your contact number</span>
 										</div>
 									</div>
@@ -43,7 +43,7 @@
 										<label class="col-lg-2 col-form-label text-right">Address:</label>
 										<div class="col-lg-3">
 											<div class="input-group">
-												<input type="text" name="address" class="form-control" placeholder="Enter your address"/>
+												<input type="text" name="address" class="form-control" placeholder="Enter your address" required/>
 												<div class="input-group-append"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
 											</div>
 											<span class="form-text text-muted">Please enter your address</span>
@@ -51,30 +51,21 @@
 										<label class="col-lg-2 col-form-label text-right">KSEB Post No:</label>
 										<div class="col-lg-3">
 											<div class="input-group">
-												<input type="text" name="postcode" class="form-control" placeholder="Enter your kseb postcode"/>
+												<input type="text" name="postcode" class="form-control" placeholder="Enter your kseb postcode" required/>
 												<div class="input-group-append"></div>
 											</div>
 											<span class="form-text text-muted">Please enter your kseb post number</span>
 										</div>
 									</div>
-									<!-- <div class="form-group row">
-										<label class="col-lg-2 col-form-label text-right">Assign To:</label>
+									<div class="form-group row">
+										<label class="col-lg-2 col-form-label text-right">State:</label>
 										<div class=" col-lg-3">
-											<select class="form-control " id="kt_select2_1" name="assign_to">
-												{{-- <option value="AK">Nihal</option>
-												<option value="HI">Rajeesh</option>
-												<option value="CA">Subeesh</option>
-												<option value="NV">Akhil</option>
-												<option value="OR">Oregon</option> --}}
-
-												@foreach($data as $row)
-															<option value="{{ $row->id }}" >{{ $row->name }}</option>
-												@endforeach
-												
+											<select class="form-control " id="kt_select2_1" name="state" >
+												<option value="Kerala">Kerala</option>
 												
 											</select>
 										</div>
-									</div> -->
+									</div>
 
 									<!-- begin: Example Code-->
 									

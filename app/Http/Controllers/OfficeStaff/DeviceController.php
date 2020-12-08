@@ -21,21 +21,27 @@ class DeviceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+
+     public function index()
     {
-        //
-        $user =User::where('user_delete_status', 1)->get();
-        $data = DB::table('devices')
-             ->join('districts', 'districts.id', '=', 'devices.district')
-             ->join('companies', 'companies.id','=','devices.device')
-             ->join('modes', 'modes.id','=','devices.model')
-             ->join('locs', 'locs.id','=','devices.lco_id')
-             ->join('types', 'types.id','=','devices.type')
-              ->join('users', 'users.id','=','devices.assign_to')
-             ->select('devices.*', 'districts.district_name','companies.company_name','modes.model_name','locs.loc_name','types.type_name','users.name')
-             ->where('device_status', 1)
-             ->get();
+
+        
+
+        // $data = DB::table('devices')
+        //      ->join('districts', 'districts.id', '=', 'devices.district')
+        //      ->join('companies', 'companies.id','=','devices.device')
+        //      ->join('modes', 'modes.id','=','devices.model')
+        //      ->join('locs', 'locs.id','=','devices.lco_id')
+        //      ->join('types', 'types.id','=','devices.type')
+        //      ->select('devices.*', 'districts.district_name','companies.company_name','modes.model_name','locs.loc_name','types.type_name')
+        //      ->where('device_status', 1)
+        //      ->get();
+
+         $data= Device::where('device_status', 1)->get();
+          $user =User::where('user_delete_status', 1)->where('role', '!=' , 1)->get();
         return view('office-staff.device.index')->with('data',$data)->with('user',$user);
+       
     }
 
     /**
@@ -45,8 +51,6 @@ class DeviceController extends Controller
      */
     public function create()
     {
-        //
-        $user =User::where('user_delete_status', 1)->get();
         $district= District::where('district_status', 1)->get();
         $company= Company::where('company_status', 1)->get();
         $mode= Mode::where('model_status', 1)->get();
@@ -54,7 +58,7 @@ class DeviceController extends Controller
         $type= Type::where('type_status', 1)->get();
         return view('office-staff.device.create')->with('district', $district)
         ->with('company',$company)->with('mode',$mode)->with('loc',$loc)
-        ->with('type',$type)->with('user',$user);
+        ->with('type',$type);
     }
 
     /**
@@ -67,12 +71,11 @@ class DeviceController extends Controller
     {
         //
 
-
-          // dd($request->all());
+       // dd($request->all());
 
 
           $request->validate([
-
+        'device_name'=>'required|max:300',
         'company'=>'required|max:300',
         'type'=>'required|max:300',
         'device_id'=>'required|max:300',
@@ -99,6 +102,7 @@ class DeviceController extends Controller
           
         $device = new Device();
         $device->deviceid=$deviceno;
+        $device->device_name =$request->device_name;
         $device->device = $request->company;
         $device->type = $request->type;
         $device->device_id = $request->device_id;
@@ -106,13 +110,14 @@ class DeviceController extends Controller
         $device->model = $request->model;
         $device->district = $request->district;
         $device->lco_id = $request->lco_id;
-        // $enquiery->assign_to = '1';
-        $device->status = '1';
+        $device->status = '0';
 
         $device->save();
 
          return redirect()->route('devices.index')->with('message','succesfully created your field');
 
+
+       
     }
 
     /**
@@ -134,9 +139,8 @@ class DeviceController extends Controller
      */
     public function edit(Device $device)
     {
-        //
-
-         $district= District::where('district_status', 1)->get();
+        
+        $district= District::where('district_status', 1)->get();
         $company= Company::where('company_status', 1)->get();
         $mode= Mode::where('model_status', 1)->get();
         $loc= Loc::where('loc_status', 1)->get();
@@ -158,6 +162,8 @@ class DeviceController extends Controller
     public function update(Request $request, Device $device)
     {
         //
+
+        //dd($request->all());
 
 
              $device_update = $device->update($request->toArray());
@@ -195,4 +201,5 @@ class DeviceController extends Controller
     {
         //
     }
+    
 }

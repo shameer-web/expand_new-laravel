@@ -11,6 +11,7 @@ class Complaint extends Model
     protected $fillable =[
 
        'complaint_id',
+       'customer_id',
        'customer_name',
        'phone_no',
        'email',
@@ -21,24 +22,31 @@ class Complaint extends Model
        'other_complaint',
        'active_deactive',
        'active_deactive_date',
+       'payment_due',
+       'customer_request',
        'assigned',
        'remarks',
+       'priority',
 
 
        'status',
        'complaint_description',
        'technician_status',
        'complaint_status',
+       'active_deactive_status',
 
 
     ];
 
     protected $casts = [
-      'complaint' => 'array'
+      'complaint' => 'array',
+      // 'complainttype' => 'array'
     ];
 
 
-  
+   public function customer(){
+    return $this->belongsTo(Customer::class,'customer_name','id');
+   }
 
     public function assingned(){
     return $this->belongsTo(User::class,'assigned','id');
@@ -51,7 +59,10 @@ class Complaint extends Model
     public function tech_status(){
     return $this->belongsTo(Technicianstatus::class,'technician_status','id');
    }
-   public function cus(){
-    return $this->belongsTo(Customer::class,'customer_name','id');
+
+   public function user(){
+
+     return $this->belongsTo(User::class,'staff','id');
    }
+   
 }

@@ -1,4 +1,4 @@
-@extends('layouts.staff')
+@extends('layouts.office_staff')
 
 
 @section('content')
@@ -92,19 +92,21 @@
 												                    <thead>
 									                              <tr>
                                              
-											  <th>Order ID</th>
-											  <th>Device</th>
-                                              <th>Comapany</th>
+											  {{-- <th>Order ID</th> --}}
+											  {{-- <th>Device</th> --}}
+											  <th>Device Name</th>
+                                              <th>Company</th>
                                               <th>Type</th>
                                               <th>Device ID</th>
-                                              <th>Serial Number</th>
+                                              {{-- <th>Serial Number</th> --}}
                                               <th>Model</th>
                                               <th>District</th>
-                                              <th>LCO ID</th>
-                                              <th>Assign_to</th>
+                                             {{--  <th>LCO ID</th> --}}
+                                              <th>Assigned Customer</th>
                                               <th>Status</th>
+
 											  <th>Actions</th>
-											  <th></th>
+											  
 					                                  </tr>
 					                    </thead>
                                       @foreach($data as $row)
@@ -112,33 +114,62 @@
 				                        <tbody>
 				                           
                           				 <tr>
-											  <td>{{ $row->id }}</td>
-											  <td>{{ $row->deviceid }}</td>
-                                              <td>{{ $row->company_name }}</td>
-                                              <td>{{ $row->type_name }}</td>
+											  {{-- <td>{{ $row->id }}</td> --}}
+											  {{-- <td>{{ $row->deviceid }}</td> --}}
+											  <td>{{ $row->device_name }}</td>
+                                              <td>{{ $row->Company['company_name'] }}</td>
+                                              <td>{{ $row->Type['type_name'] }}</td>
                                               <td>{{ $row->device_id}}</td>
-                                              <td>{{ $row->serial_number }}</td>
-                                              <td>{{ $row->model_name}}</td>
-                                              <td>{{ $row->district_name }}</td>
-                                              <td>{{ $row->loc_name }}</td>
-                                               
-                                               @if($row->assign_to ==1) 
-									          <td><span class="label label-danger label-inline mr-2">Not Assigned</span></td>
-										       @else
-										       <td> <span class="label label-success label-inline mr-2"> {{$row->name }}</span></td>
-										       @endif
+                                             {{--  <td>{{ $row->serial_number }}</td> --}}
+                                              <td>{{ $row->Mode['model_name']}}</td>
+                                              <td>{{ $row->District['district_name'] }}</td>
+                                             {{--  <td>{{ $row->Loc['loc_name'] }}</td> --}}
+											  @if($row->status ==0) 
+									   <td>{{-- <span class="label label-warning label-inline mr-2">Not Assigned</span> --}}
+                                       <button class="btn btn-info badge">Not Assigned</button>
+									   </td>
 
 
-
-											  @if($row->status ==1) 
-									   <td><span class="label label-success label-inline mr-2">Stock</span></td>
-										  @elseif($row->status ==2) 
-										  <td> <span class="label label-dange label-inline mr-2">Damage</span></td>
-										  @elseif($row->status ==3) 
-										  <td> <span class="label label-warning label-inline mr-2">Service</span></td>
 										  @else 
-										  <td> <span class="label label-success label-inline mr-2">Customer</span></td>
+										  <td> {{-- <span class="label label-primary label-inline mr-2">{{ $row->Customer['name'] }}</span> --}}
+                                           <button class="btn btn-warning badge">{{ $row->Customer['name'] }}</button>
+
+										  </td>
+										 
 										  @endif
+
+										  @if($row->device_check ==0)
+
+										    <td>
+										    	 <button class="btn btn-primary badge">In Stock</button>
+									   
+										    </td> 
+
+									      @elseif($row->device_check ==1) 
+
+									   {{-- <span class="label label-warning label-inline mr-2">Not Assigned</span> --}}
+                                        <td>
+                                       <button class="btn btn-danger badge">Damaged</button>
+									   </td>
+									   
+
+									   @elseif($row->device_check ==2)
+                                         
+                                           <td>
+                                       <button class="btn btn-warning badge">Service Center</button>
+									   </td>
+									   
+
+									   @elseif($row->device_check ==3)
+
+									      <td>
+                                       <button class="btn btn-warning badge">Customer</button>
+									   </td>
+									  
+									   @endif
+
+
+
                                              
                                             <td>
 												<a href="{{ route('devices.edit',$row->id) }}" class="btn btn-outline-primary font-weight-bold mr-2"><i class="fa fa-edit"></i></a>
@@ -151,9 +182,9 @@
                                                              </button> --}}
 
 
-                                                             <button type="button" id="btnassign" data-action="{{ route('devices.update',$row->id) }}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-													Assign
-												</button>	
+                                                 <button type="button" id="btnstatus" data-action="{{ route('devices.update',$row->id) }}" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal">
+													Status
+												</button>	             
 												
 											</td>
 											
@@ -203,7 +234,7 @@
 
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
-				<form id="assign_form" action="" method="post" class="form-horizontal">
+				<form id="status_form" action="" method="post" class="form-horizontal">
                         @csrf
                         @method('put')
 					<div class="modal-content">
@@ -215,14 +246,15 @@
 						</div>
 						<div class="modal-body">
 						<div class="form-group row">
-							<label class="col-lg-3 col-form-label text-right">Assign To:</label>
+							<label class="col-lg-3 col-form-label text-right">Status:</label>
 								<div class=" col-lg-6">
-									<select class="form-control " id="kt_select2_1" name="assign_to">
+									<select class="form-control " id="kt_select2_1" name="device_check">
 										
 
-										@foreach($user as $row)
-													<option value="{{ $row->id }}" >{{ $row->name }}</option>
-										@endforeach
+										
+													<option value="1" >Damage</option>
+													<option value="2" >Service</option>
+										
 										
 										
 									</select>
@@ -300,12 +332,12 @@ $('body').on('click', '#deletebtn', function() {
 })
 
 
-$('body').on('click', '#btnassign', function() {
+$('body').on('click', '#btnstatus', function() {
     var no = $(this).closest('tr').children('td');
 
-    $('#btnassign').data('action');
+    $('#btnstatus').data('action');
     var action = $(this).data('action');
-    $('#assign_form').attr('action', action);
+    $('#status_form').attr('action', action);
 
 })
 </script>

@@ -36,7 +36,10 @@ class Customer extends Model
         'date',		
         'remark',
          // 'proof',
+
+
         'customer_status',
+        'customer_activation_status',
 
         		
 

@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\OfficeStaff;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 use App\User;
 use App\Enquiery;
 use DB;
@@ -19,7 +18,7 @@ class EnquiryController extends Controller
     {
         //
 
-            $user =User::where('user_delete_status', 1)->get();
+            $user =User::where('user_delete_status', 1)->where('role', '!=' , 1)->get();
             $data = DB::table('enquieries')
              ->join('users', 'enquieries.assign_to', '=', 'users.id')
              ->select('enquieries.*', 'users.name')
@@ -46,9 +45,11 @@ class EnquiryController extends Controller
 
 
      public function store(Request $request)
-    {
+    {   
+        //dd($request->all());
         $invoice_prefix="ENQ-N";
-        $invoice = Enquiery::select('id', 'enqid')->orderBy('id', 'desc')->first();
+        // $invoice = Enquiery::select('id', 'enqid')->orderBy('id', 'desc')->first();
+        $invoice = Enquiery::orderBy('id', 'desc')->first();
         
         if($invoice){
             $previous_invoice_no = $invoice->enqid;
@@ -66,6 +67,7 @@ class EnquiryController extends Controller
         $enquiery->contact_number = $request->contact_number;
         $enquiery->address = $request->address;
         $enquiery->postcode = $request->postcode;
+        $enquiery->state = $request->state;
         $enquiery->assign_to = '1';
         // dd($enquiery);
         $enquiery->save();
@@ -87,7 +89,8 @@ class EnquiryController extends Controller
         $page_data['assign_to'] =  $assign_to;
         $page_data['enquiery'] = $enquiery;
        // $data=User::all();
-        $data =User::where('user_delete_status', 1)->get();
+        // $data =User::where('user_delete_status', 1)->get();
+        $data =User::where('user_delete_status', 1)->where('role', '!=' , 1)->get();
         $page_data['data'] = $data;
 
         return view('office-staff.enquiery.edit', compact('page_data'));

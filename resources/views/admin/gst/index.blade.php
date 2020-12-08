@@ -112,7 +112,7 @@
 											<td>{{ $row->cess }}</td>
 										
                                             <td>
-												{{-- <a href="{{ route('gst.edit',$row->id) }}" class="btn btn-outline-primary font-weight-bold mr-2"><i class="fa fa-edit"></i></a> --}}
+												<a href="{{ route('gst.edit',$row->id) }}" class="btn btn-outline-primary font-weight-bold mr-2"><i class="fa fa-edit"></i></a>
 
 
 												<button type="button" id="deletebtn"

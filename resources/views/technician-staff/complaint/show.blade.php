@@ -3,7 +3,10 @@
 
 @section('content')
 
-
+<?php
+ $customer =$page_data['customer'] 
+ ?>
+ 
  <?php
  $complaint =$page_data['complaint'] 
  ?>
@@ -90,7 +93,7 @@
             <div>
                 <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">
                     <span class="font-weight-bold mr-2">Customer Name:</span>
-                   {{ $complaint->customer['name'] }}
+                   {{ $customer->name }}
                 </a>
                 
             </div>
@@ -101,11 +104,11 @@
         <div class="py-9">
             <div class="d-flex align-items-center justify-content-between mb-2">
                 <span class="font-weight-bold mr-2">Email:</span>
-                <a href="#" class="text-muted text-hover-primary">{{ $complaint->customer['email'] }}</a>
+                <a href="#" class="text-muted text-hover-primary">{{ $customer->email }}</a>
             </div>
             <div class="d-flex align-items-center justify-content-between mb-2">
                 <span class="font-weight-bold mr-2">Phone:</span>
-                <span class="text-muted">{{ $complaint->customer['phone'] }}</span>
+                <span class="text-muted">{{ $customer->phone }}</span>
             </div>
             <div class="d-flex align-items-center justify-content-between">
                 <span class="font-weight-bold mr-2">Location:</span>
@@ -297,14 +300,14 @@
                     <div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">Customer ID	</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $complaint->customer['cust_id'] }}"/>
+							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->cust_id }}"/>
 							
 						</div>
 					</div>
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label"> Name</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $complaint->customer['name'] }}"/>
+							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $customer->name }}"/>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -324,21 +327,21 @@
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">CRF No</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $complaint->customer['crf_no'] }}"/>
+							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $customer->crf_no }}"/>
 							
 						</div>
 					</div>
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">KSEB Post No</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $complaint->customer['kseb_post_no'] }}"/>
+							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $customer->kseb_post_no }}"/>
 							
 						</div>
 					</div>
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">Installation Address</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $complaint->customer['installation_address'] }}"/>
+							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $customer->installation_address }}"/>
 							
 						</div>
 					</div>
@@ -353,7 +356,7 @@
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">Pin Code</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $complaint->customer['pin_code'] }}"/>
+							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $customer->pin_code }}"/>
 							
 						</div>
                     </div>
@@ -361,7 +364,7 @@
                     <div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">Communication Address</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $complaint->customer['communication_address'] }}"/>
+							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $customer->communication_address }}"/>
 							
 						</div>
                     </div>
@@ -385,14 +388,14 @@
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">Phone</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $complaint->customer['phone'] }}"/>
+							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $customer->phone }}"/>
 							
 						</div>
 					</div>
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">Mobile</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $complaint->customer['mobile_number'] }}"/>
+							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $customer->mobile_number }}"/>
 							
 						</div>
 					</div>
@@ -401,7 +404,7 @@
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">Email</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $complaint->customer['email'] }}"/>
+							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $customer->email }}"/>
 							<!-- <span class="label label-lg font-weight-bold label-light-danger label-inline">Regular</span> -->
 							
 						</div>
@@ -409,14 +412,14 @@
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">Remarks</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $complaint->customer['remark'] }}"/>
+							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $customer->remark }}"/>
 							
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">Created At</label>
+						<label class="col-xl-3 col-lg-3 col-form-label">Date</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $complaint->customer['created_at'] }}"/>
+							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $customer->created_at }}"/>
 							
 						</div>
 					</div>

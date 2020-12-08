@@ -14,12 +14,14 @@ class EnquiryController extends Controller
     {
         //
 
-            $user =User::where('user_delete_status', 1)->where('role', '!=' , 1)->get();
-            $data = DB::table('enquieries')
-             ->join('users', 'enquieries.assign_to', '=', 'users.id')
-             ->select('enquieries.*', 'users.name')
-             ->where('enquiery_status', 1)
-             ->get();
+            $user =User::where('user_delete_status', 1)->where('role',3)->get();
+            // $data = DB::table('enquieries')
+            //  ->join('users', 'enquieries.assign_to', '=', 'users.id')
+            //  ->select('enquieries.*', 'users.name')
+            //  ->where('enquiery_status', 1)
+            //  ->get();
+
+             $data =Enquiery::where('enquiery_status', 1)->get();
 
              return view('admin.enquiery.index')->with('data',$data)->with('user',$user);
     }
@@ -54,6 +56,7 @@ class EnquiryController extends Controller
         }else{
             $new_no = 0001; // Starting No When No Data is Present
         }
+
         
         $test= $invoice_prefix.str_pad($new_no, 4, '0', STR_PAD_LEFT);
         
@@ -64,7 +67,8 @@ class EnquiryController extends Controller
         $enquiery->address = $request->address;
         $enquiery->postcode = $request->postcode;
         $enquiery->state = $request->state;
-        $enquiery->assign_to = '1';
+        $enquiery->assign_to = '0';
+        $enquiery->date = $request->date;
         // dd($enquiery);
         $enquiery->save();
 
@@ -85,7 +89,8 @@ class EnquiryController extends Controller
         $page_data['assign_to'] =  $assign_to;
         $page_data['enquiery'] = $enquiery;
        // $data=User::all();
-        $data =User::where('user_delete_status', 1)->get();
+        // $data =User::where('user_delete_status', 1)->get();
+        $data =User::where('user_delete_status', 1)->where('role', '!=' , 1)->get();
         $page_data['data'] = $data;
 
         return view('admin.enquiery.edit', compact('page_data'));

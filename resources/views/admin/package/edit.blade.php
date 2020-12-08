@@ -96,10 +96,10 @@
 										</div>
 									</div>
 									<div class="form-group row">
-										<label class="col-lg-2 col-form-label text-right">Package Amount:</label>
+										<label class="col-lg-2 col-form-label text-right">Total Tax</label>
 										<div class=" col-lg-3">
 											<div class="input-group">
-												<input type="text" name='package_amount' value="{{ $package->package_amount }}" id="gst_amount" placeholder='0.00' class="form-control" />
+												<input type="text" name='package_amount' value="{{ $package->total_tax }}" id="gst_amount" placeholder='0.00' class="form-control" />
 												
 											</div>
 										</div>

@@ -9,6 +9,7 @@ class Device extends Model
     //
 
     protected $fillable = [
+       // 'device_name',
        'device',
        'type',
        'device_id',

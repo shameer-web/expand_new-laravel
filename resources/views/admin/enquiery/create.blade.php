@@ -65,7 +65,16 @@
 												
 											</select>
 										</div>
+										
+										
+										<label class="col-lg-2 col-form-label text-right">Date:</label>
+										<div class=" col-lg-3">
+											<input type="text" name="date" id="datetimepicker1" class="form-control" placeholder="date"/>
+										</div>
 									</div>
+								
+									
+								
 
 									<!-- begin: Example Code-->
 									
@@ -112,7 +121,12 @@
        
 
 
-
+<script src="{{asset('js/bootstrap-datetimepicker.min.js')}}"></script>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
 
 
 

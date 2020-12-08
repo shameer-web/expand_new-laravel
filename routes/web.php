@@ -25,10 +25,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Route::group(['middleware' =>['auth','admin']],function(){
 
-Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'admin','namespace'=>'Admin'), function()
+Route::group(array('middleware' => 'auth','middleware' => 'is_admin','prefix'=>'admin','namespace'=>'Admin'), function()
 {  
 
-    Route::get('/', 'AdminController@index');
+    Route::get('/', 'AdminController@index')->name('admin.index');
     // Route::get('/enquiery/create', 'EnquiryController@create');
     // Route::get('/enquiery/index', 'EnquiryController@index')->name('index');
     
@@ -36,6 +36,7 @@ Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'adm
     // Route::resource('enquiery','EnquieryController');
     
     Route::resource('package','PackageController');
+    Route::resource('channel','channelController');
     Route::resource('device','DeviceController');
     // Route::resource('customer','CustomerController');
 
@@ -60,7 +61,14 @@ Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'adm
     Route::put('/customer/{id}/device-status','CustomerController@device_status')->name('customer.device_status');
 
     Route::post('/customer/package','CustomerController@package')->name('customer.package');
-    Route::get('/customer/update_package/{id}','CustomerController@update_package')->name('customer.update_package');
+    Route::post('/customer/update_package/{id}','CustomerController@update_package')->name('customer.update_package');
+
+   
+
+
+
+     Route::post('/customer/chanel','CustomerController@chanel')->name('customer.chanel');
+      Route::post('/customer/update_channel/{id}','CustomerController@update_channel')->name('customer.update_channel');
 
     
 
@@ -86,6 +94,9 @@ Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'adm
     Route::resource('gst','GstController');
     Route::resource('technician_status','TechnicianstatusController');
 
+    Route::resource('invoice_image','InvoiceImageController');
+
+
 
 // data manage route end here
 
@@ -95,7 +106,15 @@ Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'adm
  Route::get('/complaint','ComplaintController@index')->name('complaint.index');
  Route::get('/complainty/create','ComplaintController@create')->name('complaint.create');
  Route::post('/complaint/create','ComplaintController@store')->name('complaint.store');
-  // Route::post('/complaint/creat','ComplaintController@creations')->name('complaint.creations');
+
+ Route::post('/complaint/activation-deactivation-create','ComplaintController@activation_store')->name('complaint.activation_store');
+
+
+
+ // Route::post('/complaint/createed','ComplaintController@store_data')->name('complaint.store_data');
+
+
+ 
   Route::post('/complaint/complaint_reg','ComplaintController@complaint_reg')->name('complaint.complaint_reg');
  Route::get('/complaint/{id}/edit','ComplaintController@edit')->name('complaint.edit');
  Route::put('/complaint/{id}/update','ComplaintController@update')->name('complaint.update');
@@ -107,19 +126,50 @@ Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'adm
 
   Route::get('/invoice','InvoiceController@index')->name('invoice.index');
  Route::get('/invoice/create','InvoiceController@create')->name('invoice.create');
+  Route::post('/invoice/invoice_reg','InvoiceController@invoice_reg')->name('invoice.invoice_reg');
+
+   Route::post('/invoice/update_package/{id}','InvoiceController@update_package')->name('invoice.update_package');
+
+   //end invoice
+
+
+   
+   //start report 
+   
+Route::get('/reports/enquiry_report', 'ReportsController@enquiry_report')->name('reports.enquiry_report');
+Route::post('/reports/select', 'ReportsController@select')->name('reports.select');
+
+Route::get('/reports/device', 'ReportsController@device')->name('reports.device');
+Route::post('/reports/device', 'ReportsController@select_device')->name('reports.select_device');
+
+Route::get('/reports/customer', 'ReportsController@customer')->name('reports.customer');
+Route::post('/reports/customer', 'ReportsController@select_customer')->name('reports.select_customer');
+
+Route::get('/reports/complaint', 'ReportsController@complaint')->name('reports.complaint');
+Route::post('/reports/complaint', 'ReportsController@select_complaint')->name('reports.select_complaint');
+
+   
+   //end report
+   
+   
 
 });
+
+
+
+
+
 
  
 
 
-Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'office-staff','namespace'=>'OfficeStaff'), function()
+Route::group(array('middleware' => 'auth','middleware' => 'is_office','prefix'=>'office-staff','namespace'=>'OfficeStaff'), function()
 {  
 
 
    
 
-    Route::get('/', 'StaffController@index');
+    Route::get('/', 'StaffController@index')->name('officestaff.index');
 
      Route::resource('packages','PackageController');
      Route::resource('devices','DeviceController');
@@ -148,7 +198,12 @@ Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'off
 
     Route::get('/customer/profile/{id}', 'CustomerController@profile')->name('cus.profile');
     Route::post('/customer/device','CustomerController@device')->name('cus.device');
+    Route::put('/customer/{id}/device-status','CustomerController@device_status')->name('cus.device_status');
+
+
+
     Route::post('/customer/package','CustomerController@package')->name('cus.package');
+    Route::get('/customer/update_package/{id}','CustomerController@update_package')->name('cus.update_package');
 
 //customer route end here
 
@@ -158,6 +213,9 @@ Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'off
  Route::get('/complaint','ComplaintController@index')->name('complaints.index');
  Route::get('/complainty/create','ComplaintController@create')->name('complaints.create');
  Route::post('/complaint/create','ComplaintController@store')->name('complaints.store');
+
+  Route::post('/complaint/complaint_reg','ComplaintController@complaint_reg')->name('complaints.complaint_reg');
+
  Route::get('/complaint/{id}/edit','ComplaintController@edit')->name('complaints.edit');
  Route::put('/complaint/{id}/update','ComplaintController@update')->name('complaints.update');
 //end complaints
@@ -176,13 +234,13 @@ Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'off
 
 
 
-Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'technician-staff','namespace'=>'TechnicianStaff'), function()
+Route::group(array('middleware' => 'auth','middleware' => 'is_technician','prefix'=>'technician-staff','namespace'=>'TechnicianStaff'), function()
 {  
 
 
    
 
-    Route::get('/', 'StaffController@index');
+    Route::get('/', 'StaffController@index')->name('technicianstaff.index');
 
 
 
@@ -190,13 +248,25 @@ Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'tec
     //customer route start here
     Route::get('/customer', 'CustomerController@index')->name('customers.index');
 
-     Route::get('/customer/profile/{id}', 'CustomerController@profile')->name('customers.profile');
+    Route::get('/customer/profile/{id}', 'CustomerController@profile')->name('customers.profile');
 
     Route::post('/customer/device','CustomerController@device')->name('customers.device');
     Route::post('/customer/package','CustomerController@package')->name('customers.package');
 
 
     //customer route end here
+
+
+
+ //enquiry 
+    Route::get('/enquiry','EnquiryController@index')->name('enq.index');
+    Route::get('/enquiry/create','EnquiryController@create')->name('enq.create');
+    Route::post('/enquiry/create','EnquiryController@store')->name('enq.store');
+    Route::get('/enquiry/{id}/edit','EnquiryController@edit')->name('enq.edit');
+    Route::put('/enquiry/{id}/update','EnquiryController@update')->name('enq.update');
+//end enquiry    
+
+    
 
 
 
@@ -213,13 +283,13 @@ Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'tec
 
 
 
-Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'collection-agent','namespace'=>'CollectionAgent'), function()
+Route::group(array('middleware' => 'auth','middleware' => 'is_collection','prefix'=>'collection-agent','namespace'=>'CollectionAgent'), function()
 {  
 
 
    
 
-    Route::get('/', 'StaffController@index');
+    Route::get('/', 'StaffController@index')->name('collectionagent.index');
 
 
 
@@ -236,9 +306,29 @@ Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'col
     Route::get('/customer/profile/{id}', 'CustomerController@profile')->name('cust.profile');
     Route::post('/customer/device','CustomerController@device')->name('cust.device');
     Route::post('/customer/package','CustomerController@package')->name('cust.package');
+
+
+
+     Route::post('/customer/{id}/notification','CustomerController@notification')->name('cust.notification');
+    
 //customer route end here
 
-});    
+  //start invoice
+    Route::get('/invoice','InvoiceController@index')->name('invo.index');
+ Route::get('/invoice/create','InvoiceController@create')->name('invo.create');
+  Route::post('/invoice/invoice_reg','InvoiceController@invoice_reg')->name('invo.invoice_reg');
+
+   Route::post('/invoice/update_package/{id}','InvoiceController@update_package')->name('invo.update_package');
+
+   //end invoice
+
+
+
+});  
+
+
+
+
 
 
 
@@ -258,6 +348,20 @@ Route::group(array('middleware' => 'auth','middleware' => 'admin','prefix'=>'col
 
 
 #### images routes
+
+
+Route::get('assets/image/invoice_image/{filename}', function ($filename)
+{
+    $path = storage_path('app/invoice_image/' . $filename);
+    if (!File::exists($path)) {
+        abort(404);
+    }
+    $file = File::get($path);
+    $type = File::mimeType($path);
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+    return $response;
+});
 
 
 

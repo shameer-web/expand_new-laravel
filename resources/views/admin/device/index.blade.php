@@ -92,9 +92,10 @@
 												                    <thead>
 									                              <tr>
                                              
-											  {{-- <th>Order ID</th> --}}
-											  <th>Device</th>
-                                              <th>Comapany</th>
+											  <th>Device ID</th>
+											  {{-- <th>Device</th> --}}
+											  {{-- <th>Device Name</th> --}}
+                                              <th>Company</th>
                                               <th>Type</th>
                                               <th>Device ID</th>
                                               {{-- <th>Serial Number</th> --}}
@@ -115,6 +116,7 @@
                           				 <tr>
 											  {{-- <td>{{ $row->id }}</td> --}}
 											  <td>{{ $row->deviceid }}</td>
+											 {{--  <td>{{ $row->device_name }}</td> --}}
                                               <td>{{ $row->Company['company_name'] }}</td>
                                               <td>{{ $row->Type['type_name'] }}</td>
                                               <td>{{ $row->device_id}}</td>
@@ -130,27 +132,40 @@
 
 										  @else 
 										  <td> {{-- <span class="label label-primary label-inline mr-2">{{ $row->Customer['name'] }}</span> --}}
-                                           <button class="btn btn-success badge">{{ $row->Customer['name'] }}</button>
+                                           <button class="btn btn-warning badge">{{ $row->Customer['name'] }}</button>
 
 										  </td>
 										 
 										  @endif
 
-										    @if($row->device_check ==1) 
-									   <td>{{-- <span class="label label-warning label-inline mr-2">Not Assigned</span> --}}
-                                       <button class="btn btn-primary badge">In Stock</button>
-									   </td>
+										  @if($row->device_check ==0)
 
-									   @elseif($row->device_check ==2)
+										    <td>
+										    	 <button class="btn btn-primary badge">In Stock</button>
+									   
+										    </td> 
 
-									    <td>
+									      @elseif($row->device_check ==1) 
+
+									   {{-- <span class="label label-warning label-inline mr-2">Not Assigned</span> --}}
+                                        <td>
                                        <button class="btn btn-danger badge">Damaged</button>
 									   </td>
+									   
 
-									   @else
-									    <td>
+									   @elseif($row->device_check ==2)
+                                         
+                                           <td>
                                        <button class="btn btn-warning badge">Service Center</button>
 									   </td>
+									   
+
+									   @elseif($row->device_check ==3)
+
+									      <td>
+                                       <button class="btn btn-warning badge">Customer</button>
+									   </td>
+									  
 									   @endif
 
 
@@ -231,14 +246,14 @@
 						</div>
 						<div class="modal-body">
 						<div class="form-group row">
-							<label class="col-lg-3 col-form-label text-right">Assign To:</label>
+							<label class="col-lg-3 col-form-label text-right">Status:</label>
 								<div class=" col-lg-6">
 									<select class="form-control " id="kt_select2_1" name="device_check">
 										
 
 										
-													<option value="2" >Damage</option>
-													<option value="3" >Service</option>
+													<option value="1" >Damage</option>
+													<option value="2" >Service</option>
 										
 										
 										

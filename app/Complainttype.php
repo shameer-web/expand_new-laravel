@@ -14,4 +14,7 @@ class Complainttype extends Model
        'complainttype',
        'complainttype_status'
     ];
+    //  protected $casts = [
+    //   'complainttype' => 'array'
+    // ];
 }

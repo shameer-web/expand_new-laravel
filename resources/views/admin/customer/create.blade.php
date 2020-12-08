@@ -89,7 +89,7 @@
 							<div class="input-group">
 								<div class="input-group-prepend"><span class="input-group-text"></div>
 								<select class="form-control " id="kt_select2_1" name="subcode">
-									<option selected="selected">Select Subcode</option>
+									<option value="">Select Subcode</option>
 									@foreach($subcode as $row)
 									<option value="{{$row->id}}">{{$row->subcode}}</option>
 									@endforeach
@@ -113,7 +113,7 @@
 							<label>Area:</label>
 							<div class="input-group">
 								<select class="form-control " id="kt_select2_1" name="area">
-									<option selected="selected">Select Area</option>
+									<option value="">Select Area</option>
 									@foreach($area as $row)
 									<option value="{{$row->id}}">{{$row->area_name}}</option>
 									@endforeach
@@ -170,8 +170,8 @@
 							<label>District:</label>
 							<div class="input-group">
 								<div class="input-group-append"></div>
-								<select class="form-control " id="kt_select2_1" name="district">
-									<option selected="selected">Select District</option>
+								<select class="form-control " id="district" name="district">
+									<option value="">Select District</option>
 									@foreach($district as $row)
 									<option value="{{$row->id}}">{{$row->district_name}}</option>
 									@endforeach
@@ -231,8 +231,8 @@
 							<label>District:</label>
 							<div class="input-group">
 								<div class="input-group-append"></div>
-								<select class="form-control " id="kt_select2_1" name="district1">
-									<option selected="selected">Select District</option>
+								<select class="form-control " id="district1" name="district1">
+									<option value="">Select District</option>
 									@foreach($district as $row)
 									<option value="{{$row->id}}">{{$row->district_name}}</option>
 									@endforeach
@@ -252,7 +252,7 @@
 							<label>Pincode:</label>
 							<div class="input-group">
 								<div class="input-group-append"></div>
-								<input type="text" name="pincode1"  id="pincode" class="form-control" placeholder="Enter your pincode"/>
+								<input type="text" name="pincode1"  id="pincode1" class="form-control" placeholder="Enter your pincode"/>
 							</div>
 							<span class="form-text text-muted">Please enter your Pincode</span>
 
@@ -295,7 +295,7 @@
 							<div class="input-group">
 								<div class="input-group-append"></div>
 								<select class="form-control " id="kt_select2_1" name="prooftype">
-									<option selected="selected">Select Id</option>
+									<option value="">Select Id</option>
 									<option value="1">Adhar</option>
 									<option value="2">Voter ID</option>
 									<option value="3">Pan</option>
@@ -543,13 +543,21 @@ function addressFunction()
 if (document.getElementById('same').checked) 
 { 
 	document.getElementById('caddress').value=document. 
-			getElementById('iaddress').value; 
+			getElementById('iaddress').value;
+
+			document.getElementById('district1').value=document. 
+			getElementById('district').value; 
+
+			document.getElementById('pincode1').value=document. 
+			getElementById('pincode').value;  
 	
 } 
 	
 else
 { 
-	document.getElementById('caddress').value=""; 
+	document.getElementById('caddress').value="";
+	document.getElementById('district1').value="";
+	document.getElementById('pincode1').value=""; 
 	 
 } 
 } 

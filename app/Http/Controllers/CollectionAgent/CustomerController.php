@@ -15,16 +15,99 @@ use App\Package;
 use App\Area;
 use App\Subcode;
 use App\CustomerPackage;
+use App\Agentnotifications;
+use App\Payment;
+use App\Complainttype;
+use Carbon\Carbon;
 use DB;
+use Auth;
 
 class CustomerController extends Controller
 {
     //
+    
+        public function profile($id)
+    {   
+         $cust_package =CustomerPackage::where('cus_id',$id)->first();
+         //dd($cust_package);
+         if($cust_package == null)
+         {
+           $count = null;
+         }
+         else{
 
-     public function profile($id)
-    {
+
+
+         $time = strtotime($cust_package->payment_date);
+         //dd($time);
+         $final =$cust_package->payment_date;
+         //dd($final);
+         $final1 = Carbon::now();
         
-        $device = Device::where('device_status', 1)->get();
+
+
+         $formatted_dt1=Carbon::parse($final);
+         // dd($formatted_dt1);
+
+        $formatted_dt2=Carbon::parse($final1);
+        //dd($formatted_dt2);
+
+        $date_diff=$formatted_dt1->diffInDays($formatted_dt2);
+        //dd($date_diff);
+        $count = 30-$date_diff;
+        //dd($count);
+              
+
+        }
+               
+
+       
+
+
+         $complainttype =Complainttype::where('complainttype_status', 1)->get();
+         
+          $payment= DB::table('payments')
+                 ->where('cus_id',$id)
+                 ->orderBy('id', 'desc')
+                 ->first();
+                 //dd($payment);
+
+
+
+
+         $complaint= DB::table('complaints')
+                 ->where('customer_name',$id)
+                 ->orderBy('id', 'desc')
+                 ->first();
+         //dd($complaint);
+          if($complaint == null){
+                   $abcd = '';
+                  // dd($abcd);
+                   $abc = json_decode($abcd);
+                 //dd($abc);
+                   $single_com = '';
+            }
+          else{
+              $complaint= DB::table('complaints')
+                 ->where('customer_name',$id)
+                 ->orderBy('id', 'desc')
+                 ->first();
+                 //dd($complaint);
+        $abcd =$complaint->complaint;
+       // dd($abcd);
+         $abc = json_decode($abcd);
+         //dd($abc);
+        $single_com = Complainttype::whereIn('id',$abc)->get();
+        //dd($single_com);
+       
+        }
+
+
+
+
+
+        
+        $device = Device::where('device_status', 1)->where('cus_device_status', 1)->get();
         $package = Package::where('package_status', 1)->get();
         $cus_device = DB::table('devices')
         ->join('companies', 'companies.id', '=', 'devices.device')
@@ -32,8 +115,9 @@ class CustomerController extends Controller
         ->join('modes','modes.id', '=', 'devices.model')
         ->join('districts','districts.id', '=', 'devices.district')
         ->join('locs','locs.id', '=', 'devices.lco_id')
+        ->select('devices.*','companies.company_name','types.type_name','modes.model_name','districts.district_name','locs.loc_name')
         ->where('device_status', 1)
-        ->where('devices.id', $id)->first();                   
+        ->where('devices.status', $id)->first();                   
         $customer = Customer::where('customer_status', 1)->
                             where('id',$id)->first();
 
@@ -41,11 +125,15 @@ class CustomerController extends Controller
         ->join('packages', 'packages.id', '=' , 'customer_packages.package_name')
         ->select('customer_packages.*','packages.package_name as pname','packages.package_type as ptype','packages.package_price as price',
         'customer_packages.created_at as date')
-        ->where('customer_packages.cus_id',$id)->get();                 
+        ->where('customer_packages.cus_id',$id)->first();
+        //dd($customer_package);              
         return view('collection-agent.customer.profile')->with('customer', $customer)->with('device', $device)
         ->with('cdevice', $cus_device)->with('package', $package)
-        ->with('pkg',$customer_package);
+        ->with('pk',$customer_package)->with('cust_package',$cust_package)->with('complaint',$complaint)->with('single_com',$single_com)->with('complainttype',$complainttype)->with('count',$count)->with('payment',$payment);
     }
+
+   
+    
     public function index()
     {
         $customer= Customer::where('customer_status', 1)->get();
@@ -257,5 +345,51 @@ class CustomerController extends Controller
         
        
         return redirect()->route('cust.index');
+    }
+
+
+
+
+    public function notification(Request $request , $id){
+       
+
+      // return "hiii";
+        //dd($request->all());
+
+       //dd(Auth::user()->name);
+        
+        //dd($id);
+        $not =new Agentnotifications();
+
+
+        $not->cust_id =$id;
+        $not->agent_name =Auth::user()->name;
+        $not->name =$request->name;
+        $not->sub_code =$request->sub_code;
+        $not->area =$request->area;
+        $not->crf_no =$request->crf_no;
+        $not->kseb_post_no =$request->kseb_post_no;
+        $not->installation_address =$request->installation_address;
+        $not->district =$request->district;
+        $not->pin_code =$request->pin_code;
+        $not->communication_address =$request->communication_address;
+        $not->district1 =$request->district1;
+        $not->pin_code1 =$request->pin_code1;
+        $not->customer_type =$request->customer_type;
+        $not->id_proof_type =$request->id_proof_type;
+        $not->id_proof_number =$request->id_proof_number;
+        $not->phone =$request->phone;
+        $not->mobile_number =$request->mobile_number;
+        $not->email =$request->email;
+        $not->date =$request->date;
+        $not->remark =$request->remark;
+
+        $not->save();
+
+        return redirect()->route('cust.index');
+
+        // return "hiiii";
+
+
     }
 }

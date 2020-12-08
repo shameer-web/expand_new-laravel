@@ -52,18 +52,13 @@
 								@method('put')
 								<div class="card-body">
 									<div class="form-group row">
-										<label class="col-lg-2 col-form-label text-right">GST:</label>
-										<div class="col-lg-3">
-											<input type="number" name="gst" value="{{ $edit->gst }}"  class="form-control" placeholder="GST"/>
-											<span class="form-text text-muted">Please enter  Gst</span>
-										</div>
+										
 										<label class="col-lg-2 col-form-label text-right">CGST:</label>
 										<div class="col-lg-3">
 											<input type="number" name="cgst" value="{{ $edit->cgst }}" class="form-control" placeholder="CGST"/>
 											<span class="form-text text-muted">Please enter Cgst</span>
 										</div>
-									</div>
-									<div class="form-group row">
+
 										<label class="col-lg-2 col-form-label text-right">SGST:</label>
 										<div class="col-lg-3">
 											<div class="input-group">
@@ -72,6 +67,9 @@
 											</div>
 											<span class="form-text text-muted">Please enter Sgst</span>
 										</div>
+									</div>
+									<div class="form-group row">
+										
 										<label class="col-lg-2 col-form-label text-right">Cess:</label>
 										<div class="col-lg-3">
 											<div class="input-group">

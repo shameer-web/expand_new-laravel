@@ -97,7 +97,7 @@
                                               <th>Package type</th>
                                               <th>Package Price</th>
                                               <th> Gst Amount</th>
-                                              <th>Package Amount</th>
+                                             {{--  <th>Package Amount</th> --}}
                                               <th>Total Amount</th>
                                               
                                               <th>Actions</th>
@@ -118,8 +118,8 @@
 										  <td> <span class="label label-success label-inline mr-2"> Prepaid</span></td>
 										  @endif
                                               <td>{{ $row->package_price}}</td>
-                                              <td>{{ $row->gst }}</td>
                                               <td>{{ $row->package_amount }}</td>
+                                              {{-- <td>{{ $row->package_amount }}</td> --}}
                                               <td>{{ $row->total_amount }}</td>
                                                
                                              

@@ -1,4 +1,4 @@
-@extends('layouts.staff')
+@extends('layouts.office_staff')
 
 
 @section('content')
@@ -101,7 +101,7 @@
 											  <th>ID</th>
                                               <th>Complaint ID</th>
                                               <th>Complaint</th>
-                                              <th>Customer Name</th>
+                                              <th>Active/deactive complaint</th>
                                               <th>Mobile</th>
                                               <th>Assigned Technician</th>
                                               <th>Date</th>
@@ -124,7 +124,23 @@
 					                              <span class="btn"> {{ $data['complainttype'].';' }} </span>
 					                               @endforeach
 											</td>
-											<td>{{ $row->customer['name'] }}</td>
+                                             
+
+                                              @if($row->active_deactive ==null )
+											  <td></td>
+											  @elseif($row->active_deactive == 1)
+
+											  <td>
+											  	 Activation
+											  </td>	 
+											  @elseif($row->active_deactive == 2)
+											  <td>
+											  	 Deactivation
+											  </td>
+											  @endif
+
+
+											
 											<td>{{ $row->phone_no }}</td>
 											<td><button type="submt" class="badge btn btn-outline-warning">{{ $row->assingned['name'] }}</button></td>
 											<td>{{ $row->created_at }}</td>
@@ -150,8 +166,16 @@
                                                               class="fa fa-trash" aria-hidden="true"></i>
                                                              </button> --}}
 
+                                                            
+                                                            <form action="{{ route('complaints.complaint_reg') }}" method="post">
+                                                             		@csrf
+                                                             		<input type="hidden" name="search" value="{{ $row->customer_name }}">
+                                                             		<button  type="submit" class="btn btn-primary">View</button>
+                                                             		
+                                                             	</form>
 
-                                                             <button type="button" id="btnassign" data-action="{{ route('complaints.update',$row->id) }}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+
+                                                             <button type="button" id="btnassign" data-action="{{ route('complaints.update',$row->id,$row->active_deactive) }}" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
 													Assign
 												</button>	
 															
@@ -234,6 +258,10 @@
 								<div class=" col-lg-9">
 									<input type="text" name="remarks" class="form-control">
 									<input type="hidden" name="status" value="1" class="form-control">
+
+									<input type="hidden" name="activation" value="" class="form-control">
+									
+
 								</div>
 						</div>
 						</div>

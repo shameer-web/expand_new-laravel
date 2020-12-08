@@ -46,7 +46,7 @@
             </div>
         </div>
 			<!--begin::Form-->
-			<form class="form" action="{{ route('customer.notification',$customer->id) }}" method="POST" enctype="multipart/form-data" >
+			<form class="form" action="{{ route('cust.notification',$customer->id) }}" method="POST" enctype="multipart/form-data" >
 			@csrf
 			{{-- @method('put') --}}
 				<div class="card-body">
@@ -54,14 +54,14 @@
 					<div class="form-group row">
 						{{-- <div class="col-lg-4">
 							<label>Enq No:</label>
-							<input type="text" class="form-control enqid-quirey"  style="text-transform:uppercase" name="enqid" value="" id="enqid" placeholder="Eg : ENQ-N0001" required/>
+							<input type="text" class="form-control enqid-quirey"  style="text-transform:uppercase" name="enqid" value="" id="enqid" placeholder="Eg : ENQ-N0001" />
 							<span class="form-text text-muted" id="alert-box">Please enter your Enqiry Number</span>
 							
 						</div> --}}
 						<div class="col-lg-6">
 							<label>Full Name:</label>
 							<input type="text" class="form-control "
-							value="{{ $customer->name }}" name="name" id="name" placeholder="Enter full name" required/>
+							value="{{ $customer->name }}" name="name" id="name" placeholder="Enter full name" />
 							<span class="form-text text-muted">Please enter your full name</span>
 						</div>
 						
@@ -69,7 +69,7 @@
 							<label>Subcode:</label>
 							<div class="input-group">
 								<div class="input-group-prepend"><span class="input-group-text"></div>
-								<select class="form-control "  name="subcode">
+								<select class="form-control "  name="sub_code">
 									
 									
 
@@ -128,14 +128,14 @@
 						
 						<div class="col-lg-4">
 							<label>CRF No:</label>
-							<input type="text" name="crfno" value="{{ $customer->crf_no }}" class="form-control" placeholder=""/>
+							<input type="text" name="crf_no" value="{{ $customer->crf_no }}" class="form-control" placeholder=""/>
 							<span class="form-text text-muted">Please enter your crf no</span>
 						</div>
 						<div class="col-lg-4">
 							<label>KSEB Post No:</label>
 							<div class="input-group">
 								<div class="input-group-prepend"><span class="input-group-text"><i class="la la-info-circle"></i></span></div>
-								<input type="text" name="ksebno" value="{{ $customer->kseb_post_no }}" id="ksebno" class="form-control" placeholder="Post Number"/>
+								<input type="text" name="kseb_post_no" value="{{ $customer->kseb_post_no }}" id="ksebno" class="form-control" placeholder="Post Number"/>
 							</div>
 							<span class="form-text text-muted">Please enter Kseb Post Number</span>
 						</div>
@@ -146,7 +146,7 @@
                         <div class="col-lg-4">
 							<label>Installation Address:</label>
 							<div class="input-group">
-								<input type="text" name="address" value="{{ $customer->installation_address }}" id="iaddress" class="form-control" placeholder="Enter your address"/>
+								<input type="text" name="installation_address" value="{{ $customer->installation_address }}" id="iaddress" class="form-control" placeholder="Enter your address"/>
 								<div class="input-group-append"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
 							</div>
 							<span class="form-text text-muted">Please enter your address</span>
@@ -185,7 +185,7 @@
 							<label>Pincode:</label>
 							<div class="input-group">
 								<div class="input-group-append"></div>
-								<input type="text" name="pincode" value="{{ $customer->pin_code }}"  id="pincode" class="form-control" placeholder="Enter your pincode"/>
+								<input type="text" name="pin_code" value="{{ $customer->pin_code }}"  id="pincode" class="form-control" placeholder="Enter your pincode"/>
 							</div>
 							<span class="form-text text-muted">Please enter your Pincode</span>
 						</div>
@@ -206,7 +206,7 @@
 						<div class="col-lg-4">
 							<label>Communication Address:</label>
 							<div class="input-group">
-								<input type="text" name="caddress" value="{{ $customer->communication_address }}" id="caddress" class="form-control" placeholder="Enter your address"/>
+								<input type="text" name="communication_address" value="{{ $customer->communication_address }}" id="caddress" class="form-control" placeholder="Enter your address"/>
 								<div class="input-group-append"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
 							</div>
 							<span class="form-text text-muted">Please enter your address</span>
@@ -242,7 +242,7 @@
 							<label>Pincode:</label>
 							<div class="input-group">
 								<div class="input-group-append"></div>
-								<input type="text" name="pincode1" value="{{ $customer->pin_code1 }}"  id="pincode" class="form-control" placeholder="Enter your pincode"/>
+								<input type="text" name="pin_code1" value="{{ $customer->pin_code1 }}"  id="pincode" class="form-control" placeholder="Enter your pincode"/>
 							</div>
 							<span class="form-text text-muted">Please enter your Pincode</span>
 						</div>
@@ -263,7 +263,7 @@
                                
 
 								<label class="radio radio-solid">
-									<input type="radio" name="ctype" {{ $customer->customer_type == '1' ? 'checked' : '' }} value="1"/>
+									<input type="radio" name="customer_type" {{ $customer->customer_type == '1' ? 'checked' : '' }} value="1"/>
 									<span></span>
 									Regular
 								</label>
@@ -279,7 +279,7 @@
 							<label>ID Proof Type:</label>
 							<div class="input-group">
 								<div class="input-group-append"></div>
-								<select class="form-control " id="kt_select2_1" name="prooftype">
+								<select class="form-control " id="kt_select2_1" name="id_proof_type">
 									<option selected="selected" value="{{ $customer->id_proof_type }}">Select Id</option>
 									<option value="1">Adhar</option>
 									<option value="2">Voter ID</option>
@@ -294,7 +294,7 @@
 						
                         <div class="col-lg-4">
 							<label>ID Proof Number:</label>
-							<input type="text" class="form-control" name="id_proof_number" value="{{ $customer->id_proof_number }}" placeholder="Enter ID Proof Number " required/>
+							<input type="text" class="form-control" name="id_proof_number" value="{{ $customer->id_proof_number }}" placeholder="Enter ID Proof Number " />
 							<span class="form-text text-muted">Please enter ID Proof Number</span>
 						</div>
 
@@ -314,7 +314,7 @@
 							<label>Mobile:</label>
 							<div class="input-group">
 								<div class="input-group-append"></div>
-								<input type="text" class="form-control" name="mobile" value="{{ $customer->mobile_number }}" id="mobile" placeholder="Enter your Mobile"/>
+								<input type="text" class="form-control" name="mobile_number" value="{{ $customer->mobile_number }}" id="mobile" placeholder="Enter your Mobile"/>
 							</div>
 							<span class="form-text text-muted">Please enter your Mobile Number</span>
 						</div>
@@ -322,7 +322,7 @@
 
 						<div class="col-lg-4">
 							<label>Email:</label>
-							<input type="email" class="form-control" name="email" value="{{ $customer->email }}" placeholder="Enter email" required/>
+							<input type="email" class="form-control" name="email" value="{{ $customer->email }}" placeholder="Enter email" />
 							<span class="form-text text-muted">Please enter your email</span>
 						</div>
 

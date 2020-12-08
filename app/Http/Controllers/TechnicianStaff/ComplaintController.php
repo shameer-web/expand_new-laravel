@@ -193,9 +193,15 @@ class ComplaintController extends Controller
         ->join('areas','areas.id', '=', 'customers.area')
         ->join('districts','districts.id', '=', 'customers.district')
         ->where('customer_status', 1)
-        ->where('customers.id', $cus_id)->first();                   
-        
+        ->where('customers.id', $cus_id)->first();
 
+         $customer = Customer::where('customer_status', 1)->
+                            where('id',$cus_id)->first();
+         //dd($customer);
+
+
+        
+         $page_data['customer'] = $customer;
          $page_data['cus_device'] = $cus_device;
 
 

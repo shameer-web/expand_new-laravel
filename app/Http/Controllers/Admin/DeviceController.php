@@ -66,11 +66,11 @@ class DeviceController extends Controller
     {
         //
 
-       // dd($request->all());
+       //dd($request->all());
 
 
           $request->validate([
-
+        // 'device_name' =>'required|max:300',
         'company'=>'required|max:300',
         'type'=>'required|max:300',
         'device_id'=>'required|max:300',
@@ -97,6 +97,7 @@ class DeviceController extends Controller
           
         $device = new Device();
         $device->deviceid=$deviceno;
+        // $device->device_name = $request->device_name;
         $device->device = $request->company;
         $device->type = $request->type;
         $device->device_id = $request->device_id;

@@ -122,9 +122,10 @@
 									
 								</li>
 
-								
-								<li class="menu-item menu-item-submenu" aria-haspopup="true" >
-									<a href="#" class="menu-link menu-toggle">
+                                
+
+                                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+									<a href="javascript:;" class="menu-link menu-toggle">
 										<span class="svg-icon menu-icon">
 
 											<!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
@@ -138,11 +139,39 @@
 
 											<!--end::Svg Icon-->
 										</span>
-										<span class="menu-text">Devices</span>
-										
+										<span class="menu-text">Enquiery</span>
+										<i class="menu-arrow"></i>
 									</a>
-									
+									<div class="menu-submenu">
+										<i class="menu-arrow"></i>
+										<ul class="menu-subnav">
+											<li class="menu-item menu-item-parent" aria-haspopup="true">
+												<span class="menu-link">
+													<span class="menu-text"> Enquiry</span>
+												</span>
+											</li>
+											
+											<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+												<a href="{{ route('enq.index') }}" class="menu-link menu-toggle">
+													<i class="menu-bullet menu-bullet-dot">
+														<span></span>
+													</i>
+													<span class="menu-text">Manage Enquiry</span>
+													
+												</a>
+												
+											</li>
+											
+											
+											
+										</ul>
+									</div>
 								</li>
+								
+
+
+
+								
 								
 								
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">

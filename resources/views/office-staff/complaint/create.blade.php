@@ -1,4 +1,4 @@
-@extends('layouts.staff')
+@extends('layouts.office_staff')
 
 
 @section('content')

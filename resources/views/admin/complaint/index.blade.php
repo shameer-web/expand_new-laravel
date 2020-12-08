@@ -98,12 +98,17 @@
 												                    <thead>
 									                              <tr>
                                              
-											  <th>ID</th>
+											  <th>SL NO</th>
                                               <th>Complaint ID</th>
-                                              <th>Complaint</th>
                                               <th>Customer Name</th>
-                                              <th>Mobile</th>
+                                              <th>Staff Name</th>
+                                              <th>Complaints</th>
+                                              <th>Activation/Deactivation Date</th>
+                                              <th>Other Complaints</th>
+                                              <th>Remarks</th>
+                                              {{-- <th>Mobile</th> --}}
                                               <th>Date</th>
+                                              <th>Priority</th>
                                               <th>Status</th>
                                               <th>Actions</th>
 											
@@ -117,15 +122,60 @@
                           				 <tr>
 											<td >{{ $row->id }}</td>
 											<td>{{ $row->complaint_id}}</td>
+
+											<td>{{ $row->customer_name}}</td>
+											<td>
+												{{ $row->user['name']}}
+
+											</td>
+
+											@if($row->complaint == null)
+											<td>
+												 @if($row->active_deactive == 1 )
+												 <button class="btn btn-success badge">Activation</button>
+												   
+												 @elseif($row->active_deactive == 2 )
+												  <button class="btn btn-danger badge">Deactivation</button>
+												     
+												 @endif
+												
+
+
+											</td>
+											@else
 											<td>
 												 
 					                              @foreach($row->complaint as $data)
 					                              <span class="btn"> {{ $data['complainttype'].';' }} </span>
 					                               @endforeach
 											</td>
-											<td>{{ $row->customer['name'] }}</td>
-											<td>{{ $row->phone_no }}</td>
+											@endif
+
+											@if($row->active_deactive_date ==null)
+											  <td></td>
+											@else
+											  <td>{{ $row->active_deactive_date }}</td>
+											@endif  
+
+											
+											
+											<td>{{ $row->other_complaint}}</td>	 	
+												
+
+
+											
+											<td>{{ $row->remarks }}</td>
 											<td>{{ $row->created_at }}</td>
+
+											@if($row->priority ==1)
+											  <td><button class="badge btn btn-danger">High</button></td>
+											@elseif($row->priority ==2)
+											 <td><button class="badge btn btn-warning">Medium</button></td> 
+											@else
+											  <td><button class="badge btn btn-success">Low</button></td>
+											@endif 
+
+
 
 											
 
@@ -151,7 +201,7 @@
 
                                                              	<form action="{{ route('complaint.complaint_reg') }}" method="post">
                                                              		@csrf
-                                                             		<input type="hidden" name="search" value="{{ $row->customer_name }}">
+                                                             		<input type="hidden" name="search" value="{{ $row->customer_id }}">
                                                              		<button  type="submit" class="btn btn-primary">View</button>
                                                              		
                                                              	</form>

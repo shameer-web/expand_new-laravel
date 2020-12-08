@@ -10,8 +10,12 @@ use App\User;
 use App\Customer;
 use App\Complainttype;
 use App\CustomerPackage;
+use App\CustomerChannel;
 use App\Device;
+use Carbon\Carbon;
+use App\ActivationDeactivation;
 use DB;
+
 
 class ComplaintController extends Controller
 {
@@ -23,20 +27,31 @@ class ComplaintController extends Controller
          $page_data = [];
 
          //may be 
+         
 
-    $complaint =Complaint::where('complaint_status', 1)->get();
+   $complaint =Complaint::where('complaint_status', 1)->get();
+   
+   // $complaint = DB::table('complaints')
+   //              ->join('users', 'users.id', '=', 'complaints.staff')
+   //              ->where('complaint_status', 1)->get();
+   //  dd($complaint);
+    
 
      foreach ($complaint as $data) {
          $data['complaint'] = Complainttype::whereIn('id',$data->complaint)->get();
+        // dd($data['complaint']);
          $value[]=$data; 
      }
+     //dd($data);
 
      if(isset($value)){
 
       $page_data['value'] = $value;
      }
 
-      $user= User::where('user_delete_status', 1)->get();
+     // $user= User::where('user_delete_status', 1)->get();
+
+     $user =User::where('user_delete_status', 1)->where('role', 3)->get();
        $page_data['user'] = $user;
 
     return view('admin.complaint.index',compact('page_data'));
@@ -48,7 +63,22 @@ class ComplaintController extends Controller
 
     public function store(Request $request)
     {
-      //dd($request->all());
+      
+      //dd($request->complaint);
+     //dd($request->all());
+
+      //dd($request->customer_id);
+      $cus_id =$request->customer_id;
+      $cus =Customer::find($cus_id);
+      //dd($cus);
+      $cus->kseb_post_no = $request->post_no;
+      $cus->phone = $request->phone;
+      $cus->mobile_number = $request->mobile;
+
+      $cus->update();
+
+
+
         
 
         $invoice_prefix="CMPLT";
@@ -73,12 +103,13 @@ class ComplaintController extends Controller
          $complaint->complaint_id = $test;
        
       
-      $complaint->customer_name =$request->customer_name;
-      $complaint->phone_no =$request->phone_no;
+      $complaint->customer_id =$request->customer_id;
+      $complaint->customer_name =$request->cus_name;
+      $complaint->phone_no =$request->phone;
       $complaint->email =$request->email;
       $complaint->staff =$request->staff;
       $complaint->post_no =$request->post_no;
-      $complaint->type =$request->type;
+      // $complaint->type =$request->type;
 
 
         $complaint->complaint =$request->complaint;
@@ -86,6 +117,13 @@ class ComplaintController extends Controller
          $complaint->other_complaint =$request->other_complaint;
          $complaint->active_deactive =$request->active_deactive;
          $complaint->active_deactive_date =$request->active_deactive_date;
+
+        $complaint->payment_due =$request->payment_due;
+        $complaint->customer_request =$request->customer_request;
+        $complaint->remarks =$request->remarks;
+        $complaint->priority =$request->priority;
+
+
 
       $complaint->save();
 
@@ -131,6 +169,8 @@ class ComplaintController extends Controller
            
     
 
+
+
       
       //dd($request->all());
        
@@ -139,18 +179,32 @@ class ComplaintController extends Controller
         //dd($customer);
 
 
-        $cust_package =CustomerPackage::where('cus_id',$cus_id)->first();
+        $cust_package =CustomerPackage::where('cus_id',$cus_id)->orderBy("id", "desc")->first();
         //dd($cust_package);
        
-
-        //dd($cust_device);
+        $cust_channel =CustomerChannel::where('cus_id',$cus_id)->orderBy("id", "desc")->first();
+        //dd($cust_channel);
+        
         //$user =User::where('user_delete_status', 1)->get();
-         $user =User::where('user_delete_status', 1)->where('role', '!=' , 1)->get();
+         $user =User::where('user_delete_status', 1)->where('role', 3)->get();
         $customer =Customer::where('customer_status', 1)->get();
         $complainttype =Complainttype::where('complainttype_status', 1)->get();
 
 
-         $cust_device =Device::where('id',$cus_id)->first();
+        // $cust_device =Device::where('id',$cus_id)->first();
+            $cust_device = DB::table('devices')
+        ->join('companies', 'companies.id', '=', 'devices.device')
+        ->join('types','types.id', '=', 'devices.type')
+        ->join('modes','modes.id', '=', 'devices.model')
+        ->join('districts','districts.id', '=', 'devices.district')
+        ->join('locs','locs.id', '=', 'devices.lco_id')
+        ->select('devices.*','companies.company_name','types.type_name','modes.model_name','districts.district_name','locs.loc_name')
+        ->where('device_status', 1)
+        ->where('devices.status', $cus_id)->first(); 
+
+
+
+
          //dd($cust_device);
 
 
@@ -159,7 +213,7 @@ class ComplaintController extends Controller
       //dd($complaint);
 
       $complaint= DB::table('complaints')
-                 ->where('customer_name',$cus_id)
+                 ->where('customer_id',$cus_id)
                  ->orderBy('id', 'desc')
                  ->first();
       //dd($complaint);
@@ -172,20 +226,252 @@ class ComplaintController extends Controller
             }
           else{
               $complaint= DB::table('complaints')
-                 ->where('customer_name',$cus_id)
+                 ->where('customer_id',$cus_id)
                  ->orderBy('id', 'desc')
                  ->first();
                  //dd($complaint);
         $abcd =$complaint->complaint;
        // dd($abcd);
          $abc = json_decode($abcd);
+         
          //dd($abc);
         $single_com = Complainttype::whereIn('id',$abc)->get();
         //dd($single_com);
        
         }
 
-      return view('admin.complaint.complaint_profile')->with('user',$user)->with('customer',$customer)->with('complainttype',$complainttype)->with('cust',$cust)->with('cust_package',$cust_package)->with('cust_device',$cust_device)->with('complaint',$complaint)->with('single_com',$single_com);
+
+         // $package_payment= DB::table('payments')
+         //         ->where('cus_id',$cus_id)
+         //         ->orderBy('id', 'desc')
+         //         ->get();
+
+
+
+           $package_payment = DB::table('payments')
+         ->join('packages', 'packages.id', '=', 'payments.package_name')
+         ->select('payments.*','packages.package_name') 
+         ->where('cus_id',$cus_id)
+                 ->orderBy('id', 'desc')
+                 ->get();      
+         //dd($package_payment); 
+
+       $customer_package = DB::table('customer_packages')
+         ->join('packages', 'packages.id', '=', 'customer_packages.package_name')
+         ->select('customer_packages.*','packages.package_name','packages.package_type') 
+         ->where('customer_package_status',1)
+         ->where('cus_id',$cus_id)
+         ->orderBy('id', 'desc')
+        ->get();
+
+
+         $customer_channel = DB::table('customer_channels')
+         ->join('channels', 'channels.id', '=', 'customer_channels.channel_name')
+         ->select('customer_channels.*','channels.channel_name','channels.channel_type') 
+         ->where('customer_channel_status',1)
+         ->where('cus_id',$cus_id)
+         ->orderBy('id', 'desc')
+        ->get();
+
+        //dd($customer_channel);
+
+
+
+         //dd($customer_package);
+
+        
+
+        $customers_package_count = CustomerPackage::get()->where('customer_package_status',1)->where('cus_id',$cus_id)->where('status',0)->count();
+
+         $customers_channel_count = CustomerChannel::get()->where('customer_channel_status',1)->where('cus_id',$cus_id)->where('status',0)->count();
+
+
+
+         
+         $cust_pack =CustomerPackage::where('cus_id',$cus_id)->orderBy("id", "desc")->get();
+         //dd($cust_package);
+
+         if($cust_package == null)
+         {
+           $count = null;
+           $total_amount1 = null;
+           $due_amount1 = null;
+         }
+         else{
+
+
+         foreach($cust_pack as  $cust_package ){
+         
+
+
+          
+
+
+                 $package_amount = $cust_package->package_total_amount;
+
+             //dd($package_amount);
+
+           
+
+         $payment_date = Carbon::now();
+
+
+          
+
+
+
+
+
+
+        
+
+           $final =$cust_package->payment_date;
+
+            $final1 =$cust_package->created_at;
+
+
+
+           $formatted_dt1=Carbon::parse($final);
+         // dd($formatted_dt1);
+
+        $formatted_dt2=Carbon::parse($final1);
+        //dd($formatted_dt2);
+
+        $date_diff=$formatted_dt1->diffInMonths($formatted_dt2);
+       // dd($date_diff);
+
+       
+
+
+          if($date_diff == 0){
+            $amount1 = $package_amount;
+        }
+        else{
+        $amount1 = $package_amount * $date_diff;
+         
+          }
+
+          //dd($amount1);
+         
+
+           $due_amount1 = $amount1;
+
+        $total_amount1 = $amount1 + $cust_package->balance;
+
+        //dd($total_amount1);
+
+
+
+
+
+
+         $time = strtotime($cust_package->payment_date);
+         //dd($time);
+         //dd( $cust_package->package_total_amount);
+         //dd( $cust_package->customer_paid_amount);
+         $package_total_amount = $cust_package->package_total_amount;
+         $extra_days_amount = $cust_package->extra_days_amount;
+
+         if($extra_days_amount > $package_total_amount)
+         {
+         // $day =$package_total_amount/30;
+        //dd($day);
+
+
+          $monts =$extra_days_amount/$package_total_amount;
+          $day = $monts * 30;
+          //dd($day);
+           
+
+          $final =$cust_package->created_at;
+         //dd($final);
+         $final1 = Carbon::now();
+        
+
+
+         $formatted_dt1=Carbon::parse($final);
+         // dd($formatted_dt1);
+
+        $formatted_dt2=Carbon::parse($final1);
+        //dd($formatted_dt2);
+
+        $date_diff=$formatted_dt1->diffInDays($formatted_dt2);
+        //dd($date_diff);
+        $count = $day-$date_diff;
+       // dd($count);  
+
+         }
+
+         else{
+
+         $final =$cust_package->created_at;
+         //dd($final);
+         $final1 = Carbon::now();
+        
+
+
+         $formatted_dt1=Carbon::parse($final);
+         // dd($formatted_dt1);
+
+        $formatted_dt2=Carbon::parse($final1);
+        //dd($formatted_dt2);
+
+        $date_diff=$formatted_dt1->diffInDays($formatted_dt2);
+        //dd($date_diff);
+        $count = 30-$date_diff;
+       // dd($count);
+
+        }
+              
+
+        }
+      }
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  $channel_payment = DB::table('channel_payments')
+         ->join('channels', 'channels.id', '=', 'channel_payments.channel_name')
+         ->select('channel_payments.*','channels.channel_name') 
+         ->where('cus_id',$cus_id)
+                 ->orderBy('id', 'desc')
+                 ->get(); 
+          //dd($channel_payment);      
+          
+          
+        //     $customer_device = DB::table('devices')
+        // ->join('companies', 'companies.id', '=', 'devices.device')
+        // ->join('types','types.id', '=', 'devices.type')
+        // ->join('modes','modes.id', '=', 'devices.model')
+        // ->join('districts','districts.id', '=', 'devices.district')
+        // ->join('locs','locs.id', '=', 'devices.lco_id')
+        // ->select('devices.*','devices.device as company','devices.model as models','devices.device_id as deviceid','devices.serial_number as serialnumber','devices.lco_id as lcoid','devices.district as dist')
+        // ->where('device_status', 1)
+        // ->where('devices.status', $cus_id)->get();
+
+
+           $customer_device= Device::where('device_status', 1)->where('devices.status', $cus_id)->get();
+           // return view('admin.device.index')->with('data',$data);
+
+        //dd($customer_device); 
+         
+
+
+      return view('admin.complaint.complaint_profile')->with('user',$user)->with('customer',$customer)->with('complainttype',$complainttype)->with('cust',$cust)->with('cust_package',$cust_package)->with('cust_device',$cust_device)->with('complaint',$complaint)->with('single_com',$single_com)->with('package_payment',$package_payment)->with('channel_payment',$channel_payment)->with('cust_channel',$cust_channel)->with('customer_device',$customer_device)->with('customer_package',$customer_package)->with('count',$count)->with('customers_package_count',$customers_package_count)->with('customer_channel',$customer_channel)->with('customers_channel_count',$customers_channel_count);
         }
        
     }
@@ -201,7 +487,7 @@ class ComplaintController extends Controller
 
 
           //$user =User::where('user_delete_status', 1)->get();
-          $user =User::where('user_delete_status', 1)->where('role', '!=' , 1)->get();
+          $user =User::where('user_delete_status', 1)->where('role', 3)->get();
           $customer =Customer::where('customer_status', 1)->get();
           $complainttype =Complainttype::where('complainttype_status', 1)->get();
 
@@ -232,7 +518,7 @@ class ComplaintController extends Controller
 
     public function update(Request $request ,$id){
 
-      //dd($request->all());
+     // dd($request->all());
        $complaint=Complaint::find($id);
         // dd($request->all());
           $complaint_update = $complaint->update($request->toArray());
@@ -260,4 +546,12 @@ class ComplaintController extends Controller
         return redirect()->route('complaint.index');
 
     }
+
+
+    // public function store_data(Request $request){
+    //   dd($request->all());
+    // }
+
+
+
 }

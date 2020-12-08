@@ -1,4 +1,4 @@
-@extends('layouts.staff')
+@extends('layouts.office_staff')
 
 
 @section('content')
@@ -50,11 +50,19 @@
 								@csrf
 								<div class="card-body">
 									<div class="form-group row">
+                                        <label class="col-lg-2 col-form-label text-right">Device Name:</label>
+										<div class="col-lg-3">
+											<div class="input-group">
+												  <input type="text" name='device_name' placeholder='Device Name' class="form-control" id="" required />
+											</div>
+											
+										</div>
+
 										<label class="col-lg-2 col-form-label text-right">Company Name:</label>
 										<div class="col-lg-3">
 										<div class="input-group">
 												<div class="input-group-append"></div>
-												<select class="form-control " id="kt_select2_5" name="company">
+												<select class="form-control " id="kt_select2_5" name="company" required>
 													<option selected="selected">Select Company</option>
 													@foreach($company as $row5)
 													<option value="{{$row5->id}}">{{$row5->company_name}}</option>
@@ -64,12 +72,15 @@
 											</div>
 											<span class="form-text text-muted">Please Selecet Device Type</span>
 										</div>
-										<label class="col-lg-2 col-form-label text-right">Device Type:</label>
+										
+									</div>
+									<div class="form-group row">
+                                        <label class="col-lg-2 col-form-label text-right">Device Type:</label>
 										<div class="col-lg-3">
 											
 											<div class="input-group">
 												<div class="input-group-append"></div>
-												<select class="form-control " id="kt_select2_4" name="type">
+												<select class="form-control " id="kt_select2_4" name="type" required>
 													<option selected="selected">Select Type</option>
 													@foreach($type as $row4)
 													<option value="{{$row4->id}}">{{$row4->type_name}}</option>
@@ -79,31 +90,40 @@
 											</div>
 											<span class="form-text text-muted">Please Selecet Device Type</span>
 										</div>
-									</div>
-									<div class="form-group row">
+
+
+
+
 										<label class="col-lg-2 col-form-label text-right">Device ID:</label>
 										<div class="col-lg-3">
 											<div class="input-group">
-												  <input type="text" name='device_id' placeholder='Device ID' class="form-control" id="" />
+												  <input type="text" name='device_id' placeholder='Device ID' class="form-control" id="" required />
 											</div>
 											
 										</div>
-										<label class="col-lg-2 col-form-label text-right">Serial Number:</label>
+										
+									</div>
+									<div class="form-group row">
+                                         
+                                         <label class="col-lg-2 col-form-label text-right">Serial Number:</label>
 										<div class="col-lg-3">
 											<div class="input-group">
-												 <input type="number" name="serial_number" class="form-control" id="" placeholder="Serial Number">
+												 <input type="number" name="serial_number" class="form-control" id="" placeholder="Serial Number" required>
 												
 											</div>
 											
 										</div>
-									</div>
-									<div class="form-group row">
+
+
+                                         
+
+
 										<label class="col-lg-2 col-form-label text-right">Model:</label>
 										<div class="col-lg-3">
 											
 											<div class="input-group">
 												<div class="input-group-append"></div>
-												<select class="form-control " id="kt_select2_1" name="model">
+												<select class="form-control " id="kt_select2_1" name="model" required>
 													<option selected="selected">Select Model</option>
 													@foreach($mode as $row11)
 													<option value="{{$row11->id}}">{{$row11->model_name}}</option>
@@ -115,12 +135,18 @@
 										</div>
 
 
-										<label class="col-lg-2 col-form-label text-right">District:</label>
+										
+									</div>
+
+
+									<div class="form-group row">
+                                        
+                                        <label class="col-lg-2 col-form-label text-right">District:</label>
 										<div class="col-lg-3">
 											
 											<div class="input-group">
 												<div class="input-group-append"></div>
-												<select class="form-control " id="kt_select2_2" name="district">
+												<select class="form-control " id="kt_select2_2" name="district" required>
 													<option selected="selected">Select District</option>
 													@foreach($district as $row1)
 													<option value="{{$row1->id}}">{{$row1->district_name}}</option>
@@ -130,16 +156,14 @@
 											</div>
 											<span class="form-text text-muted">Please enter your District</span>
 										</div>
-									</div>
+										
 
-
-									<div class="form-group row">
 										<label class="col-lg-2 col-form-label text-right">LCO ID:</label>
 										<div class="col-lg-3">
 											
 											<div class="input-group">
 												<div class="input-group-append"></div>
-												<select class="form-control " id="kt_select2_3" name="lco_id">
+												<select class="form-control " id="kt_select2_3" name="lco_id" required>
 													<option selected="selected">Select Loc</option>
 													@foreach($loc as $row2)
 													<option value="{{$row2->id}}">{{$row2->loc_name}}</option>

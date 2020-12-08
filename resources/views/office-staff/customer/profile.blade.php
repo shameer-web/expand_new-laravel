@@ -1,10 +1,9 @@
-@extends('layouts.staff')
+@extends('layouts.office_staff')
 
 
 @section('content')
 
-{{-- {{ dd($customer->id) }}
-{{ dd($cdevice->id) }} --}}
+
 
 <div class="subheader py-2 py-lg-6  subheader-solid " id="kt_subheader">
     <div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -150,6 +149,13 @@
 
     <!--begin::Body-->
                 <div class="card-body pt-2">
+                    @if($cust_package == null)
+                    <div class="d-flex flex-wrap align-items-center mb-10">
+                         <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
+                                <P class="text-danger">Package Not Taken</P>
+                            </a>
+                    </div>
+                    @else
                     <!--begin::Item-->
                     <div class="d-flex flex-wrap align-items-center mb-10">
                         <!--begin::Symbol-->
@@ -161,13 +167,13 @@
                         <!--begin::Title-->
                         <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
                             <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
-                                Cup & Green
+                                {{ $cust_package->package['package_name'] }}
                             </a>
-                            <span class="text-muted font-weight-bold font-size-sm my-1">
-                                Local, clean & environmental
+                            <span class=" font-weight-bold  my-1">
+                               Package Amount
                             </span>
                             <span class="text-muted font-weight-bold font-size-sm">
-                                Created by: <span class="text-primary font-weight-bold">CoreAd</span>
+                                Created Date: <span class="text-primary font-weight-bold">{{ $cust_package->created_at }}</span>
                             </span>
                         </div>
                         <!--end::Title-->
@@ -176,15 +182,16 @@
                         <div class="d-flex align-items-center py-lg-0 py-2">
                             <div class="d-flex flex-column text-right">
                                 <span class="text-dark-75 font-weight-bolder font-size-h4">
-                                    24,900
+                                    {{  $cust_package->package['total_amount'] }}
                                 </span>
                                 <span class="text-muted font-size-sm font-weight-bolder">
-                                    votes
+                                    
                                 </span>
                             </div>
                         </div>
                         <!--end::Info-->
                     </div>
+                    @endif
             </div>
     <!--end::Body-->
 </div>
@@ -217,20 +224,51 @@
                     <div class="d-flex flex-column align-items-cente py-2 w-75">
                         <!--begin::Title-->
                         <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">
-                            Data analytics research showcase
+                            Package & Payment Due
                         </a>
                         <!--end::Title-->
 
                         <!--begin::Data-->
+                        @if($cust_package == null)
                         <span class="text-muted font-weight-bold">
-                            Due in 2 Days
+                            <p class="text-primary">No Due</p>
                         </span>
+                        @else
+                        <span class="text-muted font-weight-bold">
+
+                              @if($cust_package->payment_date =='')
+                                <td>
+                                   
+                                   
+                                </td>
+                                
+                                @elseif($count <= 0)
+                                <td>
+                                    <button class="btn btn-danger badge">due</button>
+                                   
+                                </td>
+
+                                 @else
+                                   <td><button class="badge btn btn-warning" type="submit">
+
+                                    {{$count}} Days Remaining
+                                      
+
+
+
+                                   </button></td>
+                                   
+                                @endif
+
+                              
+                        </span>
+                        @endif
                         <!--end::Data-->
                     </div>
                     <!--end::Info-->
 
                     <!--begin::Label-->
-                    <span class="label label-lg label-light-warning label-inline font-weight-bold py-4">In Progress</span>
+                  {{--   <span class="label label-lg label-light-warning label-inline font-weight-bold py-4">In Progress</span> --}}
                     <!--end::Label-->
                 </div>
                 <!--end::Section-->
@@ -255,19 +293,7 @@
             <span class="card-label font-weight-bolder text-dark">Complaints</span>
           
         </h3>
-        <!-- <div class="card-toolbar">
-            <ul class="nav nav-pills nav-pills-sm nav-dark-75">
-                <li class="nav-item">
-                    <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_1">Month</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_2">Week</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_1_3">Day</a>
-                </li>
-            </ul>
-        </div> -->
+        
     </div>
     <!--end::Header-->
 
@@ -275,45 +301,50 @@
     <div class="card-body py-2">
         <!--begin::Table-->
         <div class="table-responsive">
-            <table class="table  table-vertical-center" >
-                <thead>
-                    <tr>
-                        <th >ID</th>
-                        <th >Customer</th>
-                        <th >Complaint</th>
-                        <th  >Status</th>
-                        <th  >Payment</th>
-                        <th >Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td >
-                            1
-                        </td>
-                        <td >
-                            nane
-                        </td>
-                        <td >
-                            Network Error
-                        </td>
-                        <td >
-                            <span class="label label-lg label-light-primary label-inline">Approved</span>
-                        </td>
-                        <td >
-                        <span class="text-muted font-weight-bold">
-                                Paid
-                            </span>
-                            
-                        </td>
-                        <td>
-                            01-10-20
-                        </td>
-                    </tr>
-                    
-                    
-                </tbody>
-            </table>
+            <table class="table table-bordered table-checkable mt-5" id="">
+                                            <thead>
+                                             <tr>
+                                             
+                                              <th>ID</th>
+                                              <th>Complaint ID</th>
+                                              <th>Complaint</th>
+                                              <th>Customer Id</th>
+                                              <th>Mobile</th>
+                                              <th>Date</th>
+                                              <th>Status</th>
+                                              {{-- <th>Actions</th> --}}
+                                            
+                                             </tr>
+                                            </thead>
+                                            <tbody>
+                                               @if($complaint == null)
+                                               <div class="card-body">
+                                                   
+                                               </div>
+                                               @else
+
+                                              <tr>
+                                                <td>{{ $complaint->id }}</td>
+                                                <td>{{ $complaint->complaint_id }}</td>
+                                                <td>
+                                                    @foreach($single_com as$com )
+                                                      {{ $com->complainttype }},<br>
+                                                    @endforeach
+                                                </td>
+                                                <td>{{ $complaint->customer_name }}</td>
+                                                <td>{{ $complaint->phone_no }}</td>
+                                                <td>{{ $complaint->created_at }}</td>
+                                                @if($complaint->status ==0) 
+                                                   <td><button class="badge btn btn-danger">pendind</button></td>
+                                                @else
+                                                <td> <button class=" badge btn btn-success">Completed</button></td>
+                                                @endif
+                                                {{-- <td>{{ $complaint-> }}</td> --}}
+                                              </tr>
+                                              @endif
+                                            </tbody>
+                                  
+                                        </table>
         </div>
         <!--end::Table-->
     </div>
@@ -377,6 +408,25 @@
 							
 						</div>
 					</div>
+
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Area Subcode Id </label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->area_subcode_id}}"/>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Enquiry Id </label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->enqid}}"/>
+                            
+                        </div>
+                    </div>
+
+
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label"> Name</label>
 						<div class="col-lg-9 col-xl-6">
@@ -386,13 +436,13 @@
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">Sub Code</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->sub_code}}"/>
+							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->Subcode['subcode']}}"/>
 						</div>
 					</div>
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">Area ID</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->area}}"/>
+							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->Area['area_name']}}"/>
 							
 						</div>
 					</div>
@@ -422,7 +472,7 @@
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">District</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->district}}"/>
+							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->District['district_name']}}"/>
 							
 						</div>
 					</div>
@@ -441,6 +491,22 @@
 							
 						</div>
                     </div>
+
+
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">District</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->District1['district_name']}}"/>
+                            
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Pin Code</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->pin_code1}}"/>
+                            
+                        </div>
+                    </div>
                     
                     <div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">Customer Type</label>
@@ -457,10 +523,30 @@
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">ID Type</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->proof}}"/>
+
+                            @if($customer->id_proof_type == 1)
+							<input class="form-control form-control-lg form-control-solid" type="text" value="Adhar"/>
+                            @elseif($customer->id_proof_type == 2 )
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="Voter ID"/>
+                            @elseif($customer->id_proof_type == 3 )
+
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="Pan Card"/>
+                            @else
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="Driwing Licence"/>
+                            @endif
+
 							
 						</div>
 					</div>
+
+
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Id Proof Number</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->id_proof_number}}"/>
+                            
+                        </div>
+                    </div>
 
 
 					
@@ -530,8 +616,29 @@
 			<form class="form">
 				<!--begin::Body-->
 
+                @if($cdevice == null)
+                {{-- <div class="card-body">
+                    <div class="row">
+
+                    </div>
+                </div> --}}
+                
+                <div class="card-body">
+                    <div class="row">
+                        <label class="col-xl-3"></label>
+                        <div class="col-lg-9 col-xl-6">
+                            <h5 class="font-weight-bold mb-6">Device Info</h5>
+                        </div>
+                        
+                        <button type="button" class="btn btn-outline-danger"> <i class="fa fa-plus" data-toggle="modal" data-target="#adddevice">Add Device</i></button>
+                    
 
 
+                    </div>
+                </div>
+
+
+                @else
 
 				<div class="card-body">
 					<div class="row">
@@ -539,22 +646,29 @@
 						<div class="col-lg-9 col-xl-6">
 							<h5 class="font-weight-bold mb-6">Device Info</h5>
 						</div>
+
+                         <button type="button" id="btnstatus" data-action="{{ route('customer.device_status',$cdevice->id) }}" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal">
+                                                    Status
+                                                </button>
                         
-                        <button type="button" class="btn btn-outline-danger"> <i class="fa fa-plus" data-toggle="modal" data-target="#adddevice">Add Device</i></button>
+                        {{-- <button type="button" class="btn btn-outline-danger"> <i class="fa fa-plus" data-toggle="modal" data-target="#adddevice">Add Device</i></button> --}}
                     
 
 
 					</div>
-
-                    
 					
 					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label"> Device</label>
+						<label class="col-xl-3 col-lg-3 col-form-label"> Device Id</label>
 						<div class="col-lg-9 col-xl-6">
-
-
 							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$cdevice->deviceid}}"/>
 						</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label"> Device Name</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$cdevice->device_name}}"/>
+                        </div>
                     </div>
                     <div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label"> Device Company</label>
@@ -607,9 +721,35 @@
 						</div>
 					</div>
 
+
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Status</label>
+                        <div class="col-lg-9 col-xl-6">
+                           
+                                    @if($cdevice->device_check ==1) 
+                                      
+                                       <button class="btn btn-primary badge">In Stock</button>
+                                      
+
+                                       @elseif($cdevice->device_check ==2)
+
+                                        
+                                       <button class="btn btn-danger badge">Damaged</button>
+                                       
+
+                                       @else
+                                        
+                                       <button class="btn btn-warning badge">Service Center</button>
+                                       
+                                       @endif
+
+                            
+                        </div>
+                    </div>
+
 					
 				</div>
-               
+                @endif
 				<!--end::Body-->
 			</form>
 			<!--end::Form-->
@@ -626,7 +766,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('cus.device') }}" method="post">
+                    <form action="{{ route('customer.device') }}" method="post">
                     @csrf
 								
                         <div class="form-group">
@@ -635,7 +775,7 @@
                                 <option selected="selected">Select Device</option>
                                 
                                 @foreach($device as $row)
-                                <option value="{{$row->id}}">{{$row->deviceid}}</option>
+                                <option value="{{$row->id}}">{{$row->deviceid}} - {{ $row->device_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -650,6 +790,44 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <form id="status_form" action="" method="post" class="form-horizontal">
+                        @csrf
+                        @method('put')
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <i aria-hidden="true" class="ki ki-close"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-right">Assign To:</label>
+                                <div class=" col-lg-6">
+                                    <select class="form-control " id="kt_select2_1" name="device_check">
+                                        
+
+                                        
+                                                    <option value="2" >Damage</option>
+                                                    <option value="3" >Service</option>
+                                        
+                                        
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary font-weight-bold">Save changes</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
 
     <!-- /**************************** third section end  here ************************************************/ -->
 
@@ -681,7 +859,7 @@
         </div>
     <!--end::Header-->
         <div class="modal fade" id="addpackage" tabindex="-1" role="dialog"  aria-hidden="true">
-        <div class="modal-dialog" role="document">
+         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" >New Package</h5>
@@ -690,7 +868,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('cus.package')}}" method="POST">
+                    <form action="{{ route('customer.package')}}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label  class="form-control-label">Package Name:</label>
@@ -702,7 +880,14 @@
                                 
                                 
                             </select>
-                            <input type="hidden" name="cus_id" value="{{ $customer->id}} ">
+                           
+                           <input type="hidden" name="cus_id" value="{{ $customer->id}} ">
+                           @if($pk == null)
+                            <p></p>
+                            @else
+
+                            <input type="hidden" name="package_amount" value="{{$pk->price}}">
+                           @endif 
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -717,23 +902,42 @@
     <!--begin::Body-->
     <div class="card-body py-2">
         <!--begin::Table-->
+         @if($pk == null)
+         <div>
+             
+         </div>
+                           
+          @else
         <div class="table-responsive">
+         
+
             <table class="table table-borderless table-vertical-center">
                 <thead>
                     <tr>
                         <th>Package Name</th>
                         <th>Amount </th>
                         <th >Type</th>
+                        <th >Status</th>
+                        <th >Payment Status</th>
+                        <th >Payment Date</th>
+                        <th>Package Duration</th>
+                        <th>Paid Amount</th>
+                        <th >Payment</th>
                         <th >Date</th>
+
                         
                     </tr>
                 </thead>
                     <tbody>
-                        @foreach($pkg as $pk)
+
+                        
+                        
                         <tr>
+                           
                             <td >
                                 {{$pk->pname}}
                             </td>
+
                             
                             <td>
                            
@@ -745,13 +949,81 @@
                                 
                             <span class="label label-lg label-light-success label-inline">{{$pk->ptype}}</span>
                             </td>
+
+                                @if($pk->package_status == 0) 
+                                    <td><button class="badge btn btn-danger" type="submit">pending</button></td>
+                                @else
+                                     <td><button class="badge btn btn-success" type="submit">active</button></td>
+                                @endif
+
+
+                                @if($pk->payment_status == 0) 
+                                   <td><button class="badge btn btn-danger" type="submit">pending</button></td>
+                                @else
+                                   <td><button class="badge btn btn-success" type="submit">success</button></td>
+                                @endif
+                                <td>
+                                    {{$pk->payment_date}}
+                                </td>
+                                  @if($pk->payment_date =='')
+                                <td>
+                                   
+                                   
+                                </td>
+                                
+                                @elseif($count <= 0)
+                                <td>
+                                    <button class="btn btn-danger badge">due</button>
+                                   
+                                </td>
+
+                                 @else
+                                   <td><button class="badge btn btn-warning" type="submit">
+
+                                    {{$count}} Days Remaining
+                                      
+
+
+
+                                   </button></td>
+                                   
+                                @endif
+                                
+                                @if($pk->customer_paid_amount == null)
+                                 <td></td>
+                                 @else
+
+                                <td>{{ $pk->customer_paid_amount }}</td>
+                                @endif
+
+                                <td>
+                                
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pay" > Pay</button>
+
+                                    {{-- <form action="{{ route('customer.update_package',$pk->id) }}">
+                                        @csrf
+                                        <input type="hidden" name="payment_amount" value="{{$pk->price}}">
+                                         <input type="hidden" name="payment_date" value="{{$pk->payment_date}}">
+                                         <input type="hidden" name="cus_id" value="{{ $customer->id}}">
+                                           <input type="hidden" name="package_amount" value="{{$pk->price}}">
+                                        <button type="submit" class="btn btn-info badge">pay</button>
+                                        
+                                    </form> --}}
+                                </td>
+
+                                
+
+
+
                             
                             <td>
                             {{$pk->date}}
                             </td>
                             
                         </tr>
-                        @endforeach
+
+                        
+                        
                     
                         
                         
@@ -759,8 +1031,74 @@
                     </tbody>
                 </table>
                 </div>
+                @endif
                 <!--end::Table-->
+    @if($pk == null)
+    <div></div>
+    @else
+    
+    <div class="modal fade" id="pay" tabindex="-1" role="dialog"  aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" >New Package</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('customer.update_package',$pk->id) }}" method="post" >
+                        @csrf
+                        <div class="form-group">
+                            <label  class="form-control-label">Transaction Type:</label>
+                            <select class="form-control " id="kt_select2_1" name="transaction_type">
+                                <option selected="selected">Cash</option>
+                                
+                                <option value="Cheque">Cheque</option>
+                                <option value="Card">Card</option>
+                               
+                                
+                                
+                            </select>
+
+                            <label  class="form-control-label">Package Amount:</label>
+                              <input type="text" class="form-control " name="package_amount" value="{{$pk->price}}">
+
+                             <label  class="form-control-label">Package Total Amount:</label>
+                              <input type="text" class="form-control " name="package_total_amount" value="{{$pk->package_total_amount}}">  
+
+                            <label  class="form-control-label">Balance:</label>
+                              <input type="text" class="form-control " name="balance" value="0" readonly>
+
+
+
+                              
+
+                                <label  class="form-control-label">GST Number:</label>
+                              <input type="text" class="form-control " name="gst_number" placeholder="Enter GST Number">
+
+                               <label  class="form-control-label">Payment Date:</label>
+                              <input type="text" class="form-control " name="payment_date" value="{{Carbon\Carbon::now()}}">
+
+
+
+
+                            <input type="hidden" name="cus_id" value="{{ $customer->id}} ">
+                            <input type="hidden" name="package_amount" value="{{ $pk->price}} ">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </form>
+                </div>
+                
             </div>
+        </div>
+    </div>
+
+    @endif
             <!--end::Body-->
         </div>
         <!--end::Advance Table Widget 7-->
@@ -947,6 +1285,7 @@
 
 <script src="{{asset('assets/js/pages/crud/ktdatatable/base/html-table.js')}}"></script>
 <script>
+    
     $("#first_div").show();
     $("#overview_menu").addClass('active');
     $("#second1_div").hide();
@@ -958,7 +1297,10 @@
     $("#overview_menu").click(function(){
         $("#first_div").show();
         $("#second1_div").hide();
-        $("#second1_div").hide();
+        $("#device_div").hide();
+        $("#package_div").hide();
+        $("#service_div").hide();
+    
         $("#overview_menu").addClass('active');
         $("#personal_menu").removeClass('active');
         $("#device_menu").removeClass('active');     
@@ -967,8 +1309,10 @@
     })
     $("#personal_menu").click(function(){
         $("#first_div").hide();
-        $("device_div").hide();
+        $("#device_div").hide();
         $("#second1_div").show();
+        $("#package_div").hide();
+        $("#service_div").hide();
         $("#overview_menu").removeClass('active');
         $("#personal_menu").addClass('active');
         $("#device_menu").removeClass('active');   
@@ -979,6 +1323,8 @@
         $("#first_div").hide();
         $("#second1_div").hide();
         $("#device_div").show();
+        $("#package_div").hide();
+        $("#service_div").hide();
         $("#overview_menu").removeClass('active');
         $("#personal_menu").removeClass('active');
         $("#device_menu").addClass('active');  
@@ -990,6 +1336,8 @@
         $("#second1_div").hide();
         $("#device_div").hide();
         $("#package_div").show();
+        $("#service_div").hide();
+
         $("#overview_menu").removeClass('active');
         $("#personal_menu").removeClass('active');
         $("#device_menu").removeClass('active'); 
@@ -1008,8 +1356,16 @@
         $("#device_menu").removeClass('active'); 
         $("#package_menu").removeClass('active');
         $("#service_menu").addClass('active');
-    })
-   
+    })  
+
+    $('body').on('click', '#btnstatus', function() {
+    var no = $(this).closest('tr').children('td');
+
+    $('#btnstatus').data('action');
+    var action = $(this).data('action');
+    $('#status_form').attr('action', action);
+
+})
 
 </script>
 

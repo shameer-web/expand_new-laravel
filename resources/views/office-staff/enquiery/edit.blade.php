@@ -1,4 +1,4 @@
-@extends('layouts.staff')
+@extends('layouts.office_staff')
 
 
 @section('content')
@@ -71,7 +71,7 @@
 											<span class="form-text text-muted">Please enter your postcode</span>
 										</div>
 									</div>
-									{{-- <div class="form-group row">
+									<div class="form-group row">
 										<label class="col-lg-2 col-form-label text-right">Assign To:</label>
 										<div class=" col-lg-3">
 											<select class="form-control " id="kt_select2_1" name="assign_to">
@@ -95,7 +95,7 @@
 												
 											</select>
 										</div>
-									</div> --}}
+									</div>
 
 									<!-- begin: Example Code-->
 									

@@ -70,53 +70,11 @@
 								@csrf
 								@method('put')
 								<div class="card-body">
-									<div class="form-group row">
-										
-
-                                         <label class="col-lg-2 col-form-label text-right">Customer Name:</label>
-										<div class="col-lg-3">
-											<div class="input-group">
-												
-
-
-
-												<select class="form-control  "  name="customer_name" value="{{ $complaint->customer_name }}">
-                                                            @foreach($customer as $row)
-															<option value="{{ $row->id }}"
-                                                                     @if($row->id == $complaint->customer_name )
-                                                                     selected
-                                                                     @endif
-
-																>
-																{{ $row->name }}</option>
-															 @endforeach
-                                                    
-                                                    
-                                                   
-                                                </select>
-												
-											</div>
-											<span class="form-text text-muted">Please select your customer</span>
-										</div>
-
-										<label class="col-lg-2 col-form-label text-right">Phone No:</label>
-										<div class="col-lg-3">
-											<input type="text" name="phone_no" value="{{ $complaint->phone_no }}"  class="form-control" placeholder="Enter Phone No"/>
-											<span class="form-text text-muted">Please enter Phone number</span>
-										</div>
-
+									  
+									  <div class="form-group row">
 
 
 										
-									</div>
-									<div class="form-group row">
-
-
-										<label class="col-lg-2 col-form-label text-right">Email Id:</label>
-										<div class="col-lg-3">
-											<input type="text" name="email" value="{{ $complaint->email }}"  class="form-control" placeholder="Enter Email Id"/>
-											<span class="form-text text-muted">Please enter Email Id</span>
-										</div>
 
 
 
@@ -145,21 +103,9 @@
 											</div>
 											<span class="form-text text-muted">Please enter your address</span>
 										</div>
-										
-									</div>
-
-									<div class="form-group row">
 
 
-										<label class="col-lg-2 col-form-label text-right">KSEB Post No:</label>
-										<div class="col-lg-3">
-											<input type="text" name="post_no" value="{{ $complaint->post_no }}"  class="form-control" placeholder=""/>
-											<span class="form-text text-muted">Please enter KSEB Post No</span>
-										</div>
-
-
-
-										<label class="col-lg-2 col-form-label text-right">Staff:</label>
+										{{-- <label class="col-lg-2 col-form-label text-right">Staff:</label>
 										<div class="col-lg-3">
 											<div class="input-group">
 												
@@ -188,21 +134,10 @@
 												
 											</div>
 											<span class="form-text text-muted">Please enter your address</span>
-										</div>
+										</div> --}}
 
-
-
-
-										
-										
-										
-
-									</div>
-
-									<div class="form-group row">
-
-
-                                       <label class="col-lg-2 col-form-label text-right">Complaint's:</label>
+                                         
+                                         <label class="col-lg-2 col-form-label text-right">Complaint's:</label>
 										<div class="col-lg-3">
 											<div class="input-group">
 												
@@ -238,12 +173,33 @@
 											<span class="form-text text-muted">Please select your complaint's</span>
 										</div>
 
+										
+									</div>
+
+									
+									<div class="form-group row">
+
+
+                                       
+
 
 
 										<label class="col-lg-2 col-form-label text-right">Other complaint:</label>
 										<div class="col-lg-3">
-											<input type="text" name="other_complaint" value="{{ $complaint->other_complaint }}"  class="form-control" placeholder="Enter Email Id"/>
+											{{-- <input type="text" name="other_complaint" value="{{ $complaint->other_complaint }}"  class="form-control" placeholder="Enter Email Id"/> --}}
+
+
+											 <textarea name="other_complaint" class="form-control" placeholder="Enter other_complaint" rows="3" >{{ $complaint->other_complaint }}</textarea>
 											<span class="form-text text-muted">Please enter other complaint</span>
+										</div>
+
+
+										<label class="col-lg-2 col-form-label text-right">Remarks:</label>
+										<div class="col-lg-3">
+											{{-- <input type="text" name="remarks" value="{{ $complaint->remarks }}"  class="form-control" placeholder="Enter Email Id"/> --}}
+
+											 <textarea name="remarks" class="form-control" placeholder="Enter remarks" rows="3" >{{ $complaint->remarks }}</textarea>
+											<span class="form-text text-muted">Please enter Remarks </span>
 										</div>
                                         
 

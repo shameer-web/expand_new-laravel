@@ -8,7 +8,7 @@
 		<base href="">
 		<meta charset="utf-8" />
 		<title>
-			 Expand -Staff   {{--  @yield('title')  --}}
+			 Expand -Office Staff   {{--  @yield('title')  --}}
 
 		</title>
 		<meta name="description" content="Metronic admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
@@ -53,14 +53,14 @@
 
 		<!--[html-partial:include:{"file":"partials/_header-mobile.html"}]/-->
 		
-		  @include('layouts.include.staff.header-mobile')
+		  @include('layouts.include.office-staff.header-mobile')
 
 		<div class="d-flex flex-column flex-root">
 
 			<!--begin::Page-->
 			<div class="d-flex flex-row flex-column-fluid page">
 				
-				  @include('layouts.include.staff.aside')
+				  @include('layouts.include.office-staff.aside')
 				<!--[html-partial:include:{"file":"partials/_aside.html"}]/-->
 
 				<!--begin::Wrapper-->
@@ -68,7 +68,7 @@
 
 					<!--[html-partial:include:{"file":"partials/_header.html"}]/-->
 					
-					  @include('layouts.include.staff.header')
+					  @include('layouts.include.office-staff.header')
 					<!--begin::Content-->
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 
@@ -123,7 +123,7 @@
 					</div>
 
 					<!--end::Content-->
-					  @include('layouts.include.staff.footer')
+					  @include('layouts.include.office-staff.footer')
 					<!--[html-partial:include:{"file":"partials/_footer.html"}]/-->
 				</div>
 

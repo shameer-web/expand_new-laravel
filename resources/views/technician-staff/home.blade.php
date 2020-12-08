@@ -231,6 +231,29 @@
                                             <!--begin::Body-->
                                             <div class="card-body pt-4">
                                                 <div class="timeline timeline-5 mt-3">
+
+
+                                                    @if($data >0)
+                                                    <div class="timeline-content d-flex">
+                                                            <span class="mr-4 font-weight-bolder  text-danger">Enquiry Pending</span>
+                                                            <!--begin::Section-->
+                                                            <div class="d-flex align-items-start mt-n2">
+                                                                <!--begin::Symbol-->
+                                                                <a href="{{ route('enq.index') }}">
+                                                               <button type="submit" class="btn btn-primary">Enquiry->{{ $data }}</button></a>
+                                                                <!--end::Symbol-->
+                                                               
+                                                            </div>
+                                                            <!--end::Section-->
+                                                    </div>
+                                                    @else
+                                                     <div>
+                                                     </div>
+                                                    @endif 
+
+
+
+                                                   
                                                     <!--begin::Item-->
                                                     <div class="timeline-item align-items-start">
                                                         <!--begin::Label-->

@@ -126,7 +126,12 @@
                                                                 </svg>
                                                                 <!--end::Svg Icon-->
                                                             </span>
-                                                            <a href="#" class="text-warning font-weight-bold font-size-h6">Weekly Sales</a>
+                                                            <a href="#" class="text-warning font-weight-bold font-size-h6">Total Customers </a>
+                                                            <div class="text-center
+                                                            text-primary font-weight-bold font-size-h6">
+                                                                {{ $customer }}
+                                                            </div>
+
                                                         </div>
                                                         <div class="col bg-light-primary px-6 py-8 rounded-xl mb-7">
                                                             <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
@@ -140,7 +145,12 @@
                                                                 </svg>
                                                                 <!--end::Svg Icon-->
                                                             </span>
-                                                            <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2">New Users</a>
+                                                            <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2">Total Enquiries</a>
+
+                                                             <div class="text-center
+                                                            text-warning font-weight-bold font-size-h6">
+                                                                {{ $enquiery }}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <!--end::Row-->
@@ -158,7 +168,12 @@
                                                                 </svg>
                                                                 <!--end::Svg Icon-->
                                                             </span>
-                                                            <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2">Item Orders</a>
+                                                            <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2">Pending payments</a>
+
+                                                            <div class="text-center
+                                                            text-primary font-weight-bold font-size-h6">
+                                                                {{ $pending_payments }}
+                                                            </div>
                                                         </div>
                                                         <div class="col bg-light-success px-6 py-8 rounded-xl">
                                                             <span class="svg-icon svg-icon-3x svg-icon-success d-block my-2">
@@ -172,7 +187,56 @@
                                                                 </svg>
                                                                 <!--end::Svg Icon-->
                                                             </span>
-                                                            <a href="#" class="text-success font-weight-bold font-size-h6 mt-2">Bug Reports</a>
+                                                            <a href="#" class="text-success font-weight-bold font-size-h6 mt-2">Completed Payments</a>
+
+                                                             <div class="text-center
+                                                            text-warning font-weight-bold font-size-h6">
+                                                                {{ $completed_payments }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Row-->
+
+
+                                                    <!--begin::Row-->
+                                                    <div class="row m-0 mt-5">
+                                                        <div class="col bg-light-warning px-6 py-8 rounded-xl mr-7">
+                                                            <span class="svg-icon svg-icon-3x svg-icon-danger d-block my-2">
+                                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                                                        <path d="M12.9336061,16.072447 L19.36,10.9564761 L19.5181585,10.8312381 C20.1676248,10.3169571 20.2772143,9.3735535 19.7629333,8.72408713 C19.6917232,8.63415859 19.6104327,8.55269514 19.5206557,8.48129411 L12.9336854,3.24257445 C12.3871201,2.80788259 11.6128799,2.80788259 11.0663146,3.24257445 L4.47482784,8.48488609 C3.82645598,9.00054628 3.71887192,9.94418071 4.23453211,10.5925526 C4.30500305,10.6811601 4.38527899,10.7615046 4.47382636,10.8320511 L4.63,10.9564761 L11.0659024,16.0730648 C11.6126744,16.5077525 12.3871218,16.5074963 12.9336061,16.072447 Z" fill="#000000" fill-rule="nonzero" />
+                                                                        <path d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z" fill="#000000" opacity="0.3" />
+                                                                    </g>
+                                                                </svg>
+                                                                <!--end::Svg Icon-->
+                                                            </span>
+                                                            <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2">Pending Complaints</a>
+
+                                                            <div class="text-center
+                                                            text-primary font-weight-bold font-size-h6">
+                                                                {{ $complaint }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col bg-light-info px-6 py-8 rounded-xl">
+                                                            <span class="svg-icon svg-icon-3x svg-icon-success d-block my-2">
+                                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Urgent-mail.svg-->
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                        <rect x="0" y="0" width="24" height="24" />
+                                                                        <path d="M12.7037037,14 L15.6666667,10 L13.4444444,10 L13.4444444,6 L9,12 L11.2222222,12 L11.2222222,14 L6,14 C5.44771525,14 5,13.5522847 5,13 L5,3 C5,2.44771525 5.44771525,2 6,2 L18,2 C18.5522847,2 19,2.44771525 19,3 L19,13 C19,13.5522847 18.5522847,14 18,14 L12.7037037,14 Z" fill="#000000" opacity="0.3" />
+                                                                        <path d="M9.80428954,10.9142091 L9,12 L11.2222222,12 L11.2222222,16 L15.6666667,10 L15.4615385,10 L20.2072547,6.57253826 C20.4311176,6.4108595 20.7436609,6.46126971 20.9053396,6.68513259 C20.9668779,6.77033951 21,6.87277228 21,6.97787787 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,6.97787787 C3,6.70173549 3.22385763,6.47787787 3.5,6.47787787 C3.60510559,6.47787787 3.70753836,6.51099993 3.79274528,6.57253826 L9.80428954,10.9142091 Z" fill="#000000" />
+                                                                    </g>
+                                                                </svg>
+                                                                <!--end::Svg Icon-->
+                                                            </span>
+                                                            <a href="#" class="text-success font-weight-bold font-size-h6 mt-2">Completed Payments</a>
+
+                                                             <div class="text-center
+                                                            text-warning font-weight-bold font-size-h6">
+                                                                {{ $completed_payments }}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <!--end::Row-->
@@ -189,8 +253,8 @@
                                             <!--begin::Header-->
                                             <div class="card-header align-items-center border-0 mt-4">
                                                 <h3 class="card-title align-items-start flex-column">
-                                                    <span class="font-weight-bolder text-dark">Recent Activities</span>
-                                                    <span class="text-muted mt-3 font-weight-bold font-size-sm">890,344 Sales</span>
+                                                    <span class="font-weight-bolder text-dark">New Customers</span>
+                                                    <span class="text-muted mt-3 font-weight-bold font-size-sm"></span>
                                                 </h3>
                                                 <div class="card-toolbar">
                                                     <div class="dropdown dropdown-inline">
@@ -255,148 +319,33 @@
                                             <!--begin::Body-->
                                             <div class="card-body pt-4">
                                                 <div class="timeline timeline-5 mt-3">
+                                                    @foreach($cust as $cus)
                                                     <!--begin::Item-->
                                                     <div class="timeline-item align-items-start">
-                                                        <!--begin::Label-->
-                                                        <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg text-right pr-3">08:42</div>
-                                                        <!--end::Label-->
-                                                        <!--begin::Badge-->
-                                                        <div class="timeline-badge">
-                                                            <i class="fa fa-genderless text-success icon-xxl"></i>
-                                                        </div>
-                                                        <!--end::Badge-->
-                                                        <!--begin::Text-->
-                                                        <div class="timeline-content text-dark-50">Outlines of the recent activities that happened last weekend</div>
-                                                        <!--end::Text-->
-                                                    </div>
-                                                    <!--end::Item-->
-                                                    <!--begin::Item-->
-                                                    <div class="timeline-item align-items-start">
-                                                        <!--begin::Label-->
-                                                        <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg text-right pr-3">3 hr</div>
-                                                        <!--end::Label-->
+                                                      
                                                         <!--begin::Badge-->
                                                         <div class="timeline-badge">
                                                             <i class="fa fa-genderless text-danger icon-xxl"></i>
                                                         </div>
                                                         <!--end::Badge-->
-                                                        <!--begin::Content-->
-                                                        <div class="timeline-content d-flex">
-                                                            <span class="mr-4 font-weight-bolder text-dark-75">AEOL meeting with</span>
-                                                            <!--begin::Section-->
-                                                            <div class="d-flex align-items-start mt-n2">
-                                                                <!--begin::Symbol-->
-                                                                <a href="#" class="symbol symbol-35 symbol-light-success mr-2">
-                                                                    <span class="symbol-label">
-                                                                        <img src="{{asset('assets/media/svg/avatars/004-boy-1.svg')}}" class="h-75 align-self-end" alt="" />
-                                                                    </span>
-                                                                </a>
-                                                                <!--end::Symbol-->
-                                                                <!--begin::Symbol-->
-                                                                <a href="#" class="symbol symbol-35 symbol-light-success">
-                                                                    <span class="symbol-label">
-                                                                        <img src="{{asset('assets/media/svg/avatars/002-girl.svg')}}" class="h-75 align-self-end" alt="" />
-                                                                    </span>
-                                                                </a>
-                                                                <!--end::Symbol-->
-                                                            </div>
-                                                            <!--end::Section-->
-                                                        </div>
-                                                        <!--end::Content-->
-                                                    </div>
-                                                    <!--end::Item-->
-                                                    <!--begin::Item-->
-                                                    <div class="timeline-item align-items-start">
-                                                        <!--begin::Label-->
-                                                        <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg text-right pr-3">14:37</div>
-                                                        <!--end::Label-->
-                                                        <!--begin::Badge-->
-                                                        <div class="timeline-badge">
-                                                            <i class="fa fa-genderless text-info icon-xxl"></i>
-                                                        </div>
-                                                        <!--end::Badge-->
                                                         <!--begin::Desc-->
-                                                        <div class="timeline-content font-weight-bolder text-dark-75">Submit initial budget -
-                                                        <a href="#" class="text-primary">USD 700</a>.</div>
+                                                        <div class="timeline-content font-weight-bolder text-dark-75">{{ $cus->name }}-
+                                                        <a href="#" class="text-primary">{{ $cus->mobile_number }}</a>.</div>
                                                         <!--end::Desc-->
                                                     </div>
                                                     <!--end::Item-->
                                                     <!--begin::Item-->
                                                     <div class="timeline-item align-items-start">
                                                         <!--begin::Label-->
-                                                        <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg text-right pr-3">16:50</div>
+                                                        <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg text-right pr-3">{{ $cus->created_at }}</div>
                                                         <!--end::Label-->
-                                                        <!--begin::Badge-->
-                                                        <div class="timeline-badge">
-                                                            <i class="fa fa-genderless text-danger icon-xxl"></i>
-                                                        </div>
-                                                        <!--end::Badge-->
-                                                        <!--begin::Text-->
-                                                        <div class="timeline-content text-dark-50">Stakeholder meeting scheduling.</div>
-                                                        <!--end::Text-->
+                                                       
+                                                       
                                                     </div>
                                                     <!--end::Item-->
-                                                    <!--begin::Item-->
-                                                    <div class="timeline-item align-items-start">
-                                                        <!--begin::Label-->
-                                                        <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg text-right pr-3">17:30</div>
-                                                        <!--end::Label-->
-                                                        <!--begin::Badge-->
-                                                        <div class="timeline-badge">
-                                                            <i class="fa fa-genderless text-success icon-xxl"></i>
-                                                        </div>
-                                                        <!--end::Badge-->
-                                                        <!--begin::Text-->
-                                                        <div class="timeline-content text-dark-50">Project scoping &amp; estimations with stakeholders.</div>
-                                                        <!--end::Text-->
-                                                    </div>
-                                                    <!--end::Item-->
-                                                    <!--begin::Item-->
-                                                    <div class="timeline-item align-items-start">
-                                                        <!--begin::Label-->
-                                                        <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg text-right pr-3">21:03</div>
-                                                        <!--end::Label-->
-                                                        <!--begin::Badge-->
-                                                        <div class="timeline-badge">
-                                                            <i class="fa fa-genderless text-warning icon-xxl"></i>
-                                                        </div>
-                                                        <!--end::Badge-->
-                                                        <!--begin::Desc-->
-                                                        <div class="timeline-content font-weight-bolder text-dark-75">New order placed
-                                                        <a href="#" class="text-primary">#XF-2356</a>.</div>
-                                                        <!--end::Desc-->
-                                                    </div>
-                                                    <!--end::Item-->
-                                                    <!--begin: Item-->
-                                                    <div class="timeline-item align-items-start">
-                                                        <!--begin::Label-->
-                                                        <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg text-right pr-3">21:07</div>
-                                                        <!--end::Label-->
-                                                        <!--begin::Badge-->
-                                                        <div class="timeline-badge">
-                                                            <i class="fa fa-genderless text-danger icon-xxl"></i>
-                                                        </div>
-                                                        <!--end::Badge-->
-                                                        <!--begin::Text-->
-                                                        <div class="timeline-content text-dark-50">Company BBQ to celebrate the last quater achievements and goals.</div>
-                                                        <!--end::Text-->
-                                                    </div>
-                                                    <!--end: Item-->
-                                                    <!--begin::Item-->
-                                                    <div class="timeline-item align-items-start">
-                                                        <!--begin::Label-->
-                                                        <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg text-right pr-3">20:30</div>
-                                                        <!--end::Label-->
-                                                        <!--begin::Badge-->
-                                                        <div class="timeline-badge">
-                                                            <i class="fa fa-genderless text-info icon-xxl"></i>
-                                                        </div>
-                                                        <!--end::Badge-->
-                                                        <!--begin::Text-->
-                                                        <div class="timeline-content text-dark-50">Marketing campaign planning with customer.</div>
-                                                        <!--end::Text-->
-                                                    </div>
-                                                    <!--end::Item-->
+                                                 @endforeach   
+                                                
+                                                    
                                                 </div>
                                                 <!--end: Items-->
                                             </div>

@@ -1,4 +1,4 @@
-@extends('layouts.staff')
+@extends('layouts.office_staff')
 
 
 @section('content')
@@ -72,7 +72,7 @@
 <!--end::Dropdown-->
 
 <!--begin::Button-->
-									<a href="{{ route('enquiry.create') }}" class="btn btn-primary font-weight-bolder">
+									<a href="{{ route('enquiries.create') }}" class="btn btn-primary font-weight-bolder">
 										<span class="svg-icon svg-icon-md"><!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 									    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 									        <rect x="0" y="0" width="24" height="24"/>
@@ -124,15 +124,15 @@
 											
 											<td>{{ $row->created_at }}</td>
                                             <td>
-												<a href="{{ route('enquiry.edit',$row->id) }}" class="btn btn-outline-primary font-weight-bold mr-2"><i class="fa fa-edit"></i></a>
+												<a href="{{ route('enquiries.edit',$row->id) }}" class="btn btn-outline-primary font-weight-bold mr-2"><i class="fa fa-edit"></i></a>
 
 
 												<button type="button" id="deletebtn"
-                                                              data-action="{{ route('enquiry.update',$row->id) }}" data-toggle="modal"
+                                                              data-action="{{ route('enquiries.update',$row->id) }}" data-toggle="modal"
                                                               data-target="#delete_modal" class="btn btn-outline-danger"><i
                                                               class="fa fa-trash" aria-hidden="true"></i>
                                                              </button>
-															 <button type="button" id="btnassign" data-action="{{ route('enquiry.update',$row->id) }}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+															 <button type="button" id="btnassign" data-action="{{ route('enquiries.update',$row->id) }}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
 													Assign
 												</button>	
 												
