@@ -118,7 +118,7 @@
 										  <td> <span class="label label-success label-inline mr-2"> Prepaid</span></td>
 										  @endif
                                               <td>{{ $row->package_price}}</td>
-                                              <td>{{ $row->package_amount }}</td>
+                                              <td>{{ $row->total_tax }}</td>
                                               {{-- <td>{{ $row->package_amount }}</td> --}}
                                               <td>{{ $row->total_amount }}</td>
                                                

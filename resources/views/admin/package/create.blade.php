@@ -257,7 +257,7 @@ function calc_total()
 
 
 	tax_sum=package_price/100*$('#cgst').val();
-	$('#tax5').val(tax_sum);
+	$('#tax5').val(tax_sum.toFixed(2));
 	$('#gst_amount').val(tax_sum.toFixed(2));
 
 	var result = parseInt(tax_sum) + parseInt(package_price);
@@ -274,7 +274,7 @@ function calc_total1()
     
 
     tax_sum=package_price/100*$('#sgst').val();
-    $('#tax6').val(tax_sum);
+    $('#tax6').val(tax_sum.toFixed(2));
 	
 
 
@@ -298,7 +298,7 @@ function calc_total2()
 
 
     tax_sum=package_price/100*$('#cess').val();
-    $('#tax7').val(tax_sum);
+    $('#tax7').val(tax_sum.toFixed(2));
 
     
 	

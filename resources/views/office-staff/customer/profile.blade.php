@@ -7,41 +7,42 @@
 
 <div class="subheader py-2 py-lg-6  subheader-solid " id="kt_subheader">
     <div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-		<!--begin::Info-->
+        <!--begin::Info-->
         <div class="d-flex align-items-center flex-wrap mr-1">
-							<!--begin::Mobile Toggle-->
-				<button class="burger-icon burger-icon-left mr-4 d-inline-block d-lg-none" id="kt_subheader_mobile_toggle">
-					<span></span>
-				</button>
-				<!--end::Mobile Toggle-->
+                            <!--begin::Mobile Toggle-->
+                <button class="burger-icon burger-icon-left mr-4 d-inline-block d-lg-none" id="kt_subheader_mobile_toggle">
+                    <span></span>
+                </button>
+                <!--end::Mobile Toggle-->
 
-			<!--begin::Page Heading-->
-			<div class="d-flex align-items-baseline flex-wrap mr-5">
-				<!--begin::Page Title-->
-	            <h5 class="text-dark font-weight-bold my-1 mr-5">
-	                Profile 	                	            </h5>
-				<!--end::Page Title-->
+            <!--begin::Page Heading-->
+            <div class="d-flex align-items-baseline flex-wrap mr-5">
+                <!--begin::Page Title-->
+                <h5 class="text-dark font-weight-bold my-1 mr-5">
+                    Profile                                     </h5>
+                <!--end::Page Title-->
 
-	            					<!--begin::Breadcrumb-->
-	                <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
-	                    							
-	                    							<li class="breadcrumb-item">
-	                        	<a href="" class="text-muted">
-	                            	Profile	                        	</a>
-							</li>
-	                    							
-	                    							<li class="breadcrumb-item">
-	                        	<a href="" class="text-muted">
-	                            	Overview	                        	</a>
-							</li>
-	                    	                </ul>
-					<!--end::Breadcrumb-->
-	            			</div>
-			<!--end::Page Heading-->
+
+                                    <!--begin::Breadcrumb-->
+                    <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+                                                    
+                                                    <li class="breadcrumb-item">
+                                <a href="" class="text-muted">
+                                    Profile                             </a>
+                            </li>
+                                                    
+                                                    <li class="breadcrumb-item">
+                                <a href="" class="text-muted">
+                                    Overview                                </a>
+                            </li>
+                                            </ul>
+                    <!--end::Breadcrumb-->
+                            </div>
+            <!--end::Page Heading-->
         </div>
-		<!--end::Info-->
+        <!--end::Info-->
 
-		
+        
     
     </div>
 </div>
@@ -54,9 +55,9 @@
 
 <!--begin::Entry-->
 <div class="d-flex flex-column-fluid">
-		<!--begin::Container-->
-		<div class=" container ">
-			<!--begin::Profile Overview-->
+        <!--begin::Container-->
+        <div class=" container ">
+            <!--begin::Profile Overview-->
 <div class="d-flex flex-row">
     <!--begin::Aside-->
     <div class="flex-row-auto offcanvas-mobile w-300px w-xl-350px" id="kt_profile_aside">
@@ -69,22 +70,26 @@
         <!--end::Toolbar-->
 
         <!--begin::User-->
-        <div class="d-flex align-items-center">
-            <!-- <div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
-                <div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div>
-                <i class="symbol-badge bg-success"></i>
-            </div> -->
-            <div>
-                <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">
-                   {{ $customer->name}}
-                </a>
-                
-            </div>
-        </div>
+        
         <!--end::User-->
 
         <!--begin::Contact-->
         <div class="py-9">
+            
+             <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="font-weight-bold mr-2">Customer Id:</span>
+                <a href="#" class="text-muted text-hover-primary">{{ $customer->
+                area_subcode_id }}
+            </div>
+
+
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="font-weight-bold mr-2">Customer Name:</span>
+                <a href="#" class="text-muted text-hover-primary">   {{ $customer->name}}</a>
+            </div>
+
+            
+
             <div class="d-flex align-items-center justify-content-between mb-2">
                 <span class="font-weight-bold mr-2">Email:</span>
                 <a href="#" class="text-muted text-hover-primary">{{ $customer->email}}</a>
@@ -96,6 +101,38 @@
             <div class="d-flex align-items-center justify-content-between">
                 <span class="font-weight-bold mr-2">Location:</span>
                 <span class="text-muted">{{ $customer->Area['area_name']}}</span>
+            </div>
+
+             <div class="d-flex align-items-center justify-content-between">
+                <span class="font-weight-bold mr-2">CRF No:</span>
+                <span class="text-muted">{{ $customer->crf_no}}</span>
+            </div>
+
+             <div class="d-flex align-items-center justify-content-between">
+                <span class="font-weight-bold mr-2">Installation Address:</span>
+                <span class="text-muted" style="margin-left: 55px">{{ $customer->installation_address}}</span>
+            </div>
+
+             {{-- <div class="d-flex align-items-center justify-content-between">
+                <span class="font-weight-bold mr-2">Phone:</span>
+                <span class="text-muted">{{ $customer->phone}}</span>
+            </div> --}}
+
+             <div class="d-flex align-items-center justify-content-between">
+                <span class="font-weight-bold mr-2">Mobile:</span>
+                <span class="text-muted">{{ $customer->mobile_number}}</span>
+            </div>
+
+             <div class="d-flex align-items-center justify-content-between">
+                <span class="font-weight-bold mr-2">Customer Type:</span>
+                <span class="text-muted">
+
+                   @if($customer->customer_type ==1)
+                     Regular
+                   @else
+                     Rent
+                   @endif
+                </span>
             </div>
         </div>
         <!--end::Contact-->
@@ -112,6 +149,10 @@
                 </a>
                 <a href="#" id="package_menu" class="btn btn-hover-light-primary font-weight-bold py-3 px-6 mb-2 text-center btn-block">
                     Package Info
+                </a>
+
+                 <a href="#" id="channel_menu" class="btn btn-hover-light-primary font-weight-bold py-3 px-6 mb-2 text-center btn-block">
+                    channel info
                 </a>
                 <a href="#" id="service_menu" class="btn btn-hover-light-primary font-weight-bold py-3 px-6 mb-2 text-center btn-block">
                     Service Info
@@ -133,70 +174,329 @@
 
 
     <div class="flex-row-fluid ml-lg-8 first_div" id="first_div" style="display: none;">
-        <!--begin::Row-->
-        <div class="row">
+        
+        
+        
+        
+       <div class="row">
             <div class="col-lg-6">
 
 
 <!--begin::List Widget 14-->
-                <div class="card card-custom card-stretch gutter-b">
-                    <!--begin::Header-->
-                    <div class="card-header border-0">
-                        <h3 class="card-title font-weight-bolder text-dark">Packages</h3>
-                        
-                </div>
-    <!--end::Header-->
 
+<!--end::List Widget 14-->
+            </div>
+            
+        </div>
+        <!--end::Row-->
+
+        <!--begin::Advance Table: Widget 7-->
+    <div class="card card-custom gutter-b">
+    <!--begin::Header-->
+        
+    <!--end::Header-->
+        
     <!--begin::Body-->
-                <div class="card-body pt-2">
-                    @if($cust_package == null)
-                    <div class="d-flex flex-wrap align-items-center mb-10">
-                         <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
-                                <P class="text-danger">Package Not Taken</P>
-                            </a>
-                    </div>
+    <div class="card-body py-2">
+        <!--begin::Table-->
+       
+         <div>
+             
+         </div>
+                           
+       
+        <div class="table-responsive">
+         
+
+            <table class="table table-borderless table-vertical-center">
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Basic Package </th>
+                        <th >Add On Package</th>
+                        <th >Device</th>
+                        <th>Due Amount</th></th>
+                       
+                        
+                    </tr>
+                </thead>
+                    <tbody>
+
+                        
+                        
+                        <tr>
+                   
+                            
+                           {{--  <td> iuyy </td> --}}
+                            <td >
+                                
+                                         
+                     @if($customer == null)
+                      <p></p>
                     @else
+                     
+                   
+                             
+                             
+                   
+                    @if($customer->customer_activation_status == 1)
+                      <button class="btn btn-primary badge">
+                         active
+                      </button>
+                    @elseif($customer->customer_activation_status == 2)
+
+                       <button class="btn btn-danger badge">
+                         Deactive
+                       </button>
+                    @else
+
+                        <button class="btn btn-danger badge">
+                         Deactive
+                        </button>   
+                    @endif
+                              
+                   
+                    @endif  
+
+
+                    </td>
+
+                    <td>
+                         
+                        @if($cust_package == null)
+                       
+                            <p class="text-primary font-weight-bolder font-size-sm">package not selected</p>
+                        
+                        
+                        @else
+                        
+                       
+                            <a class="btn btn-primary badge" data-toggle="modal" data-target="#exampleModalSizeDefault2">{{ $cust_package->package['package_name'] }}</a>
+                       
+                        @endif       
+                            
+                    </td>
+                    <td>
+                        
+
+                        @if( $customers_channel_count == 0)
+                      
+                            <p class="text-primary font-weight-bolder font-size-sm">Package Not selected</p>
+                         
+                        
+                        
+                        @else
+                        
+                        
+                           
+                          
+
+                             
+
+                              <a class="btn btn-primary badge" data-toggle="modal" data-target="#exampleModalSizeDefault">
+                                  
+                                {{--  @foreach($customers_package as $pack)
+
+                                {{ $pack->package_name }}<br>
+
+
+                                 @endforeach --}}
+
+                                 packages({{ $customers_channel_count }})
+
+                              </a>
+
+                        
+                        @endif
+
+
+
+                    </td>
+                <td>
+                                
+                @if($cdevice == null)
+                
+                    <p class="text-primary font-weight-bolder font-size-sm">Device not selected</p>
+                
+                @else
+               
+                    <a class="btn btn-primary badge" data-toggle="modal" data-target="#exampleModalSizeDefault1">{{ $cdevice ->deviceid   }}</a>
+                   
+                @endif
+
+
+
+                </td>
+
+
+                <td>
+                    
+                      
+                       @if($cust_package== null)
+                        
+                            <p class="text-primary font-weight-bolder font-size-sm">No Due</p>
+                        
+                        </div>
+                        @else
+                        
+                        
+                           
+                           {{ $cust_package->due_amount }}
+
+                        
+                        @endif
+
+
+
+
+
+
+
+
+                </td>
+
+                                
+                                
+                                
+
+                            
+                        </tr>
+
+                        
+                        
+                    
+                        
+                        
+                        
+                    </tbody>
+                </table>
+                </div>
+               
+    <div></div>
+  
+            <!--end::Body-->
+        </div>
+        <!--end::Advance Table Widget 7-->
+   
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <!--begin::Row-->
+ <div class="row">
+    <div class="col-lg-6">
+
+
+                    <!--begin::List Widget 14-->
+        <div class="card card-custom card-stretch gutter-b">
+                    <!--begin::Header-->
+                   
+                  <!--end::Header-->
+
+                    <!--begin::Body-->
+            <div class="card-body pt-2">
+                @if($cust_package == null)
+                    <div class="d-flex flex-wrap align-items-center mb-10">
+                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
+                        <span class="text-dark-75 font-weight-bolder font-size-h4 ">
+                            <h3 class=" font-weight-bolder mt-5">Packages</h3>
+                        </span>
+                            <br>
+
+                        <P class="text-danger">Package Not Taken</P>
+                        </a>
+                    </div>
+                @else
                     <!--begin::Item-->
                     <div class="d-flex flex-wrap align-items-center mb-10">
-                        <!--begin::Symbol-->
-                        <!-- <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                            <div class="symbol-label" style="background-image: url('assets/media/stock-600x400/img-17.jpg')"></div>
-                        </div> -->
-                        <!--end::Symbol-->
-
-                        <!--begin::Title-->
+                       
+                         <!--begin::Title-->
                         <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
-                            <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
-                                {{ $cust_package->package['package_name'] }}
-                            </a>
-                            <span class=" font-weight-bold  my-1">
-                               Package Amount
-                            </span>
-                            <span class="text-muted font-weight-bold font-size-sm">
-                                Created Date: <span class="text-primary font-weight-bold">{{ $cust_package->created_at }}</span>
-                            </span>
+
+                                <span class="text-dark-75 font-weight-bolder font-size-h4 ">
+                                   <h3 class=" font-weight-bolder mt-5">Packages</h3>
+                                </span>
+                                <br>
+                          
+
+                                <span class=" font-weight-bold  my-1">
+                                  Package_name:<span class="text-primary font-weight-bold">{{ $cust_package->package['package_name'] }}</span>
+                                </span>
+                                <span class=" font-weight-bold  my-1">
+                                  Amount:<span class="text-primary font-weight-bold">{{  $cust_package->package['total_amount'] }}</span>
+                                </span>
+                                <span class="text-muted font-weight-bold font-size-sm">
+                                    Date: <span class="text-primary font-weight-bold">{{ $cust_package->created_at }}</span>
+                                </span>
                         </div>
                         <!--end::Title-->
-
+                    
+                         <br>
+                         <br>
             <!--begin::Info-->
-                        <div class="d-flex align-items-center py-lg-0 py-2">
-                            <div class="d-flex flex-column text-right">
-                                <span class="text-dark-75 font-weight-bolder font-size-h4">
-                                    {{  $cust_package->package['total_amount'] }}
+
+                    @if($cdevice == null)
+
+                    <div class="d-flex flex-wrap align-items-center mb-10">
+                         <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
+
+                             <span class="text-dark-75 font-weight-bolder font-size-h4 ">
+                                   <h3 class=" font-weight-bolder mt-5">Device</h3>
                                 </span>
+                                
+                             
+                              <br>
+                                <P class="text-danger">Device Not Taken</P>
+                        </a>
+                    </div>
+                    @else
+                         <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
+                            
+                               
+                                <span class="text-dark-75 font-weight-bolder font-size-h4">
+                                  <h3 class=" font-weight-bolder mt-5">Device</h3>
+                                </span>
+
+                                <br>
+
+                                 <span class="text-muted font-weight-bold font-size-sm">
+                                 Device Id: <span class="text-primary font-weight-bold">{{$cdevice->device_id}}</span>
+                                 </span>
+
+                                {{--   <span class="text-muted font-weight-bold font-size-sm">
+                                 Device Name: <span class="text-primary font-weight-bold">{{$cdevice->device_name}}</span>
+                                 </span> --}}
+
+                                <span class="text-muted font-weight-bold font-size-sm">
+                                 Company Name: <span class="text-primary font-weight-bold">{{$cdevice->company_name}}</span>
+                                 <br>
+
+                                  <span class="text-muted font-weight-bold font-size-sm">
+                                 Model: <span class="text-primary font-weight-bold">{{$cdevice->model_name}}</span>
+                                 </span>
+                               
+                            </span>
                                 <span class="text-muted font-size-sm font-weight-bolder">
                                     
                                 </span>
-                            </div>
+                           
                         </div>
                         <!--end::Info-->
+                        @endif
                     </div>
-                    @endif
+                      @endif
+                    
             </div>
     <!--end::Body-->
 </div>
 <!--end::List Widget 14-->
             </div>
+        </div>
             <div class="col-lg-6">
                 <!--begin::List Widget 10-->
 <div class="card card-custom  card-stretch gutter-b">
@@ -236,19 +536,32 @@
                         @else
                         <span class="text-muted font-weight-bold">
 
-                              @if($cust_package->payment_date =='')
+                               {{-- @if($pk->ptype == "Postaid" && $pk->payment_date =='')
+
+                                <td>
+                                    <button class="btn btn-danger badge">due</button>
+                                   
+                                </td> --}}
+         
+
+
+
+                                  @if($pk->created_at =='')
                                 <td>
                                    
                                    
                                 </td>
+
+
                                 
                                 @elseif($count <= 0)
                                 <td>
                                     <button class="btn btn-danger badge">due</button>
+                                   {{--  {{ $count }} --}}
                                    
                                 </td>
 
-                                 @else
+                                 @elseif($count>0)
                                    <td><button class="badge btn btn-warning" type="submit">
 
                                     {{$count}} Days Remaining
@@ -259,6 +572,7 @@
                                    </button></td>
                                    
                                 @endif
+                      
 
                               
                         </span>
@@ -271,6 +585,112 @@
                   {{--   <span class="label label-lg label-light-warning label-inline font-weight-bold py-4">In Progress</span> --}}
                     <!--end::Label-->
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!--end::Section-->
+            </div>
+            <!--end::Content-->
+        </div>
+        <!--end: Item-->
+    </div>
+    <!--end: Card Body-->
+
+
+    <div class="card-header border-0">
+        <h3 class="card-title font-weight-bolder text-dark">Customer Status</h3>
+    
+    </div>
+    <!--end::Header-->
+
+    <!--begin::Body-->
+    <div class="card-body pt-0">
+        
+        <!--begin: Item-->
+        <div class="">
+            <!--begin::Content-->
+            <div class="d-flex align-items-center flex-grow-1">
+                <!--begin::Checkbox-->
+               
+                <!--end::Checkbox-->
+
+                <!--begin::Section-->
+                <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
+                    <!--begin::Info-->
+                    <div class="d-flex flex-column align-items-cente py-2 w-75">
+                        <!--begin::Title-->
+                        <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">
+                           Activation & Deactivation
+                        </a>
+                        <!--end::Title-->
+
+                        <!--begin::Data-->
+                       
+                      {{--  <button class="btn btn-primary badge">Activation /Deactivation </button> --}}
+
+                      @if($customer == null)
+                      <div>
+                          
+                      </div>
+                    @else
+                     
+                    <div class="">
+                             
+                             
+                   
+                    @if($customer->customer_activation_status == 1)
+                    <button class="btn btn-primary badge">
+                         active
+                    </button>
+                    @elseif($customer->customer_activation_status == 2)
+
+                    <button class="btn btn-danger badge">
+                         Deactive
+                    </button>
+                    @else
+
+                    <button class="btn btn-danger badge">
+                         Deactive
+                    </button>
+
+                    @endif
+                              
+                    </div>
+                    @endif    
+                        <!--end::Data-->
+                    </div>
+                    <!--end::Info-->
+
+           
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
                 <!--end::Section-->
             </div>
             <!--end::Content-->
@@ -318,9 +738,15 @@
                                             </thead>
                                             <tbody>
                                                @if($complaint == null)
-                                               <div class="card-body">
-                                                   
-                                               </div>
+                                               <tr>
+                                                   <td></td>
+                                                   <td></td>
+                                                   <td></td><td></td>
+                                                   <td></td>
+                                                   <td></td>
+                                                   <td></td>
+                                                   <td></td>
+                                               </tr>
                                                @else
 
                                               <tr>
@@ -362,35 +788,238 @@
 
      <!-- ********************************************second nav start ********************************* -->
      <div class="flex-row-fluid ml-lg-8" id="second1_div" style="display: none;">
-		<!--begin::Card-->
-		<div class="card card-custom card-stretch">
-			<!--begin::Header-->
-			
-			<!--end::Header-->
+         
+         
+          <div class="row">
+            <div class="col-lg-6">
 
-			<!--begin::Form-->
-			<form class="form">
-				<!--begin::Body-->
-				<div class="card-body">
-					<div class="row">
-						<label class="col-xl-3"></label>
-						<div class="col-lg-9 col-xl-6">
-							<h5 class="font-weight-bold mb-6">Customer Info</h5>
-						</div>
-					</div>
-					<!-- <div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">Avatar</label>
-						<div class="col-lg-9 col-xl-6">
-							<div class="image-input image-input-outline" id="kt_profile_avatar" style="background-image: url(assets/media/users/blank.png)">
+
+<!--begin::List Widget 14-->
+
+<!--end::List Widget 14-->
+            </div>
+            
+        </div>
+        <!--end::Row-->
+
+        <!--begin::Advance Table: Widget 7-->
+    <div class="card card-custom gutter-b">
+    <!--begin::Header-->
+        
+    <!--end::Header-->
+        
+    <!--begin::Body-->
+    <div class="card-body py-2">
+        <!--begin::Table-->
+       
+         <div>
+             
+         </div>
+                           
+       
+        <div class="table-responsive">
+         
+
+            <table class="table table-borderless table-vertical-center">
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Basic Package </th>
+                        <th >Add On Package</th>
+                        <th >Device</th>
+                        <th>Due Amount</th></th>
+                       
+                        
+                    </tr>
+                </thead>
+                    <tbody>
+
+                        
+                        
+                        <tr>
+                           
+                            
+                            
+                            <td>
+
+                                 @if($customer == null)
+                      <p></p>
+                    @else
+                     
+                   
+                             
+                             
+                   
+                    @if($customer->customer_activation_status == 1)
+                      <button class="btn btn-primary badge">
+                         active
+                      </button>
+                    @elseif($customer->customer_activation_status == 2)
+
+                       <button class="btn btn-danger badge">
+                         Deactive
+                       </button>
+                     @else
+
+                       <button class="btn btn-danger badge">
+                         Deactive
+                       </button>   
+                    @endif
+                              
+                   
+                    @endif  
+                           
+                            
+                    </td>
+                    <td >
+                          
+
+                        @if($cust_package == null)
+                       
+                            <p class="text-primary font-weight-bolder font-size-sm">package not selected</p>
+                        
+                        
+                        @else
+                        
+                       
+                            <a class="btn btn-primary badge" data-toggle="modal" data-target="#exampleModalSizeDefault2">{{ $cust_package->package['package_name'] }}</a>
+                       
+                        @endif      
+                            
+                    </td>
+
+                              
+                    <td>
+
+
+                         @if( $customers_channel_count == 0)
+                      
+                            <p class="text-primary font-weight-bolder font-size-sm">Package Not selected</p>
+
+
+                        
+                        
+                             
+                        
+                        
+                        @else
+                        
+                        
+                           
+                          
+
+                             
+
+                              <a class="btn btn-primary badge" data-toggle="modal" data-target="#exampleModalSizeDefault">
+                                  
+                                {{--  @foreach($customers_package as $pack)
+
+                                {{ $pack->package_name }}<br>
+
+
+                                 @endforeach --}}
+
+                                   packages({{ $customers_channel_count }})
+
+                              </a>
+
+                        
+                        @endif
+
+
+                       
+
+                                    
+                    </td>
+
+                              
+                    <td>
+                        @if($cdevice == null)
+                
+                             <p class="text-primary font-weight-bolder font-size-sm">Device not selected</p>
+                
+                        @else
+               
+                            <a class="btn btn-primary badge" data-toggle="modal" data-target="#exampleModalSizeDefault1">{{ $cdevice ->deviceid   }}</a>
+                   
+                        @endif
+                    </td>
+
+                    <td>
+                        
+                        @if( $cust_package == null)
+                        
+                            <p class="text-primary font-weight-bolder font-size-sm">No Due</p>
+                        
+                        </div>
+                        @else
+                        
+                        
+                           
+                           {{ $cust_package->due_amount }}
+
+                        
+                        @endif
+                    </td>
+                                
+
+                                
+                                
+                               
+                            
+                        </tr>
+
+                        
+                        
+                    
+                        
+                        
+                        
+                    </tbody>
+                </table>
+                </div>
+               
+    <div></div>
+  
+            <!--end::Body-->
+        </div>
+        <!--end::Advance Table Widget 7-->
+    </div> 
+        
+        
+        
+         
+         
+         
+        <!--begin::Card-->
+        <div class="card card-custom card-stretch">
+            <!--begin::Header-->
+            
+            <!--end::Header-->
+
+            <!--begin::Form-->
+            <form class="form">
+                <!--begin::Body-->
+                <div class="card-body">
+                    <div class="row">
+                        <label class="col-xl-3"></label>
+                        <div class="col-lg-9 col-xl-6">
+                            <h5 class="font-weight-bold mb-6">Customer Info</h5>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Avatar</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <div class="image-input image-input-outline" id="kt_profile_avatar" style="background-image: url(assets/media/users/blank.png)">
                                 <div class="image-input-wrapper" style="background-image: url(assets/media/users/300_21.jpg)"></div>
 
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                     <i class="fa fa-pen icon-sm text-muted"></i>
                                     <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg"/>
-        							<input type="hidden" name="profile_avatar_remove"/>
+                                    <input type="hidden" name="profile_avatar_remove"/>
                                 </label>
 
-        						<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
                                     <i class="ki ki-bold-close icon-xs text-muted"></i>
                                 </span>
 
@@ -399,15 +1028,15 @@
                                 </span>
                             </div>
                             <span class="form-text text-muted">Allowed file types:  png, jpg, jpeg.</span>
-						</div>
+                        </div>
                     </div> -->
                     <div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">Customer ID	</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->cust_id}}"/>
-							
-						</div>
-					</div>
+                        <label class="col-xl-3 col-lg-3 col-form-label">Customer ID </label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->cust_id}}"/>
+                            
+                        </div>
+                    </div>
 
                     <div class="form-group row">
                         <label class="col-xl-3 col-lg-3 col-form-label">Area Subcode Id </label>
@@ -427,69 +1056,69 @@
                     </div>
 
 
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label"> Name</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->name}}"/>
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">Sub Code</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->Subcode['subcode']}}"/>
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">Area ID</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->Area['area_name']}}"/>
-							
-						</div>
-					</div>
-					
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">CRF No</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->crf_no}}"/>
-							
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">KSEB Post No</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->kseb_post_no}}"/>
-							
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">Installation Address</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ $customer->installation_address }}"/>
-							
-						</div>
-					</div>
-
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">District</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->District['district_name']}}"/>
-							
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">Pin Code</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->pin_code}}"/>
-							
-						</div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label"> Name</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->name}}"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Sub Code</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->Subcode['subcode']}}"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Area ID</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->Area['area_name']}}"/>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">CRF No</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->crf_no}}"/>
+                            
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">KSEB Post No</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->kseb_post_no}}"/>
+                            
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Installation Address</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $customer->installation_address }}"/>
+                            
+                        </div>
                     </div>
 
                     <div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">Communication Address</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->communication_address}}"/>
-							
-						</div>
+                        <label class="col-xl-3 col-lg-3 col-form-label">District</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->District['district_name']}}"/>
+                            
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Pin Code</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->pin_code}}"/>
+                            
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Communication Address</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->communication_address}}"/>
+                            
+                        </div>
                     </div>
 
 
@@ -509,23 +1138,23 @@
                     </div>
                     
                     <div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">Customer Type</label>
-						<div class="col-lg-9 col-xl-6">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Customer Type</label>
+                        <div class="col-lg-9 col-xl-6">
                         @if($customer->customer_type==1)
                             <span class="label label-success label-inline mr-2">Prepaid</span>
                             @else
                             <span class="label label-primery label-inline mr-2">Pospaid</span>
                             @endif
-						</div>
-					</div>
+                        </div>
+                    </div>
                     
                    
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">ID Type</label>
-						<div class="col-lg-9 col-xl-6">
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">ID Type</label>
+                        <div class="col-lg-9 col-xl-6">
 
                             @if($customer->id_proof_type == 1)
-							<input class="form-control form-control-lg form-control-solid" type="text" value="Adhar"/>
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="Adhar"/>
                             @elseif($customer->id_proof_type == 2 )
                             <input class="form-control form-control-lg form-control-solid" type="text" value="Voter ID"/>
                             @elseif($customer->id_proof_type == 3 )
@@ -535,9 +1164,9 @@
                             <input class="form-control form-control-lg form-control-solid" type="text" value="Driwing Licence"/>
                             @endif
 
-							
-						</div>
-					</div>
+                            
+                        </div>
+                    </div>
 
 
                     <div class="form-group row">
@@ -549,55 +1178,55 @@
                     </div>
 
 
-					
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">Phone</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->phone}}"/>
-							
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">Mobile</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->mobile_number}}"/>
-							
-						</div>
-					</div>
+                    
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Phone</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->phone}}"/>
+                            
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Mobile</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->mobile_number}}"/>
+                            
+                        </div>
+                    </div>
 
 
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">Email</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->email}}"/>
-							<!-- <span class="label label-lg font-weight-bold label-light-danger label-inline">Regular</span> -->
-							
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">Remarks</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->remark}}"/>
-							
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">Created At</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->created_at}}"/>
-							
-						</div>
-					</div>
-					
-					
-					
-					
-				</div>
-				<!--end::Body-->
-			</form>
-			<!--end::Form-->
-		</div>
-	</div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Email</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->email}}"/>
+                            <!-- <span class="label label-lg font-weight-bold label-light-danger label-inline">Regular</span> -->
+                            
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Remarks</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->remark}}"/>
+                            
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Created At</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$customer->created_at}}"/>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                </div>
+                <!--end::Body-->
+            </form>
+            <!--end::Form-->
+        </div>
+    </div>
 
     <!-- *********************************************second nav end *********************************** -->
 
@@ -606,15 +1235,223 @@
     <!-- /**************************** third section start here ************************************************/ -->
 
     <div class="flex-row-fluid ml-lg-8" id="device_div" style="display: none;">
-		<!--begin::Card-->
-		<div class="card card-custom card-stretch">
-			<!--begin::Header-->
-			
-			<!--end::Header-->
+        
+        
+         <div class="row">
+            <div class="col-lg-6">
 
-			<!--begin::Form-->
-			<form class="form">
-				<!--begin::Body-->
+
+<!--begin::List Widget 14-->
+
+<!--end::List Widget 14-->
+            </div>
+            
+        </div>
+        <!--end::Row-->
+
+        <!--begin::Advance Table: Widget 7-->
+    <div class="card card-custom gutter-b">
+    <!--begin::Header-->
+        
+    <!--end::Header-->
+        
+    <!--begin::Body-->
+    <div class="card-body py-2">
+        <!--begin::Table-->
+       
+         <div>
+             
+         </div>
+                           
+       
+        <div class="table-responsive">
+         
+
+            <table class="table table-borderless table-vertical-center">
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Basic Package </th>
+                        <th >Add On Package</th>
+                        <th >Device</th>
+                        <th>Due Amount</th></th>
+                       
+                        
+                    </tr>
+                </thead>
+                    <tbody>
+
+                        
+                        
+                        <tr>
+                           
+                            
+                            
+                            <td>
+
+                                 @if($customer == null)
+                      <p></p>
+                    @else
+                     
+                   
+                             
+                             
+                   
+                    @if($customer->customer_activation_status == 1)
+                      <button class="btn btn-primary badge">
+                         active
+                      </button>
+                    @elseif($customer->customer_activation_status == 2)
+
+                       <button class="btn btn-danger badge">
+                         Deactive
+                       </button>
+
+                     @else
+
+                      <button class="btn btn-danger badge">
+                         Deactive
+                      </button>   
+                    @endif
+                              
+                   
+                    @endif  
+                           
+                            
+                    </td>
+                    <td >
+
+
+                         @if($cust_package == null)
+                       
+                            <p class="text-primary font-weight-bolder font-size-sm">package not selected</p>
+                        
+                        
+                        @else
+                        
+                       
+                            <a class="btn btn-primary badge" data-toggle="modal" data-target="#exampleModalSizeDefault2">{{ $cust_package->package['package_name'] }}</a>
+                       
+                        @endif
+                                
+                            
+                    </td>
+
+                              
+                    <td>
+
+
+                         @if( $customers_channel_count == 0)
+                      
+                            <p class="text-primary font-weight-bolder font-size-sm">Package Not selected</p>
+
+
+                           
+                        
+                        
+                        @else
+                        
+                        
+                           
+                          
+
+                             
+
+                              <a class="btn btn-primary badge" data-toggle="modal" data-target="#exampleModalSizeDefault">
+                                  
+                               {{--   @foreach($customers_package as $pack)
+
+                                {{ $pack->package_name }}<br>
+
+
+                                 @endforeach --}}
+
+                                   packages({{ $customers_channel_count }})
+
+                              </a>
+
+                        
+                        @endif
+
+
+
+                       
+                                    
+                    </td>
+
+                              
+                    <td>
+                                 
+                        @if($cdevice == null)
+                
+                             <p class="text-primary font-weight-bolder font-size-sm">Device not selected</p>
+                
+                        @else
+               
+                            <a class="btn btn-primary badge" data-toggle="modal" data-target="#exampleModalSizeDefault1">{{ $cdevice ->deviceid   }}</a>
+                   
+                        @endif
+
+
+                    </td>
+
+                    <td>
+                        
+                        @if( $cust_package == null)
+                        
+                            <p class="text-primary font-weight-bolder font-size-sm">No Due</p>
+                        
+                        </div>
+                        @else
+                        
+                        
+                           
+                           {{ $cust_package->due_amount }}
+
+                        
+                        @endif
+                    </td>
+
+
+                                
+
+                                
+                                
+                               
+                            
+                        </tr>
+
+                        
+                        
+                    
+                        
+                        
+                        
+                    </tbody>
+                </table>
+                </div>
+               
+    <div></div>
+  
+            <!--end::Body-->
+        </div>
+        <!--end::Advance Table Widget 7-->
+    </div> 
+        
+        
+        
+        
+        
+        
+        <!--begin::Card-->
+        <div class="card card-custom card-stretch">
+            <!--begin::Header-->
+            
+            <!--end::Header-->
+
+            <!--begin::Form-->
+            <form class="form">
+                <!--begin::Body-->
 
                 @if($cdevice == null)
                 {{-- <div class="card-body">
@@ -640,14 +1477,14 @@
 
                 @else
 
-				<div class="card-body">
-					<div class="row">
-						<label class="col-xl-3"></label>
-						<div class="col-lg-9 col-xl-6">
-							<h5 class="font-weight-bold mb-6">Device Info</h5>
-						</div>
+                <div class="card-body">
+                    <div class="row">
+                        <label class="col-xl-3"></label>
+                        <div class="col-lg-9 col-xl-6">
+                            <h5 class="font-weight-bold mb-6">Device Info</h5>
+                        </div>
 
-                         <button type="button" id="btnstatus" data-action="{{ route('customer.device_status',$cdevice->id) }}" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal">
+                         <button type="button" id="btnstatus" data-action="{{ route('cus.device_status',$cdevice->id) }}" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal">
                                                     Status
                                                 </button>
                         
@@ -655,71 +1492,71 @@
                     
 
 
-					</div>
-					
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label"> Device Id</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$cdevice->deviceid}}"/>
-						</div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label"> Device Id</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$cdevice->deviceid}}"/>
+                        </div>
                     </div>
 
-                    <div class="form-group row">
+                   {{--  <div class="form-group row">
                         <label class="col-xl-3 col-lg-3 col-form-label"> Device Name</label>
                         <div class="col-lg-9 col-xl-6">
                             <input class="form-control form-control-lg form-control-solid" type="text" value="{{$cdevice->device_name}}"/>
                         </div>
+                    </div> --}}
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label"> Device Company</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$cdevice->company_name}}"/>
+                        </div>
                     </div>
                     <div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label"> Device Company</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$cdevice->company_name}}"/>
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">Type</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$cdevice->type_name}}"/>
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">Device ID</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$cdevice->device_id}}"/>
-							
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">Serial Number	</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$cdevice->serial_number}}"/>
-							
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">Model</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$cdevice->model_name}}"/>
-							
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">District</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$cdevice->district_name}}"/>
-							
-						</div>
-					</div>
-					
+                        <label class="col-xl-3 col-lg-3 col-form-label">Type</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$cdevice->type_name}}"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Device ID</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$cdevice->device_id}}"/>
+                            
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Serial Number   </label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$cdevice->serial_number}}"/>
+                            
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Model</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$cdevice->model_name}}"/>
+                            
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">District</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$cdevice->district_name}}"/>
+                            
+                        </div>
+                    </div>
+                    
 
-					
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label">LCO ID</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="{{$cdevice->loc_name}}"/>
-							
-						</div>
-					</div>
+                    
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">LCO ID</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" type="text" value="{{$cdevice->loc_name}}"/>
+                            
+                        </div>
+                    </div>
 
 
                     <div class="form-group row">
@@ -747,13 +1584,13 @@
                         </div>
                     </div>
 
-					
-				</div>
+                    
+                </div>
                 @endif
-				<!--end::Body-->
-			</form>
-			<!--end::Form-->
-		</div>
+                <!--end::Body-->
+            </form>
+            <!--end::Form-->
+        </div>
     </div>
     
     <div class="modal fade" id="adddevice" tabindex="-1" role="dialog"  aria-hidden="true">
@@ -766,18 +1603,19 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('customer.device') }}" method="post">
+                    <form action="{{ route('cus.device') }}" method="post">
                     @csrf
-								
+                                
                         <div class="form-group">
                             <label  class="form-control-label">Device :</label>
                             <select class="form-control " id="kt_select2_2" name="deviceid">
                                 <option selected="selected">Select Device</option>
                                 
                                 @foreach($device as $row)
-                                <option value="{{$row->id}}">{{$row->deviceid}} - {{ $row->device_name }}</option>
+                                <option value="{{$row->id}}">{{$row->deviceid}}-{{$row->Company['company_name']}}</option>
                                 @endforeach
                             </select>
+
                         </div>
                         <input type="hidden" name="status" value="{{$customer->id}}" >
                         <div class="modal-footer">
@@ -805,14 +1643,14 @@
                         </div>
                         <div class="modal-body">
                         <div class="form-group row">
-                            <label class="col-lg-3 col-form-label text-right">Assign To:</label>
+                            <label class="col-lg-3 col-form-label text-right">Status:</label>
                                 <div class=" col-lg-6">
                                     <select class="form-control " id="kt_select2_1" name="device_check">
                                         
 
                                         
-                                                    <option value="2" >Damage</option>
-                                                    <option value="3" >Service</option>
+                                                    <option value="1" >Damage</option>
+                                                    <option value="2" >Service</option>
                                         
                                         
                                         
@@ -831,9 +1669,216 @@
 
     <!-- /**************************** third section end  here ************************************************/ -->
 
-    <!-- ********************************** Package section start here ******************************************* -->
+<!-- ********************************** Package section start here ******************************************* -->
 
     <div class="flex-row-fluid ml-lg-8" id="package_div" style="display: none;">
+        
+         <div class="row">
+            <div class="col-lg-6">
+
+
+<!--begin::List Widget 14-->
+
+<!--end::List Widget 14-->
+            </div>
+            
+        </div>
+        <!--end::Row-->
+
+        <!--begin::Advance Table: Widget 7-->
+    <div class="card card-custom gutter-b">
+    <!--begin::Header-->
+        
+    <!--end::Header-->
+        
+    <!--begin::Body-->
+    <div class="card-body py-2">
+        <!--begin::Table-->
+       
+         <div>
+             
+         </div>
+                           
+       
+        <div class="table-responsive">
+         
+
+            <table class="table table-borderless table-vertical-center">
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Basic Package </th>
+                        <th >Add On Package</th>
+                        <th >Device</th>
+                        <th>Due Amount</th></th>
+                       
+                        
+                    </tr>
+                </thead>
+                    <tbody>
+
+                        
+                        
+                        <tr>
+                           
+                            
+                            
+                            <td>
+
+
+                            @if($customer == null)
+                                 <p></p>
+                            @else
+                     
+                   
+                             
+                             
+                   
+                    @if($customer->customer_activation_status == 1)
+                      <button class="btn btn-primary badge">
+                         active
+                      </button>
+                    @elseif($customer->customer_activation_status == 2)
+
+                       <button class="btn btn-danger badge">
+                         Deactive
+                       </button>
+
+                     @else
+
+                      <button class="btn btn-danger badge">
+                         Deactive
+                      </button>   
+                    @endif
+                              
+                   
+                    @endif  
+                           
+                            
+                    </td>
+                    <td >
+
+                        @if($cust_package == null)
+                       
+                            <p class="text-primary font-weight-bolder font-size-sm">package not selected</p>
+                        
+                        
+                        @else
+                        
+                       
+                            <a class="btn btn-primary badge" data-toggle="modal" data-target="#exampleModalSizeDefault2">{{ $cust_package->package['package_name'] }}</a>
+                       
+                        @endif
+                                
+                            
+                    </td>
+
+                              
+                    <td>
+
+
+                         @if( $customers_channel_count == 0)
+                      
+                            <p class="text-primary font-weight-bolder font-size-sm">Package Not selected</p>
+
+                           
+                        
+                        
+                        @else
+                        
+                        
+                           
+                          
+
+                             
+
+                              <a class="btn btn-primary badge" data-toggle="modal" data-target="#exampleModalSizeDefault">
+                                  
+                                {{--  @foreach($customers_package as $pack)
+
+                                {{ $pack->package_name }}<br>
+
+
+                                 @endforeach --}}
+
+                                   packages({{ $customers_channel_count }})
+
+                              </a>
+
+                        
+                        @endif
+
+
+
+
+                                    
+                    </td>
+
+                              
+                    <td>
+
+                         @if($cdevice == null)
+                
+                             <p class="text-primary font-weight-bolder font-size-sm">Device not selected</p>
+                
+                        @else
+               
+                            <a class="btn btn-primary badge" data-toggle="modal" data-target="#exampleModalSizeDefault1">{{ $cdevice ->deviceid   }}</a>
+                   
+                        @endif
+
+
+                                   
+                    </td>
+
+
+                    <td>
+
+                        @if( $cust_package == null)
+                        
+                            <p class="text-primary font-weight-bolder font-size-sm">No Due</p>
+                        
+                        </div>
+                        @else
+                        
+                        
+                           
+                           {{ $cust_package->due_amount }}
+
+                        
+                        @endif
+                                   
+                                   
+                    </td>
+
+                                
+                                
+                               
+                            
+                        </tr>
+
+                        
+                        
+                    
+                        
+                        
+                        
+                    </tbody>
+                </table>
+                </div>
+               
+    <div></div>
+  
+            <!--end::Body-->
+        </div>
+        <!--end::Advance Table Widget 7-->
+    </div> 
+        
+        
+        
+        
+        
+        
         <!--begin::Row-->
         <div class="row">
             <div class="col-lg-6">
@@ -858,9 +1903,21 @@
             <button type="button" class="btn btn-outline-danger"> <i class="fa fa-plus" data-toggle="modal" data-target="#addpackage">Add Package</i></button>
         </div>
     <!--end::Header-->
+    
         <div class="modal fade" id="addpackage" tabindex="-1" role="dialog"  aria-hidden="true">
          <div class="modal-dialog" role="document">
+           
+             @if($cdevice == null)
+             <div class="modal-content">
+               
+                <br><br><br><br>
+                    <p class="text-danger font-weight-bolder font-size-sm ttexxt-center">Please Select Device</p>
+                <br><br><br><br>
+             </div>
+             @else
             <div class="modal-content">
+
+
                 <div class="modal-header">
                     <h5 class="modal-title" >New Package</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -868,7 +1925,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('customer.package')}}" method="POST">
+                    <form action="{{ route('cus.package')}}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label  class="form-control-label">Package Name:</label>
@@ -897,6 +1954,7 @@
                 </div>
                 
             </div>
+            @endif
         </div>
     </div>
     <!--begin::Body-->
@@ -942,7 +2000,7 @@
                             <td>
                            
                             <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                                {{$pk->price}}
+                                {{ $cust_package->package_amount }}
                                 </span>  
                             </td>
                             <td >
@@ -950,34 +2008,79 @@
                             <span class="label label-lg label-light-success label-inline">{{$pk->ptype}}</span>
                             </td>
 
-                                @if($pk->package_status == 0) 
+
+                               {{--  @if($pk->package_status == 0) 
                                     <td><button class="badge btn btn-danger" type="submit">pending</button></td>
                                 @else
                                      <td><button class="badge btn btn-success" type="submit">active</button></td>
-                                @endif
+                                @endif --}}
+
+                                @if($pk->ptype == 'Prepaid')
+                                  @if($count <= 0)
+                                    <td><button class="badge btn btn-danger">pending</button></td>
+                                  @elseif($pk->package_status == 0)
+                                    <td><button class="badge btn btn-danger">pending</button></td> 
+                                  @else
+
+                                     <td><button class="badge btn btn-success" type="submit">active</button></td>
+                                  @endif
+                                @else
+                                    @if($pk->package_status == 0) 
+                                       <td><button class="badge btn btn-danger" type="submit">pending</button></td>
+                                    @else
+                                       <td><button class="badge btn btn-success" type="submit">active</button></td>
+                                    @endif
+                                @endif  
+
+                                    
 
 
-                                @if($pk->payment_status == 0) 
+                                      
+
+                              
+                                @if($count <= 0)
+
+                                   <td><button class="badge btn btn-danger" type="submit">pending</button></td>
+
+                                @elseif($pk->payment_status == 0) 
                                    <td><button class="badge btn btn-danger" type="submit">pending</button></td>
                                 @else
                                    <td><button class="badge btn btn-success" type="submit">success</button></td>
                                 @endif
+
+
                                 <td>
                                     {{$pk->payment_date}}
                                 </td>
-                                  @if($pk->payment_date =='')
+
+
+
+                               {{--  @if($pk->ptype == "Postaid" && $pk->payment_date =='')
+
+                                <td>
+                                    <button class="btn btn-danger badge">due</button>
+                                   
+                                </td> --}}
+         
+
+
+
+                                  @if($pk->created_at =='')
                                 <td>
                                    
                                    
                                 </td>
+
+
                                 
                                 @elseif($count <= 0)
                                 <td>
                                     <button class="btn btn-danger badge">due</button>
+                                   {{--  {{ $count }} --}}
                                    
                                 </td>
 
-                                 @else
+                                 @elseif($count>0)
                                    <td><button class="badge btn btn-warning" type="submit">
 
                                     {{$count}} Days Remaining
@@ -1000,7 +2103,9 @@
                                 
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pay" > Pay</button>
 
-                                    {{-- <form action="{{ route('customer.update_package',$pk->id) }}">
+                                    
+
+                                    {{-- <form action="{{ route('cus.update_package',$pk->id) }}">
                                         @csrf
                                         <input type="hidden" name="payment_amount" value="{{$pk->price}}">
                                          <input type="hidden" name="payment_date" value="{{$pk->payment_date}}">
@@ -1041,13 +2146,15 @@
          <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" >New Package</h5>
+                    <h5 class="modal-title" >Package Payments</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form action="{{ route('customer.update_package',$pk->id) }}" method="post" >
+
+                 @if($pk->ptype == "Postaid")
+                  <div class="modal-body">
+                    <form action="{{ route('cus.update_package',$pk->id) }}" method="post" >
                         @csrf
                         <div class="form-group">
                             <label  class="form-control-label">Transaction Type:</label>
@@ -1062,10 +2169,659 @@
                             </select>
 
                             <label  class="form-control-label">Package Amount:</label>
-                              <input type="text" class="form-control " name="package_amount" value="{{$pk->price}}">
+                              <input type="text" class="form-control " name="package_amount" value="{{ $cust_package->package_amount }}">
 
                              <label  class="form-control-label">Package Total Amount:</label>
-                              <input type="text" class="form-control " name="package_total_amount" value="{{$pk->package_total_amount}}">  
+                              <input type="text" class="form-control " name="package_total_amount" value="{{$pk->package_total_amount}}">
+
+
+                              <label  class="form-control-label">Due Amount:</label>
+                              <input type="text" class="form-control " name="due_amount" value="{{ $due_amount1 }}">   
+
+                            <label  class="form-control-label">Balance:</label>
+                              <input type="text" class="form-control " name="balance" value="{{ $pk->balance }}" >
+
+                               <label  class="form-control-label">Total Amount :</label>
+                              <input type="text" class="form-control " name="total_package_amount" value="{{ $total_amount1 }}" >
+
+
+                               <label  class="form-control-label">Customer paid Amount :</label>
+                              <input type="text" class="form-control " name="customer_paid_amount" required >
+
+
+
+                              
+
+                                <label  class="form-control-label">GST Number:</label>
+                              <input type="text" class="form-control " name="gst_number" placeholder="Enter GST Number">
+
+                               <label  class="form-control-label">Payment Date:</label>
+                              <input type="text" class="form-control " name="payment_date" value="{{Carbon\Carbon::now()}}">
+
+
+
+
+                            <input type="hidden" name="cus_id" value="{{ $customer->id}} ">
+                            <input type="hidden" name="package_amount" value="{{$pk->package_amount}} ">
+
+                            
+
+                             <input type="hidden" name="package_name" value="{{$pk->package_name}} ">
+                              <input type="hidden" name="package_type" value=" {{$pk->ptype}} ">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </form>
+                </div>
+                @else
+
+                <div class="modal-body">
+                    <form action="{{ route('cus.update_package',$pk->id) }}" method="post" >
+                        @csrf
+                        <div class="form-group">
+                            <label  class="form-control-label">Transaction Type:</label>
+                            <select class="form-control " id="kt_select2_1" name="transaction_type">
+                                <option selected="selected">Cash</option>
+                                
+                                <option value="Cheque">Cheque</option>
+                                <option value="Card">Card</option>
+                               
+                                
+                                
+                            </select>
+
+                            <label  class="form-control-label">Package Amount:</label>
+                              <input type="text" class="form-control " name="package_amount" value="{{ $cust_package->package_amount }}">
+
+                             <label  class="form-control-label">Package Total Amount:</label>
+                              <input type="text" class="form-control " name="package_total_amount" value="{{$pk->package_total_amount}}">
+
+
+                              <label  class="form-control-label">Due Amount:</label>
+                              <input type="text" class="form-control " name="due_amount" value="{{ $due_amount1 }}">   
+
+                            <label  class="form-control-label">Balance:</label>
+                              <input type="text" class="form-control " name="balance" value="{{ $pk->balance }}" >
+
+                               <label  class="form-control-label">Total Amount :</label>
+                              <input type="text" class="form-control " name="total_package_amount" value="{{ $total_amount1 }}" >
+
+
+                              <label  class="form-control-label">Customer paid Amount :</label>
+                              <input type="text" class="form-control " name="customer_paid_amount" required >
+
+
+                               <label  class="form-control-label">Extra Days Amount :</label>
+                              <input type="text" class="form-control " name="extra_days_amount"  >
+
+
+
+                              
+
+                                <label  class="form-control-label">GST Number:</label>
+                              <input type="text" class="form-control " name="gst_number" placeholder="Enter GST Number">
+
+                               <label  class="form-control-label">Payment Date:</label>
+                              <input type="text" class="form-control " name="payment_date" value="{{Carbon\Carbon::now()}}">
+
+
+
+
+                            <input type="hidden" name="cus_id" value="{{ $customer->id}} ">
+                            <input type="hidden" name="package_amount" value="{{$pk->package_amount}} ">
+
+                            
+
+                             <input type="hidden" name="package_name" value="{{$pk->package_name}} ">
+                              <input type="hidden" name="package_type" value=" {{$pk->ptype}} ">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </form>
+                </div>
+                @endif
+                
+            </div>
+        </div>
+    </div>
+
+    @endif
+            <!--end::Body-->
+        </div>
+        <!--end::Advance Table Widget 7-->
+    </div>
+</div>
+
+
+
+    <!-- *************************************** End Package section here ***************************************** -->
+
+
+
+
+<!-- ********************************** Chanel section start here ******************************************* -->
+
+    <div class="flex-row-fluid ml-lg-8" id="chanel_div" style="display: none;">
+        
+        
+        
+         <div class="row">
+            <div class="col-lg-6">
+
+
+<!--begin::List Widget 14-->
+
+<!--end::List Widget 14-->
+            </div>
+            
+        </div>
+        <!--end::Row-->
+
+        <!--begin::Advance Table: Widget 7-->
+    <div class="card card-custom gutter-b">
+    <!--begin::Header-->
+        
+    <!--end::Header-->
+        
+    <!--begin::Body-->
+    <div class="card-body py-2">
+        <!--begin::Table-->
+       
+         <div>
+             
+         </div>
+                           
+       
+        <div class="table-responsive">
+         
+
+            <table class="table table-borderless table-vertical-center">
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Basic Package </th>
+                        <th >Add On Package</th>
+                        <th >Device</th>
+                        <th>Due Amount</th></th>
+                       
+                        
+                    </tr>
+                </thead>
+                    <tbody>
+
+                        
+                        
+                        <tr>
+                           
+                            
+                            
+                            <td>
+
+
+                                 @if($customer == null)
+                                   <p></p>
+                                 @else
+                     
+                   
+                             
+                             
+                   
+                    @if($customer->customer_activation_status == 1)
+                      <button class="btn btn-primary badge">
+                         active
+                      </button>
+                    @elseif($customer->customer_activation_status == 2)
+
+                       <button class="btn btn-danger badge">
+                         Deactive
+                       </button>
+                     @else
+
+                      <button class="btn btn-danger badge">
+                         Deactive
+                      </button>   
+                    @endif
+                              
+                   
+                    @endif  
+                           
+                            
+                    </td>
+                    <td >
+
+
+                        @if($cust_package == null)
+                       
+                            <p class="text-primary font-weight-bolder font-size-sm">package not selected</p>
+                        
+                        
+                        @else
+                        
+                       
+                            <a class="btn btn-primary badge" data-toggle="modal" data-target="#exampleModalSizeDefault2">{{ $cust_package->package['package_name'] }}</a>
+                       
+                        @endif
+                                
+                            
+                    </td>
+
+                              
+                    <td>
+
+
+                         @if( $customers_channel_count == 0)
+                      
+                            <p class="text-primary font-weight-bolder font-size-sm">Package Not selected</p>
+                           
+                        
+                        
+                        @else
+                        
+                        
+                           
+                          
+
+                             
+
+                              <a class="btn btn-primary badge" data-toggle="modal" data-target="#exampleModalSizeDefault">
+                                  
+                                 {{-- @foreach($customers_package as $pack)
+
+                                {{ $pack->package_name }}<br>
+
+
+                                 @endforeach --}}
+
+
+                                   packages({{ $customers_channel_count }})
+
+                              </a>
+
+                        
+                        @endif
+
+                                    
+                    </td>
+
+                              
+                    <td>
+
+                         @if($cdevice == null)
+                
+                             <p class="text-primary font-weight-bolder font-size-sm">Device not selected</p>
+                
+                        @else
+               
+                            <a class="btn btn-primary badge" data-toggle="modal" data-target="#exampleModalSizeDefault1">{{ $cdevice ->deviceid   }}</a>
+                   
+                        @endif
+                                   
+                    </td>
+
+
+                    <td>
+                             
+                        @if( $cust_package == null)
+                        
+                            <p class="text-primary font-weight-bolder font-size-sm"> No Due</p>
+                        
+                        </div>
+                        @else
+                        
+                        
+                           
+                           {{ $cust_package->due_amount }}
+
+                        
+                        @endif       
+                                   
+                    </td>
+
+                                
+                                
+                               
+                            
+                        </tr>
+
+                        
+                        
+                    
+                        
+                        
+                        
+                    </tbody>
+                </table>
+                </div>
+               
+    <div></div>
+  
+            <!--end::Body-->
+        </div>
+        <!--end::Advance Table Widget 7-->
+    </div> 
+        
+        
+        
+        
+        
+        
+        <!--begin::Row-->
+        <div class="row">
+            <div class="col-lg-6">
+
+
+<!--begin::List Widget 14-->
+
+<!--end::List Widget 14-->
+            </div>
+            
+        </div>
+        <!--end::Row-->
+
+        <!--begin::Advance Table: Widget 7-->
+    <div class="card card-custom gutter-b">
+    <!--begin::Header-->
+        <div class="card-header border-0 pt-5">
+            <h3 class="card-title align-items-start flex-column">
+                <span class="card-label font-weight-bolder text-dark">Channels</span>
+                
+            </h3>
+            <button type="button" class="btn btn-outline-danger"> <i class="fa fa-plus" data-toggle="modal" data-target="#addchanel">Add Channel </i></button>
+        </div>
+    <!--end::Header-->
+        <div class="modal fade" id="addchanel" tabindex="-1" role="dialog"  aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" >New Chanel</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('cus.chanel')}}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label  class="form-control-label">Channel Name:</label>
+                            <select class="form-control " id="kt_select2_1" name="channel_name">
+                                <option selected="selected">Select Channel</option>
+                                @foreach($channel as $ch)
+                                <option value="{{$ch->id}}">{{$ch->channel_name}}</option>
+                                @endforeach
+                                
+                                
+                            </select>
+                           
+                           <input type="hidden" name="cus_id" value="{{ $customer->id}} ">
+                           @if($channel == null)
+                            <p></p>
+                           {{--  @else --}}
+
+                            <input type="hidden" name="channel_amount" value="{{$ch->channel_price}}">
+                             <input type="hidden" name="channel_total_amount" value="{{$ch->total_amount}}">
+
+                             <input type="hidden" name="channel_type" value="{{$ch->channel_type}}">
+                           @endif 
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <!--begin::Body-->
+    <div class="card-body py-2">
+        <!--begin::Table-->
+         @if($cust_channel == null)
+         <div>
+             
+         </div>
+                           
+          @else
+        <div class="table-responsive">
+         
+
+            <table class="table table-borderless table-vertical-center">
+                <thead>
+                    <tr>
+                        <th>Channel Name</th>
+                        <th>Amount </th>
+                        <th >Type</th>
+                        <th >Status</th>
+                        <th >Payment Status</th>
+                        <th >Payment Date</th>
+                        <th>Chanel Duration</th>
+                        <th>Paid Amount</th>
+                        <th >Payment</th>
+                        <th >Date</th>
+
+                        
+                    </tr>
+                </thead>
+                    <tbody>
+
+                        
+                        
+                        <tr>
+                           
+                            <td >
+                                {{$cust_channel->channel['channel_name']}}
+                            </td>
+
+                            
+                            <td>
+                           
+                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                                {{$cust_channel->channel_amount}}
+                                </span>  
+                            </td>
+                            <td >
+                                
+                            <span class="label label-lg label-light-success label-inline">{{$cust_channel->channel['channel_type']}}</span>
+                            </td>
+
+                                @if($cust_channel->channel_status == 0) 
+                                    <td><button class="badge btn btn-danger" type="submit">pending</button></td>
+                                @else
+                                     <td><button class="badge btn btn-success" type="submit">active</button></td>
+                                @endif
+
+
+                                @if($cust_channel->payment_status == 0) 
+                                   <td><button class="badge btn btn-danger" type="submit">pending</button></td>
+                                @else
+                                   <td><button class="badge btn btn-success" type="submit">success</button></td>
+                                @endif
+                                <td>
+                                    {{$cust_channel->payment_date}}
+                                </td>
+
+                                @if($cust_channel->channel['channel_type'] == "Postaid" && $cust_channel->payment_date =='')
+
+                                <td>
+                                    <button class="btn btn-danger badge">due</button>
+                                   
+                                </td>
+
+
+                                  @elseif($cust_channel->payment_date =='')
+                                <td>
+                                   
+                                   
+                                </td>
+
+                                
+                                
+                                @elseif($count1 <= 0)
+                                <td>
+                                    <button class="btn btn-danger badge">due</button>
+                                   
+                                </td>
+
+                                 @else
+                                   <td><button class="badge btn btn-warning" type="submit">
+
+                                    {{$count1}} Days Remaining
+                                      
+
+
+
+                                   </button></td>
+                                   
+                                @endif
+                                
+                                @if($cust_channel->customer_paid_amount == null)
+                                 <td></td>
+                                 @else
+
+                                <td>{{ $cust_channel->customer_paid_amount }}</td>
+                                @endif
+
+                                <td>
+                                
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pay1" > Pay</button>
+
+                                    {{-- <form action="{{ route('cus.update_package',$pk->id) }}">
+                                        @csrf
+                                        <input type="hidden" name="payment_amount" value="{{$pk->price}}">
+                                         <input type="hidden" name="payment_date" value="{{$pk->payment_date}}">
+                                         <input type="hidden" name="cus_id" value="{{ $customer->id}}">
+                                           <input type="hidden" name="package_amount" value="{{$pk->price}}">
+                                        <button type="submit" class="btn btn-info badge">pay</button>
+                                        
+                                    </form> --}}
+                                </td>
+
+                                
+
+
+
+                            
+                            <td>
+                            {{$cust_channel->created_at}}
+                            </td>
+                            
+                        </tr>
+
+                        
+                        
+                    
+                        
+                        
+                        
+                    </tbody>
+                </table>
+                </div>
+                @endif
+                <!--end::Table-->
+    @if($cust_channel == null)
+    <div></div>
+    @else
+    
+    <div class="modal fade" id="pay1" tabindex="-1" role="dialog"  aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" >Channel</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                @if($cust_channel->channel['channel_type'] == "Postaid")
+                  <div class="modal-body">
+                    <form action="{{ route('cus.update_channel',$cust_channel->id) }}" method="post" >
+                        @csrf
+                        <div class="form-group">
+                            <label  class="form-control-label">Transaction Type:</label>
+                            <select class="form-control " id="kt_select2_1" name="transaction_type">
+                                <option selected="selected">Cash</option>
+                                
+                                <option value="Cheque">Cheque</option>
+                                <option value="Card">Card</option>
+                               
+                                
+                                
+                            </select>
+
+                            <label  class="form-control-label">Channel Amount:</label>
+                              <input type="text" class="form-control " name="channel_amount" value="{{$cust_channel->channel_amount}}">
+
+                             <label  class="form-control-label">Channel Total Amount:</label>
+                              <input type="text" class="form-control " name="channel_total_amount" value="{{$cust_channel->channel_total_amount}}">
+
+
+                              <label  class="form-control-label">Due Amount:</label>
+                              <input type="text" class="form-control " name="due_amount" value="{{ $due_amount }}">   
+
+                            <label  class="form-control-label">Balance:</label>
+                              <input type="text" class="form-control " name="balance" value="{{ $cust_channel->balance }}" >
+
+                               <label  class="form-control-label">Total Amount :</label>
+                              <input type="text" class="form-control " name="total_channel_amount" value="{{ $total_amount }}" >
+
+
+                               <label  class="form-control-label">Customer paid Amount :</label>
+                              <input type="text" class="form-control " name="customer_paid_amount" required >
+
+
+
+                              
+
+                                <label  class="form-control-label">GST Number:</label>
+                              <input type="text" class="form-control " name="gst_number" placeholder="Enter GST Number">
+
+                               <label  class="form-control-label">Payment Date:</label>
+                              <input type="text" class="form-control " name="payment_date" value="{{Carbon\Carbon::now()}}">
+
+
+
+
+                            <input type="hidden" name="cus_id" value="{{ $customer->id}} ">
+                            <input type="hidden" name="channel_amount" value="{{$cust_channel->channel_amount}} ">
+
+                             <input type="hidden" name="channel_name" value="{{$cust_channel->channel_name}} ">
+
+                             <input type="hidden" name="channel_type" value="{{ $cust_channel->channel['channel_type'] }}">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </form>
+                </div>
+                @else
+                <div class="modal-body">
+                    <form action="{{ route('cus.update_channel',$cust_channel->id) }}" method="post" >
+                        @csrf
+                        <div class="form-group">
+                            <label  class="form-control-label">Transaction Type:</label>
+                            <select class="form-control " id="kt_select2_1" name="transaction_type">
+                                <option selected="selected">Cash</option>
+                                
+                                <option value="Cheque">Cheque</option>
+                                <option value="Card">Card</option>
+                               
+                                
+                                
+                            </select>
+
+                            <label  class="form-control-label">Channel Amount:</label>
+                              <input type="text" class="form-control " name="channel_amount" value="{{$cust_channel->channel_amount}}">
+
+                             <label  class="form-control-label">Channel Total Amount:</label>
+                              <input type="text" class="form-control " name="channel_total_amount" value="{{$cust_channel->channel_total_amount}}">  
 
                             <label  class="form-control-label">Balance:</label>
                               <input type="text" class="form-control " name="balance" value="0" readonly>
@@ -1084,7 +2840,11 @@
 
 
                             <input type="hidden" name="cus_id" value="{{ $customer->id}} ">
-                            <input type="hidden" name="package_amount" value="{{ $pk->price}} ">
+                            <input type="hidden" name="channel_amount" value="{{$cust_channel->channel_amount}} ">
+
+                             <input type="hidden" name="channel_name" value="{{$cust_channel->channel_name}} ">
+
+                              <input type="hidden" name="channel_type" value="{{ $cust_channel->channel['channel_type'] }}">
 
                         </div>
                         <div class="modal-footer">
@@ -1093,6 +2853,7 @@
                         </div>
                     </form>
                 </div>
+                @endif
                 
             </div>
         </div>
@@ -1103,171 +2864,354 @@
         </div>
         <!--end::Advance Table Widget 7-->
     </div>
+</div>
 
 
-    <!-- *************************************** End Package section here ***************************************** -->
-
-    <!-- ******************************************** Service Section Start Here ************************************ -->
-
-    <div class="flex-row-fluid ml-lg-8" id="service_div" style="display: none;">
-        <!--begin::Row-->
-        <div class="row">
-            <div class="col-lg-6">
+    <!-- *************************************** End chanel section here ***************************************** -->
 
 
-<!--begin::List Widget 14-->
 
-<!--end::List Widget 14-->
-            </div>
-            
-        </div>
-        <!--end::Row-->
+    <div class="modal fade" id="exampleModalSizeDefault2" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeDefault2" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Package Details</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <i aria-hidden="true" class="ki ki-close"></i>
+                                        </button>
+                                    </div>
+                                    @if($cust_package == null)
+                                    <div class="modal-body">
+                                    </div>
+                                    @else
+                                    <div class="modal-body">
+                                        <p>
+                                           
+                                         <div class="py-9">
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">ID:</span>
+                                                <span class="font-weight-bold mr-2">{{ $cust_package->id }}</span>
+                                            </div>
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Package Name:</span>
+                                                <span class="font-weight-bold mr-2">{{ $cust_package->package['package_name'] }}</span>
+                                            </div>
+                                            
+                                             <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Package Type:</span>
+                                                <span class="font-weight-bold mr-2">{{ $cust_package->package['package_type'] }}</span>
+                                            </div>
+                                             <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Package Amount:</span>
+                                                <span class="font-weight-bold mr-2">{{ $cust_package->package_amount }}</span>
+                                            </div>
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Customer Paid Amount:</span>
+                                                <span class="font-weight-bold mr-2">{{ $cust_package->customer_paid_amount }}</span>
+                                            </div>
+                                            
+                                             <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Due Amount:</span>
+                                                <span class="font-weight-bold mr-2">{{ $cust_package->due_amount }}</span>
+                                            </div>
+                                            
+                                            
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Balance:</span>
+                                                <span class="font-weight-bold mr-2">{{ $cust_package->balance }}</span>
+                                            </div>
 
-        <!--begin::Advance Table: Widget 7-->
-        <div class="card card-custom gutter-b">
-            <!--begin::Header-->
-            <div class="card-header border-0 pt-5">
-                <h3 class="card-title align-items-start flex-column">
-                    <!-- <span class="card-label font-weight-bolder text-dark">Service</span> -->
-                    <button type="button" class="btn btn-outline-danger"> <i class="fa fa-plus" data-toggle="modal" data-target="#addservice">Add Service</i></button>
-                </h3>
-                
-            </div>
-    <!--end::Header-->
 
-            <div class="modal fade" id="addservice" tabindex="-1" role="dialog"  aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" >Create Service</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="form-group">
-                                    <label  class="form-control-label">Service Name:</label>
-                                    <input type="text" class="form-control" />
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Activate Date:</span>
+                                                <span class="font-weight-bold mr-2">{{ $cust_package->created_at }}</span>
+                                            </div>
+
+
+
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Deactivation Date:</span>
+                                                <span class="font-weight-bold mr-2">
+                                                      @if($cust_package->package_type == 'Prepaid')
+                                                         {{ $cust_package->deactivation_date }}
+                                                      @else
+                                                          <p></p>
+                                                      @endif 
+
+
+                                                </span>
+                                            </div>
+
+
+                                             <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Status:</span>
+                                                <span class="font-weight-bold mr-2">
+                                                   
+                                                @if($cust_package->package_type == 'Prepaid')
+                                                 @if($count <= 0)
+                                                    <button class="badge btn btn-danger">pending</button>
+                                                 @elseif($cust_package->package_status == 0)
+                                                    <button class="badge btn btn-danger">pending</button> 
+                                                 @else
+
+                                                    <button class="badge btn btn-success" type="submit">active</button>
+                                                @endif
+                                                @else
+                                                  @if($cust_package->package_status == 0) 
+                                                     <button class="badge btn btn-danger" type="submit">pending</button>
+                                                  @else
+                                                     <button class="badge btn btn-success" type="submit">active</button>
+                                                  @endif
+                                                @endif  
+
+
+
+                                                </span>
+                                            </div>
+                                            <hr><hr>
+                                           
+                                
+                                          
+                                            
+                                        </div>  
+                                       
+
+
+                                            
+                                            
+                                            
+                                            
+                                          
+                                        </p>
+                                    </div>
+                                    @endif
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                                        
+                                    </div>
                                 </div>
-                                
+                            </div>
+                        </div>
 
-                                <div class="form-group">
-                                    <label  class="form-control-label">Package Price:</label>
-                                    <input type="text" class="form-control" />
+
+
+
+
+                        <div class="modal fade" id="exampleModalSizeDefault" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeDefault" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Package Details</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <i aria-hidden="true" class="ki ki-close"></i>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>
+                                          @foreach($customers_channel as $pack)  
+                                         <div class="py-9">
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">ID:</span>
+                                                <span class="font-weight-bold mr-2">{{ $pack->id }}</span>
+                                            </div>
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">channel Name:</span>
+                                                <span class="font-weight-bold mr-2">{{ $pack->channel_name }}</span>
+                                            </div>
+                                            
+                                             <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Channel Type:</span>
+                                                <span class="font-weight-bold mr-2">{{ $pack->channel_type }}</span>
+                                            </div>
+                                             <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">channel Amount:</span>
+                                                <span class="font-weight-bold mr-2">{{ $pack->channel_amount }}</span>
+                                            </div>
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Customer Paid Amount:</span>
+                                                <span class="font-weight-bold mr-2">{{ $pack->customer_paid_amount }}</span>
+                                            </div>
+                                            
+                                             {{-- <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Due Amount:</span>
+                                                <span class="font-weight-bold mr-2">{{ $pack->due_amount }}</span>
+                                            </div> --}}
+                                            
+                                            
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Balance:</span>
+                                                <span class="font-weight-bold mr-2">{{ $pack->balance }}</span>
+                                            </div>
+
+
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Activate Date:</span>
+                                                <span class="font-weight-bold mr-2">{{ $pack->created_at }}</span>
+                                            </div>
+
+
+
+                                           {{--  <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Deactivation Date:</span>
+                                                <span class="font-weight-bold mr-2">
+                                                      @if($pack->package_type == 'Prepaid')
+                                                         {{ $pack->deactivation_date }}
+                                                      @else
+                                                          <p></p>
+                                                      @endif 
+
+
+                                                </span>
+                                            </div> --}}
+
+
+                                             <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Status:</span>
+                                                <span class="font-weight-bold mr-2">
+                                                   
+                                                @if($pack->channel_type == 'Prepaid')
+                                                 @if($count <= 0)
+                                                    <button class="badge btn btn-danger">pending</button>
+                                                 @elseif($pack->channel_status == 0)
+                                                    <button class="badge btn btn-danger">pending</button> 
+                                                 @else
+
+                                                    <button class="badge btn btn-success" type="submit">active</button>
+                                                @endif
+                                                @else
+                                                  @if($pack->channel_status == 0) 
+                                                     <button class="badge btn btn-danger" type="submit">pending</button>
+                                                  @else
+                                                     <button class="badge btn btn-success" type="submit">active</button>
+                                                  @endif
+                                                @endif  
+
+
+
+                                                </span>
+                                            </div>
+                                            <hr><hr>
+                                           
+                                
+                                          
+                                            
+                                        </div>  
+                                        @endforeach
+
+
+                                            
+                                            
+                                            
+                                            
+                                          
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                                        
+                                    </div>
                                 </div>
-                                
-                            </form>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="kt_blockui_modal_default_btn">Save</button>
+
+
+
+
+                        <div  class="modal fade" id="exampleModalSizeDefault1" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeDefault1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Device Details</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <i aria-hidden="true" class="ki ki-close"></i>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>
+                                            
+                                           @foreach($customer_device as $cd)  
+                                         <div class="py-9">
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">ID:</span>
+                                                <span class="font-weight-bold mr-2">{{ $cd->id }}</span>
+                                            </div>
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Device Id:</span>
+                                                <span class="font-weight-bold mr-2">{{ $cd->deviceid }}</span>
+                                            </div>
+                                            
+                                             {{-- <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Device:</span>
+                                                <span class="font-weight-bold mr-2">{{ $cd->device_name }}</span>
+                                            </div> --}}
+                                             <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Company Name:</span>
+                                                <span class="font-weight-bold mr-2">{{ $cd->Company['company_name'] }}</span>
+                                            </div>
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Model:</span>
+                                                <span class="font-weight-bold mr-2">{{ $cd->Mode['model_name']}}</span>
+                                            </div>
+                                            
+                                            <hr> 
+                                            
+                                            
+                                        </div>  
+                                         @endforeach
+                                              
+                                            
+                                            
+                                         
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                                       
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
 
-    <!--begin::Body-->
-            <div class="card-body py-2">
-                <!--begin::Table-->
-                <div class="table-responsive">
-                    <table class="table table-borderless table-vertical-center">
-                        <thead>
-                            <tr>
-                                <th class="p-0" ></th>
-                                <th class="p-0" ></th>
-                                <th class="p-0" ></th>
-                                <th class="p-0" ></th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="pl-0">
-                                    <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">11-02-20</a>
-                                    
-                                </td>
-                                
-                                <td class="pl-0">
-                                    <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Service</a>
-                                    
-                                </td>
-                                <td class="text-right">
-                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                                        500 INR
-                                    </span>
-                                
-                                </td>
-                                
-                                <td class="text-right">
-                                    <span class="label label-lg label-light-success label-inline">Paid</span>
-                                </td>
-                                
-                            </tr>
-                            <tr>
-                                <td class="pl-0">
-                                    <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">11-02-20</a>
-                                    
-                                </td>
-                                <td class="pl-0">
-                                    <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Service2</a>
-                                    
-                                </td>
-                                <td class="text-right">
-                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                                        1299 INR
-                                    </span>
-                                
-                                </td>
-                                
-                                
-                                <td class="text-right">
-                                    <span class="label label-lg label-light-success label-inline">Paid</span>
-                                </td>
-                                
-                            </tr>
-                            <tr>
-                                <td class="pl-0">
-                                    <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">11-02-20</a>
-                                    
-                                </td>
-                                <td class="pl-0">
-                                    <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Service3</a>
-                                
-                                </td>
-                                <td class="text-right">
-                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                                        00 INR
-                                    </span>
-                                    
-                                </td>
-                                
-                                <td class="text-right">
-                                    <span class="label label-lg label-light-warning label-inline">Free</span>
-                                </td>
-                                
-                            </tr>
-                            
-                            
-                        </tbody>
-                    </table>
-                </div>
-                <!--end::Table-->
-            </div>
-            <!--end::Body-->
-        </div>
-<!--end::Advance Table Widget 7-->
-    </div>
 
-    <!-- ************************************************** Service Section End Here ********************************* -->
 
+
+
+
+
+
+
+
+
+
+
+
+   
+   
+
+   
+   
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+  
 
     <!--end::Content-->
 </div>
 <!--end::Profile Overview-->
-		</div>
-		<!--end::Container-->
-	</div>
+        </div>
+        <!--end::Container-->
+    </div>
 <!--end::Entry-->
 @endsection
 
@@ -1275,13 +3219,14 @@
 @section('css')
 
       <link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
-      <script src="{{asset('assets/js/pages/crud/forms/widgets/select2.js')}}"></script>
+      
       
 @endsection
 
 
 
 @section('script')
+<script src="{{asset('assets/js/pages/crud/forms/widgets/select2.js')}}"></script>
 
 <script src="{{asset('assets/js/pages/crud/ktdatatable/base/html-table.js')}}"></script>
 <script>
@@ -1291,6 +3236,7 @@
     $("#second1_div").hide();
     $("#device_div").hide();
     $("#package_div").hide();
+    $("#chanel_div").hide(); 
     $("#service_div").hide();
     
 
@@ -1299,12 +3245,14 @@
         $("#second1_div").hide();
         $("#device_div").hide();
         $("#package_div").hide();
+        $("#chanel_div").hide();
         $("#service_div").hide();
     
         $("#overview_menu").addClass('active');
         $("#personal_menu").removeClass('active');
         $("#device_menu").removeClass('active');     
         $("#package_menu").removeClass('active');
+        $("#channel_menu").removeClass('active');
         $("#service_menu").removeClass('active');
     })
     $("#personal_menu").click(function(){
@@ -1312,11 +3260,14 @@
         $("#device_div").hide();
         $("#second1_div").show();
         $("#package_div").hide();
+        $("#chanel_div").hide();
         $("#service_div").hide();
+
         $("#overview_menu").removeClass('active');
         $("#personal_menu").addClass('active');
         $("#device_menu").removeClass('active');   
         $("#package_menu").removeClass('active');
+         $("#channel_menu").removeClass('active');
         $("#service_menu").removeClass('active');  
     })
     $("#device_menu").click(function(){
@@ -1324,11 +3275,14 @@
         $("#second1_div").hide();
         $("#device_div").show();
         $("#package_div").hide();
+        $("#chanel_div").hide();
         $("#service_div").hide();
+
         $("#overview_menu").removeClass('active');
         $("#personal_menu").removeClass('active');
         $("#device_menu").addClass('active');  
         $("#package_menu").removeClass('active');
+         $("#channel_menu").removeClass('active');
         $("#service_menu").removeClass('active');  
     })
     $("#package_menu").click(function(){
@@ -1336,25 +3290,48 @@
         $("#second1_div").hide();
         $("#device_div").hide();
         $("#package_div").show();
+         $("#chanel_div").hide();
         $("#service_div").hide();
 
         $("#overview_menu").removeClass('active');
         $("#personal_menu").removeClass('active');
         $("#device_menu").removeClass('active'); 
         $("#package_menu").addClass('active');
+        $("#channel_menu").removeClass('active');
         $("#service_menu").removeClass('active'); 
     })
+    
+     $("#channel_menu").click(function(){
+        $("#first_div").hide();
+        $("#second1_div").hide();
+        $("#device_div").hide();
+        $("#package_div").hide();
+        $("#chanel_div").show();
+        $("#service_div").hide();
+
+        $("#overview_menu").removeClass('active');
+        $("#personal_menu").removeClass('active');
+        $("#device_menu").removeClass('active'); 
+        $("#package_menu").removeClass('active');
+        $("#channel_menu").addClass('active');
+        $("#service_menu").removeClass('active'); 
+    })
+
+
 
     $("#service_menu").click(function(){
         $("#first_div").hide();
         $("#second1_div").hide();
         $("#device_div").hide();
         $("#package_div").hide();
+        $("#chanel_div").hide();
         $("#service_div").show();
+        
         $("#overview_menu").removeClass('active');
         $("#personal_menu").removeClass('active');
         $("#device_menu").removeClass('active'); 
         $("#package_menu").removeClass('active');
+        $("#channel_menu").removeClass('active');
         $("#service_menu").addClass('active');
     })  
 

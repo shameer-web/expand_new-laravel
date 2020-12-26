@@ -253,6 +253,28 @@
 
 
 
+
+
+                                                     @if($com >0)
+                                                    <div class=" mt-5 timeline-content d-flex">
+                                                            <span class="mr-4 font-weight-bolder  text-danger">Complaints Pending</span>
+                                                            <!--begin::Section-->
+                                                            <div class="d-flex align-items-start mt-n2">
+                                                                <!--begin::Symbol-->
+                                                                <a href="{{ route('comp.index') }}">
+                                                               <button type="submit" class="btn btn-primary">Complaints->{{ $com}}</button></a>
+                                                                <!--end::Symbol-->
+                                                               
+                                                            </div>
+                                                            <!--end::Section-->
+                                                    </div>
+                                                    @else
+                                                     <div>
+                                                     </div>
+                                                    @endif 
+
+
+
                                                    
                                                     <!--begin::Item-->
                                                     <div class="timeline-item align-items-start">

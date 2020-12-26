@@ -8,6 +8,10 @@
  $assign_to =$page_data['assign_to'] 
  ?>
 
+  <?php
+ $assist_by =$page_data['assist_by'] 
+ ?>
+
 
  <?php
  $enquiery =$page_data['enquiery'] 
@@ -75,12 +79,43 @@
 										<label class="col-lg-2 col-form-label text-right">Assign To:</label>
 										<div class=" col-lg-3">
 											<select class="form-control " id="kt_select2_1" name="assign_to">
+
+
+												<option value="{{ $assign_to }}">--select Technician--</option>
 												
 
 												@foreach($data as $row)
 															<option value="{{ $row->id }}"
 
                                                               @if($row->id == $assign_to)  selected  
+                                                                    @endif
+
+
+
+															 >{{ $row->name }}</option>
+												@endforeach
+
+
+
+												 
+												
+												
+											</select>
+										</div>
+
+
+
+										<label class="col-lg-2 col-form-label text-right">Assist By:</label>
+										<div class=" col-lg-3">
+											<select class="form-control " id="kt_select2_1" name="assist_by">
+
+												  <option value="{{ $assist_by }}">--select Technician--</option>
+												
+
+												@foreach($data as $row)
+															<option value="{{ $row->id }}"
+
+                                                              @if($row->id == $assist_by)  selected  
                                                                     @endif
 
 

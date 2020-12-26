@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Customer;
 use App\CustomerPackage;
 use App\Payment;
+use App\InvoiceImage;
 use Carbon;
 
 class InvoiceController extends Controller
@@ -29,7 +30,7 @@ class InvoiceController extends Controller
       $cust_id =$request->cust_id;
       //dd($cust_id);
 
-      $cust_package =CustomerPackage::where('cus_id',$cust_id)->first();
+      $cust_package =CustomerPackage::where('cus_id',$cust_id)->orderBy("id", "desc")->first();
       //dd($cust_package);
        // dd($cust_package->payment_date);
       //dd($cust_package->package_amount);
@@ -71,14 +72,27 @@ class InvoiceController extends Controller
        }
 
 
-      return view('collection-agent.invoice.invoice')->with('cust_package',$cust_package)->with('due_amount',$due_amount)->with('total_amount',$total_amount);
+        $invoice_img1=InvoiceImage::where('invoice_image_status',1)->first();
+      // dd($invoice_img1);
+       $invoice_img2=InvoiceImage::where('invoice_image_status',1) ->orderBy("id", "desc")->first();
+     // dd($invoice_img2);
+
+       $billdate = Carbon\Carbon::now();
+      // dd($billdate);
+
+
+
+      return view('collection-agent.invoice.invoice')->with('cust_package',$cust_package)->with('due_amount',$due_amount)->with('total_amount',$total_amount)->with('invoice_img1',$invoice_img1)->with('invoice_img2',$invoice_img2)->with('billdate',$billdate);
 
 
     }
 
    
     public function update_package(Request $request ,$id){
-         //dd($request->all());
+
+
+
+       // dd($request->all());
 
          
          $pay = new Payment();
@@ -108,9 +122,15 @@ class InvoiceController extends Controller
         //dd($cus_package);
        
         $balance = $request->total_package_amount - $request->customer_paid_amount;
-        //dd($balance);
+//dd($balance);
 
-        // $cus_package->package_amount = $request->package_amount;
+        // $cus_package->package_amount = $request->package_total_amount;
+
+        $next=$request->package_total_amount;
+
+        
+        $cus_package->package_total_amount =$next;
+
         $cus_package->transaction_type =$request->transaction_type;
         $cus_package->customer_paid_amount = $request->customer_paid_amount;
         $cus_package->balance =$balance;
@@ -120,12 +140,62 @@ class InvoiceController extends Controller
         $cus_package->package_status =1;
         $cus_package->update();
 
-        $cust_package =CustomerPackage::where('id',$id)->first();
+        $cust_package =CustomerPackage::where('id',$id)->orderBy("id", "desc")->first();
         //dd($cust_package);
 
-        return view('admin.customer.customer_invoice')->with('cust_package',$cust_package); 
+
+           if($cust_package ==null)
+        {
+         $due_amount = null;
+         $total_amount =null;
+        }
+
+        else{
+
+         $final =$cust_package->payment_date;
+         $final1 =Carbon\Carbon::now();
+         //dd($final1);
+
+          $formatted_dt1=Carbon\Carbon::parse($final);
+         // dd($formatted_dt1);
+
+        $formatted_dt2=Carbon\Carbon::parse($final1);
+
+         $date_diff=$formatted_dt1->diffInMonths($formatted_dt2);
+         //dd($date_diff);
+
+          if($date_diff == 0){
+           $amout = $cust_package->package_total_amount;
+        }
+        else{
+         $amout = $date_diff * $cust_package->package_total_amount;
+         
+       }
+       //dd($amout);
+       $due_amount = $amout ;
+      // dd($due_amount);
+       
+       
+
+       $total_amount = $amout + $cust_package->balance;
+
+       //dd($total_amount);
+
+       }
 
 
+       $invoice_img1=InvoiceImage::where('invoice_image_status',1)->first();
+       //dd($invoice_img1->header);
+       $invoice_img2=InvoiceImage::where('invoice_image_status',1) ->orderBy("id", "desc")->first();
+     // dd($invoice_img2);
+
+         $billdate = Carbon\Carbon::now();
+       //dd($billdate);
+
+
+      return view('admin.invoice.invoice')->with('cust_package',$cust_package)->with('due_amount',$due_amount)->with('total_amount',$total_amount)->with('invoice_img1',$invoice_img1)->with('invoice_img2',$invoice_img2)->with('billdate',$billdate);
+
+       
 
     // $startTime = Carbon::parse($cus_package ->payment_date);
     // //dd($startTime);

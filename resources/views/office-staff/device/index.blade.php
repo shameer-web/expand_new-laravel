@@ -92,9 +92,9 @@
 												                    <thead>
 									                              <tr>
                                              
-											  {{-- <th>Order ID</th> --}}
+											  <th>Device ID</th>
 											  {{-- <th>Device</th> --}}
-											  <th>Device Name</th>
+											  {{-- <th>Device Name</th> --}}
                                               <th>Company</th>
                                               <th>Type</th>
                                               <th>Device ID</th>
@@ -115,8 +115,8 @@
 				                           
                           				 <tr>
 											  {{-- <td>{{ $row->id }}</td> --}}
-											  {{-- <td>{{ $row->deviceid }}</td> --}}
-											  <td>{{ $row->device_name }}</td>
+											  <td>{{ $row->deviceid }}</td>
+											 {{--  <td>{{ $row->device_name }}</td> --}}
                                               <td>{{ $row->Company['company_name'] }}</td>
                                               <td>{{ $row->Type['type_name'] }}</td>
                                               <td>{{ $row->device_id}}</td>

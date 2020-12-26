@@ -545,17 +545,18 @@ if (document.getElementById('same').checked)
 	document.getElementById('caddress').value=document. 
 			getElementById('iaddress').value;
 
-	document.getElementById('district1').value=document. 
-			getElementById('district').value;
-	document.getElementById('pincode1').value=document. 
-			getElementById('pincode').value; 
+			document.getElementById('district1').value=document. 
+			getElementById('district').value; 
+
+			document.getElementById('pincode1').value=document. 
+			getElementById('pincode').value;  
 	
 } 
 	
 else
 { 
-	document.getElementById('caddress').value=""; 
-	document.getElementById('district1').value=""; 
+	document.getElementById('caddress').value="";
+	document.getElementById('district1').value="";
 	document.getElementById('pincode1').value=""; 
 	 
 } 

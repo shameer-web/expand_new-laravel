@@ -28,6 +28,22 @@
 	</div>
 	<div class="card-body">
 		<!--begin: Datatable-->
+        
+          @if ($message = Session::get('message'))
+                <div>
+                   <p class="text-center text-danger" style="font-size: 18px">{{ $message }}</p>
+                </div>
+                                              
+
+
+         @elseif ($datas = Session::get('datas'))
+                <div>
+                    <p class="text-center text-danger" style="font-size: 18px">{{ $datas }}</p>
+                </div>
+        @endif
+
+
+
 		<table class="table table-separate table-head-custom table-checkable" id="kt_datatable1">
 			                    <thead>
                               <tr> {{-- <th style="display:none">Order ID</th> --}}
@@ -36,7 +52,8 @@
                                 <th>Address</th>
                                 <th>Phone</th>
                                 <th>Phost No</th>
-                                <th>Assigned</th>
+                                <th>Assigned Staff</th>
+                                <th>Assist Staff</th>
                                 <th>Remarks</th>
                                 <th>Number Of Visit</th>
                                 <th>Date</th>
@@ -60,6 +77,16 @@
                             @else
                             <td> <span class="label label-success label-inline mr-2"> {{$row->User['name'] }}</span></td>
                             @endif
+
+
+
+
+                             @if($row->assist_by == null) 
+                            <td><span class="label label-danger label-inline mr-2">Pending</span></td>
+                            @else
+                            <td> <span class="label label-success label-inline mr-2"> {{$row->staff['name'] }}</span></td>
+                            @endif
+
                             <td>{{ $row->remarks }}</td>
                               <td>{{ $row->number_of_visit }}</td>
 
@@ -73,6 +100,12 @@
                             @endif
 
                             <td>
+
+
+
+                                <a href="{{ route('enquiry.view',$row->id) }}" class="btn btn-sm btn-clean btn-icon" title="Edit details">
+                                <i class="la la-eye"></i>
+                                </a>
 
                                <a type="button" id="btnassign" data-action="{{ route('enquiry.update',$row->id) }}" data-toggle="modal" data-target="#exampleModal" class="btn btn-sm btn-clean btn-icon" title="Assign">
 								<i class="la la-user"></i>
@@ -137,8 +170,8 @@
 							</button>
 						</div>
 						<div class="modal-body">
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label text-right">Assign To:</label>
+						    <div class="form-group row">
+							  <label class="col-lg-3 col-form-label text-right">Lead By:</label>
 								<div class=" col-lg-6">
 									<select class="form-control " id="kt_select2_1" name="assign_to">
 										
@@ -151,6 +184,25 @@
 									</select>
 								</div>
 							</div>
+
+
+                            <div class="form-group row">
+                              <label class="col-lg-3 col-form-label text-right">Assist By:</label>
+                                <div class=" col-lg-6">
+                                    <select class="form-control " id="kt_select2_1" name="assist_by">
+                                        
+
+                                        @foreach($user as $row)
+                                                    <option value="{{ $row->id }}" >{{ $row->name }}</option>
+                                        @endforeach
+                                        
+                                        
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="assign_status" value="1">
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>

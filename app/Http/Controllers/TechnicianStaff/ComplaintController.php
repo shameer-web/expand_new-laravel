@@ -10,7 +10,9 @@ use App\User;
 use App\Customer;
 use App\Complainttype;
 use App\Technicianstatus;
+use App\ComplaintHistory;
 use DB;
+use Auth;
 
 class ComplaintController extends Controller
 {
@@ -23,8 +25,47 @@ class ComplaintController extends Controller
          $page_data = [];
 
          //may be 
+   
+    $tech = Auth::user()->id;
+    //dd($tech);
 
-    $complaint =Complaint::where('complaint_status', 1)->get();
+           
+            // $complaint =Complaint::where('complaint_status', 1)->get();
+            $status = Complaint::where('complaint_status', 1)->get();
+          //  dd($status);
+
+            foreach($status as $stat){
+           // dd($stat->assign_to);
+           
+
+
+
+              $res = Complaint::where('complaint_status', 1);
+        
+        if ($stat->staff ==$tech ){
+        $res->where('staff',$tech);
+        $complaint = $res->get();
+        }
+
+
+
+        else{
+              $res->where('assist_by',$tech);
+              $complaint = $res->get();
+        }
+        }
+       
+       // dd($stat->assist_by);
+
+      // dd($complaint);
+
+
+
+    // $complaint =Complaint::where('complaint_status', 1)->get();
+
+    
+
+
 
      foreach ($complaint as $data) {
          $data['complaint'] = Complainttype::whereIn('id',$data->complaint)->get();
@@ -137,34 +178,82 @@ class ComplaintController extends Controller
 
     public function update(Request $request ,$id){
 
-      //dd($request->all());
+    //  dd($request->all());
     	 $complaint=Complaint::find($id);
-         //dd($complaint);
-        //   $complaint_update = $complaint->update($request->all());
-        // if ($complaint_update) {
 
-        //     if (isset($request->complaint_status) and $request->complaint_status == '0') {
-        //         Session::flash('toasttype', 'success');
-        //         Session::flash('toasttitle', 'Deleted');
-        //         Session::flash('toastcontent', 'complaint  Details Deleted  Successfully');
-        //     } else {
+        
 
-        //         Session::flash('toasttype', 'success');
-        //         Session::flash('toasttitle', 'Success');
-        //         Session::flash('toastcontent', 'complaint  Details updated Successfully');
-        //     }
-        // } else {
-        //     Session::flash('toasttype', 'error');
-        //     Session::flash('toasttitle', 'Error');
-        //     Session::flash('toastcontent', 'complaint  Details Not Updated');
-        // }
+       //dd($complaint->active_deactive);
+
+         
+
+            $staff =$complaint->staff;
+            //dd($staff);
+            $customer_name =$complaint->customer_name;
+             // dd($customer_name);
+            $customer_id =$complaint->customer_id;
+            //dd($customer_id);
+
+            $complaint_history =new ComplaintHistory();
+            $complaint_history->complaint_id =$id;
+            $complaint_history->staff =Auth::user()->id;
+            $complaint_history->customer_id =$customer_id;
+            $complaint_history->customer_name =$customer_name;
+            $complaint_history->remarks =$request->complaint_description;
+         $complaint_history->save();
 
 
+
+
+
+      
+         $number_of_visit =$complaint->number_of_visit;
+             
+              $previous_invoice_no =  $number_of_visit;
+              //dd($previous_invoice_no+1);
+
+            $unique_id = substr($previous_invoice_no, 5);
+            $new_no = $previous_invoice_no+1;
+            //dd($new_no);
+
+             $test= str_pad($new_no, 2, '0', STR_PAD_LEFT);
+
+            //dd($test);
+
+         $complaint->number_of_visit =$test;
+          $complaint->status = 1;
          $complaint->complaint_description =$request->complaint_description;
          $complaint->technician_status =$request->technician_status;
          $complaint->update();
-       
+
+
         
+
+        if($complaint->active_deactive != null)
+        {
+         // return "hiii";
+
+          if($request->technician_status == 1)
+          {
+            //return "hiii";
+            //dd($complaint->customer_id);
+            $cus_id =$complaint->customer_id;
+            $customer =Customer::find($cus_id);
+
+              $customer->customer_activation_status = $complaint->active_deactive;
+            //dd($customer);
+              $customer->update();
+          }
+
+          else{
+            
+          }
+        }
+
+
+
+       
+       
        
         return redirect()->route('comp.index');
 
@@ -172,12 +261,12 @@ class ComplaintController extends Controller
 
     public function check($id){
     	//return "hiii";
-
+         
 
     	$complaint =Complaint::find($id);
     	//dd($complaint);
 
-    	$cus_id =$complaint->customer_name;
+    	$cus_id =$complaint->customer_id;
     	//dd($cus_id);
     	$technician_status = Technicianstatus::where('delete_status', 1)->get();
 
@@ -203,6 +292,7 @@ class ComplaintController extends Controller
         
          $page_data['customer'] = $customer;
          $page_data['cus_device'] = $cus_device;
+
 
 
 

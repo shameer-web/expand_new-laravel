@@ -71,7 +71,7 @@
 								@method('put')
 								<div class="card-body">
 									  
-									  <div class="form-group row">
+									 <div class="form-group row">
 
 
 										
@@ -101,11 +101,43 @@
                                                 </select>
 												
 											</div>
-											<span class="form-text text-muted">Please enter your address</span>
+											<span class="form-text text-muted">Please enter your Staff Name</span>
 										</div>
 
 
-										<label class="col-lg-2 col-form-label text-right">Staff:</label>
+
+
+
+										<label class="col-lg-2 col-form-label text-right">Assist By:</label>
+										<div class="col-lg-3">
+											<div class="input-group">
+												
+
+
+
+												<select class="form-control  "  name="assist_by" value="{{ $complaint->assist_by }}">
+                                                            @foreach($user as $row)
+															<option value="{{ $row->id }}"
+                                                                     @if($row->id == $complaint->assist_by )
+                                                                     selected
+                                                                     @endif
+
+																>
+																{{ $row->name }}</option>
+															 @endforeach
+                                                    
+                                                    
+                                                   
+                                                </select>
+												
+											</div>
+											<span class="form-text text-muted">Please enter Assistant Name</span>
+										</div>
+
+
+
+
+										{{-- <label class="col-lg-2 col-form-label text-right">Staff:</label>
 										<div class="col-lg-3">
 											<div class="input-group">
 												
@@ -134,10 +166,10 @@
 												
 											</div>
 											<span class="form-text text-muted">Please enter your address</span>
-										</div>
+										</div> --}}
 
-
-
+                                         
+                                        
 										
 									</div>
 
@@ -145,7 +177,9 @@
 									<div class="form-group row">
 
 
-                                       <label class="col-lg-2 col-form-label text-right">Complaint's:</label>
+
+
+										 <label class="col-lg-2 col-form-label text-right">Complaint's:</label>
 										<div class="col-lg-3">
 											<div class="input-group">
 												
@@ -183,16 +217,41 @@
 
 
 
+                                       
+
+
+
 										<label class="col-lg-2 col-form-label text-right">Other complaint:</label>
 										<div class="col-lg-3">
-											<input type="text" name="other_complaint" value="{{ $complaint->other_complaint }}"  class="form-control" placeholder="Enter Email Id"/>
+											{{-- <input type="text" name="other_complaint" value="{{ $complaint->other_complaint }}"  class="form-control" placeholder="Enter Email Id"/> --}}
+
+
+											 <textarea name="other_complaint" class="form-control" placeholder="Enter other_complaint" rows="3" >{{ $complaint->other_complaint }}</textarea>
 											<span class="form-text text-muted">Please enter other complaint</span>
 										</div>
+
+
+										
                                         
 
                                         
 
 									</div>
+
+
+
+                                    <div class="form-group row">
+                                    	
+                                    
+
+									<label class="col-lg-2 col-form-label text-right">Remarks:</label>
+										<div class="col-lg-3">
+											{{-- <input type="text" name="remarks" value="{{ $complaint->remarks }}"  class="form-control" placeholder="Enter Email Id"/> --}}
+
+											 <textarea name="remarks" class="form-control" placeholder="Enter remarks" rows="3" >{{ $complaint->remarks }}</textarea>
+											<span class="form-text text-muted">Please enter Remarks </span>
+										</div>
+									</div>	
 
 									{{-- <div class="form-group row">
 

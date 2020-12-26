@@ -18,6 +18,9 @@ use App\CustomerPackage;
 use App\Agentnotifications;
 use App\Payment;
 use App\Complainttype;
+use App\TechnicianStaff;
+use App\Channel;
+use App\CustomerChannel;
 use Carbon\Carbon;
 use DB;
 use Auth;
@@ -26,21 +29,250 @@ class CustomerController extends Controller
 {
     //
 
-        public function profile($id)
+
+  public function profile($id)
     {   
-         $cust_package =CustomerPackage::where('cus_id',$id)->first();
-         //dd($cust_package);
-         if($cust_package == null)
+         
+         $channel = Channel::where('channel_status', 1)->get();
+
+         $cust_channel =CustomerChannel::where('cus_id',$id)->orderBy("id", "desc")->first();
+
+        // dd( $cust_channel->channel['channel_type']);
+
+           if($cust_channel == null)
          {
-           $count = null;
+           $total_amount = null;
+            $due_amount = null;
+         }
+         else{
+
+               $channel_amount = $cust_channel->channel_total_amount;
+
+            // dd($channel_amount);
+
+             // $per_day = $channel_amount/30;
+             //dd($per_day);
+
+             // $created_date =$cust_channel->created_at;
+             //dd($created_date);
+
+         $payment_date = Carbon::now();
+
+
+          // $lastDayofMonth =    \Carbon\Carbon::parse($created_date)->endOfMonth()->toDateString();
+
+
+           //$firstDay = new Carbon('first day of next month'); 
+        // $lastDay = new Carbon('last day of last month'); 
+       // dd($firstDay);
+
+        //dd($lastDayofMonth);
+
+
+
+
+
+
+        
+
+           $final =$cust_channel->payment_date;
+
+            $final1 =$cust_channel->created_at;
+
+
+
+           $formatted_dt1=Carbon::parse($final);
+         // dd($formatted_dt1);
+
+        $formatted_dt2=Carbon::parse($final1);
+        //dd($formatted_dt2);
+
+        $date_diff=$formatted_dt1->diffInMonths($formatted_dt2);
+       // dd($date_diff);
+
+       
+
+
+          if($date_diff == 0){
+            $amount = $channel_amount;
+        }
+        else{
+        $amount = $channel_amount * $date_diff;
+         
+          }
+         // dd($total_amount);
+
+           $due_amount = $amount;
+
+        $total_amount = $amount + $cust_channel->balance;
+
+
+        
+
+      
+         //dd($last_day);
+
+
+
+       
+
+
+     
+
+
+         }
+
+
+
+          
+
+          //dd($cust_channel);
+         if($cust_channel == null)
+         {
+           $count1 = null;
          }
          else{
 
 
 
+         $time = strtotime($cust_channel->payment_date);
+         //dd($time);
+         $final =$cust_channel->payment_date;
+         //dd($final);
+         $final1 = Carbon::now();
+        
+
+
+         $formatted_dt1=Carbon::parse($final);
+         // dd($formatted_dt1);
+
+        $formatted_dt2=Carbon::parse($final1);
+        //dd($formatted_dt2);
+
+        $date_diff=$formatted_dt1->diffInDays($formatted_dt2);
+        //dd($date_diff);
+        $count1 = 30-$date_diff;
+        //dd($count);
+              
+
+        }
+
+
+
+
+
+         $cust_package =CustomerPackage::where('cus_id',$id)->orderBy("id", "desc")->first();
+         //dd($cust_package);
+         if($cust_package == null)
+         {
+           $count = null;
+           $total_amount1 = null;
+           $due_amount1 = null;
+         }
+         else{
+
+
+          
+
+
+                 $package_amount = $cust_package->package_total_amount;
+
+             //dd($package_amount);
+
+           
+
+         $payment_date = Carbon::now();
+
+
+          
+
+
+
+
+
+
+        
+
+           $final =$cust_package->payment_date;
+
+            $final1 =$cust_package->created_at;
+
+
+
+           $formatted_dt1=Carbon::parse($final);
+         // dd($formatted_dt1);
+
+        $formatted_dt2=Carbon::parse($final1);
+        //dd($formatted_dt2);
+
+        $date_diff=$formatted_dt1->diffInMonths($formatted_dt2);
+       // dd($date_diff);
+
+       
+
+
+          if($date_diff == 0){
+            $amount1 = $package_amount;
+        }
+        else{
+        $amount1 = $package_amount * $date_diff;
+         
+          }
+
+          //dd($amount1);
+         
+
+           $due_amount1 = $amount1;
+
+        $total_amount1 = $amount1 + $cust_package->balance;
+
+        //dd($total_amount1);
+
+
+
+
+
+
          $time = strtotime($cust_package->payment_date);
          //dd($time);
-         $final =$cust_package->payment_date;
+         //dd( $cust_package->package_total_amount);
+         //dd( $cust_package->customer_paid_amount);
+         $package_total_amount = $cust_package->package_total_amount;
+         $extra_days_amount = $cust_package->extra_days_amount;
+
+         if($extra_days_amount > $package_total_amount)
+         {
+         // $day =$package_total_amount/30;
+        //dd($day);
+
+
+          $monts =$extra_days_amount/$package_total_amount;
+          $day = $monts * 30;
+          //dd($day);
+           
+
+          $final =$cust_package->created_at;
+         //dd($final);
+         $final1 = Carbon::now();
+        
+
+
+         $formatted_dt1=Carbon::parse($final);
+         // dd($formatted_dt1);
+
+        $formatted_dt2=Carbon::parse($final1);
+        //dd($formatted_dt2);
+
+        $date_diff=$formatted_dt1->diffInDays($formatted_dt2);
+        //dd($date_diff);
+        $count = $day-$date_diff;
+       // dd($count);  
+
+         }
+
+         else{
+
+         $final =$cust_package->created_at;
          //dd($final);
          $final1 = Carbon::now();
         
@@ -56,6 +288,8 @@ class CustomerController extends Controller
         //dd($date_diff);
         $count = 30-$date_diff;
         //dd($count);
+
+        }
               
 
         }
@@ -108,6 +342,8 @@ class CustomerController extends Controller
 
         
         $device = Device::where('device_status', 1)->where('cus_device_status', 1)->get();
+
+
         $package = Package::where('package_status', 1)->get();
         $cus_device = DB::table('devices')
         ->join('companies', 'companies.id', '=', 'devices.device')
@@ -117,7 +353,9 @@ class CustomerController extends Controller
         ->join('locs','locs.id', '=', 'devices.lco_id')
         ->select('devices.*','companies.company_name','types.type_name','modes.model_name','districts.district_name','locs.loc_name')
         ->where('device_status', 1)
-        ->where('devices.status', $id)->first();                   
+        ->where('devices.status', $id)->first(); 
+
+        //dd($cus_device);                  
         $customer = Customer::where('customer_status', 1)->
                             where('id',$id)->first();
 
@@ -125,13 +363,41 @@ class CustomerController extends Controller
         ->join('packages', 'packages.id', '=' , 'customer_packages.package_name')
         ->select('customer_packages.*','packages.package_name as pname','packages.package_type as ptype','packages.package_price as price',
         'customer_packages.created_at as date')
-        ->where('customer_packages.cus_id',$id)->first();
-        //dd($customer_package);              
+        ->where('customer_packages.cus_id',$id)->orderBy("id", "desc")->first();
+        //dd($customer_package);  
+
+
+         $customers_package = DB::table('customer_packages')
+         ->join('packages', 'packages.id', '=', 'customer_packages.package_name')
+         ->select('customer_packages.*','packages.package_name','packages.package_type') 
+         ->where('customer_package_status',1)
+         ->where('cus_id',$id)
+         ->orderBy('id', 'desc')
+        ->get();
+
+
+        $customers_channel = DB::table('customer_channels')
+         ->join('channels', 'channels.id', '=', 'customer_channels.channel_name')
+         ->select('customer_channels.*','channels.channel_name','channels.channel_type') 
+         ->where('customer_channel_status',1)
+         ->where('cus_id',$id)
+         ->orderBy('id', 'desc')
+        ->get();
+
+         $customers_channel_count = CustomerChannel::get()->where('customer_channel_status',1)->where('cus_id',$id)->where('status',0)->count();
+
+         //dd($customers_channel_count);
+
+        //dd($customers_package_count);
+
+         $customer_device= Device::where('device_status', 1)->where('devices.status', $id)->get();
+
         return view('technician-staff.customer.profile')->with('customer', $customer)->with('device', $device)
         ->with('cdevice', $cus_device)->with('package', $package)
-        ->with('pk',$customer_package)->with('cust_package',$cust_package)->with('complaint',$complaint)->with('single_com',$single_com)->with('complainttype',$complainttype)->with('count',$count)->with('payment',$payment);
+        ->with('pk',$customer_package)->with('cust_package',$cust_package)->with('complaint',$complaint)->with('single_com',$single_com)->with('complainttype',$complainttype)->with('count',$count)->with('payment',$payment)->with('cust_channel',$cust_channel)->with('channel',$channel)->with('count1',$count1)->with('total_amount',$total_amount)->with('due_amount',$due_amount)->with('total_amount1',$total_amount1)->with('due_amount1',$due_amount1)->with('customers_package',$customers_package)->with('customer_device',$customer_device)->with('customers_channel',$customers_channel)->with('customers_channel_count',$customers_channel_count);
     }
 
+    
 
         public function index()
     {

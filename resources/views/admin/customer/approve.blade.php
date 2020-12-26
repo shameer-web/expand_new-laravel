@@ -277,14 +277,30 @@
 				</div>
 				<div class="card-footer">
 					<div class="row">
-						<div class="col-lg-4"></div>
-						<div class="col-lg-8">
-							<button type="submit" class="btn btn-success mr-2 w-50">approved</button>
+						<div class="col-lg-6">
+							
+							<button type="submit" class="btn btn-success mr-2 w-50">Approved</button>
+							
+						</div>
+
+						</form>
+
+                      
+
+						<div class="col-lg-6">
+
+                           <form class="form" action="{{ route('customer.notification_reject',$approve->id) }}" method="POST" enctype="multipart/form-data" >
+			                @csrf
+			                @method('put')
+
+							<button type="submit" class="btn btn-danger mr-2 w-50 ml-5" >Reject</button>
+						   </form>
+
 							
 						</div>
 					</div>
 				</div>
-			</form>
+			
 			<!--end::Form-->
 		</div>
 

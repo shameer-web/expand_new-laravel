@@ -1,6 +1,19 @@
 
 <!--begin::Header-->
-					<div id="kt_header" class="header header-fixed">
+
+
+
+<div id="kt_header" class="header header-fixed" style="height: 100px">
+                        <!--begin::Subheader-->
+                        
+                        <!--end::Subheader-->
+                        <!--begin::Entry-->
+                      
+                           
+
+
+
+					
 
 						<!--begin::Container-->
 						<div class="container-fluid d-flex align-items-stretch justify-content-between">
@@ -9,11 +22,55 @@
 							<div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
 
 								<!--begin::Header Menu-->
-								<div id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
+								<div id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default mt-5 " style="margin-left: 300px">
 
-									<!--begin::Header Nav-->
+
+
+									 <form class="form" action="{{ route('complaint.complaint_reg') }}" method="post"  id="form-complaint">
+                                @csrf
+                            <div class="row mt-3 w-100">
+                            <label class="col-lg-1 col-form-label text-right">Cus Id:</label>
+                                        <div class="col-lg-10">
+                                            <input type="number" name="search" id="search"  class="form-control" placeholder="Enter Customer Id"/>
+                                            <span class="form-text text-muted">&nbsp;&nbsp;&nbsp;&nbsp;Please enter Customer Id
+
+                                           {{--    @if ($message = Session::get('message'))
+                                               <div>
+                                                 <p class="text-center text-danger" style="font-size: 12px">{{ $message }}</p>
+                                            </div>
+                                            @endif
+ --}}
+
+
+                                            </span>
+
+
+                                            {{--  @error('search')
+                                                <p class="text-danger">{{ $message }}</p>
+                                             @enderror --}}
+                                            
+                                          
+
+
+                                        </div>
+
+                                        <div class="col-lg-1">
+                                            <button type="submit" class="btn btn-success mr-2">Go</button>
+                                            
+                                        </div>
+                            </div>
+                            </form>
+                            
+                         
+
+
+
+                                       
+
 									
-									<!--end::Header Nav-->
+
+
+
 								</div>
 
 								<!--end::Header Menu-->
@@ -48,13 +105,7 @@
 
 									<!--end::Toggle-->
 
-									<!--begin::Dropdown-->
-									<div class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg">
-
-										<!--[html-partial:include:{"file":"partials/_extras/dropdown/search-dropdown.html"}]/-->
-									</div>
-
-									<!--end::Dropdown-->
+									
 								</div>
 
 								<!--end::Search-->

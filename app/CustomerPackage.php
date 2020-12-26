@@ -21,6 +21,7 @@ class CustomerPackage extends Model
        'extra_days_amount',
        'due_amount',
        'balance',
+       'discount',
        'gst_number',
        'payment_date',
        'customer_package_status',

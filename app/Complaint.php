@@ -16,6 +16,8 @@ class Complaint extends Model
        'phone_no',
        'email',
        'staff',
+       'assist_by',
+       'number_of_visit',
        'post_no',
        'type',
        'complaint',
@@ -42,6 +44,15 @@ class Complaint extends Model
       'complaint' => 'array',
       // 'complainttype' => 'array'
     ];
+
+  
+    public function staffs(){
+    return $this->belongsTo(User::class,'staff','id');
+   }
+
+    public function assist(){
+    return $this->belongsTo(User::class,'assist_by','id');
+   }
 
 
    public function customer(){

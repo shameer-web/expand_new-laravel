@@ -62,7 +62,55 @@ class ComplaintController extends Controller
     }
 
     public function store(Request $request)
-    {
+    { 
+
+     // dd($request->all());
+
+
+     // $abc =$request->validate([
+
+     //       // 'staff' => 'unique:complaints,assist_by',
+     //       'assist_by' => 'unique:complaints,staff',
+
+     //    ]);
+
+
+
+      $user =new Complaint();
+
+
+           $exist_staff =Complaint::where('staff', '=', $request->assist_by)
+                         ->where('complaint_status','=',1)
+                         ->first();
+
+            $exist_assist_staff =Complaint::where('assist_by', '=', $request->staff)
+                         ->where('complaint_status','=',1)
+                         ->first();
+
+           if($exist_staff){
+                //return "already added";
+
+             return redirect()->route('complaint.create')->with('message',' This Technician already leadership in other complaints, so please select another Technician staff as assistant staff.');
+           }
+
+          
+
+            elseif($exist_assist_staff){
+               // return "already added";
+
+
+
+             return redirect()->route('complaint.create')->with('data',' This Technician already assist in other complaints, so please select another Technician staff as main staff.');
+           }             
+
+
+
+
+       else{
+
+          
+
+
       
       //dd($request->complaint);
      //dd($request->all());
@@ -108,6 +156,8 @@ class ComplaintController extends Controller
       $complaint->phone_no =$request->phone;
       $complaint->email =$request->email;
       $complaint->staff =$request->staff;
+      $complaint->assist_by =$request->assist_by;
+
       $complaint->post_no =$request->post_no;
       // $complaint->type =$request->type;
 
@@ -127,7 +177,9 @@ class ComplaintController extends Controller
 
       $complaint->save();
 
-       return redirect()->route('complaint.index')->with('message','succesfully created your field');
+       return redirect()->route('complaint.index');
+    }
+
     }
 
 
@@ -146,10 +198,12 @@ class ComplaintController extends Controller
 
     public function complaint_reg(Request $request)
 
-    {  
+    {   
+     // dd($request->all());
         $request->validate([
 
-        'search'=>'required',
+         'search'=>'required',
+         // "search" => "required|exists:customers",
          ]);
 
        $cus_id =$request->search;
@@ -158,13 +212,15 @@ class ComplaintController extends Controller
          $exist_customer = Customer::where('id', '=', $cus_id)
                          ->where('customer_status', 1)
                          ->first();
-                         //dd($exist_user);
+         // dd($exist_customer);
             if($exist_customer == null){
               $message ="pls enter Valid Customer Id";
               //dd($message);
-              return redirect()->back()->with('message',$message);
+            //  return redirect()->back()->with('message',$message);
+              return redirect()->route('complaint.create')->with('message',$message);
 ;
             }
+
             else{
            
     
@@ -212,33 +268,105 @@ class ComplaintController extends Controller
      // $complaint =Complaint::where('complaint_status', 1)->first();
       //dd($complaint);
 
-      $complaint= DB::table('complaints')
-                 ->where('customer_id',$cus_id)
-                 ->orderBy('id', 'desc')
-                 ->first();
-      //dd($complaint);
-          if($complaint == null){
-                   $abcd = '';
-                  // dd($abcd);
-                   $abc = json_decode($abcd);
-                 //dd($abc);
-                   $single_com = '';
-            }
-          else{
-              $complaint= DB::table('complaints')
-                 ->where('customer_id',$cus_id)
-                 ->orderBy('id', 'desc')
-                 ->first();
-                 //dd($complaint);
-        $abcd =$complaint->complaint;
-       // dd($abcd);
-         $abc = json_decode($abcd);
+        $complaint = null;
+        
+         $page_data = [];
+
+         //may be 
          
-         //dd($abc);
-        $single_com = Complainttype::whereIn('id',$abc)->get();
+
+   $comp =Complaint::where('complaint_status', 1)->where('customer_id',$cus_id)->get();
+  // dd($complaint);
+   
+   
+    
+
+     foreach ($comp as $data) {
+         $data['complaint'] = Complainttype::whereIn('id',$data->complaint)->get();
+        // dd($data['complaint']);
+         $value[]=$data; 
+     }
+     //dd($data);
+
+     if(isset($value)){
+
+      //$page_data['value'] = $value;
+     // $complaint = $value;
+     }
+
+     //dd($complaint);
+    
+   
+    $pend_complaint =Complaint::where('complaint_status', 1)->where('customer_id',$cus_id)->where('status',0)->first();
+
+     // dd($pend_complaint);
+
+    if($pend_complaint == null){
+
+       $pending_complaint =Complaint::where('complaint_status', 1)->where('customer_id',$cus_id)->where('status',0)->get();
+    }
+
+    else{
+    
+      $page_data = [];
+         
+
+   $com =Complaint::where('complaint_status', 1)->where('customer_id',$cus_id)->where('status',0)->get();
+   //dd($com);
+   
+   
+    
+
+     foreach ($com as $dat) {
+         $dat['complaint'] = Complainttype::whereIn('id',$dat->complaint)->get();
+         //dd($data['complaint']);
+         $valu[]=$dat; 
+     }
+     //dd($dat);
+
+     if(isset($valu)){
+
+      //$page_data['value'] = $value;
+      $pending_complaint = $valu;
+
+
+
+     }
+
+        
+     }
+    // dd($pending_complaint);
+
+
+      // $complaint= DB::table('complaints')
+      //            ->where('complaint_status',1)
+      //            ->where('customer_id',$cus_id)
+      //            ->orderBy('id', 'desc')
+      //            ->first();
+      // //dd($complaint);
+      //     if($complaint == null){
+      //              $abcd = '';
+      //             // dd($abcd);
+      //              $abc = json_decode($abcd);
+      //            //dd($abc);
+      //              $single_com = '';
+      //       }
+      //     else{
+      //         $complaint= DB::table('complaints')
+      //            ->where('complaint_status',1)
+      //            ->where('customer_id',$cus_id)
+      //            ->orderBy('id', 'desc')
+      //            ->first();
+      //            //dd($complaint);
+      //   $abcd =$complaint->complaint;
+      //  // dd($abcd);
+      //    $abc = json_decode($abcd);
+         
+      //    //dd($abc);
+        // $single_com = Complainttype::whereIn('id',$abc)->get();
         //dd($single_com);
        
-        }
+      //   }
 
 
          // $package_payment= DB::table('payments')
@@ -285,6 +413,8 @@ class ComplaintController extends Controller
 
          $customers_channel_count = CustomerChannel::get()->where('customer_channel_status',1)->where('cus_id',$cus_id)->where('status',0)->count();
 
+         $pending_complaint_count =Complaint::get()->where('complaint_status',1)->where('customer_id',$cus_id)->where('status',0)->count();
+          //dd($pending_complaint_count);
 
 
          
@@ -471,7 +601,7 @@ class ComplaintController extends Controller
          
 
 
-      return view('admin.complaint.complaint_profile')->with('user',$user)->with('customer',$customer)->with('complainttype',$complainttype)->with('cust',$cust)->with('cust_package',$cust_package)->with('cust_device',$cust_device)->with('complaint',$complaint)->with('single_com',$single_com)->with('package_payment',$package_payment)->with('channel_payment',$channel_payment)->with('cust_channel',$cust_channel)->with('customer_device',$customer_device)->with('customer_package',$customer_package)->with('count',$count)->with('customers_package_count',$customers_package_count)->with('customer_channel',$customer_channel)->with('customers_channel_count',$customers_channel_count);
+      return view('admin.complaint.complaint_profile')->with('user',$user)->with('customer',$customer)->with('complainttype',$complainttype)->with('cust',$cust)->with('cust_package',$cust_package)->with('cust_device',$cust_device)->with('package_payment',$package_payment)->with('channel_payment',$channel_payment)->with('cust_channel',$cust_channel)->with('customer_device',$customer_device)->with('customer_package',$customer_package)->with('count',$count)->with('customers_package_count',$customers_package_count)->with('customer_channel',$customer_channel)->with('customers_channel_count',$customers_channel_count)->with('pending_complaint_count',$pending_complaint_count)->with('pending_complaint',$pending_complaint)->with('complaint',$complaint);
         }
        
     }
@@ -519,6 +649,40 @@ class ComplaintController extends Controller
     public function update(Request $request ,$id){
 
      // dd($request->all());
+
+        
+
+        $exist_staff =Complaint::where('staff', '=', $request->assist_by)
+                         ->where('complaint_status','=',1)
+                         ->first();
+
+            $exist_assist_staff =Complaint::where('assist_by', '=', $request->staff)
+                         ->where('complaint_status','=',1)
+                         ->first();
+
+           if($exist_staff){
+                //return "already added";
+
+             return redirect()->back()->with('message',' This Technician already leadership in other complaints, so please select another Technician staff as assistant staff.');
+           }
+
+          
+
+            elseif($exist_assist_staff){
+               // return "already added";
+
+
+
+             return redirect()->back()->with('data',' This Technician already assist in other complaints, so please select another Technician staff as main staff.');
+           }             
+
+
+
+
+
+
+        else{
+
        $complaint=Complaint::find($id);
         // dd($request->all());
           $complaint_update = $complaint->update($request->toArray());
@@ -544,6 +708,8 @@ class ComplaintController extends Controller
         
        
         return redirect()->route('complaint.index');
+
+      }
 
     }
 

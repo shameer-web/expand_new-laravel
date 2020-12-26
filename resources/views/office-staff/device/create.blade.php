@@ -50,13 +50,13 @@
 								@csrf
 								<div class="card-body">
 									<div class="form-group row">
-                                        <label class="col-lg-2 col-form-label text-right">Device Name:</label>
+                                        {{-- <label class="col-lg-2 col-form-label text-right">Device Name:</label>
 										<div class="col-lg-3">
 											<div class="input-group">
 												  <input type="text" name='device_name' placeholder='Device Name' class="form-control" id="" required />
 											</div>
 											
-										</div>
+										</div> --}}
 
 										<label class="col-lg-2 col-form-label text-right">Company Name:</label>
 										<div class="col-lg-3">
@@ -72,10 +72,9 @@
 											</div>
 											<span class="form-text text-muted">Please Selecet Device Type</span>
 										</div>
-										
-									</div>
-									<div class="form-group row">
-                                        <label class="col-lg-2 col-form-label text-right">Device Type:</label>
+
+
+										<label class="col-lg-2 col-form-label text-right">Device Type:</label>
 										<div class="col-lg-3">
 											
 											<div class="input-group">
@@ -90,6 +89,10 @@
 											</div>
 											<span class="form-text text-muted">Please Selecet Device Type</span>
 										</div>
+										
+									</div>
+									<div class="form-group row">
+                                        
 
 
 
@@ -101,11 +104,9 @@
 											</div>
 											
 										</div>
-										
-									</div>
-									<div class="form-group row">
-                                         
-                                         <label class="col-lg-2 col-form-label text-right">Serial Number:</label>
+
+
+										   <label class="col-lg-2 col-form-label text-right">Serial Number:</label>
 										<div class="col-lg-3">
 											<div class="input-group">
 												 <input type="number" name="serial_number" class="form-control" id="" placeholder="Serial Number" required>
@@ -113,6 +114,11 @@
 											</div>
 											
 										</div>
+										
+									</div>
+									<div class="form-group row">
+                                         
+                                      
 
 
                                          
@@ -135,13 +141,7 @@
 										</div>
 
 
-										
-									</div>
-
-
-									<div class="form-group row">
-                                        
-                                        <label class="col-lg-2 col-form-label text-right">District:</label>
+										 <label class="col-lg-2 col-form-label text-right">District:</label>
 										<div class="col-lg-3">
 											
 											<div class="input-group">
@@ -156,6 +156,15 @@
 											</div>
 											<span class="form-text text-muted">Please enter your District</span>
 										</div>
+
+
+										
+									</div>
+
+
+									<div class="form-group row">
+                                        
+                                       
 										
 
 										<label class="col-lg-2 col-form-label text-right">LCO ID:</label>

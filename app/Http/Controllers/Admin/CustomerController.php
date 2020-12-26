@@ -398,8 +398,12 @@ class CustomerController extends Controller
     public function index()
     {
         $customer= Customer::where('customer_status', 1)->get();
-        return view('admin.customer.view')->with('customer',$customer);
+
+         $agent_notification = Agentnotifications::get()->where('agentnotification_status',1)->count();
+         //dd($agent_notification);
+        return view('admin.customer.view')->with('customer',$customer)->with('agent_notification',$agent_notification);
     }
+
     
     public function enquiry($enq_id)
     {
@@ -593,7 +597,7 @@ class CustomerController extends Controller
         // $customer->customer_status = '1';
         $customer->save();
         
-        return redirect()->route('customer.create')->with('message','succesfully created your field');
+        return redirect()->route('customer.index')->with('message','succesfully created your field');
     }
     public function device(Request $request)
     {   
@@ -658,6 +662,7 @@ class CustomerController extends Controller
       //dd($bc);
         $package->package_amount =$bc;
         $package->package_total_amount =$ab;
+        $package->due_amount =$ab;
         $package->cus_id = $request->cus_id;
        
 
@@ -778,11 +783,16 @@ class CustomerController extends Controller
 
 
 
+
     }
 
     public function notifications()
     {
          
+          $agent = Agentnotifications::get()->where('agentnotification_status',1)->count();
+          //dd($agent);
+
+
         $notification = Agentnotifications::where('agentnotification_status', 1)->get(); 
         return view('admin.customer.notification')->with('notification',$notification);
     }
@@ -840,6 +850,27 @@ class CustomerController extends Controller
             return redirect()->route('customer.index');
 
          }
+
+    }
+
+    public function notification_reject(Request $request , $id){
+       // dd($id);
+
+
+          
+
+            
+
+            $notification =Agentnotifications::find($id);
+            //dd($notification);
+
+            $notification->agentnotification_status = 0;
+            
+            $notification->update();
+
+       
+
+        return redirect()->route('customer.index');
     }
 
     public function update_package(Request $request ,$id){
@@ -949,7 +980,8 @@ class CustomerController extends Controller
          $cust_package =CustomerPackage::find($id);
 
           // dd($cust_package->package_total_amount);
-        
+         
+         $deactivation=0; 
         if($request->extra_days_amount == null){
         $balance = $request->total_package_amount - $request->customer_paid_amount;
          }
@@ -958,7 +990,7 @@ class CustomerController extends Controller
           
           $package_total_amount=$cust_package->package_total_amount;
           $monts =$request->extra_days_amount/$package_total_amount;
-         // dd($monts);
+        // dd($monts);
           $day = $monts * 30;
           //dd($day);
            

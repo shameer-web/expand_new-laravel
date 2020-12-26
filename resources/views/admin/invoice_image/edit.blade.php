@@ -53,10 +53,11 @@
 								@method('put')
 								
 									<div class="form-group row">
-										<label class="col-lg-3 col-form-label text-right">Heading:</label>
+										<label class="col-lg-3 col-form-label text-right">Address:</label>
 										<div class="col-lg-9">
-											<input type="text" name="header" value="{{ $edit->header }}"  class="form-control" placeholder=""/>
-											<span class="form-text text-muted">Please enter your Heading</span>
+											{{-- <input type="text" name="header" value="{{ $edit->header }}"  class="form-control" placeholder=""/> --}}
+											<textarea name="header" class="form-control" placeholder="" rows="4">{{ $edit->header }}</textarea>
+											<span class="form-text text-muted">Please enter your Address</span>
 										</div>
 										
 									</div>

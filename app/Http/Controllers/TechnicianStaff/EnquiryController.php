@@ -25,8 +25,35 @@ class EnquiryController extends Controller
 
             $user =User::where('user_delete_status', 1)->where('role',3)->get();
            
-             $data =Enquiery::where('enquiery_status', 1)->where('assign_to',$tech)->get();
+             // $data =Enquiery::where('enquiery_status', 1)->where('assign_to',$tech)->get();
             //dd($data);
+
+            $status = Enquiery::where('enquiery_status', 1)->get();
+
+            foreach($status as $stat){
+           // dd($stat->assign_to);
+           
+
+
+
+
+
+        $res = Enquiery::where('enquiery_status', 1);
+        
+        if ($stat->assign_to ==$tech ){
+        $res->where('assign_to',$tech);
+        $data = $res->get();
+        }
+
+        else{
+              $res->where('assist_by',$tech);
+              $data = $res->get();
+        }
+        }
+        //dd($data);
+
+
+        
 
 
              return view('technician-staff.enquiery.index')->with('data',$data)->with('user',$user);
@@ -108,7 +135,8 @@ class EnquiryController extends Controller
     {   
 
     	//dd($id);
-        // dd($request->all());
+         //dd($request->all());
+
 
 
 
@@ -118,11 +146,13 @@ class EnquiryController extends Controller
 
 
             $staff =$enquiery->assign_to;
+            //dd($staff);
             $customer_name =$enquiery->full_name;
 
 
          $enq_history =new EnquiryHistory();
-            $enq_history->staff =$staff;
+            $enq_history->enq_id =$id;
+            $enq_history->staff =Auth::user()->id;
             $enq_history->customer_name =$customer_name;
             $enq_history->remarks =$request->remarks;
          $enq_history->save();
@@ -156,6 +186,8 @@ class EnquiryController extends Controller
 
             $enquiery->remarks =$request->remarks;
             $enquiery->number_of_visit =$test;
+            $enquiery->assign_status =$request->assign_status;
+
 
             $enquiery->update();
 

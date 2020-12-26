@@ -61,13 +61,13 @@ $device =$page_data['device'];
 								<div class="card-body">
 									<div class="form-group row">
                                         
-                                        <label class="col-lg-2 col-form-label text-right">Device Name:</label>
+                                        {{-- <label class="col-lg-2 col-form-label text-right">Device Name:</label>
 										<div class="col-lg-3">
 											<div class="input-group">
 												  <input type="text" name='device_name' value="{{ $device->device_name}}" placeholder='Device ID' class="form-control" id="" />
 											</div>
 											
-										</div>
+										</div> --}}
 
 
 										<label class="col-lg-2 col-form-label text-right">Company Name:</label>
@@ -84,11 +84,10 @@ $device =$page_data['device'];
 											</div>
 											<span class="form-text text-muted">Please Selecet Device Type</span>
 										</div>
-										
-									</div>
-									<div class="form-group row">
 
-                                        <label class="col-lg-2 col-form-label text-right">Type:</label>
+
+
+										 <label class="col-lg-2 col-form-label text-right">Type:</label>
 										<div class="col-lg-3">
 											
 											<div class="input-group">
@@ -103,6 +102,11 @@ $device =$page_data['device'];
 											</div>
 											<span class="form-text text-muted">Please Selecet Device Type</span>
 										</div>
+										
+									</div>
+									<div class="form-group row">
+
+                                       
                                         
 
 										<label class="col-lg-2 col-form-label text-right">Device ID:</label>
@@ -112,11 +116,9 @@ $device =$page_data['device'];
 											</div>
 											
 										</div>
-										
-									</div>
-									<div class="form-group row">
-                                        
-                                        <label class="col-lg-2 col-form-label text-right">Serial Number:</label>
+
+
+										<label class="col-lg-2 col-form-label text-right">Serial Number:</label>
 										<div class="col-lg-3">
 											<div class="input-group">
 												 <input type="number" name="serial_number" value="{{ $device->serial_number }}" class="form-control" id="" placeholder="Serial Number">
@@ -124,6 +126,11 @@ $device =$page_data['device'];
 											</div>
 											
 										</div>
+										
+									</div>
+									<div class="form-group row">
+                                        
+                                        
 
 
 										<label class="col-lg-2 col-form-label text-right">Model:</label>
@@ -142,14 +149,7 @@ $device =$page_data['device'];
 											<span class="form-text text-muted">Please select your model</span>
 										</div>
 
-
-										
-									</div>
-
-
-									<div  class="form-group row">
-                                       
-                                       <label class="col-lg-2 col-form-label text-right">District:</label>
+										  <label class="col-lg-2 col-form-label text-right">District:</label>
 										<div class="col-lg-3">
 											
 											<div class="input-group">
@@ -164,6 +164,15 @@ $device =$page_data['device'];
 											</div>
 											<span class="form-text text-muted">Please enter your District</span>
 										</div>
+
+
+										
+									</div>
+
+
+									<div  class="form-group row">
+                                       
+                                     
 
 
 										<label class="col-lg-2 col-form-label text-right">LCO ID:</label>

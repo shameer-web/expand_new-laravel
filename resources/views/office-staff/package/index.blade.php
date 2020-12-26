@@ -119,7 +119,7 @@
 										  @endif
                                               <td>{{ $row->package_price}}</td>
                                               {{-- <td>{{ $row->gst }}</td> --}}
-                                              <td>{{ $row->package_amount }}</td>
+                                              <td>{{ $row->total_tax }}</td>
                                               <td>{{ $row->total_amount }}</td>
                                                
                                              

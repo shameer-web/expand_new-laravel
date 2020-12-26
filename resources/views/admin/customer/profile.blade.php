@@ -75,16 +75,19 @@
 
         <!--begin::Contact-->
         <div class="py-9">
-            <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="font-weight-bold mr-2">Customer Name:</span>
-                <a href="#" class="text-muted text-hover-primary">   {{ $customer->name}}</a>
-            </div>
 
              <div class="d-flex align-items-center justify-content-between mb-2">
                 <span class="font-weight-bold mr-2">Customer Id:</span>
                 <a href="#" class="text-muted text-hover-primary">{{ $customer->
                 area_subcode_id }}
             </div>
+
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="font-weight-bold mr-2">Customer Name:</span>
+                <a href="#" class="text-muted text-hover-primary">   {{ $customer->name}}</a>
+            </div>
+
+            
 
             <div class="d-flex align-items-center justify-content-between mb-2">
                 <span class="font-weight-bold mr-2">Email:</span>
@@ -106,7 +109,7 @@
 
              <div class="d-flex align-items-center justify-content-between">
                 <span class="font-weight-bold mr-2">Installation Address:</span>
-                <span class="text-muted">{{ $customer->installation_address}}</span>
+                <span class="text-muted " style="margin-left: 55px">{{ $customer->installation_address}}</span>
             </div>
 
              {{-- <div class="d-flex align-items-center justify-content-between">
@@ -211,7 +214,7 @@
                         <th>Basic Package </th>
                         <th >Add On Package</th>
                         <th >Device</th>
-                        <th>Balance Amount</th></th>
+                        <th>Due Amount</th></th>
                        
                         
                     </tr>
@@ -823,7 +826,7 @@
                         <th>Basic Package </th>
                         <th >Add On Package</th>
                         <th >Device</th>
-                        <th>Balance Amount</th></th>
+                        <th>Due Amount</th></th>
                        
                         
                     </tr>
@@ -1270,7 +1273,7 @@
                         <th>Basic Package </th>
                         <th >Add On Package</th>
                         <th >Device</th>
-                        <th>Balance Amount</th></th>
+                        <th>Due Amount</th></th>
                        
                         
                     </tr>
@@ -1706,7 +1709,7 @@
                         <th>Basic Package </th>
                         <th >Add On Package</th>
                         <th >Device</th>
-                        <th>Balance Amount</th></th>
+                        <th>Due Amount</th></th>
                        
                         
                     </tr>
@@ -2344,7 +2347,7 @@
                         <th>Basic Package </th>
                         <th >Add On Package</th>
                         <th >Device</th>
-                        <th>Balance Amount</th></th>
+                        <th>Due Amount</th></th>
                        
                         
                     </tr>

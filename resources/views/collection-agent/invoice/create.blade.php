@@ -16,11 +16,11 @@
 		<div class="card-body">
 			
 			<div class="form-group row">
-				<label class="col-form-label text-right col-lg-3 col-sm-12">Customer Name</label>
+				<label class="col-form-label text-right col-lg-3 col-sm-12">Customer Id</label>
 				<div class=" col-lg-4 col-md-9 col-sm-12">
 					<select class="form-control " id="" name="cust_id">
                          @foreach($customer as $row)
-						<option value="{{ $row->id }}">{{ $row->name }}</option>
+						<option value="{{ $row->id }}">{{ $row->id }}</option>
 						
                         @endforeach
 						

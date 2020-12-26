@@ -43,7 +43,7 @@
 						<div class="card card-custom gutter-b example example-compact">
 							<div class="card-header">
 								<h3 class="card-title">
-									 Create Form
+									 New Complaint's
 								</h3>
 								
 							</div>
@@ -58,9 +58,27 @@
 											<span class="form-text text-muted">Please enter Customer Id</span>
 
 
-											 @error('search')
+                                              @if ($message = Session::get('message'))
+                                               <div>
+                                                  <p class="text-center text-danger" style="font-size: 18px">{{ $message }}</p>
+                                               </div>
+                                              
+
+
+                                              @elseif ($data = Session::get('data'))
+                                               <div>
+                                                  <p class="text-center text-danger" style="font-size: 18px">{{ $data }}</p>
+                                               </div>
+                                              @endif
+
+
+											 {{-- @error('search')
 												<p class="text-danger">{{ $message }}</p>
-											 @enderror
+											 @enderror --}}
+
+                                           
+
+
 										</div>
 
 										<div class="col-lg-3">

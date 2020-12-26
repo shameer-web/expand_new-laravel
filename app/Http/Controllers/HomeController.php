@@ -9,6 +9,7 @@ use App\Customer;
 use App\Enquiery;
 use App\CustomerPackage;
 use App\Complaint;
+use App\Agentnotifications;
 
 class HomeController extends Controller
 {
@@ -56,6 +57,10 @@ class HomeController extends Controller
          $complaint = Complaint::get()->where('complaint_status',1)->where('status',0)->count();
 
 
-        return view('admin.home')->with('customer',$customer)->with('enquiery',$enquiery)->with('pending_payments',$pending_payments)->with('completed_payments',$completed_payments)->with('cust',$cust)->with('complaint',$complaint);
+          $agent_notification = Agentnotifications::get()->where('agentnotification_status',1)->count();
+
+
+
+        return view('admin.home')->with('customer',$customer)->with('enquiery',$enquiery)->with('pending_payments',$pending_payments)->with('completed_payments',$completed_payments)->with('cust',$cust)->with('complaint',$complaint)->with('agent_notification',$agent_notification);
     }
 }

@@ -46,6 +46,8 @@ Route::group(array('middleware' => 'auth','middleware' => 'is_admin','prefix'=>'
     Route::post('/enquiry/create','EnquiryController@store')->name('enquiry.store');
     Route::get('/enquiry/{id}/edit','EnquiryController@edit')->name('enquiry.edit');
     Route::put('/enquiry/{id}/update','EnquiryController@update')->name('enquiry.update');
+    Route::get('/enquiry/{id}/view','EnquiryController@view')->name('enquiry.view');
+
 //end enquiry 
 
 //customer route start here
@@ -78,6 +80,8 @@ Route::group(array('middleware' => 'auth','middleware' => 'is_admin','prefix'=>'
     Route::get('/customer/{id}/approve','CustomerController@approve')->name('customer.approve');
 
      Route::put('/customer/{id}/notification_update','CustomerController@notification_update')->name('customer.notification_update');
+
+      Route::put('/customer/{id}/notification_reject','CustomerController@notification_reject')->name('customer.notification_reject');
 //customer route end here
 
 // data mange route start here 
@@ -129,6 +133,16 @@ Route::group(array('middleware' => 'auth','middleware' => 'is_admin','prefix'=>'
   Route::post('/invoice/invoice_reg','InvoiceController@invoice_reg')->name('invoice.invoice_reg');
 
    Route::post('/invoice/update_package/{id}','InvoiceController@update_package')->name('invoice.update_package');
+
+
+
+     Route::get('/invoice/notifications', 'InvoiceController@notifications')->name('invoice.notifications');
+
+    Route::get('/invoice/{id}/approve','InvoiceController@approve')->name('invoice.approve');
+
+     Route::put('/invoice/{id}/notification_update','InvoiceController@notification_update')->name('invoice.notification_update');
+
+      Route::post('/invoice/{id}/notification_update','InvoiceController@notification_reject')->name('invoice.notification_reject');
 
    //end invoice
 
@@ -182,6 +196,8 @@ Route::group(array('middleware' => 'auth','middleware' => 'is_office','prefix'=>
     Route::post('/enquiry/create','EnquiryController@store')->name('enquiries.store');
     Route::get('/enquiry/{id}/edit','EnquiryController@edit')->name('enquiries.edit');
     Route::put('/enquiry/{id}/update','EnquiryController@update')->name('enquiries.update');
+
+     Route::get('/enquiry/{id}/view','EnquiryController@view')->name('enquiries.view');
    //end enquiry 
 
 
@@ -203,7 +219,20 @@ Route::group(array('middleware' => 'auth','middleware' => 'is_office','prefix'=>
 
 
     Route::post('/customer/package','CustomerController@package')->name('cus.package');
-    Route::get('/customer/update_package/{id}','CustomerController@update_package')->name('cus.update_package');
+    Route::post('/customer/update_package/{id}','CustomerController@update_package')->name('cus.update_package');
+
+
+
+     Route::post('/customer/chanel','CustomerController@chanel')->name('cus.chanel');
+      Route::post('/customer/update_channel/{id}','CustomerController@update_channel')->name('cus.update_channel');
+
+
+     Route::post('/customer/{id}/notification','CustomerController@notification')->name('cus.notification');
+    Route::get('/customer/notifications', 'CustomerController@notifications')->name('cus.notifications');
+
+    Route::get('/customer/{id}/approve','CustomerController@approve')->name('cus.approve');
+
+     Route::put('/customer/{id}/notification_update','CustomerController@notification_update')->name('cus.notification_update');   
 
 //customer route end here
 
@@ -214,11 +243,28 @@ Route::group(array('middleware' => 'auth','middleware' => 'is_office','prefix'=>
  Route::get('/complainty/create','ComplaintController@create')->name('complaints.create');
  Route::post('/complaint/create','ComplaintController@store')->name('complaints.store');
 
+
+ Route::post('/complaint/activation-deactivation-create','ComplaintController@activation_store')->name('complaints.activation_store');
+
   Route::post('/complaint/complaint_reg','ComplaintController@complaint_reg')->name('complaints.complaint_reg');
 
  Route::get('/complaint/{id}/edit','ComplaintController@edit')->name('complaints.edit');
  Route::put('/complaint/{id}/update','ComplaintController@update')->name('complaints.update');
 //end complaints
+
+
+
+ //start invoice
+
+  Route::get('/invoice','InvoiceController@index')->name('invoices.index');
+ Route::get('/invoice/create','InvoiceController@create')->name('invoices.create');
+  Route::post('/invoice/invoice_reg','InvoiceController@invoice_reg')->name('invoices.invoice_reg');
+
+   Route::post('/invoice/update_package/{id}','InvoiceController@update_package')->name('invoices.update_package');
+
+   //end invoice
+
+ 
 
 
 
@@ -309,6 +355,7 @@ Route::group(array('middleware' => 'auth','middleware' => 'is_collection','prefi
 
 
 
+
      Route::post('/customer/{id}/notification','CustomerController@notification')->name('cust.notification');
     
 //customer route end here
@@ -362,6 +409,8 @@ Route::get('assets/image/invoice_image/{filename}', function ($filename)
     $response->header("Content-Type", $type);
     return $response;
 });
+
+
 
 
 

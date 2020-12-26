@@ -3,298 +3,392 @@
 
 @section('content')
 
-                <!--begin::Content-->
-<div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
-											<!--begin::Subheader-->
-    
+<body>
+ 
+<div class="container bg-white">
+  <div class="row">
+<div class="col-md-12  ">
+
+<table class="table-bordered" style="width: 100%">
+    <tbody>
+
+      <tr>
+        <td class="center">
+          <img src="{{ url('assets/image/invoice_image/'.$invoice_img1->invoice_image)}}" style="padding:80px" width="100%"> 
+        {{-- <h4>Company Name</h4> --}}
+        <h4 class="font-italic font-weight-bold">{{ $invoice_img1->header }}</h4>
+                {{--  <p>Email: info@totoronto.ca</p>
+ <p>Phone:+1-647-354-1222, +1-437-772-3191</p> --}}
+        </td>   
+        <td class="center" >
+          <img src="{{ url('assets/image/invoice_image/'.$invoice_img2->invoice_image)}}" class="brand-logo" style="padding:80px" width="100%"> 
+        {{--  <h4>Company Name</h4> --}}
+        <h4 class="font-italic font-weight-bold">{{ $invoice_img2->header }}</h4>
+       {{--   <p>Email: info@totoronto.ca</p>
+ <p>Phone:+1-647-354-1222, +1-437-772-3191</p> --}}
+        </td>  
+       </tr>
+
+        
+          <tr>
+
+              @if($cust_package == null)
+              <td class="center" width="50%"> 
+               <h6>Name: </h6>
+              </td> 
+              @else
+              <td class="center" width="50%"> 
+               <h6>Name: {{ $cust_package->cus['name'] }}</h6>
+              </td> 
+              @endif 
+              
+               @if($cust_package == null)
+              <td class="center" width="50%"> 
+               <h6>Plan: </h6>
+              </td> 
+              @else
+              <td class="center" width="50%"> 
+               <h6>Plan:  {{ $cust_package->package['package_name'] }}</h6>
+              </td>
+              @endif                           
+          </tr>
+
+
+          <tr>
+               @if($cust_package == null)
+              <td class="center" width="50%"> 
+               <h6>Customer ID: </h6>
+              </td> 
+              @else
+              <td class="center" width="50%"> 
+               <h6>Customer ID: {{ $cust_package->cus['area_subcode_id'] }}</h6>
+              </td>
+              @endif  
+
+              @if($cust_package == null)
+              <td class="center" width="50%"> 
+               <h6>Plan Rate: </h6>
+              </td> 
+              @else
+              <td class="center" width="50%"> 
+               <h6>Plan Rate:  {{ $cust_package->package_amount }}</h6>
+              </td> 
+              @endif                          
+          </tr>
 
 
 
-<!--end::Subheader-->
+          <tr>
+                @if($cust_package == null)
+              <td class="center" width="50%"> 
+               <h6>Address: </h6>
+              </td> 
+              @else
+              <td class="center" width="50%"> 
+               <h6>Address: {{ $cust_package->cus['installation_address'] }}</h6>
+              </td> 
+              @endif 
 
-					<!--begin::Entry-->
+              <td class="center" width="50%"> 
+               <h6>Bill Date: {{ $billdate }}</h6>
+              </td>
 
-<!--end::Entry-->
-<div class="d-flex flex-column-fluid" >
-		<!--begin::Container-->
-		<div class=" container " >
-			<div class="card card-custom">
-    <div class="card-body p-0">
-        <!--begin::Invoice-->
-        <div class="row justify-content-center pt-8 px-8 pt-md-27 px-md-0">
-            <div class="col-md-9">
-                <!-- begin: Invoice header-->
-                <div class="d-flex justify-content-between pb-10 pb-md-20 flex-column flex-md-row">
-                    <h1 class="display-4 font-weight-boldest mb-10">INVOICE</h1>
-                    <div class="d-flex flex-column align-items-md-end px-0">
-                        <!--begin::Logo-->
-                        <img src="{{asset('assets/media/logos/ExpandLogo.png')}}" class="max-h-70px" alt=""/>                          </a>
-                        <!--end::Logo-->
-                        <span class="d-flex flex-column align-items-md-end font-size-h5 font-weight-bold text-muted">
-                            <span>Cecilia Chapman, 711-2880 Nulla St, Mankato</span>
-                            <span>Mississippi 96522</span>
-                        </span>
-                    </div>
-                </div>
-               
-                <!--end: Invoice header-->
-
-                <!--begin: Invoice body-->
-                <div class="row border-bottom pb-10">
-                    <div class="col-md-9 py-md-10 pr-md-10">
-                        <div class="table-responsive">
-                            <h6>Bill Details</h6>
-                                
-
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th class="pt-1 pb-9 pl-0 font-weight-bolder text-muted font-size-lg text-uppercase">Subscription Charge</th>
-                                        <th class="pt-1 pb-9 text-right font-weight-bolder text-muted font-size-lg text-uppercase">CGST -9%</th>
-                                        <th class="pt-1 pb-9 text-right font-weight-bolder text-muted font-size-lg text-uppercase">SGST - 9%</th>
-                                        <th class="pt-1 pb-9 text-right font-weight-bolder text-muted font-size-lg text-uppercase">KFC - 1%</th>
-                                        <th class="pt-1 pb-9 text-right pr-0 font-weight-bolder text-muted font-size-lg text-uppercase">Total Tax </th>
-                                         <th class="pt-1 pb-9 text-right pr-0 font-weight-bolder text-muted font-size-lg text-uppercase">Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    
-                                    <tr class="font-weight-bolder font-size-lg">
-                                        <td class="border-top-0 pl-0 pt-7 d-flex align-items-center">
-                                            <span class="navi-icon mr-2">
-                                                <i class="fa fa-genderless text-danger font-size-h2"></i>
-                                            </span>
-                                            @if($cust_package == null)
-                                              <p></p>
-                                            @else
-                                            {{ $cust_package->package['package_price'] }}
-                                            @endif
-                                        </td>
-                                         @if($cust_package == null)
-                                         <td></td>
-                                         @else
-                                        <td class="text-right pt-7">{{ $cust_package->package['cgst'] }}</td>
-                                        @endif
-                                        @if($cust_package == null)
-                                         <td></td>
-                                         @else
-                                        <td class="text-right pt-7">{{ $cust_package->package['sgst'] }}</td>
-                                        @endif
-                                        @if($cust_package == null)
-                                         <td></td>
-                                        @else
-                                        <td class="text-right pt-7">{{ $cust_package->package['cess'] }}</td>
-                                        @endif
-                                        @if($cust_package == null)
-                                         <td></td>
-                                         @else
-                                        <td class="pr-0 pt-7 font-size-h6 font-weight-boldest text-right">{{ $cust_package->package['total_tax'] }}</td>
-                                        @endif
-                                        @if($cust_package == null)
-                                         <td></td>
-                                         @else
-                                        <td class="pr-0 pt-7 font-size-h6 font-weight-boldest text-right">{{ $cust_package->package['total_amount'] }}</td>
-                                        @endif
-                                    </tr>
-                                   
-                                </tbody>
-                            </table>
-                        </div>
-
-
-
-                        <div class="border-bottom w-100 mt-7 mb-13"></div>
-
-                        <div class="table-responsive">
-                            <h6>Payment Due Details</h6>
-                                
-                              
-                                                  
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th class="pt-1 pb-9 pl-0 font-weight-bolder text-muted font-size-lg text-uppercase"> Balance</th>
-                                        <th class="pt-1 pb-9 pl-0 font-weight-bolder text-muted font-size-lg text-uppercase"> Paid Amount</th>
-                                        <th class="pt-1 pb-9 text-right font-weight-bolder text-muted font-size-lg text-uppercase">Net Amount</th>
                                         
-                                        <th class="pt-1 pb-9 text-right pr-0 font-weight-bolder text-muted font-size-lg text-uppercase">Total Amount Due</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    
-                                    <tr class="font-weight-bolder font-size-lg">
-                                        <td class="border-top-0 pl-0 pt-7 d-flex align-items-center">
-                                            <span class="navi-icon mr-2">
-                                                <i class="fa fa-genderless text-danger font-size-h2"></i>
-                                            </span>
-                                            @if($cust_package == null)
-                                            <p></p>
-                                            @else
-                                           {{ $cust_package->balance }}
-                                           @endif
-                                        </td>
+          </tr>
 
-                                        @if($cust_package == null)
-                                        <td></td>
-                                        @else
-                                        <td class=" pt-7">{{ $cust_package->customer_paid_amount }}</td>
-                                        @endif
+         {{--  <tr>
 
-
-                                        @if($cust_package == null)
-                                        <td></td>
-                                        @else
-                                        <td class="text-right pt-7">{{$cust_package->package['total_amount'] }}</td>
-                                        @endif
-                                        <td class="text-right pt-7"></td>
-                                        <td class="pr-0 pt-7 font-size-h6 font-weight-boldest text-right"></td>
-                                    </tr>
-                                   
-                                </tbody>
-                            </table>
-                        </div>
-
-
-                    </div>
-                    <div class="col-md-3 border-left-md pl-md-10 py-md-10 text-right">
-                        <!--begin::Total Amount-->
-                        <div class="font-size-h4 font-weight-bolder text-muted mb-3">TOTAL AMOUNT</div>
-                        @if($cust_package == null)
-                        <div></div>
-                        @else
-                        <div class="font-size-h1 font-weight-boldest">{{ $cust_package->package['total_amount'] }}</div>
-                        @endif
-                        <div class="text-muted font-weight-bold mb-16">Taxes included</div>
-                        <!--end::Total Amount-->
-
-                        <div class="border-bottom w-100 mb-16"></div>
-
-                        <!--begin::Invoice To-->
-                        <div class="text-dark-50 font-size-lg font-weight-bold mb-3">INVOICE TO.</div>
-                        @if($cust_package == null)
-                        <div></div>
-                        @else
-                        <div class="font-size-lg font-weight-bold mb-10">{{ $cust_package->cus['name'] }}.<br />{{ $cust_package->cus['installation_address'] }}.<br />{{ $cust_package->cus['mobile_number'] }} </div>
-                        @endif
-                        <!--end::Invoice To-->
-
-                        <!--begin::Invoice No-->
-                        <div class="text-dark-50 font-size-lg font-weight-bold mb-3">INVOICE NO.</div>
-                        @if($cust_package == null)
-                        <div></div>
-                        @else
-                        <div class="font-size-lg font-weight-bold mb-10">{{ $cust_package->cus['id'] }}</div>
-                        @endif
-                        <!--end::Invoice No-->
-
-                        <!--begin::Invoice Date-->
-                        <div class="text-dark-50 font-size-lg font-weight-bold mb-3">DATE</div>
-                        @if($cust_package == null)
-                        <div></div>
-                        @else
-                        <div class="font-size-lg font-weight-bold">{{ $cust_package->payment_date }}</div>
-                        @endif
-                        <!--end::Invoice Date-->
-                    </div>
-                </div>
-                <!--end: Invoice body-->
-            </div>
-        </div>
-        <!-- begin: Invoice action-->
-        <div class="row justify-content-center py-8 px-8 py-md-28 px-md-0">
-            <div class="col-md-9">
-                <div class="d-flex font-size-sm flex-wrap">
-                    <button type="button" class="btn btn-primary font-weight-bolder py-4 mr-3 mr-sm-14 my-1" onclick="window.print();">Print Invoice</button>
-                    
-                   {{--  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Pay</button> --}}
-
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pay" > Pay</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- end: Invoice action-->
-        <!--end::Invoice-->
-    </div>
-</div>		</div>
-		<!--end::Container-->
-    </div>
-    
-    <!-- Modal-->
-{{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Payment</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i aria-hidden="true" class="ki ki-close"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-            <div class="card card-custom card-sticky" id="kt_page_sticky_card">
+              <td class="center" width="50%"> 
+               <h6>Bill No: KER/KZH/1175/2018-1</h6>
+              </td> 
                 
-                <div class="card-body">
-                    <!--begin::Form-->
-                    <form class="form" {{ route('invoice.invoice_package',$cust_package->id) }} method="post" id="kt_form">
-                         @csrf
-                        <div class="row">
-                            <div class="col-xl-2"></div>
-                            <div class="col-xl-8">
-                                <div class="my-5">
-                                    <h3 class=" text-dark font-weight-bold mb-10">Payment Info:</h3>
-                                    <div class="form-group row">
-                                        <label class="col-5">Due Amount</label>
-                                        <div class="col-7">
-                                            <input class="form-control form-control-solid" name ="due_amount" value="" type="text" placeholder="0"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-5">Pay Amount</label>
-                                        <div class="col-7">
-                                            <input class="form-control form-control-solid" value="" name="paid_amount" type="text" placeholder="0"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-5">Transaction Type</label>
-                                        <div class="col-7">
-                                        <select class="form-control form-control-solid" name="transaction_type">
-                                                <option value="card">Card</option>
-                                                <option value="cheque">Cheque</option>
-                                                <option value="cash">Cash</option>
-                                               
-                                                
-                                                
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-5">GST No</label>
-                                        <div class="col-7">
-                                            <input class="form-control form-control-solid" name="gst_number" type="text" placeholder="32AACFG1099D1ZU"/>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                
-                                <div class="separator separator-dashed my-10"></div>
-                                
-                            </div>
-                            <div class="col-xl-2"></div>
-                        </div>
-                        <div class="modal-footer">
-                <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary font-weight-bold">Save changes</button>
-            </div>
-                    </form>
-                    <!--end::Form-->
-                </div>
-            </div>
-            </div>
-            
-        </div>
-    </div>
-</div> --}}
 
+              <td class="center" width="50%"> 
+               <h6>Bill Period: Jan-2020</h6>
+              </td>                           
+          </tr> --}}
+
+         {{--   <tr>
+              <td class="center" width="50%"> 
+                
+              </td>  
+
+              <td class="center" width="50%"> 
+               <h6>Due Date: 10-02-2020</h6>
+              </td>                           
+          </tr> --}}
+
+         
+
+
+          <tr>
+              <td class="center" width="100%" colspan="2"> <h4>Bill Details</h4></td>                      
+          </tr>
+
+
+          <tr>
+             {{--  <td class="center" width="50%"> 
+               <h6> Subscription Charge: 930</h6>
+              </td>  --}}
+
+              @if($cust_package == null)
+              <td>
+                   <h6> CGST -9%: </h6>
+              </td> 
+              @else
+              <td class="center" width="50%"> 
+               <h6> CGST -9%: {{ $cust_package->package['cgst'] }}</h6>
+              </td>
+              @endif 
+
+
+               @if($cust_package == null)
+              <td>
+                  <h6> SGST - 9%: </h6>
+              </td> 
+              @else
+              <td class="center" width="50%"> 
+               <h6> SGST - 9%: {{ $cust_package->package['sgst'] }}</h6>
+              </td> 
+              @endif                   
+          </tr>
+
+
+
+          <tr>
+              
+
+               @if($cust_package == null)
+              <td>
+                  <h6> CESS - 1%: </h6>
+              </td> 
+              @else
+
+              <td class="center" width="50%"> 
+               <h6> CESS - 1%: {{ $cust_package->package['cess'] }}</h6>
+              </td> 
+              @endif 
+
+
+                @if($cust_package == null)
+              <td>
+                   <h6> Total Tax:  </h6>
+              </td> 
+              @else
+              <td class="center" width="50%"> 
+               <h6> Total Tax: {{ $cust_package->package['total_tax'] }} </h6>
+              </td> 
+              @endif                          
+          </tr>
+         
+
+          <tr>
+             
+
+               @if($cust_package == null)
+              <td>
+                  <h6> Total: </h6>
+              </td> 
+              @else
+
+              <td class="center" width="50%"> 
+               <h6> Total: {{ $cust_package->package['total_amount'] }}</h6>
+              </td>  
+
+              @endif                         
+          </tr>
+
+
+      
+
+            <tr>
+              <td class="center" width="100%" colspan="2"> <h4>Payment Due Details</h4></td>                      
+          </tr>
+
+
+          <tr>
+               @if($cust_package == null)
+              <td>
+                  <h6> Previous Balance: </h6>
+              </td> 
+              @else
+              <td class="center" width="50%"> 
+               <h6> Previous Balance: {{ $cust_package->balance }}</h6>
+              </td> 
+              @endif 
+
+
+               @if($cust_package == null)
+              <td>
+                  <h6> Discount: </h6>
+              </td> 
+              @else
+
+              <td class="center" width="50%"> 
+               <h6> Discount: {{ $cust_package->discount }} </h6>
+              </td>  
+              @endif 
+
+
+
+
+
+
+                     
+          </tr>
+
+
+          
+         
+          <tr>
+               
+               
+               @if($cust_package == null)
+              <td>
+                  <h6> Net Amount: </h6>
+              </td> 
+              @else
+              <td class="center" width="50%"> 
+               <h6> Net Amount: {{ $total_amount }} </h6>
+              </td>  
+              @endif    
+
+
+
+
+                @if($cust_package == null)
+              <td>
+                  <h6> Total Amount Due: </h6>
+              </td> 
+              @else
+              <td class="center" width="50%"> 
+               <h6> Total Amount Due: {{  $total_amount }}</h6>
+              </td>  
+              @endif
+                      
+          </tr>
+
+
+
+          <tr>
+              <td class="center" colspan="2" width="100%"> 
+                <div class="row">
+                   <div class="col-md-6">
+                      <button type="button" class="btn btn-primary font-weight-bolder py-4 mr-3 mr-sm-14 my-1" onclick="window.print();">Print Invoice</button>
+                   </div>
+                   <div class="col-md-6">
+                       <button type="button" class="btn btn-primary font-weight-bolder py-4 mr-3 mr-sm-14 my-1" data-toggle="modal" data-target="#pay" > Pay</button>
+                   </div>
+                  {{--  <div class="col-md-4">
+                     <h6> Total Amount Due: 38.800000000001</h6>
+                   </div> --}}
+                  
+
+                </div>
+              
+              </td>  
+        
+          </tr>
+         
+ 
+         
+
+          <!-- <tr>
+            <td class="center" width="50%" > <textarea type="text" class="form-control" name="address" id="website" placeholder="Address" data-rule="website" data-msg="Please Address" spellcheck="false"></textarea></td>  
+            <td class="center" width="50%"> 
+              <label style="margin-top: 0px;"><span style="display: inline-block;">English </span>
+                  <input class="form-control" type="checkbox" style="height: 20px;">
+              </label>
+              </td>      
+                                     
+          </tr>
+
+
+
+        <tr>
+              <td class="center" width="50%"> <input type="text" name="name" class="form-control" id="name" placeholder="GST NO" data-rule="minlen:4" data-msg="Please enter at least 4 chars"></td>  
+              <td class="center" width="50%"> 
+                <input type="text" name="name" class="form-control" id="name" placeholder="Bill NO" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                </td>      
+                                      
+          </tr>
+
+
+
+
+
+        <tr>
+              <td class="center" width="50%"> <input type="text" name="name" class="form-control" id="name" placeholder="Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars"></td>  
+              <td class="center" width="50%"> 
+                <input type="text" name="name" class="form-control" id="name" placeholder="Bill Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                </td>      
+                                      
+          </tr>
+
+
+     <tr>
+              <td class="center" width="50%"> <input type="text" name="name" class="form-control" id="name" placeholder="Mobile" data-rule="minlen:4" data-msg="Please enter at least 4 chars"></td>  
+              <td class="center" width="50%"> 
+                <input type="text" name="name" class="form-control" id="name" placeholder="Bill Period" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                </td>      
+                                      
+          </tr>
+
+
+     <tr>
+      <td class="center" width="50%"> 
+          <input type="text" name="name" class="form-control" id="name" placeholder="Mobile" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+      </td>  
+      <td class="center" width="50%"> 
+          <input type="text" name="name" class="form-control" id="name" placeholder="Due Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+      </td>      
+                                      
+          </tr>
+ 
+
+          <tr>
+            <td class="center" width="100%" colspan="2"> Bill Details</td>  
+
+                                         
+          </tr>
+            <tr>
+              <td class="center" width="100%" colspan="2"> 
+               <input type="text" name="name" class="form-control" id="name" placeholder="Subscription Charge" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                <input type="text" name="name" class="form-control" id="name" placeholder="CGST-9%" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                <input type="text" name="name" class="form-control" id="name" placeholder="SCGST-9%" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                <input type="text" name="name" class="form-control" id="name" placeholder="KFC-1%" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Total Tax" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Total " data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+              </td>   
+ </tr>
+  
+  
+  <tr>
+            <td class="center" width="100%" colspan="2"> Payment Due Details</td>  
+
+                                         
+          </tr>
+            <tr>
+              <td class="center" width="100%" colspan="2"> 
+               <input type="text" name="name" class="form-control" id="name" placeholder="Previous Balance Charge" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                
+                <input type="text" name="name" class="form-control" id="name" placeholder="Net Amount" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Total Amount Due" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+              </td>   
+ </tr>
+
+            <tr>
+              <td colspan="2" char="center">
+              <button name="submit" style="background:black; color: #fff;" type="submit">Submit Now</button> 
+               </td>
+            </tr> -->
+
+                      </tbody>
+                    </table>
+               
+                </div>
+
+  {{--  start modal --}}
   @if($cust_package == null)
   <div></div>
   @else
@@ -391,13 +485,19 @@
  </div>
  @endif
 
-
-<!-- end modal  -->
-
+ {{-- end modal --}}
 
 
-</div>
-				
+
+
+                </div>
+              </div>
+
+              <style type="text/css">
+                td{padding: 10px; }
+
+              </style>
+            </body>
 @endsection
 
 

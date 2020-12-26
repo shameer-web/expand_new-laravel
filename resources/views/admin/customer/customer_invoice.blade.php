@@ -115,7 +115,7 @@
                     <div class="col-md-3 border-left-md pl-md-10 py-md-10 text-right">
                         <!--begin::Total Amount-->
                         <div class="font-size-h4 font-weight-bolder text-muted mb-3">TOTAL AMOUNT</div>
-                        <div class="font-size-h1 font-weight-boldest">{{ $cust_package->package['total_amount'] }}</div>
+                        <div class="font-size-h1 font-weight-boldest">{{ $cust_package->package_total_amount }}</div>
                         <div class="text-muted font-weight-bold mb-16">Taxes included</div>
                         <!--end::Total Amount-->
 

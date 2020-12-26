@@ -74,14 +74,18 @@
 
         <!--begin::Contact-->
         <div class="py-9">
+            
+             <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="font-weight-bold mr-2">Customer ID:</span>
+                <a href="#" class="text-muted text-hover-primary">{{$cust->area_subcode_id}}</a>
+            </div>
+
+
             <div class="d-flex align-items-center justify-content-between mb-2">
                 <span class="font-weight-bold mr-2">Customer Name:</span>
                 <a href="#" class="text-muted text-hover-primary">{{ $cust->name }}</a>
             </div>
-            <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="font-weight-bold mr-2">Customer ID:</span>
-                <a href="#" class="text-muted text-hover-primary">{{$cust->area_subcode_id}}</a>
-            </div>
+           
             
              <div class="d-flex align-items-center justify-content-between mb-2">
                 <span class="font-weight-bold mr-2">CRF NO:</span>
@@ -89,7 +93,7 @@
             </div>
              <div class="d-flex align-items-center justify-content-between mb-2">
                 <span class="font-weight-bold mr-2">Installation Address:</span>
-                <span class="text-muted">{{$cust->installation_address}}</span>
+                <span class="text-muted" style="margin-left: 55px">{{$cust->installation_address}}</span>
             </div>
             <div class="d-flex align-items-center justify-content-between mb-2">
                 <span class="font-weight-bold mr-2">Mobile No:</span>
@@ -349,14 +353,14 @@
                         </span> --}}
                         @if( $cust_package == null)
                         <div class="d-flex flex-column text-dark-75">
-                            <span class="font-weight-bolder font-size-h5">Balance Amount</span>
+                            <span class="font-weight-bolder font-size-h5">Due Amount</span>
                             <p class="text-primary font-weight-bolder font-size-sm">Package Not selected</p>
                         
                         </div>
                         @else
                         
                         <div class="d-flex flex-column text-dark-75">
-                            <span class="font-weight-bolder font-size-h5">Balance Amount</span>
+                            <span class="font-weight-bolder font-size-h5">Due Amount</span>
                            
                            {{ $cust_package->due_amount }}
 
@@ -401,6 +405,49 @@
 
 
                                 Package({{  $customers_channel_count }})
+
+                              </a>
+
+                        </div>
+                        @endif
+                 </div>
+
+
+                 <div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
+                       {{--  <span class="mr-4">
+                            <i class="flaticon-piggy-bank display-4 text-muted font-weight-bold"></i>
+                        </span> --}}
+                        @if( $pending_complaint_count == 0)
+                        <div class="d-flex flex-column text-dark-75">
+                            <span class="font-weight-bolder font-size-h5">Pending Complaint</span>
+                            <p class="text-primary font-weight-bolder font-size-sm">No Pending Complaint </p>
+                        
+                        </div>
+
+                        
+
+                      
+
+                        @else
+                        
+                        <div class="d-flex flex-column text-dark-75">
+                            <span class="font-weight-bolder font-size-h5">Pending Complaint's</span>
+                           
+                          
+
+                             
+
+                              <a class="btn btn-danger badge" data-toggle="modal" data-target="#exampleModalSizeDefault111">
+                                  
+                                {{--  @foreach($customer_channel as $pack)
+
+                                {{ $pack->package_name }}<br>
+
+
+                              @endforeach --}}
+
+
+                                Complaint's({{  $pending_complaint_count }})
 
                               </a>
 
@@ -486,6 +533,41 @@
                                             </div>
                                             <span class="form-text text-muted">Please enter Staff name</span>
                                         </div>
+
+                                        @error('staff')
+                                           <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                        
+                                    </div>
+
+
+
+
+
+
+
+                                     <div class="form-group row">
+
+                                        <label class="col-lg-3 col-form-label text-right">Assist by:</label>
+                                        <div class="col-lg-5">
+                                            <div class="input-group">
+                                            
+                                                <select class="form-control  "  name="assist_by">
+                                                            @foreach($user as $row)
+                                                            <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                                            
+                                                             @endforeach
+                                                 
+                                                </select>
+                                                
+                                                
+                                            </div>
+                                            <span class="form-text text-muted">Please enter Assistant name</span>
+                                        </div>
+
+                                        @error('assist_by')
+                                           <p class="text-danger">{{ $message }}</p>
+                                        @enderror
                                         
                                     </div>
 
@@ -571,7 +653,7 @@
                                         
                                        <label class="col-lg-3 col-form-label text-right">Phone:</label>
                                         <div class="col-lg-5">
-                                            <input type="text" name="phone" value="{{$cust->phone}}"  class="form-control" placeholder="Enter Phone No" required/>
+                                            <input type="text" name="phone" value="{{$cust->phone}}"  class="form-control" placeholder="Enter Phone No" />
                                             <span class="form-text text-muted">Please enter Phone No</span>
                                         </div>
 
@@ -841,14 +923,14 @@
                         </span> --}}
                         @if( $cust_package == null)
                         <div class="d-flex flex-column text-dark-75">
-                            <span class="font-weight-bolder font-size-h5">Balance Amount</span>
+                            <span class="font-weight-bolder font-size-h5">Due Amount</span>
                             <p class="text-primary font-weight-bolder font-size-sm">No Due</p>
                         
                         </div>
                         @else
                         
                         <div class="d-flex flex-column text-dark-75">
-                            <span class="font-weight-bolder font-size-h5">Balance Amount</span>
+                            <span class="font-weight-bolder font-size-h5">Due Amount</span>
                            
                            {{ $cust_package->due_amount }}
 
@@ -886,6 +968,48 @@
 
 
                                 Package({{  $customers_channel_count }})
+
+                              </a>
+
+                        </div>
+                        @endif
+                 </div>
+
+                   <div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
+                       {{--  <span class="mr-4">
+                            <i class="flaticon-piggy-bank display-4 text-muted font-weight-bold"></i>
+                        </span> --}}
+                        @if( $pending_complaint_count == 0)
+                        <div class="d-flex flex-column text-dark-75">
+                            <span class="font-weight-bolder font-size-h5">Pending Complaint</span>
+                            <p class="text-primary font-weight-bolder font-size-sm">No Pending Complaint </p>
+                        
+                        </div>
+
+                        
+
+                      
+
+                        @else
+                        
+                        <div class="d-flex flex-column text-dark-75">
+                            <span class="font-weight-bolder font-size-h5">Pending Complaint's</span>
+                           
+                          
+
+                             
+
+                              <a class="btn btn-danger badge" data-toggle="modal" data-target="#exampleModalSizeDefault111">
+                                  
+                                {{--  @foreach($customer_channel as $pack)
+
+                                {{ $pack->package_name }}<br>
+
+
+                              @endforeach --}}
+
+
+                                Complaint's({{  $pending_complaint_count }})
 
                               </a>
 
@@ -977,6 +1101,39 @@
                                             </div>
                                             <span class="form-text text-muted">Please enter Staff name</span>
                                         </div>
+
+
+                                        @error('staff')
+                                           <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                        
+                                    </div>
+
+
+
+                                     <div class="form-group row">
+
+                                        <label class="col-lg-3 col-form-label text-right">Assist by:</label>
+                                        <div class="col-lg-5">
+                                            <div class="input-group">
+                                            
+                                                <select class="form-control  "  name="assist_by">
+                                                            @foreach($user as $row)
+                                                            <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                                            
+                                                             @endforeach
+                                                 
+                                                </select>
+                                                
+                                                
+                                            </div>
+                                            <span class="form-text text-muted">Please enter Assistant name</span>
+                                        </div>
+
+
+                                        @error('assist_by')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
                                         
                                     </div>
 
@@ -1420,14 +1577,14 @@
                         </span> --}}
                         @if( $cust_package == null)
                         <div class="d-flex flex-column text-dark-75">
-                            <span class="font-weight-bolder font-size-h5">Out standing Amount</span>
+                            <span class="font-weight-bolder font-size-h5">Due Amount</span>
                             <p class="text-primary font-weight-bolder font-size-sm">Package Not selected</p>
                         
                         </div>
                         @else
                         
                         <div class="d-flex flex-column text-dark-75">
-                            <span class="font-weight-bolder font-size-h5">Out standing Amount</span>
+                            <span class="font-weight-bolder font-size-h5">Due Amount</span>
                            
                            {{ $cust_package->due_amount }}
 
@@ -1465,6 +1622,48 @@
 
 
                                 Package({{  $customers_channel_count }})
+
+                              </a>
+
+                        </div>
+                        @endif
+                 </div>
+
+                   <div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
+                       {{--  <span class="mr-4">
+                            <i class="flaticon-piggy-bank display-4 text-muted font-weight-bold"></i>
+                        </span> --}}
+                        @if( $pending_complaint_count == 0)
+                        <div class="d-flex flex-column text-dark-75">
+                            <span class="font-weight-bolder font-size-h5">Pending Complaint</span>
+                            <p class="text-primary font-weight-bolder font-size-sm">No Pending Complaint </p>
+                        
+                        </div>
+
+                        
+
+                      
+
+                        @else
+                        
+                        <div class="d-flex flex-column text-dark-75">
+                            <span class="font-weight-bolder font-size-h5">Pending Complaint's</span>
+                           
+                          
+
+                             
+
+                              <a class="btn btn-danger badge" data-toggle="modal" data-target="#exampleModalSizeDefault111">
+                                  
+                                {{--  @foreach($customer_channel as $pack)
+
+                                {{ $pack->package_name }}<br>
+
+
+                              @endforeach --}}
+
+
+                                Complaint's({{  $pending_complaint_count }})
 
                               </a>
 
@@ -1574,18 +1773,18 @@
                             <td></td> 
                         </tr>
                         @else
-
+                        @foreach($complaint as $row)
                         <tr>
-                        <td>{{ $complaint->id }}</td>
-                        <td>{{ $complaint->complaint_id }}</td>
+                        <td>{{ $row->id }}</td>
+                        <td>{{ $row->complaint_id }}</td>
 
-                           @if($complaint->active_deactive == 1 )
+                           @if($row->active_deactive == 1 )
                             <td>
                                
                                 <button class="btn btn-success badge">Activation</button>
                             </td>
                                                    
-                            @elseif($complaint->active_deactive == 2 )
+                            @elseif($row->active_deactive == 2 )
 
                               <td>
                                     <button class="btn btn-danger badge">Deactivation</button>
@@ -1597,9 +1796,13 @@
                             @else
                             <td>
                                                  
-                                @foreach($single_com as$com )
+                               {{--  @foreach($single_com as$com )
                                   {{ $com->complainttype }},<br>
-                                @endforeach
+                                @endforeach --}}
+
+                                 @foreach($row->complaint as $data)
+                                                  <span class="btn"> {{ $data['complainttype'].';' }} </span>
+                                 @endforeach
                             </td>
                         @endif
 
@@ -1608,9 +1811,9 @@
 
 
                        
-                        <td>{{ $cust->name }}</td>
-                        <td>{{ $complaint->phone_no }}</td>
-                        <td>{{ $complaint->created_at }}</td>
+                        <td>{{ $row->customer_name }}</td>
+                        <td>{{ $row->phone_no }}</td>
+                        <td>{{ $row->created_at }}</td>
                        {{--  @if($complaint->active_deactive == null)
                         <td></td>
                         @elseif($complaint->active_deactive == 1)
@@ -1619,13 +1822,14 @@
                          <td><button class="badge btn btn-danger">Deactive</button></td>
                          @endif --}}
 
-                        @if($complaint->status ==0) 
+                        @if($row->status ==0) 
                             <td><button class="badge btn btn-danger">pendind</button></td>
                         @else
                         <td> <button class=" badge btn btn-success">Completed</button></td>
                         @endif
                         {{-- <td>{{ $complaint-> }}</td> --}}
                         </tr>
+                        @endforeach
                         @endif
                     </tbody>
             
@@ -1797,14 +2001,14 @@
                         </span> --}}
                         @if( $cust_package == null)
                         <div class="d-flex flex-column text-dark-75">
-                            <span class="font-weight-bolder font-size-h5">Out standing Amount</span>
+                            <span class="font-weight-bolder font-size-h5">Due Amount</span>
                             <p class="text-primary font-weight-bolder font-size-sm">Package Not selected</p>
                         
                         </div>
                         @else
                         
                         <div class="d-flex flex-column text-dark-75">
-                            <span class="font-weight-bolder font-size-h5">Out standing Amount</span>
+                            <span class="font-weight-bolder font-size-h5">Due Amount</span>
                            
                            {{ $cust_package->due_amount }}
 
@@ -1842,6 +2046,49 @@
 
 
                                 Package({{  $customers_channel_count }})
+
+                              </a>
+
+                        </div>
+                        @endif
+                 </div>
+
+
+                   <div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
+                       {{--  <span class="mr-4">
+                            <i class="flaticon-piggy-bank display-4 text-muted font-weight-bold"></i>
+                        </span> --}}
+                        @if( $pending_complaint_count == 0)
+                        <div class="d-flex flex-column text-dark-75">
+                            <span class="font-weight-bolder font-size-h5">Pending Complaint</span>
+                            <p class="text-primary font-weight-bolder font-size-sm">No Pending Complaint </p>
+                        
+                        </div>
+
+                        
+
+                      
+
+                        @else
+                        
+                        <div class="d-flex flex-column text-dark-75">
+                            <span class="font-weight-bolder font-size-h5">Pending Complaint's</span>
+                           
+                          
+
+                             
+
+                              <a class="btn btn-danger badge" data-toggle="modal" data-target="#exampleModalSizeDefault111">
+                                  
+                                {{--  @foreach($customer_channel as $pack)
+
+                                {{ $pack->package_name }}<br>
+
+
+                              @endforeach --}}
+
+
+                                Complaint's({{  $pending_complaint_count }})
 
                               </a>
 
@@ -2118,14 +2365,14 @@
                         </span> --}}
                         @if( $cust_package == null)
                         <div class="d-flex flex-column text-dark-75">
-                            <span class="font-weight-bolder font-size-h5">Out standing Amount</span>
+                            <span class="font-weight-bolder font-size-h5">Due Amount</span>
                             <p class="text-primary font-weight-bolder font-size-sm">Package Not selected</p>
                         
                         </div>
                         @else
                         
                         <div class="d-flex flex-column text-dark-75">
-                            <span class="font-weight-bolder font-size-h5">Out standing Amount</span>
+                            <span class="font-weight-bolder font-size-h5">Due Amount</span>
                            
                            {{ $cust_package->due_amount }}
 
@@ -2163,6 +2410,48 @@
 
 
                                 Package({{  $customers_channel_count }})
+
+                              </a>
+
+                        </div>
+                        @endif
+                 </div>
+
+                   <div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
+                       {{--  <span class="mr-4">
+                            <i class="flaticon-piggy-bank display-4 text-muted font-weight-bold"></i>
+                        </span> --}}
+                        @if( $pending_complaint_count == 0)
+                        <div class="d-flex flex-column text-dark-75">
+                            <span class="font-weight-bolder font-size-h5">Pending Complaint</span>
+                            <p class="text-primary font-weight-bolder font-size-sm">No Pending Complaint </p>
+                        
+                        </div>
+
+                        
+
+                      
+
+                        @else
+                        
+                        <div class="d-flex flex-column text-dark-75">
+                            <span class="font-weight-bolder font-size-h5">Pending Complaint's</span>
+                           
+                          
+
+                             
+
+                              <a class="btn btn-danger badge" data-toggle="modal" data-target="#exampleModalSizeDefault111">
+                                  
+                                {{--  @foreach($customer_channel as $pack)
+
+                                {{ $pack->package_name }}<br>
+
+
+                              @endforeach --}}
+
+
+                                Complaint's({{  $pending_complaint_count }})
 
                               </a>
 
@@ -2608,6 +2897,194 @@
                                 </div>
                             </div>
                         </div>
+
+
+  <div class="modal fade" id="exampleModalSizeDefault111" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeDefault" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Pending Complaints Details</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <i aria-hidden="true" class="ki ki-close"></i>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>
+                                          @foreach($pending_complaint as $row)  
+                                         <div class="py-9">
+
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Days:</span>
+
+                                                @php
+                                                    {{
+
+                                                        $final =$row->created_at;
+
+                                                        $final1 =Carbon\Carbon::now();
+
+
+
+                                                        $formatted_dt1=Carbon\Carbon::parse($final);
+        
+
+                                                       $formatted_dt2=Carbon\Carbon::parse($final1);
+        
+
+                                                         $date_diff=$formatted_dt1->diffInDays($formatted_dt2);
+                                                  
+                                                    }}
+                                                @endphp
+
+
+
+                                                <span class="font-weight-bold mr-2">{{ $date_diff }}</span>
+                                            </div>
+                                            
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Complaint Id:</span>
+                                                <span class="font-weight-bold mr-2">{{ $row->complaint_id }}</span>
+                                            </div>
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Customer Name:</span>
+                                                <span class="font-weight-bold mr-2">{{ $row->customer_name }}</span>
+                                            </div>
+                                            
+                                             <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Complaints:</span>
+
+                                                 
+                                                 @if($row->complaint == null)
+                                            
+                                                 @if($row->active_deactive == 1 )
+                                                 <button class="btn btn-success badge">Activation</button>
+                                                   
+                                                 @elseif($row->active_deactive == 2 )
+                                                  <button class="btn btn-danger badge">Deactivation</button>
+                                                     
+                                                 @endif
+                                                
+
+
+                                           
+                                            @else
+                                           
+                                                 
+                                                  @foreach($row->complaint as $data)
+                                                  <span class="btn"> {{ $data['complainttype'].';' }} </span>
+                                                 @endforeach
+                                            
+                                            @endif
+
+
+
+
+
+
+                                               {{--  <span class="font-weight-bold mr-2">{{ $pack->channel_type }}</span> --}}
+                                            </div>
+                                             <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Other Complaints:</span>
+                                                <span class="font-weight-bold mr-2">{{ $row->other_complaint}}</span>
+                                            </div>
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Assigned Technician:</span>
+                                                <span class="font-weight-bold mr-2">{{ $row->staffs['name'] }}</span>
+                                            </div>
+                                            
+                                             {{-- <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Due Amount:</span>
+                                                <span class="font-weight-bold mr-2">{{ $pack->due_amount }}</span>
+                                            </div> --}}
+                                            
+                                            
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Assist By:</span>
+                                                <span class="font-weight-bold mr-2">{{ $row->assist['name'] }}</span>
+                                            </div>
+
+
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Remarks:</span>
+                                                <span class="font-weight-bold mr-2">{{ $row->complaint_description }}</span>
+                                            </div>
+
+
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Number Of Visit:</span>
+                                                <span class="font-weight-bold mr-2">{{ $row->number_of_visit }}</span>
+                                            </div>
+
+
+
+                                             <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Technician Staff status:</span>
+                                                {{-- <span class="font-weight-bold mr-2">{{ $row->number_of_visit }}</span> --}}
+
+
+
+                                                  @if($row->technician_status == 0) 
+                                                <button class="badge btn btn-danger">pendind</button>
+                                                 @else
+                                                  <button class=" badge btn btn-success">{{ $row->tech_status['technician_status'] }}</button>
+                                                 @endif
+
+
+                                            </div>
+
+
+
+                                             <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Date:</span>
+                                                <span class="font-weight-bold mr-2">{{ $row->created_at }}</span>
+                                            </div>
+
+
+
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="font-weight-bold mr-2">Status:</span>
+                                                {{-- <span class="font-weight-bold mr-2"><td>{{ $row->created_at }}</td></span> --}}
+
+                                            @if($row->status ==0) 
+                                                  <button class="badge btn btn-danger">pendind</button>
+                                            @else
+                                                <button class=" badge btn btn-success">Completed</button></td>
+                                            @endif
+                                            </div>
+
+
+
+
+
+
+
+
+                                         
+
+
+                                            <hr><hr>
+                                           
+                                
+                                          
+                                            
+                                        </div>  
+                                        @endforeach
+
+
+                                            
+                                            
+                                            
+                                            
+                                          
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                      
 
 
         </div>

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\User;
 use App\Enquiery;
+use App\EnquiryHistory;
 use DB;
 class EnquiryController extends Controller
 {
@@ -22,6 +23,10 @@ class EnquiryController extends Controller
             //  ->get();
 
              $data =Enquiery::where('enquiery_status', 1)->get();
+
+             //dd($data);
+
+            
 
              return view('admin.enquiery.index')->with('data',$data)->with('user',$user);
     }
@@ -85,9 +90,14 @@ class EnquiryController extends Controller
         $enquiery =Enquiery::find($id);
 
         $assign_to = $enquiery->assign_to;
+
+        $assist_by = $enquiery->assist_by;
        
         $page_data['assign_to'] =  $assign_to;
         $page_data['enquiery'] = $enquiery;
+
+        $page_data['assist_by'] = $assist_by;
+
        // $data=User::all();
         // $data =User::where('user_delete_status', 1)->get();
         $data =User::where('user_delete_status', 1)->where('role', '!=' , 1)->get();
@@ -101,6 +111,39 @@ class EnquiryController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+       // dd($request->all());
+
+
+         
+           $exist_staff =Enquiery::where('assign_to', '=', $request->assist_by)
+                         ->where('enquiery_status','=',1)
+                         ->first();
+
+            $exist_assist_staff =Enquiery::where('assist_by', '=', $request->assign_to)
+                         ->where('enquiery_status','=',1)
+                         ->first();
+
+           if($exist_staff){
+               // return "already added";
+
+             return redirect()->back()->with('message',' This Technician already leadership in other complaints, so please select another Technician staff as assistant staff.');
+           }
+
+          
+
+            elseif($exist_assist_staff){
+                //return "already added fdfdd";
+
+              
+
+             return redirect()->back()->with('datas',' This Technician already assist in other complaints, so please select another Technician staff as main staff.');
+           }             
+
+
+
+
+        else{
 
           $enquiery=Enquiery::find($id);
         // dd($request->all());
@@ -127,6 +170,27 @@ class EnquiryController extends Controller
         
        
         return redirect()->route('enquiry.index');
+    }
+    }
+
+    public function view($id){
+        //dd($id);
+
+          // $data = DB::table('enquiry_histories')
+          //    ->join('enquieries', 'enquiry_histories.enq_id', '=', 'enquieries.id')
+          //    ->select('enquiry_histories.*', 'enquieries.*')
+          //    ->where('enquiry_history_status', 1)
+          //    ->get();
+          //    dd($data);
+
+
+        $history =EnquiryHistory::where('enq_id',$id)->where('enquiry_history_status', 1)->orderBy("id", "desc")->get();
+            
+            //dd($history);
+
+             return view('admin.enquiery.view')->with('history',$history);
+
+
     }
 
 }

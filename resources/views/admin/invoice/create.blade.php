@@ -16,11 +16,11 @@
 		<div class="card-body">
 			
 			<div class="form-group row">
-				<label class="col-form-label text-right col-lg-3 col-sm-12">Customer Name</label>
+				<label class="col-form-label text-right col-lg-3 col-sm-12">Customer Id</label>
 				<div class=" col-lg-4 col-md-9 col-sm-12">
 					<select class="form-control " id="" name="cust_id">
                          @foreach($customer as $row)
-						<option value="{{ $row->id }}">{{ $row->name }}</option>
+						<option value="{{ $row->id }}">{{ $row->id }}</option>
 						
                         @endforeach
 						
@@ -30,10 +30,26 @@
 				</div>
 
                 <div class="col-lg-3">
-                    <button type="submit" class="btn btn-success mr-2">Go</button>
+                    <button type="submit" class="btn btn-success mr-2 " >Go</button>
                                             
                 </div>
 			</div>
+
+            @if($staff_notification >0)
+
+            <div class="form-group row">
+                 
+                  {{-- <button type="submit" class="btn btn-success ml-auto">Office staff Notification</button> --}}
+
+                  <a href="{{ route('invoice.notifications') }}" class="btn btn-success font-weight-bolder ml-auto">staff Notification ->{{ $staff_notification }}</a>
+            </div>
+
+            @else
+            <div>
+                
+            </div>
+            @endif
+
 			
 		</div>
 		

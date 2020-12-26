@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-
 use App\Channel;
 use App\Gst;
 
@@ -45,8 +44,13 @@ class channelController extends Controller
     public function store(Request $request)
     {
         //
+        //dd($request->all());
 
+       
+       $total_tax =$request->tax5 + $request->tax6 + $request->tax7;
+      // dd($total_tax);
 
+      // dd($request->channel_price + $total_tax);
 
 
 
@@ -59,11 +63,11 @@ class channelController extends Controller
         $channel->cgst = $request->tax5;
         $channel->sgst = $request->tax6;
         $channel->cess = $request->tax7;
-        $channel->total_tax = $request->tax5 + $request->tax6 + $request->tax7;
+        $channel->total_tax = $total_tax;
 
         $channel->gst = $request->tax;
         $channel->channel_amount = $request->channel_amount;
-        $channel->total_amount = $request->total_amount;
+        $channel->total_amount = $request->channel_price + $total_tax;
 
         $channel->save();
 

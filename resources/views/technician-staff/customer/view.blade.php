@@ -48,7 +48,7 @@
                             @foreach($customer as $row)
 							<tr>
 								<td >{{$row->id}}</td>
-								<td>{{$row->cust_id}}</td>
+								<td>{{$row->area_subcode_id}}</td>
 								<td>{{$row->name}}</td>
 								<td>{{$row->mobile_number}}</td>
 								@if($row->customer_type==1)

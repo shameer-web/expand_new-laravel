@@ -9,6 +9,7 @@
  $user =$page_data['user'] 
 
  ?>
+
  
 
 
@@ -93,41 +94,58 @@
 											</div>
 										</div>
 										<div class="card-body">
+
+
+		@if ($message = Session::get('message'))
+                <div>
+                   <p class="text-center text-danger" style="font-size: 18px">{{ $message }}</p>
+                </div>
+                                              
+
+
+         @elseif ($datas = Session::get('datas'))
+                <div>
+                    <p class="text-center text-danger" style="font-size: 18px">{{ $datas }}</p>
+                </div>
+        @endif
+
+
 											<!--begin: Datatable-->
 											<table class="table table-bordered table-checkable" id="kt_datatable">
-												                    <thead>
+											<thead>
 									                              <tr>
                                              
-											  <th>SL NO</th>
+											  {{-- <th>SL NO</th> --}}
                                               <th>Complaint ID</th>
                                               <th>Customer Name</th>
-                                              <th>Staff Name</th>
+                                              
                                               <th>Complaints</th>
+                                              <th>Assigned Technician</th>
+                                              <th>Assist By </th>
                                               <th>Activation/Deactivation Date</th>
                                               <th>Other Complaints</th>
                                               <th>Remarks</th>
-                                              {{-- <th>Mobile</th> --}}
+                                              <th>Number Of Visit</th>
+                                              <th>Customer Reference</th>
+                                              <th>Status</th>
                                               <th>Date</th>
                                               <th>Priority</th>
-                                              <th>Status</th>
+                                              
                                               <th>Actions</th>
 											
 					                                  </tr>
-					                    </thead>
+					                        </thead>
 					                 @if(isset($page_data['value']))
                                       @foreach($page_data['value'] as $row)
 									
 				                        <tbody>
 				                           
                           				 <tr>
-											<td >{{ $row->id }}</td>
+											{{-- <td >{{ $row->id }}</td> --}}
 											<td>{{ $row->complaint_id}}</td>
 
 											<td>{{ $row->customer_name}}</td>
-											<td>
-												{{ $row->user['name']}}
-
-											</td>
+											
 
 											@if($row->complaint == null)
 											<td>
@@ -151,6 +169,16 @@
 											</td>
 											@endif
 
+
+											
+											<td><button type="submt" class="badge btn  btn-outline-warning">{{ $row->staffs['name'] }}</button>
+											</td>
+
+											 <td><button type="submt" class="badge btn  btn-outline-warning">{{ $row->assist['name'] }}</button>
+											 </td>
+
+											
+
 											@if($row->active_deactive_date ==null)
 											  <td></td>
 											@else
@@ -164,7 +192,25 @@
 
 
 											
-											<td>{{ $row->remarks }}</td>
+											<td>{{ $row->complaint_description }}</td>
+
+											<td>{{ $row->number_of_visit }}</td>
+                                            
+                                             @if($row->technician_status == 0) 
+                                                <td><button class="badge btn btn-danger">pendind</button></td>
+                                             @else
+                                                 <td> <button class=" badge btn btn-success">{{ $row->tech_status['technician_status'] }}</button></td>
+                                             @endif
+
+
+
+                                              @if($row->status ==0) 
+                                            <td><button class="badge btn btn-danger">pendind</button></td>
+                                          @elseif($row->status ==1)
+                                          <td> <button class=" badge btn btn-primary">Complaint Picked</button></td>
+                                          @endif
+
+
 											<td>{{ $row->created_at }}</td>
 
 											@if($row->priority ==1)
@@ -179,11 +225,7 @@
 
 											
 
-											@if($row->status ==0) 
-									   <td><button class="badge btn btn-danger">pendind</button></td>
-										  @else
-										  <td> <button class=" badge btn btn-success">Completed</button></td>
-										  @endif
+										
 
 
 											
@@ -205,8 +247,13 @@
                                                              		<button  type="submit" class="btn btn-primary">View</button>
                                                              		
                                                              	</form>
-													
+
+
+                                                             	   <button type="button" id="btnassign" data-action="{{ route('complaint.update',$row->id,$row->active_deactive) }}" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+													Assign
 												</button>	
+													
+												{{-- </button> --}}	
 															
 											</td>
 											
@@ -252,6 +299,67 @@
                     </form>
                 </div>
             </div>
+
+
+
+
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+				<form id="assign_form" action="" method="post" class="form-horizontal">
+                        @csrf
+                        @method('put')
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel"> Please Confirm Your Action</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<i aria-hidden="true" class="ki ki-close"></i>
+							</button>
+						</div>
+						<div class="modal-body">
+						<div class="form-group row">
+							<label class="col-lg-3 col-form-label text-right">Assign To:</label>
+								<div class=" col-lg-9 ">
+									<select class="form-control" id="kt_select2_1" style="width: 100%" name="staff">
+										
+
+										@foreach($user as $row)
+													<option value="{{ $row->id }}" >{{ $row->name }}</option>
+										@endforeach
+										
+										
+									</select>
+								</div>
+						</div>
+
+
+						<div class="form-group row">
+							<label class="col-lg-3 col-form-label text-right">Assist By:</label>
+								<div class=" col-lg-9 ">
+									<select class="form-control" id="kt_select2_1" style="width: 100%" name="assist_by">
+										
+
+										@foreach($user as $row)
+													<option value="{{ $row->id }}" >{{ $row->name }}</option>
+										@endforeach
+										
+										
+									</select>
+								</div>
+						</div>
+						
+						 {{-- <input type="hidden" name="status" value="1" class="form-control"> --}}
+
+									{{-- <input type="hidden" name="activation" value="" class="form-control"> --}}
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary font-weight-bold">Save changes</button>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
+
 
 
 

@@ -36,7 +36,9 @@
                                 <th>Address</th>
                                 <th>Phone</th>
                                 <th>Phost No</th>
-                                <th>Assigned</th>
+                                <th>Assigned Staff</th>
+                                <th>Assist Staff</th>
+
                                 <th>Remarks</th>
                                 <th>Number Of Visit</th>
                                 <th>Date</th>
@@ -60,6 +62,14 @@
                             @else
                             <td> <span class="label label-success label-inline mr-2"> {{$row->User['name'] }}</span></td>
                             @endif
+
+                            
+                            @if($row->assist_by == null) 
+                            <td><span class="label label-danger label-inline mr-2">Pending</span></td>
+                            @else
+                            <td> <span class="label label-success label-inline mr-2"> {{$row->staff['name'] }}</span></td>
+                            @endif
+
                             <td>{{ $row->remarks }}</td>
                             <td>{{ $row->number_of_visit }}</td>
 
@@ -156,6 +166,8 @@
 
                                         
                                     </div>
+
+                                    <input type="hidden" name="assign_status" value="0">
 
 
 
