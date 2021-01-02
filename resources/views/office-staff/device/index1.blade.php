@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.office_staff')
 
 
 @section('content')
@@ -11,7 +11,7 @@
 							<div class="card-header flex-wrap py-3">
 								<div class="card-title">
 									<h3 class="card-label">
-										View All Packages
+										View All Device Details
 
 										<!-- <span class="d-block text-muted pt-2 font-size-sm">sorting & pagination remote datasource</span> -->
 									</h3>
@@ -74,7 +74,7 @@
 <!--end::Dropdown-->
 
 <!--begin::Button-->
-									<a href="{{ route('package.create') }}" class="btn btn-primary font-weight-bolder">
+									<a href="{{ route('devices.create') }}" class="btn btn-primary font-weight-bolder">
 										<span class="svg-icon svg-icon-md"><!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 									    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 									        <rect x="0" y="0" width="24" height="24"/>
@@ -92,48 +92,102 @@
 												                    <thead>
 									                              <tr>
                                              
-                                              <th>Order ID</th>
-                                              <th>Package Name</th>
-                                              <th>Package type</th>
-                                              <th>Package Price</th>
-                                              <th> Gst Amount</th>
-                                             {{--  <th>Package Amount</th> --}}
-                                              <th>Total Amount</th>
-                                              
-                                              <th>Actions</th>
+											  <th>Device ID</th>
+											  {{-- <th>Device</th> --}}
+											  {{-- <th>Device Name</th> --}}
+                                              <th>Company</th>
+                                              <th>Type</th>
+                                              <th>Device ID</th>
+                                              {{-- <th>Serial Number</th> --}}
+                                              <th>Model</th>
+                                              <th>District</th>
+                                             {{--  <th>LCO ID</th> --}}
+                                              <th>Assigned Customer</th>
+                                              <th>Status</th>
+
+											  <th>Actions</th>
+											  
 					                                  </tr>
 					                    </thead>
-									  @foreach($package as $row)
-									  
+                                      @foreach($data as $row)
+									 
 				                        <tbody>
 				                           
                           				 <tr>
-                                              <td>{{ $row->id }}</td>
-											  <td>{{ $row->package_name }}</td>
-											 
-									   		
-											   @if($row->package_type =='Postaid') 
-									   <td><span class="label label-primary label-inline mr-2">Postpaid</span></td>
-										  @else
-										  <td> <span class="label label-success label-inline mr-2"> Prepaid</span></td>
+											  {{-- <td>{{ $row->id }}</td> --}}
+											  <td>{{ $row->deviceid }}</td>
+											 {{--  <td>{{ $row->device_name }}</td> --}}
+                                              <td>{{ $row->Company['company_name'] }}</td>
+                                              <td>{{ $row->Type['type_name'] }}</td>
+                                              <td>{{ $row->device_id}}</td>
+                                             {{--  <td>{{ $row->serial_number }}</td> --}}
+                                              <td>{{ $row->Mode['model_name']}}</td>
+                                              <td>{{ $row->District['district_name'] }}</td>
+                                             {{--  <td>{{ $row->Loc['loc_name'] }}</td> --}}
+											  @if($row->status ==0) 
+									   <td>{{-- <span class="label label-warning label-inline mr-2">Not Assigned</span> --}}
+                                       <button class="btn btn-info badge">Not Assigned</button>
+									   </td>
+
+
+										  @else 
+										  <td> {{-- <span class="label label-primary label-inline mr-2">{{ $row->Customer['name'] }}</span> --}}
+                                           <button class="btn btn-warning badge">{{ $row->Customer['name'] }}</button>
+
+										  </td>
+										 
 										  @endif
-                                              <td>{{ $row->package_price}}</td>
-                                              <td>{{ $row->total_tax }}</td>
-                                              {{-- <td>{{ $row->package_amount }}</td> --}}
-                                              <td>{{ $row->total_amount }}</td>
-                                               
+
+										  @if($row->device_check ==0)
+
+										    <td>
+										    	 <button class="btn btn-primary badge">In Stock</button>
+									   
+										    </td> 
+
+									      @elseif($row->device_check ==1) 
+
+									   {{-- <span class="label label-warning label-inline mr-2">Not Assigned</span> --}}
+                                        <td>
+                                       <button class="btn btn-danger badge">Damaged</button>
+									   </td>
+									   
+
+									   @elseif($row->device_check ==2)
+                                         
+                                           <td>
+                                       <button class="btn btn-warning badge">Service Center</button>
+									   </td>
+									   
+
+									   @elseif($row->device_check ==3)
+
+									      <td>
+                                       <button class="btn btn-warning badge">Customer</button>
+									   </td>
+									  
+									   @endif
+
+
+
                                              
                                             <td>
-												<a href="{{ route('package.edit',$row->id) }}" class="btn btn-outline-primary font-weight-bold mr-2"><i class="fa fa-edit"></i></a>
+												<a href="{{ route('devices.edit',$row->id) }}" class="btn btn-outline-primary font-weight-bold mr-2"><i class="fa fa-edit"></i></a>
 
 
-												<button type="button" id="deletebtn"
-                                                              data-action="{{ route('package.update',$row->id) }}" data-toggle="modal"
+												{{-- <button type="button" id="deletebtn"
+                                                              data-action="{{ route('devices.update',$row->id) }}" data-toggle="modal"
                                                               data-target="#delete_modal" class="btn btn-outline-danger"><i
                                                               class="fa fa-trash" aria-hidden="true"></i>
-                                                             </button>
+                                                             </button> --}}
+
+
+                                                 <button type="button" id="btnstatus" data-action="{{ route('devices.update',$row->id) }}" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal">
+													Status
+												</button>	             
 												
 											</td>
+											
                                              
                                              
                                   		</tr>
@@ -169,12 +223,52 @@
                                     <button type="button" class="btn btn-primary modal-dismiss"
                                         data-dismiss="modal">Cancel</button>
                                 </p>
-                                <input type="hidden" name="package_status" value="0">
+                                <input type="hidden" name="device_status" value="0">
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+
+
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+				<form id="status_form" action="" method="post" class="form-horizontal">
+                        @csrf
+                        @method('put')
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<i aria-hidden="true" class="ki ki-close"></i>
+							</button>
+						</div>
+						<div class="modal-body">
+						<div class="form-group row">
+							<label class="col-lg-3 col-form-label text-right">Status:</label>
+								<div class=" col-lg-6">
+									<select class="form-control " id="kt_select2_1" name="device_check">
+										
+
+										
+													<option value="1" >Damage</option>
+													<option value="2" >Service</option>
+										
+										
+										
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary font-weight-bold">Save changes</button>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
 
 
 
@@ -234,6 +328,16 @@ $('body').on('click', '#deletebtn', function() {
     $('#deletebtn').data('action');
     var action = $(this).data('action');
     $('#delete_form').attr('action', action);
+
+})
+
+
+$('body').on('click', '#btnstatus', function() {
+    var no = $(this).closest('tr').children('td');
+
+    $('#btnstatus').data('action');
+    var action = $(this).data('action');
+    $('#status_form').attr('action', action);
 
 })
 </script>

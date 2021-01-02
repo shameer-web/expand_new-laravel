@@ -73,6 +73,36 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <!--begin::Content-->
     <div class="login-content flex-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden p-7 mx-auto">
+
+       {{--  @if(session('success'))
+           <div class="alert alert-success">
+              {{ session('success') }}
+               
+           </div>
+        @elseif(session('failure')) 
+            <div class="alert alert-danger">
+              {{ session('failure') }}
+               
+           </div>
+
+        @endif  --}}  
+
+
+
+
+         @if ($success = Session::get('success'))
+                <div>
+                   <p class="text-center text-success" style="font-size: 18px">{{ $success }}</p>
+                </div>
+                                              
+
+
+         @elseif ($failure = Session::get('failure'))
+                <div>
+                    <p class="text-center text-danger" style="font-size: 18px">{{ $failure }}</p>
+                </div>
+        @endif
+             
         <!--begin::Content body-->
         <div class="d-flex flex-column-fluid flex-center">
             <!--begin::Signin-->

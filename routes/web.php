@@ -17,13 +17,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/indipay/response', 'GatewayController@index')->name('indipay.index');
+Route::post('/indipay/response/success','GatewayController@response')->name('pay.response');
+ Route::post('/indipay/response/failure','GatewayController@response')->name('pay.response');
 // Route::get('/admin', 'AdminController@index')->name('admin')->middleware('admin');
 
 
 // Route::group(['middleware' =>['auth','admin']],function(){
+
+
 
 Route::group(array('middleware' => 'auth','middleware' => 'is_admin','prefix'=>'admin','namespace'=>'Admin'), function()
 {  
@@ -164,6 +173,18 @@ Route::post('/reports/complaint', 'ReportsController@select_complaint')->name('r
 
    
    //end report
+
+
+//payment gateway
+
+
+ Route::post('/gateway/{id}','GatewayController@gateway')->name('gateway.payu');
+ // Route::post('/indipay/response/success','GatewayController@response')->name('pay.response');
+
+ // Route::post('/indipay/response/success','GatewayController@response')->name('pay.response');
+ // Route::post('/indipay/response/failure','GatewayController@response')->name('pay.response');
+
+//end ayment gateway
    
    
 
@@ -263,6 +284,20 @@ Route::group(array('middleware' => 'auth','middleware' => 'is_office','prefix'=>
    Route::post('/invoice/update_package/{id}','InvoiceController@update_package')->name('invoices.update_package');
 
    //end invoice
+
+
+
+     //payment gateway
+
+
+ Route::post('/gateway/{id}','GatewayController@gateway')->name('gateway.pay');
+ // Route::post('/indipay/response/success','GatewayController@response')->name('pay.response');
+
+ // Route::post('/indipay/response/success','GatewayController@response')->name('pay.response');
+ // Route::post('/indipay/response/failure','GatewayController@response')->name('pay.response');
+
+//end ayment gateway
+
 
  
 
@@ -368,6 +403,19 @@ Route::group(array('middleware' => 'auth','middleware' => 'is_collection','prefi
    Route::post('/invoice/update_package/{id}','InvoiceController@update_package')->name('invo.update_package');
 
    //end invoice
+
+
+
+   //payment gateway
+
+
+ Route::post('/gateway/{id}','GatewayController@gateway')->name('gateway.payumoney');
+ // Route::post('/indipay/response/success','GatewayController@response')->name('pay.response');
+
+ // Route::post('/indipay/response/success','GatewayController@response')->name('pay.response');
+ // Route::post('/indipay/response/failure','GatewayController@response')->name('pay.response');
+
+//end ayment gateway
 
 
 

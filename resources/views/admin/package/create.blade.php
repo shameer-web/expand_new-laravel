@@ -260,7 +260,9 @@ function calc_total()
 	$('#tax5').val(tax_sum.toFixed(2));
 	$('#gst_amount').val(tax_sum.toFixed(2));
 
-	var result = parseInt(tax_sum) + parseInt(package_price);
+	// var result = parseInt(tax_sum) + parseInt(package_price);
+     var result = parseInt(package_price) + (parseInt(package_price) * 0.09);
+	//alert(result);
 	$("#total_amount1").val(result.toFixed(2));
 	// $('#tax5').val(result.toFixed(2));
 }
@@ -285,7 +287,11 @@ function calc_total1()
 	// $('#tax6').val(sgst);
 	tax_sum=package_price/100*cgstsgst;
 	$('#gst_amount').val(tax_sum.toFixed(2));
-	var result = parseInt(tax_sum) + parseInt(package_price);
+	// var result = parseInt(tax_sum) + parseInt(package_price);
+	var result = parseInt(package_price) + (parseInt(package_price) * 0.18);
+
+
+
 	$("#total_amount1").val(result.toFixed(2));
 }
 function calc_total2()
@@ -308,7 +314,9 @@ function calc_total2()
 	
 	tax_sum=package_price/100*cgstsgstcess;
 	$('#gst_amount').val(tax_sum.toFixed(2));
-	var result = parseInt(tax_sum) + parseInt(package_price);
+	// var result = parseInt(tax_sum) + parseInt(package_price);
+
+	var result = parseInt(package_price) + (parseInt(package_price) * 0.19);
 	$("#total_amount1").val(result.toFixed(2));
 }
 

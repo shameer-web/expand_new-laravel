@@ -274,8 +274,13 @@
                    <div class="col-md-6">
                       <button type="button" class="btn btn-primary font-weight-bolder py-4 mr-3 mr-sm-14 my-1" onclick="window.print();">Print Invoice</button>
                    </div>
-                   <div class="col-md-6">
+                   <div class="col-md-3">
                        <button type="button" class="btn btn-primary font-weight-bolder py-4 mr-3 mr-sm-14 my-1" data-toggle="modal" data-target="#pay" > Pay</button>
+                   </div>
+
+
+                    <div class="col-md-3">
+                       <button type="button" class="btn btn-primary font-weight-bolder py-4 mr-3 mr-sm-14 my-1" data-toggle="modal" data-target="#onlinepayment" > OnLine Payment</button>
                    </div>
                   {{--  <div class="col-md-4">
                      <h6> Total Amount Due: 38.800000000001</h6>
@@ -474,6 +479,91 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+ </div>
+ @endif
+
+ {{-- end modal --}}
+
+
+
+ {{--  start modal --}}
+  @if($cust_package == null)
+  <div></div>
+  @else
+ <div class="modal fade" id="onlinepayment" tabindex="-1" role="dialog"  aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" >Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('gateway.payumoney',$cust_package->id) }}" method="post" >
+                        @csrf
+                       
+
+
+                        
+
+                        
+
+                         
+                        
+                        
+                        
+
+                           <div class="form-group">     
+                            <label  class="form-control-label">Amount :</label>
+                              <input type="text" class="form-control " name="amount" value="{{ $total_amount }}" >
+                          </div>
+
+                          <div class="form-group">     
+                            <label  class="form-control-label">Name :</label>
+                              <input type="text" class="form-control " name="firstname" required >
+                              <span>enter your name</span>
+                          </div>
+
+                          <div class="form-group">     
+                            <label  class="form-control-label">Email :</label>
+                              <input type="text" class="form-control " name="email" required >
+                              <span>enter your Email</span>
+                          </div>
+
+
+                          <div class="form-group">     
+                            <label  class="form-control-label">Phone Number :</label>
+                              <input type="text" class="form-control " name="phone" required >
+                              <span>enter your Phone Number</span>
+                          </div>
+
+                         
+
+                         
+                        
+                         
+
+                           <input type="hidden" name="first_payment_date" value="{{ $cust_package->payment_date }}">
+
+                           <input type="hidden" name="cus_id" value="{{ $cust_package->cus_id }}">
+
+                           <input type="hidden" name="package_total_amount" value="{{ $cust_package->package['total_amount'] }}">
+
+
+
+
+                            
+                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>
                 </div>
